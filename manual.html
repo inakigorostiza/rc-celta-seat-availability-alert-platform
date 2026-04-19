@@ -590,14 +590,13 @@
       background: var(--bg-soft);
       border: 1px solid var(--line);
       position: relative;
-      overflow: hidden;
     }
     .flow__stage {
       position: relative;
       width: 100%;
-      aspect-ratio: 900 / 360;
       max-width: 900px;
       margin: 0 auto;
+      height: 360px;
     }
     .flow__svg {
       position: absolute;
@@ -727,8 +726,9 @@
     }
     @media (max-width: 720px) {
       .flow { padding: 1.5rem .75rem; }
-      .flow__stage { aspect-ratio: auto; height: 640px; }
-      .flow__node { width: 150px; }
+      .flow__stage { height: 560px; }
+      .flow__node { width: 140px; padding: .7rem .8rem; }
+      .flow__node--end { width: 56px; padding: .4rem; }
     }
 
     /* =========================================================
