@@ -1,0 +1,211 @@
+{
+  "name": "Avisame – ONEBOX → Mailchimp → Mandrill",
+  "nodes": [
+    {
+      "id": "trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [100, 300],
+      "parameters": {}
+    },
+    {
+      "id": "vars",
+      "name": "Vars",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [300, 300],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            { "id": "v1", "name": "event_id",              "type": "number", "value": 4587 },
+            { "id": "v2", "name": "channel_id",            "type": "number", "value": 2287 },
+            { "id": "v3", "name": "onebox_client_secret",  "type": "string", "value": "REPLACE_WITH_ONEBOX_CLIENT_SECRET" },
+            { "id": "v4", "name": "mailchimp_list_id",     "type": "string", "value": "REPLACE_WITH_MAILCHIMP_AUDIENCE_ID" },
+            { "id": "v5", "name": "mandrill_from_email",   "type": "string", "value": "avisame@lin3s.com" },
+            { "id": "v6", "name": "mandrill_from_name",    "type": "string", "value": "RC Celta (demo)" },
+            { "id": "v7", "name": "purchase_url_template", "type": "string", "value": "https://tickets.oneboxtds.com/rccelta/select/{sessionId}?viewCode=V_blockmap&utm_source=avisame&utm_medium=email&utm_campaign=recovery-app&utm_content=event-{eventId}-grada-{gradaId}" },
+            { "id": "v8", "name": "mandrill_api_key",      "type": "string", "value": "REPLACE_WITH_MANDRILL_API_KEY" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "mcMembers",
+      "name": "Mailchimp Members",
+      "type": "n8n-nodes-base.mailchimp",
+      "typeVersion": 1,
+      "position": [500, 300],
+      "parameters": {
+        "resource": "listMember",
+        "operation": "getAll",
+        "list": "={{ $('Vars').first().json.mailchimp_list_id }}",
+        "returnAll": true,
+        "filters": {
+          "status": "subscribed"
+        }
+      },
+      "credentials": {
+        "mailchimpApi": { "id": "PLEASE_LINK_AFTER_IMPORT", "name": "Mailchimp API" }
+      }
+    },
+    {
+      "id": "aggregateMembers",
+      "name": "Aggregate members",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [700, 300],
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "members",
+        "include": "allFields",
+        "options": {}
+      }
+    },
+    {
+      "id": "oneboxAuth",
+      "name": "ONEBOX Auth",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.oneboxtds.net/oauth/token",
+        "authentication": "none",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "grant_type",    "value": "client_credentials" },
+            { "name": "client_id",     "value": "seller-channel-client" },
+            { "name": "client_secret", "value": "={{ $('Vars').first().json.onebox_client_secret }}" },
+            { "name": "channel_id",    "value": "={{ $('Vars').first().json.channel_id }}" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "oneboxSessions",
+      "name": "ONEBOX Sessions",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1100, 300],
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.oneboxtds.net/catalog-api/v1/sessions",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{ $('ONEBOX Auth').first().json.access_token }}" },
+            { "name": "Accept",        "value": "application/json" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "filterEvent",
+      "name": "Filter by event_id",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1300, 300],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const eventId = Number($('Vars').first().json.event_id);\nconst resp = $input.first().json;\nconst sessions = resp.data ?? [];\nreturn sessions\n  .filter(s => Number(s.event?.id) === eventId)\n  .map(s => ({\n    json: {\n      session_id: s.id,\n      session_name: s.name,\n      event_id: s.event?.id,\n      event_name: s.event?.name,\n      on_sale: !!s.on_sale,\n      sold_out: !!s.sold_out\n    }\n  }));"
+      }
+    },
+    {
+      "id": "oneboxAvailability",
+      "name": "ONEBOX Availability",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1500, 300],
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.oneboxtds.net/catalog-api/v1/sessions/{{ $json.session_id }}/availability",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{ $('ONEBOX Auth').first().json.access_token }}" },
+            { "name": "Accept",        "value": "application/json" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "gradasAvail",
+      "name": "Gradas with availability",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1700, 300],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const eventId = Number($('Vars').first().json.event_id);\nconst sessions = $('Filter by event_id').all();\nconst responses = $input.all();\n\nconst out = [];\nfor (let i = 0; i < responses.length; i++) {\n  const avail = responses[i].json;\n  const sess  = sessions[i]?.json ?? {};\n  const sessionId = avail.id ?? sess.session_id;\n  const eventName = sess.event_name ?? null;\n\n  for (const sec of avail.sectors ?? []) {\n    let available = 0;\n    let total = 0;\n    for (const pt of sec.price_types ?? []) {\n      available += pt.availability?.available ?? 0;\n      total     += pt.availability?.total ?? 0;\n    }\n    if (available > 0) {\n      out.push({ json: {\n        event_id: eventId,\n        session_id: sessionId,\n        event_name: eventName,\n        grada_id: sec.id,\n        grada_name: sec.name,\n        grada_code: sec.code ?? null,\n        available,\n        total\n      }});\n    }\n  }\n}\nreturn out;"
+      }
+    },
+    {
+      "id": "findLeads",
+      "name": "Find leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1900, 300],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// For each grada with availability, find Mailchimp subscribers whose tags\n// include event:<id>, grada:<id> and source:avisame.\nconst members = $('Aggregate members').first().json.members ?? [];\nconst gradas  = $input.all();\nconst wantSource = 'source:avisame';\n\nconst out = [];\nfor (const g of gradas) {\n  const ctx = g.json;\n  const wantEvent = 'event:' + ctx.event_id;\n  const wantGrada = 'grada:' + ctx.grada_id;\n  for (const m of members) {\n    if (m.status !== 'subscribed') continue;\n    const tagNames = (m.tags ?? []).map(t => t.name);\n    if (!tagNames.includes(wantEvent)) continue;\n    if (!tagNames.includes(wantGrada)) continue;\n    if (!tagNames.includes(wantSource)) continue;\n    out.push({ json: {\n      email:      m.email_address,\n      first_name: m.merge_fields?.FNAME || '',\n      last_name:  m.merge_fields?.LNAME || '',\n      event_id:   ctx.event_id,\n      event_name: ctx.event_name,\n      session_id: ctx.session_id,\n      grada_id:   ctx.grada_id,\n      grada_name: ctx.grada_name,\n      available:  ctx.available,\n      purchase_url: ($('Vars').first().json.purchase_url_template || '')\n        .replace('{sessionId}', String(ctx.session_id))\n        .replace('{eventId}',   String(ctx.event_id))\n        .replace('{gradaId}',   String(ctx.grada_id))\n    }});\n  }\n}\nreturn out;"
+      }
+    },
+    {
+      "id": "buildBody",
+      "name": "Build Mandrill body",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2100, 300],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "language": "javaScript",
+        "jsCode": "const v = $('Vars').first().json;\nconst d = $input.item.json;\nconst fullName = (d.first_name + ' ' + d.last_name).trim() || d.email;\nconst subject = `¡Hay entradas en ${d.grada_name} para ${d.event_name}!`;\nconst preheader = `${d.available} localidades recién liberadas en ${d.grada_name} — ${d.event_name}`;\n\nconst html = `<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>¡Avísame!</title></head><body style=\"margin:0;padding:0;background:#eaf1f8;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#0a1a3a;\"><div style=\"display:none;max-height:0;overflow:hidden;color:transparent\">${preheader}</div><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background:#eaf1f8;padding:24px 12px\"><tr><td align=\"center\"><table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 6px 24px rgba(10,26,58,.08)\"><tr><td style=\"background:#7AB1D9;padding:22px 32px\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"color:#ffffff;font-weight:800;font-size:20px;letter-spacing:.02em\">RC Celta · Entradas</td><td align=\"right\" style=\"color:#ffffff;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase\">¡Avísame!</td></tr></table></td></tr><tr><td style=\"padding:32px 32px 8px 32px\"><h1 style=\"margin:0 0 8px 0;font-size:26px;line-height:1.2;color:#D61034;font-weight:800\">¡Hay entradas!</h1><p style=\"margin:0 0 16px 0;font-size:15px;color:#10213f;line-height:1.55\">Hola <strong>${d.first_name}</strong>, se acaban de liberar localidades para la grada que estás siguiendo. Corre que vuelan 🏃</p></td></tr><tr><td style=\"padding:0 32px\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background:#E6EFF8;border-radius:10px\"><tr><td style=\"padding:16px 18px\"><div style=\"font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5d6c80;font-weight:700;margin-bottom:6px\">Partido</div><div style=\"font-size:16px;font-weight:700;color:#0a1a3a;margin-bottom:14px\">${d.event_name}</div><div style=\"font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5d6c80;font-weight:700;margin-bottom:6px\">Grada</div><div style=\"font-size:16px;font-weight:700;color:#0a1a3a;margin-bottom:14px\">${d.grada_name}</div><div style=\"font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5d6c80;font-weight:700;margin-bottom:6px\">Disponibilidad</div><div style=\"font-size:16px;font-weight:700;color:#0a8754\">${d.available} localidades</div></td></tr></table></td></tr><tr><td align=\"center\" style=\"padding:28px 32px 12px 32px\"><a href=\"${d.purchase_url}\" style=\"display:inline-block;background:#D61034;color:#ffffff;text-decoration:none;padding:14px 34px;border-radius:8px;font-weight:700;font-size:15px;letter-spacing:.02em\">Comprar entrada</a></td></tr><tr><td style=\"padding:0 32px 28px 32px;text-align:center\"><p style=\"margin:0;font-size:12px;color:#6b7a8f;line-height:1.5\">Si el botón no funciona, copia este enlace en tu navegador:<br><span style=\"color:#4a89c3;word-break:break-all\">${d.purchase_url}</span></p></td></tr><tr><td style=\"background:#f3f6fa;padding:18px 32px;border-top:1px solid #dbe4ef;text-align:center\"><p style=\"margin:0 0 4px 0;font-size:12px;color:#6b7a8f\">Has recibido este aviso porque te registraste en <a href=\"https://avisame.rccelta.es\" style=\"color:#4a89c3;text-decoration:none\">avisame.rccelta.es</a>.</p><p style=\"margin:0;font-size:11px;color:#8b98ab\">RC Celta — esto es un aviso informativo, no garantiza ni reserva tu entrada.</p></td></tr></table></td></tr></table></body></html>`;\n\nconst body = {\n  key: v.mandrill_api_key,\n  message: {\n    from_email: v.mandrill_from_email,\n    from_name:  v.mandrill_from_name,\n    subject,\n    to: [ { email: d.email, name: fullName, type: 'to' } ],\n    html,\n    tags: ['avisame', 'event-' + d.event_id, 'grada-' + d.grada_id],\n    track_opens: true,\n    track_clicks: true\n  }\n};\nreturn { json: { mandrillBody: body, email: d.email, grada_name: d.grada_name } };"
+      }
+    },
+    {
+      "id": "mandrillSend",
+      "name": "Mandrill Send",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2300, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "https://mandrillapp.com/api/1.0/messages/send.json",
+        "authentication": "none",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.mandrillBody) }}",
+        "options": { "response": { "response": { "neverError": true } } }
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger":           { "main": [[{ "node": "Vars",                     "type": "main", "index": 0 }]] },
+    "Vars":                     { "main": [[{ "node": "Mailchimp Members",        "type": "main", "index": 0 }]] },
+    "Mailchimp Members":        { "main": [[{ "node": "Aggregate members",        "type": "main", "index": 0 }]] },
+    "Aggregate members":        { "main": [[{ "node": "ONEBOX Auth",              "type": "main", "index": 0 }]] },
+    "ONEBOX Auth":              { "main": [[{ "node": "ONEBOX Sessions",          "type": "main", "index": 0 }]] },
+    "ONEBOX Sessions":          { "main": [[{ "node": "Filter by event_id",       "type": "main", "index": 0 }]] },
+    "Filter by event_id":       { "main": [[{ "node": "ONEBOX Availability",      "type": "main", "index": 0 }]] },
+    "ONEBOX Availability":      { "main": [[{ "node": "Gradas with availability", "type": "main", "index": 0 }]] },
+    "Gradas with availability": { "main": [[{ "node": "Find leads",               "type": "main", "index": 0 }]] },
+    "Find leads":               { "main": [[{ "node": "Build Mandrill body",     "type": "main", "index": 0 }]] },
+    "Build Mandrill body":      { "main": [[{ "node": "Mandrill Send",            "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "tags": []
+}

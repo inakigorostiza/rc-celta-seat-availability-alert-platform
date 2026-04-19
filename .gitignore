@@ -1,0 +1,21 @@
+# Secrets and local configuration
+.env
+.env.local
+.env.*.local
+.claude/
+.mcp.json
+
+# Generated artifacts — produced by the generate-*.js scripts from live APIs
+# and your .env. Regenerate locally with `node generate-landing.js`.
+landing.html
+sessions.html
+examples.html
+
+# Node
+node_modules/
+
+# Editor/OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
