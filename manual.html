@@ -2566,9 +2566,9 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
       <p class="card__text">Mandrill open pixel + redirect-wrapping for clicks. Visible in its own dashboard and in GA4 via UTMs.</p>
     </div>
     <div class="card card--light">
-      <div class="card__role">Filters in the panel</div>
+      <div class="card__role">Optional upgrade</div>
       <h3 class="card__title">Tags per match + section</h3>
-      <p class="card__text">Every send carries <code>avisame</code>, <code>event-{id}</code>, <code>grada-{id}</code>. Cross-views available in Mandrill Analytics.</p>
+      <p class="card__text">Enable Mandrill Analytics filtering by tagging every send with <code>avisame</code>, <code>event-{id}</code>, <code>grada-{id}</code>. Not set in the starter workflow — add it in the Mandrill node's <em>Additional Fields → Tags</em> when you need per-grada breakdowns.</p>
     </div>
   </div>
 
@@ -2844,7 +2844,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
       <div class="node-row__body">
         <h4 class="node-row__title">Mandrill Send</h4>
         <div class="node-row__kind">n8n-nodes-base.mandrill · Message · sendHtml</div>
-        <p class="node-row__text">Sends one personalised email per lead using n8n's built-in Mandrill node. Everything the email needs is configured directly on the node — subject line (<em>"¡Hay entradas en {grada} para {event}!"</em>), the branded HTML body (sky-blue header, red title, seat recap card, red CTA pointing at <code>purchase_url</code>), <code>from_email</code> / <code>from_name</code>, the recipient's email, and tags (<code>avisame</code>, <code>event-{id}</code>, <code>grada-{id}</code>) so Mandrill Analytics can filter by match and section. Open + click tracking toggles are on.</p>
+        <p class="node-row__text">Sends one personalised email per lead using n8n's built-in Mandrill node. The node's four fields are set straight from the current item: <strong>From Email</strong> (from Vars), <strong>To Email</strong> (the fan's address from <em>Find leads</em>), <strong>Subject</strong> (<em>"¡Hay entradas en {grada} para {event}!"</em>), and <strong>HTML</strong> (the full branded body with the sky-blue header, red title, seat recap card, and the red "Comprar entrada" CTA built as a single n8n expression that concatenates the template with <code>first_name</code> / <code>event_name</code> / <code>grada_name</code> / <code>available</code> / <code>purchase_url</code>).</p>
         <div class="node-row__meta">
           <div class="node-row__meta-item"><span class="node-row__label">In</span>K lead items</div>
           <div class="node-row__meta-item"><span class="node-row__label">Out</span>K Mandrill responses</div>
@@ -2872,6 +2872,16 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
       <div class="card__role">Internal alerts</div>
       <h3 class="card__title">Slack channel</h3>
       <p class="card__text">A second output that notifies the internal team in real time when top sections open up.</p>
+    </div>
+    <div class="card card--light">
+      <div class="card__role">Analytics granularity</div>
+      <h3 class="card__title">Tag every send</h3>
+      <p class="card__text">Add <code>avisame</code>, <code>event-{id}</code>, <code>grada-{id}</code> in the Mandrill node's <em>Additional Fields → Tags</em>. Unlocks per-match and per-grada open / click breakdowns in Mandrill Analytics.</p>
+    </div>
+    <div class="card card--light">
+      <div class="card__role">Tracking toggles</div>
+      <h3 class="card__title">Opens + clicks</h3>
+      <p class="card__text">Flip <em>Track Opens</em> and <em>Track Clicks</em> on the Mandrill node to get per-recipient engagement signals back into Mandrill's dashboard and the API response.</p>
     </div>
   </div>
 
