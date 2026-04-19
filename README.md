@@ -6,8 +6,9 @@ A lead-recovery platform that captures demand while tickets are sold-out, detect
 
 | | |
 |---|---|
+| 📖 **Interactive manual** | [inakigorostiza.github.io/…/manual.html](https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/manual.html) **← start here** |
 | 🌐 **Live landing** | [inakigorostiza.github.io/rc-celta-seat-availability-alert-platform](https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/) |
-| 📓 **Full walkthrough (Colab)** | [Open in Google Colab](https://colab.research.google.com/github/inakigorostiza/rc-celta-seat-availability-alert-platform/blob/main/presentation.ipynb) |
+| 📓 **Colab notebook (alt format)** | [Open in Google Colab](https://colab.research.google.com/github/inakigorostiza/rc-celta-seat-availability-alert-platform/blob/main/presentation.ipynb) |
 | 🎬 **Video (2 min)** | [youtu.be/-FURuRfDk8I](https://youtu.be/-FURuRfDk8I) |
 
 ```
@@ -37,7 +38,8 @@ A lead-recovery platform that captures demand while tickets are sold-out, detect
 
 | Path | What it is |
 |---|---|
-| [`presentation.ipynb`](presentation.ipynb) | **Start here.** 12-section Colab notebook walking through the entire platform. |
+| [`manual.html`](manual.html) | **Start here.** Interactive web-based walkthrough of the platform (single-page, dark UI, embedded video, interactive tabs + diagrams). |
+| [`presentation.ipynb`](presentation.ipynb) | Same 12-section walkthrough in Google Colab format — for instructors who prefer a notebook. |
 | [`test-onebox.js`](test-onebox.js) | Minimal Node script that auths against ONEBOX and pokes a couple of endpoints. |
 | [`generate-examples.js`](generate-examples.js) | Produces `examples.html` — a static doc page with live API request/response examples. |
 | [`generate-sessions.js`](generate-sessions.js) | Produces `sessions.html` — a card-grid view of every session with per-sector availability. |

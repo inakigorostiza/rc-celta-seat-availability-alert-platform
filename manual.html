@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RC Celta · Seat Availability Alert Platform — IE Business School</title>
+  <meta name="description" content="Caso de estudio para el AI Marketing Lab del IE Business School: cómo recuperar demanda perdida de entradas con ONEBOX, Mailchimp, Mandrill, n8n y GA4." />
+  <style>
+    /* =========================================================
+       DESIGN SYSTEM
+    ========================================================= */
+    :root {
+      --bg-0:        #0A1628;   /* darkest  */
+      --bg-1:        #0F1E35;
+      --bg-2:        #162942;
+      --bg-3:        #1F3451;
+      --line:        #24395A;
+      --text-0:      #F7FAFC;
+      --text-1:      #C9D6E8;
+      --text-2:      #95A8C2;
+      --text-3:      #6B7F9E;
+      --celta-blue:  #8BB8DC;
+      --celta-blue-2:#7AB1D9;
+      --celta-blue-3:#4A89C3;
+      --celta-red:   #E30613;
+      --celta-red-2: #FF1A2E;
+      --success:     #3FB950;
+      --warning:     #D29922;
+      --error:       #F85149;
+      --grad-hero:   linear-gradient(135deg, #7AB1D9 0%, #4A89C3 50%, #2A5A8E 100%);
+      --grad-accent: linear-gradient(135deg, #E30613 0%, #FF1A2E 100%);
+      --grad-celta:  linear-gradient(90deg, #7AB1D9 0%, #4A89C3 40%, #E30613 100%);
+      --shadow-soft: 0 4px 24px rgba(0,0,0,.3);
+      --shadow-lift: 0 12px 40px rgba(122,177,217,.15);
+      --radius:      14px;
+      --radius-sm:   8px;
+      --trans:       .25s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg-0);
+      color: var(--text-1);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: var(--celta-blue); text-decoration: none; transition: color var(--trans); }
+    a:hover { color: var(--celta-blue-2); }
+    code { font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: .88em; color: var(--celta-blue); background: var(--bg-2); padding: .1em .4em; border-radius: 4px; }
+    pre { font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; overflow-x: auto; }
+
+    /* =========================================================
+       LAYOUT: SIDEBAR NAV + MAIN
+    ========================================================= */
+    .layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+    .nav {
+      position: sticky; top: 0;
+      height: 100vh;
+      background: var(--bg-1);
+      border-right: 1px solid var(--line);
+      padding: 2rem 1.25rem;
+      overflow-y: auto;
+      z-index: 50;
+    }
+    .nav__brand {
+      display: flex; align-items: center; gap: .75rem;
+      padding-bottom: 1.25rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .nav__crest {
+      width: 40px; height: 40px; flex-shrink: 0;
+    }
+    .nav__brand-text { font-size: .8rem; line-height: 1.3; }
+    .nav__brand-title { font-weight: 800; color: var(--text-0); display: block; }
+    .nav__brand-sub { color: var(--text-3); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
+    .nav__label {
+      font-size: .65rem; font-weight: 700; letter-spacing: .18em;
+      color: var(--text-3); text-transform: uppercase;
+      margin: 1.5rem 0 .4rem;
+    }
+    .nav__list { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .nav__item a {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .55rem .75rem;
+      border-radius: var(--radius-sm);
+      color: var(--text-2);
+      font-size: .88rem;
+      transition: all var(--trans);
+    }
+    .nav__item a:hover { background: var(--bg-2); color: var(--text-0); }
+    .nav__item a.active {
+      background: linear-gradient(90deg, rgba(122,177,217,.15), transparent);
+      color: var(--celta-blue);
+      border-left: 3px solid var(--celta-blue);
+      padding-left: calc(.75rem - 3px);
+    }
+    .nav__num {
+      font-size: .7rem; font-family: "SF Mono", monospace;
+      color: var(--text-3);
+      width: 1.2rem; text-align: center;
+    }
+    .nav__item a.active .nav__num { color: var(--celta-blue); }
+    .nav__ctas { margin-top: 2rem; display: flex; flex-direction: column; gap: .5rem; }
+    .nav__cta {
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      padding: .55rem .75rem; border-radius: var(--radius-sm);
+      font-size: .8rem; font-weight: 600;
+      border: 1px solid var(--line);
+      color: var(--text-1);
+      transition: all var(--trans);
+    }
+    .nav__cta:hover { border-color: var(--celta-blue); color: var(--celta-blue); background: var(--bg-2); }
+    .nav__cta--primary {
+      background: var(--grad-hero);
+      color: #fff;
+      border: none;
+    }
+    .nav__cta--primary:hover { color: #fff; filter: brightness(1.15); }
+
+    main { padding: 0; }
+    .section {
+      padding: 6rem 2.5rem;
+      max-width: 1280px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--bg-2);
+    }
+    .section:last-child { border-bottom: none; }
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+    .nav__toggle { display: none; }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .nav {
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        transform: translateX(-100%);
+        transition: transform var(--trans);
+        width: 280px;
+      }
+      .nav.is-open { transform: translateX(0); }
+      .nav__toggle {
+        display: flex; align-items: center; justify-content: center;
+        position: fixed; top: 1rem; right: 1rem; z-index: 100;
+        width: 44px; height: 44px;
+        background: var(--bg-2); border: 1px solid var(--line); color: var(--text-0);
+        border-radius: 10px; cursor: pointer;
+      }
+      .section { padding: 4rem 1.25rem; }
+      .hero__title { font-size: 2.5rem !important; }
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+    .hero {
+      padding: 7rem 2.5rem 6rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--bg-2);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -20%; right: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(122,177,217,.25) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: -40%; left: -20%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(227,6,19,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero__inner { position: relative; max-width: 1000px; margin: 0 auto; }
+    .hero__badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .4rem .9rem;
+      background: rgba(122,177,217,.1);
+      border: 1px solid rgba(122,177,217,.3);
+      border-radius: 999px;
+      font-size: .75rem; font-weight: 600; letter-spacing: .08em;
+      color: var(--celta-blue);
+      margin-bottom: 1.5rem;
+    }
+    .hero__title {
+      font-size: clamp(2.5rem, 6vw, 4.25rem);
+      font-weight: 800;
+      color: var(--text-0);
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      margin-bottom: 1.25rem;
+    }
+    .hero__title span { background: var(--grad-celta); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero__lead { font-size: 1.15rem; color: var(--text-2); max-width: 680px; margin-bottom: 2.25rem; }
+    .hero__ctas { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .55rem;
+      padding: .85rem 1.4rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600; font-size: .95rem;
+      transition: all var(--trans);
+      cursor: pointer; border: none;
+    }
+    .btn--primary {
+      background: var(--grad-accent);
+      color: #fff;
+    }
+    .btn--primary:hover { filter: brightness(1.15); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(227,6,19,.35); }
+    .btn--secondary {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      color: var(--text-0);
+    }
+    .btn--secondary:hover { border-color: var(--celta-blue); color: var(--celta-blue); }
+    .hero__meta {
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--bg-2);
+    }
+    .hero__metaitem { font-size: .85rem; }
+    .hero__metaval {
+      display: block;
+      font-size: 2rem; font-weight: 800; color: var(--text-0);
+      line-height: 1;
+      margin-bottom: .3rem;
+    }
+    .hero__metalabel { color: var(--text-3); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; }
+
+    /* =========================================================
+       SECTION HEADER
+    ========================================================= */
+    .sec-header { margin-bottom: 3rem; }
+    .sec-num {
+      display: inline-block;
+      font-size: .75rem; font-weight: 700; letter-spacing: .18em;
+      color: var(--celta-blue);
+      text-transform: uppercase;
+      margin-bottom: .75rem;
+      padding: .25rem .75rem;
+      background: rgba(122,177,217,.1);
+      border-radius: 999px;
+    }
+    .sec-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+      font-weight: 800;
+      color: var(--text-0);
+      line-height: 1.15;
+      letter-spacing: -.01em;
+      margin-bottom: 1rem;
+    }
+    .sec-lead { color: var(--text-2); font-size: 1.05rem; max-width: 720px; }
+
+    /* =========================================================
+       CALLOUT BOXES
+    ========================================================= */
+    .callout {
+      display: flex; gap: 1rem;
+      padding: 1.15rem 1.4rem;
+      border-radius: var(--radius);
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      margin: 1.5rem 0;
+    }
+    .callout__icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+    .callout__body h4 {
+      font-size: .78rem; font-weight: 800; letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: .35rem;
+    }
+    .callout__body p { margin: 0; color: var(--text-1); font-size: .94rem; }
+    .callout--tip        { border-left: 3px solid var(--celta-blue); }
+    .callout--tip h4     { color: var(--celta-blue); }
+    .callout--good       { border-left: 3px solid var(--success); }
+    .callout--good h4    { color: var(--success); }
+    .callout--warn       { border-left: 3px solid var(--warning); }
+    .callout--warn h4    { color: var(--warning); }
+    .callout--class      { border-left: 3px solid #C77DFF; }
+    .callout--class h4   { color: #C77DFF; }
+
+    /* =========================================================
+       GRID CARDS
+    ========================================================= */
+    .grid { display: grid; gap: 1.25rem; }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+    .card {
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: all var(--trans);
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      border-color: var(--celta-blue-3);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lift);
+    }
+    .card__icon {
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg-2);
+      border-radius: 10px;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .card__title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-0);
+      margin-bottom: .4rem;
+    }
+    .card__role {
+      font-size: .7rem; font-weight: 700; letter-spacing: .12em;
+      color: var(--celta-blue);
+      text-transform: uppercase;
+      margin-bottom: .7rem;
+    }
+    .card__text { font-size: .92rem; color: var(--text-2); }
+
+    /* =========================================================
+       ARCHITECTURE DIAGRAM (interactive-ish)
+    ========================================================= */
+    .arch {
+      margin: 2rem 0;
+      padding: 2rem 1.5rem;
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      position: relative;
+      overflow-x: auto;
+    }
+    .arch__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      min-width: 720px;
+    }
+    .arch__node {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1.1rem;
+      text-align: center;
+      position: relative;
+      transition: all var(--trans);
+    }
+    .arch__node:hover { border-color: var(--celta-blue); background: var(--bg-3); }
+    .arch__node--source { grid-column: 1 / span 3; background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-3) 100%); }
+    .arch__node--mid-left  { grid-column: 1; grid-row: 2; }
+    .arch__node--mid-right { grid-column: 3; grid-row: 2; }
+    .arch__node--out-left  { grid-column: 1; grid-row: 3; }
+    .arch__node--out-right { grid-column: 3; grid-row: 3; }
+    .arch__node--analytics { grid-column: 1 / span 3; grid-row: 4; }
+    .arch__node h5 {
+      font-size: .95rem; color: var(--text-0); font-weight: 700;
+      margin-bottom: .3rem;
+    }
+    .arch__node p { font-size: .8rem; color: var(--text-3); margin: 0; }
+    .arch__node__emoji { font-size: 1.6rem; display: block; margin-bottom: .5rem; }
+    .arch__arrow {
+      position: absolute;
+      color: var(--celta-blue-3);
+      font-size: 1.2rem;
+      pointer-events: none;
+    }
+    .arch__legend { font-size: .72rem; color: var(--text-3); text-align: center; margin-top: 1rem; }
+
+    /* =========================================================
+       TIMELINE (roadmap)
+    ========================================================= */
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+      margin: 2.5rem 0 0;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 1.1rem; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--celta-blue) 0%, var(--celta-red) 100%);
+      border-radius: 2px;
+    }
+    .t-item {
+      position: relative;
+      padding-bottom: 2rem;
+    }
+    .t-item:last-child { padding-bottom: 0; }
+    .t-dot {
+      position: absolute;
+      left: -1.9rem; top: .4rem;
+      width: 28px; height: 28px;
+      background: var(--bg-1);
+      border: 2px solid var(--celta-blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 800;
+      color: var(--celta-blue);
+    }
+    .t-item__head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: .4rem;
+    }
+    .t-item__head h4 { font-size: 1.1rem; color: var(--text-0); font-weight: 700; }
+    .t-item__emoji { font-size: 1.25rem; }
+    .t-item__body { color: var(--text-2); font-size: .95rem; padding-left: .1rem; }
+    .t-item__out {
+      display: inline-block;
+      margin-top: .55rem;
+      padding: .25rem .7rem;
+      background: rgba(63,185,80,.1);
+      border: 1px solid rgba(63,185,80,.3);
+      color: var(--success);
+      font-size: .75rem; font-weight: 600;
+      border-radius: 999px;
+    }
+
+    /* =========================================================
+       TABS (credentials)
+    ========================================================= */
+    .tabs {
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+    .tabs__triggers {
+      display: flex;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--line);
+      overflow-x: auto;
+    }
+    .tabs__trigger {
+      padding: 1rem 1.5rem;
+      background: transparent;
+      border: none;
+      color: var(--text-2);
+      font: inherit; font-size: .9rem; font-weight: 600;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all var(--trans);
+      white-space: nowrap;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .tabs__trigger:hover { color: var(--text-0); }
+    .tabs__trigger.active {
+      color: var(--celta-blue);
+      border-bottom-color: var(--celta-blue);
+      background: var(--bg-1);
+    }
+    .tabs__panel { display: none; padding: 2rem; }
+    .tabs__panel.active { display: block; }
+    .tabs__panel h4 {
+      color: var(--text-0); font-size: 1rem; margin: 1.25rem 0 .5rem;
+    }
+    .tabs__panel h4:first-child { margin-top: 0; }
+    .tabs__panel dl {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: .5rem 1.25rem;
+      margin-top: 1rem;
+    }
+    .tabs__panel dt { font-weight: 600; color: var(--text-0); }
+    .tabs__panel dd { color: var(--text-2); margin: 0; font-size: .92rem; }
+    .breadcrumb {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-family: "SF Mono", monospace;
+      font-size: .82rem;
+      color: var(--text-1);
+      background: var(--bg-2);
+      padding: .45rem .8rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+    }
+    .breadcrumb svg { color: var(--text-3); flex-shrink: 0; }
+
+    /* =========================================================
+       TREE (data model)
+    ========================================================= */
+    .tree {
+      font-family: "SF Mono", monospace;
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      font-size: .88rem;
+      line-height: 1.9;
+      color: var(--text-1);
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+    .tree__key { color: var(--celta-blue); font-weight: 600; }
+    .tree__annot { color: var(--text-3); font-style: italic; }
+
+    /* =========================================================
+       ENDPOINT LIST
+    ========================================================= */
+    .endpoint {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.25rem;
+      margin: .6rem 0;
+      transition: all var(--trans);
+    }
+    .endpoint:hover { border-color: var(--celta-blue-3); }
+    .endpoint__method {
+      padding: .25rem .5rem;
+      border-radius: 4px;
+      font-family: "SF Mono", monospace; font-size: .7rem; font-weight: 800;
+      letter-spacing: .05em;
+    }
+    .endpoint__method--get  { background: rgba(63,185,80,.15); color: var(--success); }
+    .endpoint__method--post { background: rgba(210,153,34,.15); color: var(--warning); }
+    .endpoint__path {
+      font-family: "SF Mono", monospace;
+      color: var(--text-0);
+      font-size: .88rem;
+      font-weight: 600;
+    }
+    .endpoint__purpose { color: var(--text-3); font-size: .85rem; margin-left: auto; }
+
+    /* =========================================================
+       URL BREAKDOWN (deep-link)
+    ========================================================= */
+    .url-box {
+      font-family: "SF Mono", monospace;
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      font-size: .85rem;
+      line-height: 2;
+      color: var(--text-1);
+      word-break: break-all;
+      margin: 1.5rem 0 .5rem;
+      overflow-x: auto;
+    }
+    .url-box em { font-style: normal; color: var(--celta-blue); font-weight: 600; }
+    .url-box strong { font-weight: 600; color: var(--celta-red-2); }
+
+    /* =========================================================
+       FORM FLOW
+    ========================================================= */
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .flow__step {
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      position: relative;
+    }
+    .flow__num {
+      display: inline-block;
+      width: 28px; height: 28px; line-height: 28px;
+      border-radius: 50%;
+      background: var(--grad-hero);
+      color: #fff; font-weight: 700; text-align: center;
+      font-size: .85rem;
+      margin-bottom: .7rem;
+    }
+    .flow__step h5 { color: var(--text-0); font-size: .95rem; margin-bottom: .3rem; }
+    .flow__step p { color: var(--text-3); font-size: .85rem; margin: 0; }
+
+    /* =========================================================
+       MAILCHIMP: merge vs tags comparison
+    ========================================================= */
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+    @media (max-width: 700px) { .compare { grid-template-columns: 1fr; } }
+    .compare__col {
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .compare__col h4 {
+      color: var(--text-0); font-size: 1.1rem; margin-bottom: .3rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .compare__col .tag-vs {
+      font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+      padding: .2rem .55rem; border-radius: 999px;
+      text-transform: uppercase;
+    }
+    .compare__col--merge .tag-vs { background: rgba(210,153,34,.15); color: var(--warning); }
+    .compare__col--tags  .tag-vs { background: rgba(63,185,80,.15); color: var(--success); }
+    .compare__col p  { font-size: .9rem; color: var(--text-2); margin-bottom: .8rem; }
+    .compare__example {
+      font-family: "SF Mono", monospace;
+      background: var(--bg-2);
+      border-radius: var(--radius-sm);
+      padding: .85rem;
+      font-size: .78rem;
+      color: var(--text-1);
+      line-height: 1.8;
+      margin-top: .6rem;
+    }
+    .compare__example .added { color: var(--success); }
+    .compare__example .overwritten { color: var(--warning); }
+
+    /* =========================================================
+       EMAIL MOCKUP
+    ========================================================= */
+    .email {
+      max-width: 560px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #0A1A3A;
+      line-height: 1.55;
+    }
+    .email__header {
+      background: #7AB1D9;
+      padding: 1.25rem 1.75rem;
+      display: flex; justify-content: space-between; align-items: center;
+      color: #fff;
+    }
+    .email__header-brand { font-weight: 800; font-size: 1.05rem; }
+    .email__header-tag { font-size: .65rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+    .email__body { padding: 1.75rem; }
+    .email__h1 { color: #D61034; font-size: 1.35rem; font-weight: 800; margin-bottom: .4rem; line-height: 1.25; }
+    .email__intro { font-size: .92rem; color: #10213f; margin-bottom: 1rem; }
+    .email__recap {
+      background: #E6EFF8;
+      border-radius: 8px;
+      padding: .9rem 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .email__recap-row { margin-bottom: .7rem; }
+    .email__recap-row:last-child { margin-bottom: 0; }
+    .email__recap-label { font-size: .65rem; letter-spacing: .14em; color: #5d6c80; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: .15rem; }
+    .email__recap-value { font-weight: 700; color: #0A1A3A; font-size: .95rem; }
+    .email__recap-value--avail { color: #0a8754; }
+    .email__cta {
+      display: inline-block;
+      background: #D61034; color: #fff !important;
+      padding: .8rem 2rem;
+      border-radius: 7px;
+      font-weight: 700; font-size: .88rem;
+      text-decoration: none;
+    }
+    .email__cta-wrap { text-align: center; margin: 1rem 0; }
+    .email__footer {
+      background: #f3f6fa;
+      padding: .9rem 1.75rem;
+      text-align: center;
+      font-size: .72rem;
+      color: #6b7f9e;
+      border-top: 1px solid #dbe4ef;
+    }
+    .email__labels { margin-top: 1rem; position: relative; }
+    .email__labels span {
+      position: absolute;
+      font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--celta-blue); background: var(--bg-0); padding: .12rem .5rem; border-radius: 4px;
+      pointer-events: none;
+    }
+
+    /* =========================================================
+       N8N PIPELINE
+    ========================================================= */
+    .pipeline {
+      margin: 2rem 0;
+    }
+    .pipeline__list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: .7rem;
+    }
+    .pipe-node {
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: .85rem 1rem;
+      display: flex; align-items: center; gap: .65rem;
+      transition: all var(--trans);
+      cursor: default;
+      position: relative;
+    }
+    .pipe-node:hover {
+      border-color: var(--celta-blue-3);
+      background: var(--bg-2);
+    }
+    .pipe-node__num {
+      font-family: "SF Mono", monospace;
+      font-size: .7rem;
+      color: var(--text-3);
+      font-weight: 700;
+      width: 1.2rem; flex-shrink: 0;
+    }
+    .pipe-node__emoji { font-size: 1.15rem; flex-shrink: 0; }
+    .pipe-node__body { min-width: 0; }
+    .pipe-node__title { color: var(--text-0); font-weight: 600; font-size: .85rem; margin-bottom: .1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pipe-node__desc { color: var(--text-3); font-size: .72rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* =========================================================
+       GA4 MOCK DASHBOARD
+    ========================================================= */
+    .dash {
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      margin: 2rem 0;
+    }
+    .dash__title {
+      font-size: .75rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--celta-blue); font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .dash__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .kpi {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1rem 1.15rem;
+    }
+    .kpi__label {
+      font-size: .7rem; color: var(--text-3);
+      text-transform: uppercase; letter-spacing: .1em;
+      margin-bottom: .4rem;
+      display: block;
+    }
+    .kpi__value {
+      font-size: 1.6rem; font-weight: 800; color: var(--text-0);
+      line-height: 1;
+      margin-bottom: .3rem;
+    }
+    .kpi__value--blue { color: var(--celta-blue); }
+    .kpi__value--red  { color: var(--celta-red-2); }
+    .kpi__bar {
+      height: 6px; border-radius: 3px;
+      background: var(--bg-3);
+      overflow: hidden;
+      margin-top: .4rem;
+    }
+    .kpi__bar-fill { height: 100%; background: var(--grad-hero); }
+    .kpi__bar-fill--accent { background: var(--grad-accent); }
+    .kpi__delta {
+      font-size: .75rem; color: var(--text-3);
+      margin-top: .2rem;
+    }
+
+    /* =========================================================
+       LEGAL COMPLIANCE MATRIX
+    ========================================================= */
+    .laws { margin: 2rem 0; }
+    .law {
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .law__head {
+      display: flex; align-items: baseline; gap: 1rem;
+      margin-bottom: .7rem;
+    }
+    .law__flag { font-size: 1.5rem; }
+    .law__title { font-size: 1.15rem; font-weight: 800; color: var(--text-0); }
+    .law__code {
+      font-family: "SF Mono", monospace;
+      font-size: .72rem;
+      color: var(--text-3);
+    }
+    .law__desc { color: var(--text-2); font-size: .94rem; margin-bottom: .8rem; }
+    .law ul { list-style: none; padding: 0; }
+    .law ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: .35rem;
+      font-size: .9rem;
+      color: var(--text-1);
+    }
+    .law ul li::before {
+      content: "→";
+      position: absolute; left: 0;
+      color: var(--celta-blue);
+      font-weight: 700;
+    }
+
+    .matrix {
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+    .matrix table { width: 100%; border-collapse: collapse; }
+    .matrix th {
+      text-align: left;
+      padding: 1rem 1.25rem;
+      background: var(--bg-2);
+      font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+      color: var(--text-3);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--line);
+    }
+    .matrix td {
+      padding: .85rem 1.25rem;
+      border-bottom: 1px solid var(--bg-2);
+      color: var(--text-1);
+      font-size: .9rem;
+    }
+    .matrix tr:last-child td { border-bottom: none; }
+    .status {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 1.8rem; height: 1.8rem;
+      border-radius: 50%;
+      font-size: 1rem; font-weight: 700;
+    }
+    .status--ok   { background: rgba(63,185,80,.15);  color: var(--success); }
+    .status--warn { background: rgba(210,153,34,.15); color: var(--warning); }
+    .status--err  { background: rgba(248,81,73,.15);  color: var(--error);   }
+
+    /* =========================================================
+       VIDEO EMBED
+    ========================================================= */
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      margin: 2rem 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg-2);
+      box-shadow: var(--shadow-lift);
+    }
+    .video-wrap iframe {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+    footer {
+      padding: 4rem 2.5rem 3rem;
+      background: var(--bg-1);
+      border-top: 1px solid var(--line);
+    }
+    footer .footer-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+    }
+    @media (max-width: 800px) { footer .footer-inner { grid-template-columns: 1fr; } }
+    footer h4 {
+      font-size: .75rem; font-weight: 700; letter-spacing: .14em;
+      color: var(--text-3); text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    footer ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    footer .footer-brand { color: var(--text-0); font-weight: 700; display: flex; align-items: center; gap: .6rem; margin-bottom: .7rem; }
+    footer .footer-brand img { width: 32px; height: 32px; }
+    footer .footer-text { font-size: .88rem; color: var(--text-2); max-width: 400px; }
+    footer .bottom {
+      max-width: 1280px; margin: 3rem auto 0;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+      font-size: .75rem;
+      color: var(--text-3);
+    }
+
+    /* =========================================================
+       SCROLL-TRIGGERED ANIMATION
+    ========================================================= */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    [data-reveal].is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- MOBILE TOGGLE -->
+<button class="nav__toggle" aria-label="Toggle navigation">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+  </svg>
+</button>
+
+<div class="layout">
+
+<!-- ============================== SIDEBAR ============================== -->
+<aside class="nav">
+  <div class="nav__brand">
+    <img src="assets/celta-crest.svg" alt="RC Celta" class="nav__crest">
+    <div class="nav__brand-text">
+      <span class="nav__brand-title">RC Celta</span>
+      <span class="nav__brand-sub">Alert Platform</span>
+    </div>
+  </div>
+  <div class="nav__label">Secciones</div>
+  <ul class="nav__list">
+    <li class="nav__item"><a href="#intro">      <span class="nav__num">01</span>🎯 Introducción</a></li>
+    <li class="nav__item"><a href="#stack">      <span class="nav__num">02</span>🛠️ Stack</a></li>
+    <li class="nav__item"><a href="#roadmap">    <span class="nav__num">03</span>🗺️ Roadmap</a></li>
+    <li class="nav__item"><a href="#credentials"><span class="nav__num">04</span>🔑 Credenciales</a></li>
+    <li class="nav__item"><a href="#onebox">     <span class="nav__num">05</span>🎟️ ONEBOX</a></li>
+    <li class="nav__item"><a href="#landing">    <span class="nav__num">06</span>🌐 Landing</a></li>
+    <li class="nav__item"><a href="#mailchimp">  <span class="nav__num">07</span>📬 Mailchimp</a></li>
+    <li class="nav__item"><a href="#mandrill">   <span class="nav__num">08</span>✉️ Mandrill</a></li>
+    <li class="nav__item"><a href="#n8n">        <span class="nav__num">09</span>🤖 n8n</a></li>
+    <li class="nav__item"><a href="#github">     <span class="nav__num">10</span>🐙 GitHub</a></li>
+    <li class="nav__item"><a href="#ga4">        <span class="nav__num">11</span>📊 GA4</a></li>
+    <li class="nav__item"><a href="#legal">      <span class="nav__num">12</span>⚖️ Legal</a></li>
+  </ul>
+  <div class="nav__ctas">
+    <a class="nav__cta nav__cta--primary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+      Demo en vivo
+    </a>
+    <a class="nav__cta" href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.111.793-.26.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.838 1.237 1.838 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+      Código fuente
+    </a>
+    <a class="nav__cta" href="https://youtu.be/-FURuRfDk8I" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      Vídeo (2 min)
+    </a>
+  </div>
+</aside>
+
+<!-- ============================== MAIN ============================== -->
+<main>
+
+<!-- ============================== HERO ============================== -->
+<section class="hero" id="hero">
+  <div class="hero__inner">
+    <div class="hero__badge">
+      <span style="width:8px;height:8px;background:var(--celta-red);border-radius:50%;"></span>
+      IE Business School · AI Marketing Lab
+    </div>
+    <h1 class="hero__title">
+      Seat Availability<br><span>Alert Platform</span>
+    </h1>
+    <p class="hero__lead">
+      Una plataforma de recuperación de demanda para el RC Celta de Vigo: captura aficionados que se quedaron sin entrada, detecta cuándo se libera inventario y les avisa por email para cerrar la venta.
+    </p>
+    <div class="hero__ctas">
+      <a class="btn btn--primary" href="#intro">
+        Empezar el recorrido
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a class="btn btn--secondary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
+        Ver demo en vivo
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+      </a>
+    </div>
+    <div class="hero__meta">
+      <div class="hero__metaitem">
+        <span class="hero__metaval">5</span>
+        <span class="hero__metalabel">Herramientas en el stack</span>
+      </div>
+      <div class="hero__metaitem">
+        <span class="hero__metaval">12</span>
+        <span class="hero__metalabel">Nodos de automatización</span>
+      </div>
+      <div class="hero__metaitem">
+        <span class="hero__metaval">3</span>
+        <span class="hero__metalabel">Normativas de cumplimiento</span>
+      </div>
+      <div class="hero__metaitem">
+        <span class="hero__metaval">100%</span>
+        <span class="hero__metalabel">Opt-in · RGPD compliant</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== §1 INTRODUCCIÓN ============================== -->
+<section class="section" id="intro">
+  <div class="sec-header" data-reveal>
+    <span class="sec-num">01 · 🎯 Introducción</span>
+    <h2 class="sec-title">El problema, la solución y por qué importa</h2>
+    <p class="sec-lead">Un aficionado quiere entrar a ver al Celta, la grada está llena, y cuando días después se libera un asiento, la taquilla no sabe que él lo quería. Esa memoria faltante es una pérdida de ingresos silenciosa.</p>
+  </div>
+
+  <div class="grid grid-2" data-reveal>
+    <div class="card">
+      <div class="card__icon" style="background:rgba(248,81,73,.1); color:var(--error);">❌</div>
+      <div class="card__role">El problema</div>
+      <h3 class="card__title">Demanda perdida invisible</h3>
+      <p class="card__text">Una parte significativa de los abonos y entradas que se liberan (devoluciones, pagos caídos, pre-asignaciones canceladas) nunca llega a manos de los fans que las querían. La venta se evapora porque nadie les avisó.</p>
+    </div>
+    <div class="card">
+      <div class="card__icon" style="background:rgba(63,185,80,.1); color:var(--success);">✅</div>
+      <div class="card__role">La solución</div>
+      <h3 class="card__title">Recuperación automatizada</h3>
+      <p class="card__text">Capturar el interés mientras no hay entradas, detectar continuamente la disponibilidad en ONEBOX, y enviar un email personalizado con deep-link de compra en el momento exacto en que se libera la grada solicitada.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--tip" data-reveal>
+    <div class="callout__icon">💡</div>
+    <div class="callout__body">
+      <h4>Para recordar</h4>
+      <p>Recuperar demanda perdida es un negocio de <strong>timing</strong>. El valor no está en tener la lista: está en llegar al cliente <em>en el instante</em> en que el problema que le impedía comprar se ha resuelto.</p>
+    </div>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:2rem 0 .75rem; font-size:1.2rem;">🎬 Demo rápida</h3>
+  <p style="color:var(--text-2);">Recorrido visual del caso en 2 minutos.</p>
+  <div class="video-wrap" data-reveal>
+    <iframe src="https://www.youtube.com/embed/-FURuRfDk8I" title="Demo · RC Celta Seat Availability Alert Platform" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+</section>
+
+<!-- ============================== §2 STACK ============================== -->
+<section class="section" id="stack">
+  <div class="sec-header" data-reveal>
+    <span class="sec-num">02 · 🛠️ Technology Stack</span>
+    <h2 class="sec-title">Cinco herramientas que un marketer ya conoce</h2>
+    <p class="sec-lead">Deliberadamente pocas piezas móviles. Cada componente es o bien serverless, o bien freemium, o bien una herramienta que el equipo de marketing ya tiene en su cinturón.</p>
+  </div>
+
+  <div class="grid grid-3" data-reveal>
+    <div class="card">
+      <div class="card__icon" style="background:rgba(227,6,19,.1);">🎟️</div>
+      <div class="card__role">Fuente de datos</div>
+      <h3 class="card__title">ONEBOX TDS</h3>
+      <p class="card__text">La plataforma donde el club vende las entradas online. Nos dice, en tiempo real, cuántas butacas quedan libres en cada grada de cada partido.</p>
+    </div>
+    <div class="card">
+      <div class="card__icon" style="background:rgba(122,177,217,.1);">🌐</div>
+      <div class="card__role">Punto de entrada</div>
+      <h3 class="card__title">Landing page</h3>
+      <p class="card__text">Página pública estática con el formulario «avísame cuando haya entradas». Diseñada con el look & feel del Celta y alojada gratis en GitHub Pages.</p>
+    </div>
+    <div class="card">
+      <div class="card__icon" style="background:rgba(255,255,102,.1);">📬</div>
+      <div class="card__role">Lista de contactos</div>
+      <h3 class="card__title">Mailchimp</h3>
+      <p class="card__text">La audiencia CRM. Cada fan registrado vive aquí con merge fields (datos) y tags (por partido y grada) para que el equipo segmente sin escribir SQL.</p>
+    </div>
+    <div class="card">
+      <div class="card__icon" style="background:rgba(210,153,34,.1);">✉️</div>
+      <div class="card__role">Canal transaccional</div>
+      <h3 class="card__title">Mandrill</h3>
+      <p class="card__text">El servicio que envía los emails uno-a-uno del aviso. Optimizado para latencia y tracking individual. Mismo login que Mailchimp.</p>
+    </div>
+    <div class="card">
+      <div class="card__icon" style="background:rgba(199,125,255,.1);">🤖</div>
+      <div class="card__role">Automatización</div>
+      <h3 class="card__title">n8n</h3>
+      <p class="card__text">El pegamento visual: consulta ONEBOX, cruza con Mailchimp, dispara Mandrill. Free-tier cloud o self-hosted. Zero code para el marketer.</p>
+    </div>
+    <div class="card">
+      <div class="card__icon" style="background:rgba(63,185,80,.1);">📊</div>
+      <div class="card__role">Medición</div>
+      <h3 class="card__title">Google Analytics 4</h3>
+      <p class="card__text">Capa de analítica: page views, eventos custom (<code>generate_lead</code>), atribución por UTMs y embudo completo hasta la conversión.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--good" data-reveal>
+    <div class="callout__icon">✅</div>
+    <div class="callout__body">
+      <h4>Buena práctica</h4>
+      <p>Elegir herramientas que el equipo <strong>ya conoce</strong> &gt; elegir las técnicamente mejores. Cada tool nueva es una curva de aprendizaje, un contrato y un coste oculto.</p>
+    </div>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🔌 Cómo se conectan</h3>
+  <div class="arch" data-reveal>
+    <div class="arch__grid">
+      <div class="arch__node arch__node--source">
+        <span class="arch__node__emoji">🎟️</span>
+        <h5>ONEBOX TDS</h5>
+        <p>Fuente de verdad del inventario</p>
+      </div>
+      <div class="arch__node arch__node--mid-left">
+        <span class="arch__node__emoji">🌐</span>
+        <h5>Landing page</h5>
+        <p>GitHub Pages</p>
+      </div>
+      <div class="arch__node arch__node--mid-right">
+        <span class="arch__node__emoji">🤖</span>
+        <h5>n8n</h5>
+        <p>ONEBOX → MC → Mandrill</p>
+      </div>
+      <div class="arch__node arch__node--out-left">
+        <span class="arch__node__emoji">📬</span>
+        <h5>Mailchimp</h5>
+        <p>Audience + tags</p>
+      </div>
+      <div class="arch__node arch__node--out-right">
+        <span class="arch__node__emoji">✉️</span>
+        <h5>Mandrill</h5>
+        <p>Email uno-a-uno</p>
+      </div>
+      <div class="arch__node arch__node--analytics">
+        <span class="arch__node__emoji">📊</span>
+        <h5>Google Analytics 4</h5>
+        <p>Medición end-to-end del embudo</p>
+      </div>
+    </div>
+    <p class="arch__legend">Haz clic en cualquier nodo para ir a su sección detallada abajo.</p>
+  </div>
+</section>
+
+<!-- ============================== §3 ROADMAP ============================== -->
+<section class="section" id="roadmap">
+  <div class="sec-header" data-reveal>
+    <span class="sec-num">03 · 🗺️ Roadmap</span>
+    <h2 class="sec-title">Cinco fases incrementales</h2>
+    <p class="sec-lead">Cada fase termina con algo visible que podías enseñar al cliente. El proyecto se construyó en commits discretos, no en un Big Bang.</p>
+  </div>
+
+  <div class="timeline" data-reveal>
+    <div class="t-item">
+      <div class="t-dot">01</div>
+      <div class="t-item__head"><span class="t-item__emoji">🔐</span><h4>Conectar con ONEBOX</h4></div>
+      <div class="t-item__body">Obtener credenciales seller-channel-client, autenticar contra el entorno PRE y mapear el catálogo (partidos, sesiones, gradas).</div>
+      <span class="t-item__out">✓ Token obtenido · 21 sesiones listadas</span>
+    </div>
+    <div class="t-item">
+      <div class="t-dot">02</div>
+      <div class="t-item__head"><span class="t-item__emoji">🌐</span><h4>Landing + primer lead</h4></div>
+      <div class="t-item__body">Diseñar la landing con branding Celta. Conectar el formulario. Capturar el primer lead real con consentimientos y atribución UTM.</div>
+      <span class="t-item__out">✓ Formulario en vivo · Primer contacto en Mailchimp</span>
+    </div>
+    <div class="t-item">
+      <div class="t-dot">03</div>
+      <div class="t-item__head"><span class="t-item__emoji">🤖</span><h4>Detección automática</h4></div>
+      <div class="t-item__body">Construir el flujo de n8n que consulta ONEBOX, aplana gradas con disponibilidad y las cruza con los tags de Mailchimp.</div>
+      <span class="t-item__out">✓ Workflow listo · Cruce OK</span>
+    </div>
+    <div class="t-item">
+      <div class="t-dot">04</div>
+      <div class="t-item__head"><span class="t-item__emoji">✉️</span><h4>Aviso personalizado</h4></div>
+      <div class="t-item__body">Plantilla HTML con branding Celta, recap del partido + grada, CTA con UTMs que apuntan al selector de butacas de ONEBOX.</div>
+      <span class="t-item__out">✓ Inbox recibe el email con botón funcional</span>
+    </div>
+    <div class="t-item">
+      <div class="t-dot">05</div>
+      <div class="t-item__head"><span class="t-item__emoji">📊</span><h4>Medir y cumplir</h4></div>
+      <div class="t-item__body">Instrumentar GA4 con eventos <code>generate_lead</code>. Revisar checklist legal (RGPD · LOPDGDD · LSSI-CE).</div>
+      <span class="t-item__out">✓ Dashboard activo · Compliance auditado</span>
+    </div>
+  </div>
+
+  <div class="callout callout--class" data-reveal>
+    <div class="callout__icon">🧪</div>
+    <div class="callout__body">
+      <h4>En clase</h4>
+      <p>Cada fase es un commit distinto en el repositorio. Abre el historial en <a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform/commits/main" target="_blank">github.com/.../commits/main</a> y verás cómo fue creciendo el proyecto paso a paso.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== §4 CREDENCIALES ============================== -->
+<section class="section" id="credentials">
+  <div class="sec-header" data-reveal>
+    <span class="sec-num">04 · 🔑 Credenciales</span>
+    <h2 class="sec-title">Cuatro credenciales, ninguna cuesta dinero en plan inicial</h2>
+    <p class="sec-lead">Este es el setup mínimo. Todas las claves tienen plan gratuito generoso o free-forever. Reserva 30 minutos para tenerlas todas listas antes de empezar.</p>
+  </div>
+
+  <div class="tabs" data-reveal>
+    <div class="tabs__triggers" role="tablist">
+      <button class="tabs__trigger active" data-tab="onebox">🎟️ ONEBOX</button>
+      <button class="tabs__trigger" data-tab="mailchimp">📬 Mailchimp</button>
+      <button class="tabs__trigger" data-tab="mandrill">✉️ Mandrill</button>
+      <button class="tabs__trigger" data-tab="ga4">📊 GA4</button>
+    </div>
+    <div class="tabs__panel active" data-panel="onebox">
+      <h4>Qué necesitas</h4>
+      <dl>
+        <dt><code>client_secret</code></dt><dd>Cadena de 32 caracteres que identifica tu canal en ONEBOX.</dd>
+        <dt><code>channel_id</code></dt><dd>Número entero que identifica el canal dentro de la organización (ej. <code>2287</code>).</dd>
+      </dl>
+      <h4>Dónde se pide</h4>
+      <p style="color:var(--text-2); font-size:.92rem;">Las facilita el equipo técnico de ONEBOX. Pídeselas a tu contacto de cuenta.</p>
+      <div class="callout callout--warn" style="margin-top:1.5rem;">
+        <div class="callout__icon">⚠️</div>
+        <div class="callout__body">
+          <h4>Cuidado</h4>
+          <p>El <code>client_secret</code> da acceso a todo el catálogo del canal. <strong>Nunca</strong> lo metas en el frontend ni en un repositorio público. Guárdalo en el gestor de secretos de tu plataforma.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tabs__panel" data-panel="mailchimp">
+      <h4>Qué necesitas</h4>
+      <dl>
+        <dt>API key</dt><dd>Token para llamar a la Marketing API desde n8n y la automatización.</dd>
+        <dt>Audience ID</dt><dd>Identificador del "audience" (lista) donde irán tus contactos.</dd>
+        <dt>Server prefix</dt><dd>Sufijo de la API key (ej. <code>...-us1</code> → <code>us1</code>). Indica el datacenter donde vive tu cuenta.</dd>
+      </dl>
+      <h4>Dónde encontrarlo</h4>
+      <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> API key:&nbsp; Profile &nbsp;→&nbsp; Account & billing &nbsp;→&nbsp; Extras &nbsp;→&nbsp; API keys</div><br>
+      <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Audience ID:&nbsp; Audience &nbsp;→&nbsp; Settings &nbsp;→&nbsp; Audience name and defaults</div>
+    </div>
+    <div class="tabs__panel" data-panel="mandrill">
+      <h4>Qué necesitas</h4>
+      <dl>
+        <dt>API key</dt><dd>Token para llamar a la Transactional API desde n8n.</dd>
+        <dt>Dominio de envío verificado</dt><dd>Un dominio tuyo con DKIM + SPF publicados y validados en Mandrill.</dd>
+      </dl>
+      <h4>Dónde encontrarlo</h4>
+      <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> API key:&nbsp; Mandrill &nbsp;→&nbsp; Settings &nbsp;→&nbsp; SMTP & API Info &nbsp;→&nbsp; New API key</div><br>
+      <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Dominios:&nbsp; Settings &nbsp;→&nbsp; Sending Domains</div>
+      <div class="callout callout--warn" style="margin-top:1.5rem;">
+        <div class="callout__icon">⚠️</div>
+        <div class="callout__body">
+          <h4>Cuidado</h4>
+          <p>Sin dominio verificado, Mandrill rechaza <strong>todos</strong> tus envíos con <code>unsigned</code>. Es el error nº 1 de los que empiezan. Publica los TXT records antes de montar el flow.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tabs__panel" data-panel="ga4">
+      <h4>Qué necesitas</h4>
+      <dl>
+        <dt>Measurement ID</dt><dd>Identificador <code>G-XXXXXXX</code> del web stream.</dd>
+      </dl>
+      <h4>Dónde encontrarlo</h4>
+      <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> GA4 &nbsp;→&nbsp; Admin &nbsp;→&nbsp; Data streams &nbsp;→&nbsp; Web &nbsp;→&nbsp; tu stream</div>
+      <p style="color:var(--text-2); font-size:.92rem; margin-top:1rem;">Este ID <strong>sí</strong> puede ir en el HTML público: está diseñado para ser visible. GA4 distingue sesiones mediante cookies y parámetros de URL, no por el ID en sí.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== §5 ONEBOX ============================== -->
+<section class="section" id="onebox">
+  <div class="sec-header" data-reveal>
+    <span class="sec-num">05 · 🎟️ ONEBOX</span>
+    <h2 class="sec-title">La API de ticketing</h2>
+    <p class="sec-lead">ONEBOX TDS es la plataforma donde el RC Celta vende sus entradas online. Expone una REST API profesional que nosotros usamos exclusivamente en modo <strong>lectura</strong> — jamás modificamos datos.</p>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">Modelo de datos (con nombres que entiende marketing)</h3>
+  <div class="tree" data-reveal>
+<span class="tree__key">Partido</span> <span class="tree__annot">(ej. «Celta – Athletic · Jornada 29»)</span>
+  └── <span class="tree__key">Sesión</span> <span class="tree__annot">(un partido concreto, con fecha y hora)</span>
+        ├── <span class="tree__key">Tipos de precio</span> <span class="tree__annot">(General, Junior, Abonado…)</span>
+        └── <span class="tree__key">Gradas</span> <span class="tree__annot">(Pista B1, Río Alto, Marcador…)</span>
+              └── <span class="tree__key">disponibilidad</span> <span class="tree__annot">= N asientos libres</span>
+  </div>
+
+  <div class="callout callout--tip" data-reveal>
+    <div class="callout__icon">💡</div>
+    <div class="callout__body">
+      <h4>Para recordar</h4>
+      <p>Al aficionado le hablamos de <strong>partido</strong> y <strong>grada</strong>. Los IDs internos (<code>session_id</code>, <code>grada_id</code>) son para las máquinas.</p>
+    </div>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:2rem 0 .75rem; font-size:1.2rem;">Los tres endpoints que usamos</h3>
+  <div data-reveal>
+    <div class="endpoint">
+      <span class="endpoint__method endpoint__method--post">POST</span>
+      <span class="endpoint__path">/oauth/token</span>
+      <span class="endpoint__purpose">Pedir un token de acceso (válido 12 horas)</span>
+    </div>
+    <div class="endpoint">
+      <span class="endpoint__method endpoint__method--get">GET</span>
+      <span class="endpoint__path">/catalog-api/v1/sessions</span>
+      <span class="endpoint__purpose">Listar todos los partidos del canal</span>
+    </div>
+    <div class="endpoint">
+      <span class="endpoint__method endpoint__method--get">GET</span>
+      <span class="endpoint__path">/catalog-api/v1/sessions/{id}/availability</span>
+      <span class="endpoint__purpose">Disponibilidad por grada de un partido</span>
+    </div>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:2rem 0 .75rem; font-size:1.2rem;">🔗 El enlace de compra (deep-link)</h3>
+  <p style="color:var(--text-2);">Cuando enviamos el email de aviso, el botón <strong>Comprar entrada</strong> apunta a una URL que abre ONEBOX directamente en el mapa de butacas, con los UTMs necesarios para que GA4 atribuya la conversión:</p>
+  <div class="url-box" data-reveal>
+https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
+&nbsp;&nbsp;&nbsp;<strong>viewCode=V_blockmap</strong>
+&nbsp;&nbsp;&nbsp;&amp;utm_source=avisame
+&nbsp;&nbsp;&nbsp;&amp;utm_medium=email
+&nbsp;&nbsp;&nbsp;&amp;utm_campaign=recovery-app
+&nbsp;&nbsp;&nbsp;&amp;utm_content=event-<em>{eventId}</em>-grada-<em>{gradaId}</em>
+  </div>
+  <p style="color:var(--text-3); font-size:.85rem;">
+    • <code style="color:var(--celta-red-2);">viewCode=V_blockmap</code> es funcional (abre el mapa directamente).<br>
+    • Los cuatro <code>utm_*</code> permiten a GA4 atribuir la compra al email concreto que generó el clic.
+  </p>
+</section>
+
+<!-- ============================== §6 LANDING ============================== -->
+<section class="section" id="landing">
+  <div class="sec-header" data-reveal>
+    <span class="sec-num">06 · 🌐 Landing Page</span>
+    <h2 class="sec-title">Estática, brandeada y conectada a ONEBOX</h2>
+    <p class="sec-lead">Una página HTML estática que imita el look & feel de las landing oficiales del RC Celta. Los datos del partido (imagen, fecha, gradas disponibles) se incrustan al compilar, leyéndolos en directo de ONEBOX.</p>
+  </div>
+
+  <div class="grid grid-2" data-reveal>
+    <div class="card">
+      <div class="card__icon" style="background:rgba(122,177,217,.1);">⚡</div>
+      <div class="card__role">Qué es</div>
+      <h3 class="card__title">HTML estático · GitHub Pages</h3>
+      <p class="card__text">Una página generada en build-time a partir de un template Node.js. Se sirve directamente desde GitHub Pages con HTTPS automático.</p>
+    </div>
+    <div class="card">
+      <div class="card__icon" style="background:rgba(255,255,102,.1);">🏗️</div>
+      <div class="card__role">Por qué estática</div>
+      <h3 class="card__title">Menos partes = más estable</h3>
+      <p class="card__text">Sin servidor en runtime, sin bases de datos en el hot path. Gratis de alojar. Trivial de cachear en CDN.</p>
+    </div>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">Flujo de envío del formulario</h3>
+  <div class="flow" data-reveal>
+    <div class="flow__step">
+      <span class="flow__num">1</span>
+      <h5>Usuario rellena</h5>
+      <p>Nombre, email, grada, consentimientos.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">2</span>
+      <h5>Browser captura UTMs</h5>
+      <p>Fuente, campaña, idioma, user-agent.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">3</span>
+      <h5>Envío a automatización</h5>
+      <p>Validación + upsert a Mailchimp.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">4</span>
+      <h5>Thank-you + GA4</h5>
+      <p>Evento <code>generate_lead</code>.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--tip" data-reveal>
+    <div class="callout__icon">💡</div>
+    <div class="callout__body">
+      <h4>Para recordar</h4>
+      <p>El navegador nunca habla directamente con Mailchimp. Una automatización intermedia permite validar datos, aplicar lógica y mantener las API keys fuera del cliente.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:2rem;">
+    <a class="btn btn--secondary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
+      Probar landing en vivo
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+    </a>
+  </p>
+</section>
+
+<!-- ============================== §7 MAILCHIMP ============================== -->
+<section class="section" id="mailchimp">
+  <div class="sec-header" data-reveal>
+    <span class="sec-num">07 · 📬 Mailchimp</span>
+    <h2 class="sec-title">La lista central, segmentable sin SQL</h2>
+    <p class="sec-lead">Aquí vive cada fan registrado. Dos mecanismos distintos organizan sus datos: <strong>merge fields</strong> (su ficha) y <strong>tags</strong> (su historial de intereses). Cada uno tiene una semántica diferente y eso cambia cómo los usamos.</p>
+  </div>
+
+  <div class="compare" data-reveal>
+    <div class="compare__col compare__col--merge">
+      <h4>🗂️ Merge fields <span class="tag-vs">Sobrescriben</span></h4>
+      <p>La «ficha» del contacto. Cada campo guarda <em>un solo valor</em>: el más reciente. Ideal para datos que son por naturaleza únicos por contacto.</p>
+      <p style="color:var(--text-3); font-size:.85rem; margin-top:1rem;"><strong>Ejemplo</strong>: Ana firma por Pista B1 hoy. Mañana firma por Río Alto.</p>
+      <div class="compare__example">
+        <span class="overwritten">GRADA_NAME: <del>Pista B1</del> → <strong>Río Alto</strong></span><br>
+        <span class="overwritten">GRADA_ID: <del>224549</del> → <strong>224562</strong></span>
+      </div>
+    </div>
+    <div class="compare__col compare__col--tags">
+      <h4>🏷️ Tags <span class="tag-vs">Se acumulan</span></h4>
+      <p>Preservan <em>todo el historial</em>. Un contacto puede llevar decenas de tags simultáneamente. Ideal para segmentar por intereses o comportamientos.</p>
+      <p style="color:var(--text-3); font-size:.85rem; margin-top:1rem;"><strong>Mismo caso</strong>: Ana firma por Pista B1 y luego por Río Alto.</p>
+      <div class="compare__example">
+        <span class="added">grada:224549 (Pista B1)</span><br>
+        <span class="added">grada:224562 (Río Alto)</span><br>
+        <span class="added">event:4587</span><br>
+        <span class="added">source:avisame</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout--tip" data-reveal>
+    <div class="callout__icon">💡</div>
+    <div class="callout__body">
+      <h4>Para recordar</h4>
+      <p>Para <strong>segmentar</strong> usa tags. Para la <strong>ficha visible</strong> en el panel de Mailchimp usa merge fields. Son complementarios, no alternativos.</p>
+    </div>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">Segmento típico: «Avisar al abrir Sector 316 del Celta–Athletic»</h3>
+  <pre style="background:var(--bg-1); border:1px solid var(--line); border-radius:var(--radius); padding:1.25rem; font-size:.85rem; color:var(--text-1); margin-top:1rem;" data-reveal>tag contains  <strong style="color:var(--celta-blue);">grada:224515</strong>         <span style="color:var(--text-3);">Y</span>
+tag contains  <strong style="color:var(--celta-blue);">event:4587</strong>           <span style="color:var(--text-3);">Y</span>
+tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-grada-224515</strong></pre>
+  <p style="color:var(--text-3); font-size:.85rem;">Marketing construye este segmento en la UI de Mailchimp. n8n lo consume para enviar el aviso una sola vez por fan y grada.</p>
+</section>
+
+<!-- ============================== §8 MANDRILL ============================== -->
+<section class="section" id="mandrill">
+  <div class="sec-header" data-reveal>
+    <span class="sec-num">08 · ✉️ Mandrill</span>
+    <h2 class="sec-title">Transaccional, no masivo</h2>
+    <p class="sec-lead">Mailchimp es para campañas programadas a listas grandes. Mandrill es para envíos inmediatos, personalizados, con analítica individual de aperturas y clics.</p>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">🎨 Anatomía del email</h3>
+  <div class="email" data-reveal>
+    <div class="email__header">
+      <span class="email__header-brand">RC Celta · Entradas</span>
+      <span class="email__header-tag">¡Avísame!</span>
+    </div>
+    <div class="email__body">
+      <h1 class="email__h1">¡Hay entradas!</h1>
+      <p class="email__intro">Hola <strong>Ana</strong>, se acaban de liberar localidades para la grada que estás siguiendo. Corre que vuelan 🏃</p>
+      <div class="email__recap">
+        <div class="email__recap-row">
+          <span class="email__recap-label">Partido</span>
+          <span class="email__recap-value">Celta – Athletic · Jornada 29</span>
+        </div>
+        <div class="email__recap-row">
+          <span class="email__recap-label">Grada</span>
+          <span class="email__recap-value">Pista - B1</span>
+        </div>
+        <div class="email__recap-row">
+          <span class="email__recap-label">Disponibilidad</span>
+          <span class="email__recap-value email__recap-value--avail">83 localidades</span>
+        </div>
+      </div>
+      <div class="email__cta-wrap">
+        <a class="email__cta" href="#">Comprar entrada</a>
+      </div>
+    </div>
+    <div class="email__footer">Te registraste en avisame.rccelta.es · No garantiza reserva</div>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">📊 Qué se mide por envío</h3>
+  <div class="grid grid-2" data-reveal>
+    <div class="card">
+      <div class="card__role">Tracking activado</div>
+      <h3 class="card__title">Open rate · CTR</h3>
+      <p class="card__text">Mandrill pixel de apertura + redirect-wrapping para clics. Se ve en su panel nativo y en GA4 via UTMs.</p>
+    </div>
+    <div class="card">
+      <div class="card__role">Filtros en el panel</div>
+      <h3 class="card__title">Tags por partido + grada</h3>
+      <p class="card__text">Cada envío lleva <code>avisame</code>, <code>event-{id}</code>, <code>grada-{id}</code>. Vistas cruzadas en Mandrill Analytics.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--warn" data-reveal>
+    <div class="callout__icon">⚠️</div>
+    <div class="callout__body">
+      <h4>Cuidado</h4>
+      <p>El dominio desde el que envías (<code>from_email</code>) <strong>debe</strong> estar verificado en Mandrill con DKIM + SPF. Si no, todos los envíos se rechazan con <code>reject_reason: unsigned</code>. Es el primer error que todo el mundo comete.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== §9 N8N ============================== -->
+<section class="section" id="n8n">
+  <div class="sec-header" data-reveal>
+    <span class="sec-num">09 · 🤖 n8n</span>
+    <h2 class="sec-title">El cerebro que conecta todo</h2>
+    <p class="sec-lead">n8n es una herramienta de automatización visual: arrastras cajas, conectas flechas y ejecutas. El equivalente open-source de Zapier, pero sin límite de ejecuciones y con control total.</p>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">🧩 El pipeline (12 nodos)</h3>
+  <div class="pipeline" data-reveal>
+    <div class="pipeline__list">
+      <div class="pipe-node"><span class="pipe-node__num">01</span><span class="pipe-node__emoji">🎬</span><div class="pipe-node__body"><div class="pipe-node__title">Manual Trigger</div><div class="pipe-node__desc">Punto de entrada</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">02</span><span class="pipe-node__emoji">📌</span><div class="pipe-node__body"><div class="pipe-node__title">Vars</div><div class="pipe-node__desc">Config central</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">03</span><span class="pipe-node__emoji">📬</span><div class="pipe-node__body"><div class="pipe-node__title">Mailchimp Members</div><div class="pipe-node__desc">Traer contactos</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">04</span><span class="pipe-node__emoji">📚</span><div class="pipe-node__body"><div class="pipe-node__title">Aggregate</div><div class="pipe-node__desc">Agrupar en lista</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">05</span><span class="pipe-node__emoji">🔐</span><div class="pipe-node__body"><div class="pipe-node__title">ONEBOX Auth</div><div class="pipe-node__desc">Pedir token</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">06</span><span class="pipe-node__emoji">📅</span><div class="pipe-node__body"><div class="pipe-node__title">ONEBOX Sessions</div><div class="pipe-node__desc">Listar partidos</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">07</span><span class="pipe-node__emoji">🔎</span><div class="pipe-node__body"><div class="pipe-node__title">Filter event_id</div><div class="pipe-node__desc">Quedarnos con el target</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">08</span><span class="pipe-node__emoji">🎫</span><div class="pipe-node__body"><div class="pipe-node__title">ONEBOX Availability</div><div class="pipe-node__desc">Consultar disponibilidad</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">09</span><span class="pipe-node__emoji">🧮</span><div class="pipe-node__body"><div class="pipe-node__title">Gradas availability</div><div class="pipe-node__desc">Aplanar con asientos</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">10</span><span class="pipe-node__emoji">🤝</span><div class="pipe-node__body"><div class="pipe-node__title">Find leads</div><div class="pipe-node__desc">Cruzar × tags</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">11</span><span class="pipe-node__emoji">🛠️</span><div class="pipe-node__body"><div class="pipe-node__title">Build Mandrill</div><div class="pipe-node__desc">Armar JSON email</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">12</span><span class="pipe-node__emoji">✉️</span><div class="pipe-node__body"><div class="pipe-node__title">Mandrill Send</div><div class="pipe-node__desc">Enviar el aviso</div></div></div>
+    </div>
+  </div>
+
+  <div class="callout callout--good" data-reveal>
+    <div class="callout__icon">✅</div>
+    <div class="callout__body">
+      <h4>Buena práctica</h4>
+      <p>El workflow completo está en <code>n8n/avisame-workflow.json</code> en el repo. Descárgalo y <strong>Import from File</strong> en tu instancia de n8n — los 12 nodos aparecen listos para conectar con tus credenciales.</p>
+    </div>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🚀 Evoluciones posibles</h3>
+  <div class="grid grid-3" data-reveal>
+    <div class="card">
+      <div class="card__role">Evitar duplicados</div>
+      <h3 class="card__title">Marcar notificados</h3>
+      <p class="card__text">Añadir el tag <code>notified:event-X-grada-Y</code> tras enviar para no duplicar avisos.</p>
+    </div>
+    <div class="card">
+      <div class="card__role">Automatizar completamente</div>
+      <h3 class="card__title">Scheduler</h3>
+      <p class="card__text">Sustituir el trigger manual por un Schedule node cada 10 min durante ventanas de alta demanda.</p>
+    </div>
+    <div class="card">
+      <div class="card__role">Alertas internas</div>
+      <h3 class="card__title">Canal Slack</h3>
+      <p class="card__text">Segunda salida que avisa al equipo interno en tiempo real cuando se liberan gradas top.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== §10 GITHUB ============================== -->
+<section class="section" id="github">
+  <div class="sec-header" data-reveal>
+    <span class="sec-num">10 · 🐙 GitHub</span>
+    <h2 class="sec-title">Control de versiones + hosting gratuito</h2>
+    <p class="sec-lead">GitHub hace dos cosas a la vez aquí: guarda la historia de cambios del código (control de versiones) y publica <code>landing.html</code> en HTTPS gratis (GitHub Pages).</p>
+  </div>
+
+  <div class="grid grid-2" data-reveal>
+    <div class="card">
+      <div class="card__icon" style="background:rgba(122,177,217,.1);">📁</div>
+      <div class="card__role">Repositorio</div>
+      <h3 class="card__title">Público · Rama única</h3>
+      <p class="card__text"><a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform" target="_blank">github.com/.../rc-celta-seat-availability-alert-platform</a>. Una sola rama <code>main</code> — para equipos pequeños, no hace falta más.</p>
+    </div>
+    <div class="card">
+      <div class="card__icon" style="background:rgba(63,185,80,.1);">🚀</div>
+      <div class="card__role">Deploy automático</div>
+      <h3 class="card__title">GitHub Pages</h3>
+      <p class="card__text">Cada <code>git push</code> dispara un redeploy. 30–60 segundos después, los cambios están en vivo con certificado HTTPS auto-renovado.</p>
+    </div>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🧹 Qué se versiona, qué no</h3>
+  <div class="compare" data-reveal>
+    <div class="compare__col" style="border-left:3px solid var(--success);">
+      <h4>✅ En el repo</h4>
+      <ul style="list-style:none; padding:0; font-size:.9rem; color:var(--text-1);">
+        <li style="padding:.3rem 0;">Código (<code>generate-landing.js</code>, scripts de build)</li>
+        <li style="padding:.3rem 0;">Landing final (<code>landing.html</code>, <code>index.html</code>)</li>
+        <li style="padding:.3rem 0;">Assets de marca (escudo, logos)</li>
+        <li style="padding:.3rem 0;">Workflow de n8n (con secretos sustituidos)</li>
+        <li style="padding:.3rem 0;">Documentación (<code>README.md</code>, <code>manual.html</code>)</li>
+      </ul>
+    </div>
+    <div class="compare__col" style="border-left:3px solid var(--error);">
+      <h4>🚫 Gitignored</h4>
+      <ul style="list-style:none; padding:0; font-size:.9rem; color:var(--text-1);">
+        <li style="padding:.3rem 0;"><code>.env</code> con credenciales reales</li>
+        <li style="padding:.3rem 0;">Artefactos pesados regenerables</li>
+        <li style="padding:.3rem 0;">Config local de herramientas de IDE</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout callout--good" data-reveal>
+    <div class="callout__icon">✅</div>
+    <div class="callout__body">
+      <h4>Buena práctica</h4>
+      <p>Antes del primer <code>git push</code> a un repo público, haz un <strong>grep de seguridad</strong>: busca cualquier API key, contraseña o token en los archivos staged. Es un hábito de dos segundos que evita filtraciones.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== §11 GA4 ============================== -->
+<section class="section" id="ga4">
+  <div class="sec-header" data-reveal>
+    <span class="sec-num">11 · 📊 Google Analytics 4</span>
+    <h2 class="sec-title">Medir lo que importa</h2>
+    <p class="sec-lead">El <code>measurement_id</code> está incrustado en la landing. GA4 captura tráfico y eventos automáticamente; nosotros añadimos un evento custom <code>generate_lead</code> al enviar el formulario.</p>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">📈 Dashboard de recuperación — ejemplo ilustrativo</h3>
+  <div class="dash" data-reveal>
+    <div class="dash__title">Avisos de entradas · Últimos 30 días</div>
+    <div class="dash__grid">
+      <div class="kpi">
+        <span class="kpi__label">Tasa de registro</span>
+        <div class="kpi__value kpi__value--blue">24,3%</div>
+        <div class="kpi__bar"><div class="kpi__bar-fill" style="width:24%;"></div></div>
+        <div class="kpi__delta">page_view → generate_lead</div>
+      </div>
+      <div class="kpi">
+        <span class="kpi__label">Leads totales</span>
+        <div class="kpi__value">830</div>
+        <div class="kpi__bar"><div class="kpi__bar-fill" style="width:80%;"></div></div>
+        <div class="kpi__delta">+412 última jornada</div>
+      </div>
+      <div class="kpi">
+        <span class="kpi__label">Emails enviados</span>
+        <div class="kpi__value">412</div>
+        <div class="kpi__bar"><div class="kpi__bar-fill" style="width:50%;"></div></div>
+        <div class="kpi__delta">vía Mandrill</div>
+      </div>
+      <div class="kpi">
+        <span class="kpi__label">Tasa de recuperación</span>
+        <div class="kpi__value kpi__value--red">12,8%</div>
+        <div class="kpi__bar"><div class="kpi__bar-fill kpi__bar-fill--accent" style="width:12%;"></div></div>
+        <div class="kpi__delta">notificación → compra</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🎛️ Parámetros custom del evento <code>generate_lead</code></h3>
+  <div class="matrix" data-reveal>
+    <table>
+      <thead><tr><th style="width:40%;">Parámetro</th><th>Ejemplo</th><th style="width:15%; text-align:center;">Custom dim</th></tr></thead>
+      <tbody>
+        <tr><td><code>method</code></td><td>avisame_form</td><td style="text-align:center;">—</td></tr>
+        <tr><td><code>event_id</code></td><td>4587</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
+        <tr><td><code>event_name</code></td><td>Celta – Athletic · J29</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
+        <tr><td><code>grada_id</code></td><td>224549</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
+        <tr><td><code>grada_name</code></td><td>Pista - B1</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
+        <tr><td><code>is_duplicate</code></td><td>false</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
+        <tr><td><code>locale</code></td><td>es-ES</td><td style="text-align:center;">opcional</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout--tip" data-reveal>
+    <div class="callout__icon">💡</div>
+    <div class="callout__body">
+      <h4>Para recordar</h4>
+      <p>Sin registrar los parámetros como <strong>custom dimensions</strong> en <em>Admin → Custom definitions</em>, GA4 los captura pero no los expone como breakdowns en los informes. Es un paso obligatorio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== §12 LEGAL ============================== -->
+<section class="section" id="legal">
+  <div class="sec-header" data-reveal>
+    <span class="sec-num">12 · ⚖️ Legal &amp; Privacy</span>
+    <h2 class="sec-title">RGPD · LOPDGDD · LSSI-CE</h2>
+    <p class="sec-lead">Tres normativas se cruzan en este proyecto. Todas son obligatorias si operas en España. No son "nice to have" — sin cumplirlas, la plataforma no puede ir a producción.</p>
+  </div>
+
+  <div class="laws" data-reveal>
+    <div class="law">
+      <div class="law__head">
+        <span class="law__flag">🇪🇺</span>
+        <div>
+          <span class="law__title">RGPD</span>
+          <div class="law__code">Reglamento General de Protección de Datos · UE 2016/679</div>
+        </div>
+      </div>
+      <p class="law__desc">Normativa europea que establece el marco general sobre cómo se deben recoger, tratar y almacenar los datos personales. Aplica a cualquier tratamiento de datos de residentes de la UE.</p>
+      <ul>
+        <li>Consentimiento <strong>libre, específico, informado e inequívoco</strong> antes de recoger el email</li>
+        <li>Minimización de datos — solo lo estrictamente necesario</li>
+        <li>Limitación de finalidad — usar los datos solo para lo que se consintió</li>
+        <li>Derechos ARCO-POL garantizados contractualmente</li>
+        <li>Registro de actividades de tratamiento documentado</li>
+      </ul>
+    </div>
+
+    <div class="law">
+      <div class="law__head">
+        <span class="law__flag">🇪🇸</span>
+        <div>
+          <span class="law__title">LOPDGDD</span>
+          <div class="law__code">Ley Orgánica 3/2018</div>
+        </div>
+      </div>
+      <p class="law__desc">Adaptación española del RGPD. Refuerza los derechos de los usuarios y define el régimen sancionador nacional.</p>
+      <ul>
+        <li>Edad mínima <strong>14 años</strong> para consentir por sí mismos</li>
+        <li>Derechos digitales: portabilidad, olvido en redes, desconexión digital</li>
+        <li>Sanciones hasta <strong>20 M€ o el 4 % de la facturación global</strong></li>
+        <li>DPO obligatorio en tratamientos a gran escala</li>
+      </ul>
+    </div>
+
+    <div class="law">
+      <div class="law__head">
+        <span class="law__flag">📧</span>
+        <div>
+          <span class="law__title">LSSI-CE</span>
+          <div class="law__code">Ley 34/2002 · Servicios de la Sociedad de la Información</div>
+        </div>
+      </div>
+      <p class="law__desc">Regula el envío de comunicaciones comerciales electrónicas y el uso de cookies.</p>
+      <ul>
+        <li><strong>Opt-in previo y expreso</strong> para emails comerciales (art. 21)</li>
+        <li>Enlace de baja gratuito y sencillo en cada comunicación</li>
+        <li>Identificación clara del remitente</li>
+        <li>Banner de cookies bloqueante para cualquier cookie no estrictamente necesaria (GA4 entra aquí)</li>
+        <li>Sanciones hasta <strong>150 000 €</strong> por infracción grave</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🔍 Cómo cumple hoy la plataforma</h3>
+  <div class="matrix" data-reveal>
+    <table>
+      <thead><tr><th>Requisito</th><th style="text-align:center; width:80px;">Estado</th></tr></thead>
+      <tbody>
+        <tr><td>Consentimiento inequívoco (checkbox sin premarcar)</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
+        <tr><td>Consentimiento separado para marketing</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
+        <tr><td>Información previa — enlace a política de privacidad</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
+        <tr><td>Minimización de datos</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
+        <tr><td>Seguridad: TLS + cifrado en reposo</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
+        <tr><td>Enlace de baja en emails</td><td style="text-align:center;"><span class="status status--err">✗</span></td></tr>
+        <tr><td>Banner de cookies antes de cargar GA4</td><td style="text-align:center;"><span class="status status--err">✗</span></td></tr>
+        <tr><td>Contratos DPA firmados con encargados</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
+        <tr><td>Registro de actividades de tratamiento</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
+        <tr><td>DPO designado y publicado</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout--warn" data-reveal>
+    <div class="callout__icon">⚠️</div>
+    <div class="callout__body">
+      <h4>Cuidado</h4>
+      <p>Un <strong>banner de cookies bloqueante</strong> (que impida cargar <code>gtag.js</code> hasta aceptar) es obligatorio bajo la LSSI-CE. Sin él, la plataforma no puede ir a producción, por impecable que sea el código.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- ============================== FOOTER ============================== -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">
+        <img src="assets/celta-crest.svg" alt="RC Celta">
+        <span>Seat Availability Alert Platform</span>
+      </div>
+      <p class="footer-text">Caso de estudio del <strong>AI Marketing Lab</strong> · IE Business School. Una plataforma de recuperación de demanda para el RC Celta de Vigo, construida con herramientas que cualquier equipo de marketing ya tiene en su cinturón.</p>
+    </div>
+    <div>
+      <h4>Recursos</h4>
+      <ul>
+        <li><a href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">Landing en vivo</a></li>
+        <li><a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform" target="_blank">Código fuente</a></li>
+        <li><a href="https://colab.research.google.com/github/inakigorostiza/rc-celta-seat-availability-alert-platform/blob/main/presentation.ipynb" target="_blank">Notebook Colab</a></li>
+        <li><a href="https://youtu.be/-FURuRfDk8I" target="_blank">Vídeo (2 min)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Herramientas</h4>
+      <ul>
+        <li><a href="https://developer.oneboxtds.com/" target="_blank">ONEBOX TDS Docs</a></li>
+        <li><a href="https://mailchimp.com/developer/" target="_blank">Mailchimp API</a></li>
+        <li><a href="https://mailchimp.com/developer/transactional/" target="_blank">Mandrill API</a></li>
+        <li><a href="https://n8n.io" target="_blank">n8n</a></li>
+        <li><a href="https://developers.google.com/analytics" target="_blank">Google Analytics 4</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="bottom">
+    <span>© 2026 · IE Business School · AI Marketing Lab</span>
+    <span>Construido con ❤️ y con herramientas que ya conocías</span>
+  </div>
+</footer>
+
+<script>
+  // -------------- ACTIVE NAV LINK (on scroll) --------------
+  const navLinks = document.querySelectorAll('.nav__item a');
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+  sections.forEach(s => obs.observe(s));
+
+  // -------------- REVEAL ON SCROLL --------------
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+
+  document.querySelectorAll('[data-reveal]').forEach(el => revealObs.observe(el));
+
+  // -------------- MOBILE NAV TOGGLE --------------
+  const nav = document.querySelector('.nav');
+  const toggle = document.querySelector('.nav__toggle');
+  toggle.addEventListener('click', () => nav.classList.toggle('is-open'));
+  document.querySelectorAll('.nav__item a').forEach(a => {
+    a.addEventListener('click', () => nav.classList.remove('is-open'));
+  });
+
+  // -------------- TABS --------------
+  document.querySelectorAll('.tabs').forEach(tabs => {
+    const triggers = tabs.querySelectorAll('.tabs__trigger');
+    const panels = tabs.querySelectorAll('.tabs__panel');
+    triggers.forEach(t => {
+      t.addEventListener('click', () => {
+        const target = t.dataset.tab;
+        triggers.forEach(x => x.classList.toggle('active', x === t));
+        panels.forEach(p => p.classList.toggle('active', p.dataset.panel === target));
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
