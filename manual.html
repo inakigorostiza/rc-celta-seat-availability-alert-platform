@@ -2334,6 +2334,79 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
 tag contains  <strong style="color:var(--ie-blue);">event:4587</strong>           <span style="color:var(--ink-4);">AND</span>
 tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-224515</strong></pre>
   <p style="color:var(--ink-4); font-size:.88rem;">Marketing builds this segment in Mailchimp's UI. n8n consumes it to send the alert at most once per fan and section.</p>
+
+  <h3 class="h-sub">Set up Mailchimp · 10 minutes</h3>
+  <p style="color:var(--ink-3); max-width:720px;">Before connecting the landing, you need a Mailchimp audience ready to receive contacts. All UI clicks — no code yet.</p>
+
+  <div class="flow" data-reveal>
+    <div class="flow__step">
+      <span class="flow__num">01</span>
+      <h5>Create a Mailchimp account</h5>
+      <p>Sign up at <a href="https://mailchimp.com/signup/" target="_blank">mailchimp.com/signup</a>. The free tier is plenty to build this case study.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">02</span>
+      <h5>Create the audience</h5>
+      <p>Audience → <strong>Create Audience</strong>. Name it <em>"RC Celta – Avisos de entradas"</em>. Default from-name and from-email are the club's official sender.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">03</span>
+      <h5>Add the merge fields</h5>
+      <p>Audience → Settings → <strong>Audience fields and <code>*|MERGE|*</code> tags</strong>. Add the four custom fields shown in the table below.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">04</span>
+      <h5>Grab your three credentials</h5>
+      <p>Account &amp; billing → Extras → <strong>API keys</strong> (create one). Then Audience → Settings → <strong>Audience name and defaults</strong> for the Audience ID. The <em>server prefix</em> is the suffix of the API key (e.g. <code>-us1</code>).</p>
+    </div>
+  </div>
+
+  <h3 class="h-sub">The merge fields to add</h3>
+  <p style="color:var(--ink-3); max-width:720px;">Mailchimp gives you <code>FNAME</code>, <code>LNAME</code> and <code>EMAIL</code> out of the box. Add these four yourself so every contact remembers which match and section they signed up for:</p>
+  <div class="matrix" data-reveal>
+    <table>
+      <thead><tr><th>API identifier</th><th>Label (shown in Mailchimp UI)</th><th style="width:110px;">Type</th></tr></thead>
+      <tbody>
+        <tr><td><code>EVENT_ID</code></td><td>Match ID</td><td>Number</td></tr>
+        <tr><td><code>EVENT_NAME</code></td><td>Match name</td><td>Text</td></tr>
+        <tr><td><code>GRADA_ID</code></td><td>Grada ID</td><td>Number</td></tr>
+        <tr><td><code>GRADA_NAME</code></td><td>Grada name</td><td>Text</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="color:var(--ink-4); font-size:.85rem; margin-top:.5rem;">The full list used in the production repo also tracks <code>LOCALE</code>, <code>CHANNEL</code>, <code>SIGNUPAT</code>, <code>SRC</code>, <code>LANDING</code> and a few more — start with these four; add the rest when marketing asks.</p>
+
+  <div class="callout callout--warn" data-reveal>
+    <div class="callout__icon">⚠️</div>
+    <div class="callout__body">
+      <h4>Keep your API key secret</h4>
+      <p>The Mailchimp API key lets anyone modify your entire audience. <strong>Never</strong> commit it to Git or embed it in the landing HTML. Store it in the <code>.env</code> file Claude Code already created for your ONEBOX keys — that file is gitignored by default.</p>
+    </div>
+  </div>
+
+  <h3 class="h-sub">Connect the landing to Mailchimp · 1 prompt</h3>
+  <p style="color:var(--ink-3); max-width:720px;">Your audience is ready. One prompt in Claude Code wires every form submission into it, complete with merge fields and segmentation tags.</p>
+
+  <div class="prompt" data-reveal>
+    <div class="prompt__badge">01</div>
+    <div class="prompt__body">
+      <div class="prompt__head">
+        <span class="prompt__title">Wire the form to Mailchimp</span>
+        <span class="prompt__artefact">→ updates landing.html + adds a server function</span>
+      </div>
+      <div class="prompt__quote">Connect my landing page form (from §07) to my <strong>Mailchimp audience</strong>. Whenever a fan submits the form, create them as a contact in Mailchimp with their <strong>name</strong>, <strong>surname</strong>, <strong>email</strong>, and their chosen <strong>match</strong> and <strong>grada</strong> stored in the merge fields <code>EVENT_ID</code>, <code>EVENT_NAME</code>, <code>GRADA_ID</code>, <code>GRADA_NAME</code>. Also add three <strong>tags</strong> to each contact for later segmentation: <code>event:{id}</code>, <code>grada:{id}</code>, and <code>source:avisame</code>. My Mailchimp API key, audience ID and server prefix are in the <strong>.env</strong> file. Keep the API key server-side — the browser must never see it.</div>
+      <p class="prompt__result"><strong>What Claude will do:</strong> add a small server-side function that receives the form submission and forwards it to Mailchimp's API. It'll update <code>landing.html</code> to POST to that function instead of just logging to the console, and handle success / error states (duplicate emails, missing fields, failed network).</p>
+      <p class="prompt__result"><strong>How to verify:</strong> submit the form with your own email. Open <strong>Mailchimp → Audience → All contacts</strong>. Your entry appears within seconds — with the four merge fields populated and the three tags attached. That's the full loop, working.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--good" data-reveal>
+    <div class="callout__icon">✅</div>
+    <div class="callout__body">
+      <h4>What's next</h4>
+      <p>Your audience now grows automatically with every signup, and each contact is tagged for segmentation. Section 09 introduces <strong>Mandrill</strong> — the service that reads from this audience and sends the actual alert email when seats open up.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ============================== §8 MANDRILL ============================== -->
