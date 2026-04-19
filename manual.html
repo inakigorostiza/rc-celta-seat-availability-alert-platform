@@ -2192,27 +2192,11 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
     </div>
   </div>
 
-  <div class="prompt" data-reveal>
-    <div class="prompt__badge">05</div>
-    <div class="prompt__body">
-      <div class="prompt__head">
-        <span class="prompt__title">Build the «¡Avísame!» signup page</span>
-        <span class="prompt__artefact">→ landing.html</span>
-      </div>
-      <div class="prompt__quote">Finally, build a landing page for one specific match. It should look like the RC Celta «¡Avísame!» page: sky-blue hero with the Celta crest, big white title, and a simple form asking for <strong>name</strong>, <strong>surname</strong>, <strong>email</strong>, and a dropdown to pick which <strong>grada</strong> the fan wants. The grada options should be the real ones from that match's seat map in ONEBOX. When someone submits, log the data to the browser console for now. Save it as <strong>landing.html</strong>.</div>
-      <p class="prompt__result"><strong>What you'll see:</strong> A production-quality, club-branded landing page that actually works — backed by real ONEBOX data. Submit the form, open DevTools → Console, and you'll see the fan's choice ready to forward to Mailchimp. That's the hand-off to §08.</p>
-      <a class="prompt__preview" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/landing.html" target="_blank">
-        See the live result
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
-      </a>
-    </div>
-  </div>
-
   <div class="callout callout--good" data-reveal>
     <div class="callout__icon">✅</div>
     <div class="callout__body">
       <h4>What's next</h4>
-      <p>In an afternoon, you've gone from two API keys to a branded signup form wired to real catalog data. The upcoming sections show how we connect each submission to Mailchimp (§08), detect availability and fire alert emails with Mandrill (§09), and orchestrate the whole thing through n8n (§10). You'll use exactly the same prompt-by-prompt approach.</p>
+      <p>You can now talk to ONEBOX and visualise its data. Section 07 turns that data into the fan-facing <strong>«¡Avísame!»</strong> signup page with its own prompt-by-prompt tutorial — and then §08–§10 show how every submission becomes an automated email alert.</p>
     </div>
   </div>
 </section>
@@ -2275,12 +2259,32 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
     </div>
   </div>
 
-  <p style="margin-top:2rem;">
-    <a class="btn btn--secondary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
-      Try the live landing
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
-    </a>
-  </p>
+  <h3 class="h-sub">Try it yourself — build the «¡Avísame!» page</h3>
+  <p style="color:var(--ink-3); max-width:720px;">Once you've completed the four ONEBOX prompts in §06, you already have the data layer. One more prompt turns it into the fan-facing signup form.</p>
+
+  <div class="prompt" data-reveal>
+    <div class="prompt__badge">01</div>
+    <div class="prompt__body">
+      <div class="prompt__head">
+        <span class="prompt__title">Build the signup landing page</span>
+        <span class="prompt__artefact">→ landing.html</span>
+      </div>
+      <div class="prompt__quote">Build a landing page for one specific RC Celta match. It should look like the «¡Avísame!» page: sky-blue hero with the Celta crest, big white title, and a simple form asking for <strong>name</strong>, <strong>surname</strong>, <strong>email</strong>, and a dropdown to pick which <strong>grada</strong> (section of the stadium) the fan wants. The grada options should be the real ones from that match's seat map in ONEBOX. When someone submits the form, log the data to the browser console for now. Save it as <strong>landing.html</strong>.</div>
+      <p class="prompt__result"><strong>What you'll see:</strong> A production-quality, club-branded landing page that actually works — backed by real ONEBOX data. Submit the form, open the browser's DevTools → Console, and you'll see the fan's choice printed there, ready to forward to Mailchimp. That's the hand-off to §08.</p>
+      <a class="prompt__preview" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/landing.html" target="_blank">
+        See the live result
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="callout callout--good" data-reveal>
+    <div class="callout__icon">✅</div>
+    <div class="callout__body">
+      <h4>What's next</h4>
+      <p>Your form now captures fan intent locally. Section 08 shows how we send every submission to <strong>Mailchimp</strong> so the marketing team has a real segmentable audience — and the rest of the alerting pipeline unlocks from there.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ============================== §7 MAILCHIMP ============================== -->
