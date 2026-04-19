@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RC Celta · Seat Availability Alert Platform — IE Business School</title>
-  <meta name="description" content="Caso de estudio para el AI Marketing Lab del IE Business School: cómo recuperar demanda perdida de entradas con ONEBOX, Mailchimp, Mandrill, n8n y GA4." />
+  <meta name="description" content="Case study for the AI Marketing Lab at IE Business School: how to recover lost ticketing demand using ONEBOX, Mailchimp, Mandrill, n8n and GA4." />
   <style>
     /* =========================================================
        DESIGN SYSTEM
     ========================================================= */
     :root {
-      --bg-0:        #0A1628;   /* darkest  */
+      --bg-0:        #0A1628;
       --bg-1:        #0F1E35;
       --bg-2:        #162942;
       --bg-3:        #1F3451;
@@ -339,7 +339,7 @@
     .card__text { font-size: .92rem; color: var(--text-2); }
 
     /* =========================================================
-       ARCHITECTURE DIAGRAM (interactive-ish)
+       ARCHITECTURE DIAGRAM
     ========================================================= */
     .arch {
       margin: 2rem 0;
@@ -378,12 +378,6 @@
     }
     .arch__node p { font-size: .8rem; color: var(--text-3); margin: 0; }
     .arch__node__emoji { font-size: 1.6rem; display: block; margin-bottom: .5rem; }
-    .arch__arrow {
-      position: absolute;
-      color: var(--celta-blue-3);
-      font-size: 1.2rem;
-      pointer-events: none;
-    }
     .arch__legend { font-size: .72rem; color: var(--text-3); text-align: center; margin-top: 1rem; }
 
     /* =========================================================
@@ -437,7 +431,7 @@
     }
 
     /* =========================================================
-       TABS (credentials)
+       TABS
     ========================================================= */
     .tabs {
       background: var(--bg-1);
@@ -544,7 +538,7 @@
     .endpoint__purpose { color: var(--text-3); font-size: .85rem; margin-left: auto; }
 
     /* =========================================================
-       URL BREAKDOWN (deep-link)
+       URL BREAKDOWN
     ========================================================= */
     .url-box {
       font-family: "SF Mono", monospace;
@@ -591,7 +585,7 @@
     .flow__step p { color: var(--text-3); font-size: .85rem; margin: 0; }
 
     /* =========================================================
-       MAILCHIMP: merge vs tags comparison
+       COMPARE (merge vs tags)
     ========================================================= */
     .compare {
       display: grid;
@@ -683,13 +677,6 @@
       font-size: .72rem;
       color: #6b7f9e;
       border-top: 1px solid #dbe4ef;
-    }
-    .email__labels { margin-top: 1rem; position: relative; }
-    .email__labels span {
-      position: absolute;
-      font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-      color: var(--celta-blue); background: var(--bg-0); padding: .12rem .5rem; border-radius: 4px;
-      pointer-events: none;
     }
 
     /* =========================================================
@@ -940,12 +927,12 @@
       <span class="nav__brand-sub">Alert Platform</span>
     </div>
   </div>
-  <div class="nav__label">Secciones</div>
+  <div class="nav__label">Sections</div>
   <ul class="nav__list">
-    <li class="nav__item"><a href="#intro">      <span class="nav__num">01</span>🎯 Introducción</a></li>
+    <li class="nav__item"><a href="#intro">      <span class="nav__num">01</span>🎯 Introduction</a></li>
     <li class="nav__item"><a href="#stack">      <span class="nav__num">02</span>🛠️ Stack</a></li>
     <li class="nav__item"><a href="#roadmap">    <span class="nav__num">03</span>🗺️ Roadmap</a></li>
-    <li class="nav__item"><a href="#credentials"><span class="nav__num">04</span>🔑 Credenciales</a></li>
+    <li class="nav__item"><a href="#credentials"><span class="nav__num">04</span>🔑 Credentials</a></li>
     <li class="nav__item"><a href="#onebox">     <span class="nav__num">05</span>🎟️ ONEBOX</a></li>
     <li class="nav__item"><a href="#landing">    <span class="nav__num">06</span>🌐 Landing</a></li>
     <li class="nav__item"><a href="#mailchimp">  <span class="nav__num">07</span>📬 Mailchimp</a></li>
@@ -958,15 +945,15 @@
   <div class="nav__ctas">
     <a class="nav__cta nav__cta--primary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
-      Demo en vivo
+      Live demo
     </a>
     <a class="nav__cta" href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform" target="_blank">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.111.793-.26.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.838 1.237 1.838 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-      Código fuente
+      Source code
     </a>
     <a class="nav__cta" href="https://youtu.be/-FURuRfDk8I" target="_blank">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      Vídeo (2 min)
+      Video (2 min)
     </a>
   </div>
 </aside>
@@ -985,139 +972,148 @@
       Seat Availability<br><span>Alert Platform</span>
     </h1>
     <p class="hero__lead">
-      Una plataforma de recuperación de demanda para el RC Celta de Vigo: captura aficionados que se quedaron sin entrada, detecta cuándo se libera inventario y les avisa por email para cerrar la venta.
+      A demand-recovery platform for RC Celta de Vigo: capture fans who couldn't get a ticket, detect when inventory frees up, and notify them instantly so the sale closes before the match starts.
     </p>
     <div class="hero__ctas">
       <a class="btn btn--primary" href="#intro">
-        Empezar el recorrido
+        Start the walkthrough
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
       <a class="btn btn--secondary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
-        Ver demo en vivo
+        See the live demo
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
       </a>
     </div>
     <div class="hero__meta">
       <div class="hero__metaitem">
         <span class="hero__metaval">5</span>
-        <span class="hero__metalabel">Herramientas en el stack</span>
+        <span class="hero__metalabel">Tools in the stack</span>
       </div>
       <div class="hero__metaitem">
         <span class="hero__metaval">12</span>
-        <span class="hero__metalabel">Nodos de automatización</span>
+        <span class="hero__metalabel">Automation nodes</span>
       </div>
       <div class="hero__metaitem">
         <span class="hero__metaval">3</span>
-        <span class="hero__metalabel">Normativas de cumplimiento</span>
+        <span class="hero__metalabel">Compliance regulations</span>
       </div>
       <div class="hero__metaitem">
         <span class="hero__metaval">100%</span>
-        <span class="hero__metalabel">Opt-in · RGPD compliant</span>
+        <span class="hero__metalabel">Opt-in · GDPR compliant</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================== §1 INTRODUCCIÓN ============================== -->
+<!-- ============================== §1 INTRODUCTION ============================== -->
 <section class="section" id="intro">
   <div class="sec-header" data-reveal>
-    <span class="sec-num">01 · 🎯 Introducción</span>
-    <h2 class="sec-title">El problema, la solución y por qué importa</h2>
-    <p class="sec-lead">Un aficionado quiere entrar a ver al Celta, la grada está llena, y cuando días después se libera un asiento, la taquilla no sabe que él lo quería. Esa memoria faltante es una pérdida de ingresos silenciosa.</p>
+    <span class="sec-num">01 · 🎯 Introduction</span>
+    <h2 class="sec-title">The problem, the solution, and why it matters</h2>
+    <p class="sec-lead">A fan wants to see RC Celta play. The section is sold out. Days later a seat frees up — but the ticket office has no record that this fan wanted it. That missing memory is silent revenue lost.</p>
   </div>
 
   <div class="grid grid-2" data-reveal>
     <div class="card">
       <div class="card__icon" style="background:rgba(248,81,73,.1); color:var(--error);">❌</div>
-      <div class="card__role">El problema</div>
-      <h3 class="card__title">Demanda perdida invisible</h3>
-      <p class="card__text">Una parte significativa de los abonos y entradas que se liberan (devoluciones, pagos caídos, pre-asignaciones canceladas) nunca llega a manos de los fans que las querían. La venta se evapora porque nadie les avisó.</p>
+      <div class="card__role">The problem</div>
+      <h3 class="card__title">Invisible lost demand</h3>
+      <p class="card__text">A significant share of tickets that free up (refunds, failed payments, released pre-allocations) never reach the fans who wanted them. The sale evaporates because nobody told them.</p>
     </div>
     <div class="card">
       <div class="card__icon" style="background:rgba(63,185,80,.1); color:var(--success);">✅</div>
-      <div class="card__role">La solución</div>
-      <h3 class="card__title">Recuperación automatizada</h3>
-      <p class="card__text">Capturar el interés mientras no hay entradas, detectar continuamente la disponibilidad en ONEBOX, y enviar un email personalizado con deep-link de compra en el momento exacto en que se libera la grada solicitada.</p>
+      <div class="card__role">The solution</div>
+      <h3 class="card__title">Automated recovery</h3>
+      <p class="card__text">Capture interest while inventory is sold out, continuously watch availability in ONEBOX, and send a personalised email with a purchase deep-link the moment the requested section has seats again.</p>
     </div>
   </div>
 
   <div class="callout callout--tip" data-reveal>
     <div class="callout__icon">💡</div>
     <div class="callout__body">
-      <h4>Para recordar</h4>
-      <p>Recuperar demanda perdida es un negocio de <strong>timing</strong>. El valor no está en tener la lista: está en llegar al cliente <em>en el instante</em> en que el problema que le impedía comprar se ha resuelto.</p>
+      <h4>Key takeaway</h4>
+      <p>Recovering lost demand is a <strong>timing</strong> game. The value isn't in owning the list: it's in reaching the customer <em>the moment</em> the problem that stopped them from buying has been solved.</p>
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2rem 0 .75rem; font-size:1.2rem;">🎬 Demo rápida</h3>
-  <p style="color:var(--text-2);">Recorrido visual del caso en 2 minutos.</p>
-  <div class="video-wrap" data-reveal>
-    <iframe src="https://www.youtube.com/embed/-FURuRfDk8I" title="Demo · RC Celta Seat Availability Alert Platform" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <h3 style="color:var(--text-0); margin:2rem 0 .75rem; font-size:1.2rem;">🎬 Quick demo</h3>
+  <p style="color:var(--text-2);">A 2-minute visual walkthrough of the case.</p>
+  <div class="video-wrap">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/-FURuRfDk8I?rel=0&modestbranding=1"
+      title="Demo · RC Celta Seat Availability Alert Platform"
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
   </div>
+  <p style="color:var(--text-3); font-size:.85rem; text-align:center; margin-top:-.5rem;">
+    Video not loading? Watch it directly on <a href="https://youtu.be/-FURuRfDk8I" target="_blank">YouTube →</a>
+  </p>
 </section>
 
 <!-- ============================== §2 STACK ============================== -->
 <section class="section" id="stack">
   <div class="sec-header" data-reveal>
     <span class="sec-num">02 · 🛠️ Technology Stack</span>
-    <h2 class="sec-title">Cinco herramientas que un marketer ya conoce</h2>
-    <p class="sec-lead">Deliberadamente pocas piezas móviles. Cada componente es o bien serverless, o bien freemium, o bien una herramienta que el equipo de marketing ya tiene en su cinturón.</p>
+    <h2 class="sec-title">Five tools every marketer already knows</h2>
+    <p class="sec-lead">Deliberately few moving parts. Every component is either serverless, free-tier-friendly, or a tool the marketing team already has on its shelf.</p>
   </div>
 
   <div class="grid grid-3" data-reveal>
     <div class="card">
       <div class="card__icon" style="background:rgba(227,6,19,.1);">🎟️</div>
-      <div class="card__role">Fuente de datos</div>
+      <div class="card__role">Data source</div>
       <h3 class="card__title">ONEBOX TDS</h3>
-      <p class="card__text">La plataforma donde el club vende las entradas online. Nos dice, en tiempo real, cuántas butacas quedan libres en cada grada de cada partido.</p>
+      <p class="card__text">The platform the club uses to sell tickets online. Tells us — in real time — how many seats are still free in each section of each match.</p>
     </div>
     <div class="card">
       <div class="card__icon" style="background:rgba(122,177,217,.1);">🌐</div>
-      <div class="card__role">Punto de entrada</div>
+      <div class="card__role">Entry point</div>
       <h3 class="card__title">Landing page</h3>
-      <p class="card__text">Página pública estática con el formulario «avísame cuando haya entradas». Diseñada con el look & feel del Celta y alojada gratis en GitHub Pages.</p>
+      <p class="card__text">Public static page with the "notify me when tickets open" form. Designed with the Celta look & feel and hosted free on GitHub Pages.</p>
     </div>
     <div class="card">
       <div class="card__icon" style="background:rgba(255,255,102,.1);">📬</div>
-      <div class="card__role">Lista de contactos</div>
+      <div class="card__role">Contact list</div>
       <h3 class="card__title">Mailchimp</h3>
-      <p class="card__text">La audiencia CRM. Cada fan registrado vive aquí con merge fields (datos) y tags (por partido y grada) para que el equipo segmente sin escribir SQL.</p>
+      <p class="card__text">The CRM audience. Every registered fan lives here with merge fields (their data) and tags (by match and section) so the team can segment without writing SQL.</p>
     </div>
     <div class="card">
       <div class="card__icon" style="background:rgba(210,153,34,.1);">✉️</div>
-      <div class="card__role">Canal transaccional</div>
+      <div class="card__role">Transactional channel</div>
       <h3 class="card__title">Mandrill</h3>
-      <p class="card__text">El servicio que envía los emails uno-a-uno del aviso. Optimizado para latencia y tracking individual. Mismo login que Mailchimp.</p>
+      <p class="card__text">The service that sends the one-to-one alert emails. Optimised for latency and individual tracking. Same login as Mailchimp.</p>
     </div>
     <div class="card">
       <div class="card__icon" style="background:rgba(199,125,255,.1);">🤖</div>
-      <div class="card__role">Automatización</div>
+      <div class="card__role">Automation</div>
       <h3 class="card__title">n8n</h3>
-      <p class="card__text">El pegamento visual: consulta ONEBOX, cruza con Mailchimp, dispara Mandrill. Free-tier cloud o self-hosted. Zero code para el marketer.</p>
+      <p class="card__text">The visual glue: polls ONEBOX, cross-references Mailchimp, triggers Mandrill. Free cloud tier or self-hosted. Zero code for the marketer.</p>
     </div>
     <div class="card">
       <div class="card__icon" style="background:rgba(63,185,80,.1);">📊</div>
-      <div class="card__role">Medición</div>
+      <div class="card__role">Measurement</div>
       <h3 class="card__title">Google Analytics 4</h3>
-      <p class="card__text">Capa de analítica: page views, eventos custom (<code>generate_lead</code>), atribución por UTMs y embudo completo hasta la conversión.</p>
+      <p class="card__text">The analytics layer: page views, custom events (<code>generate_lead</code>), UTM attribution, and a full funnel all the way to conversion.</p>
     </div>
   </div>
 
   <div class="callout callout--good" data-reveal>
     <div class="callout__icon">✅</div>
     <div class="callout__body">
-      <h4>Buena práctica</h4>
-      <p>Elegir herramientas que el equipo <strong>ya conoce</strong> &gt; elegir las técnicamente mejores. Cada tool nueva es una curva de aprendizaje, un contrato y un coste oculto.</p>
+      <h4>Best practice</h4>
+      <p>Pick tools the team <strong>already knows</strong> &gt; pick the technically best ones. Each new tool is a learning curve, a contract, and a hidden cost.</p>
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🔌 Cómo se conectan</h3>
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🔌 How it all connects</h3>
   <div class="arch" data-reveal>
     <div class="arch__grid">
       <div class="arch__node arch__node--source">
         <span class="arch__node__emoji">🎟️</span>
         <h5>ONEBOX TDS</h5>
-        <p>Fuente de verdad del inventario</p>
+        <p>Source of truth for inventory</p>
       </div>
       <div class="arch__node arch__node--mid-left">
         <span class="arch__node__emoji">🌐</span>
@@ -1137,15 +1133,15 @@
       <div class="arch__node arch__node--out-right">
         <span class="arch__node__emoji">✉️</span>
         <h5>Mandrill</h5>
-        <p>Email uno-a-uno</p>
+        <p>One-to-one email</p>
       </div>
       <div class="arch__node arch__node--analytics">
         <span class="arch__node__emoji">📊</span>
         <h5>Google Analytics 4</h5>
-        <p>Medición end-to-end del embudo</p>
+        <p>End-to-end funnel measurement</p>
       </div>
     </div>
-    <p class="arch__legend">Haz clic en cualquier nodo para ir a su sección detallada abajo.</p>
+    <p class="arch__legend">Click any node to jump to its detailed section below.</p>
   </div>
 </section>
 
@@ -1153,58 +1149,58 @@
 <section class="section" id="roadmap">
   <div class="sec-header" data-reveal>
     <span class="sec-num">03 · 🗺️ Roadmap</span>
-    <h2 class="sec-title">Cinco fases incrementales</h2>
-    <p class="sec-lead">Cada fase termina con algo visible que podías enseñar al cliente. El proyecto se construyó en commits discretos, no en un Big Bang.</p>
+    <h2 class="sec-title">Five incremental phases</h2>
+    <p class="sec-lead">Every phase ships something demo-able. The project was built in discrete commits, not a Big Bang.</p>
   </div>
 
   <div class="timeline" data-reveal>
     <div class="t-item">
       <div class="t-dot">01</div>
-      <div class="t-item__head"><span class="t-item__emoji">🔐</span><h4>Conectar con ONEBOX</h4></div>
-      <div class="t-item__body">Obtener credenciales seller-channel-client, autenticar contra el entorno PRE y mapear el catálogo (partidos, sesiones, gradas).</div>
-      <span class="t-item__out">✓ Token obtenido · 21 sesiones listadas</span>
+      <div class="t-item__head"><span class="t-item__emoji">🔐</span><h4>Connect to ONEBOX</h4></div>
+      <div class="t-item__body">Obtain seller-channel-client credentials, authenticate against the PRE environment, and map the catalog (events, sessions, sections).</div>
+      <span class="t-item__out">✓ Token acquired · 21 sessions listed</span>
     </div>
     <div class="t-item">
       <div class="t-dot">02</div>
-      <div class="t-item__head"><span class="t-item__emoji">🌐</span><h4>Landing + primer lead</h4></div>
-      <div class="t-item__body">Diseñar la landing con branding Celta. Conectar el formulario. Capturar el primer lead real con consentimientos y atribución UTM.</div>
-      <span class="t-item__out">✓ Formulario en vivo · Primer contacto en Mailchimp</span>
+      <div class="t-item__head"><span class="t-item__emoji">🌐</span><h4>Landing + first lead</h4></div>
+      <div class="t-item__body">Design the landing with Celta branding. Wire up the form. Capture the first real lead with consents and UTM attribution.</div>
+      <span class="t-item__out">✓ Form live · First contact in Mailchimp</span>
     </div>
     <div class="t-item">
       <div class="t-dot">03</div>
-      <div class="t-item__head"><span class="t-item__emoji">🤖</span><h4>Detección automática</h4></div>
-      <div class="t-item__body">Construir el flujo de n8n que consulta ONEBOX, aplana gradas con disponibilidad y las cruza con los tags de Mailchimp.</div>
-      <span class="t-item__out">✓ Workflow listo · Cruce OK</span>
+      <div class="t-item__head"><span class="t-item__emoji">🤖</span><h4>Automated detection</h4></div>
+      <div class="t-item__body">Build the n8n workflow that polls ONEBOX, flattens sections with availability, and cross-references with Mailchimp tags.</div>
+      <span class="t-item__out">✓ Workflow ready · Match OK</span>
     </div>
     <div class="t-item">
       <div class="t-dot">04</div>
-      <div class="t-item__head"><span class="t-item__emoji">✉️</span><h4>Aviso personalizado</h4></div>
-      <div class="t-item__body">Plantilla HTML con branding Celta, recap del partido + grada, CTA con UTMs que apuntan al selector de butacas de ONEBOX.</div>
-      <span class="t-item__out">✓ Inbox recibe el email con botón funcional</span>
+      <div class="t-item__head"><span class="t-item__emoji">✉️</span><h4>Personalised alert</h4></div>
+      <div class="t-item__body">HTML template with Celta branding, match + section recap, and a CTA with UTMs pointing to the ONEBOX seat selector.</div>
+      <span class="t-item__out">✓ Inbox receives the email with a working button</span>
     </div>
     <div class="t-item">
       <div class="t-dot">05</div>
-      <div class="t-item__head"><span class="t-item__emoji">📊</span><h4>Medir y cumplir</h4></div>
-      <div class="t-item__body">Instrumentar GA4 con eventos <code>generate_lead</code>. Revisar checklist legal (RGPD · LOPDGDD · LSSI-CE).</div>
-      <span class="t-item__out">✓ Dashboard activo · Compliance auditado</span>
+      <div class="t-item__head"><span class="t-item__emoji">📊</span><h4>Measure & comply</h4></div>
+      <div class="t-item__body">Instrument GA4 with <code>generate_lead</code> events. Audit the legal checklist (GDPR · LOPDGDD · LSSI-CE).</div>
+      <span class="t-item__out">✓ Dashboard live · Compliance reviewed</span>
     </div>
   </div>
 
   <div class="callout callout--class" data-reveal>
     <div class="callout__icon">🧪</div>
     <div class="callout__body">
-      <h4>En clase</h4>
-      <p>Cada fase es un commit distinto en el repositorio. Abre el historial en <a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform/commits/main" target="_blank">github.com/.../commits/main</a> y verás cómo fue creciendo el proyecto paso a paso.</p>
+      <h4>In class</h4>
+      <p>Every phase maps to a separate commit in the repository. Open the history at <a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform/commits/main" target="_blank">github.com/.../commits/main</a> and you'll see the project grow step by step.</p>
     </div>
   </div>
 </section>
 
-<!-- ============================== §4 CREDENCIALES ============================== -->
+<!-- ============================== §4 CREDENTIALS ============================== -->
 <section class="section" id="credentials">
   <div class="sec-header" data-reveal>
-    <span class="sec-num">04 · 🔑 Credenciales</span>
-    <h2 class="sec-title">Cuatro credenciales, ninguna cuesta dinero en plan inicial</h2>
-    <p class="sec-lead">Este es el setup mínimo. Todas las claves tienen plan gratuito generoso o free-forever. Reserva 30 minutos para tenerlas todas listas antes de empezar.</p>
+    <span class="sec-num">04 · 🔑 Credentials</span>
+    <h2 class="sec-title">Four credentials, none of them paid on the starter plan</h2>
+    <p class="sec-lead">This is the minimum setup. Every key either has a generous free tier or is free-forever. Budget 30 minutes to have them all lined up before you start building.</p>
   </div>
 
   <div class="tabs" data-reveal>
@@ -1215,57 +1211,57 @@
       <button class="tabs__trigger" data-tab="ga4">📊 GA4</button>
     </div>
     <div class="tabs__panel active" data-panel="onebox">
-      <h4>Qué necesitas</h4>
+      <h4>What you need</h4>
       <dl>
-        <dt><code>client_secret</code></dt><dd>Cadena de 32 caracteres que identifica tu canal en ONEBOX.</dd>
-        <dt><code>channel_id</code></dt><dd>Número entero que identifica el canal dentro de la organización (ej. <code>2287</code>).</dd>
+        <dt><code>client_secret</code></dt><dd>32-character string that identifies your channel in ONEBOX.</dd>
+        <dt><code>channel_id</code></dt><dd>Integer that identifies the channel inside the organisation (e.g. <code>2287</code>).</dd>
       </dl>
-      <h4>Dónde se pide</h4>
-      <p style="color:var(--text-2); font-size:.92rem;">Las facilita el equipo técnico de ONEBOX. Pídeselas a tu contacto de cuenta.</p>
+      <h4>Where to get it</h4>
+      <p style="color:var(--text-2); font-size:.92rem;">Provided by ONEBOX's technical team. Ask your account contact.</p>
       <div class="callout callout--warn" style="margin-top:1.5rem;">
         <div class="callout__icon">⚠️</div>
         <div class="callout__body">
-          <h4>Cuidado</h4>
-          <p>El <code>client_secret</code> da acceso a todo el catálogo del canal. <strong>Nunca</strong> lo metas en el frontend ni en un repositorio público. Guárdalo en el gestor de secretos de tu plataforma.</p>
+          <h4>Watch out</h4>
+          <p>The <code>client_secret</code> grants access to the whole channel catalog. <strong>Never</strong> embed it in the frontend or commit it to a public repo. Keep it in your platform's secret manager.</p>
         </div>
       </div>
     </div>
     <div class="tabs__panel" data-panel="mailchimp">
-      <h4>Qué necesitas</h4>
+      <h4>What you need</h4>
       <dl>
-        <dt>API key</dt><dd>Token para llamar a la Marketing API desde n8n y la automatización.</dd>
-        <dt>Audience ID</dt><dd>Identificador del "audience" (lista) donde irán tus contactos.</dd>
-        <dt>Server prefix</dt><dd>Sufijo de la API key (ej. <code>...-us1</code> → <code>us1</code>). Indica el datacenter donde vive tu cuenta.</dd>
+        <dt>API key</dt><dd>Token to call the Marketing API from n8n and the automation layer.</dd>
+        <dt>Audience ID</dt><dd>Identifier of the audience (list) where your contacts will live.</dd>
+        <dt>Server prefix</dt><dd>Suffix of the API key (e.g. <code>...-us1</code> → <code>us1</code>). Tells you which datacenter your account lives on.</dd>
       </dl>
-      <h4>Dónde encontrarlo</h4>
+      <h4>Where to find it</h4>
       <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> API key:&nbsp; Profile &nbsp;→&nbsp; Account & billing &nbsp;→&nbsp; Extras &nbsp;→&nbsp; API keys</div><br>
       <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Audience ID:&nbsp; Audience &nbsp;→&nbsp; Settings &nbsp;→&nbsp; Audience name and defaults</div>
     </div>
     <div class="tabs__panel" data-panel="mandrill">
-      <h4>Qué necesitas</h4>
+      <h4>What you need</h4>
       <dl>
-        <dt>API key</dt><dd>Token para llamar a la Transactional API desde n8n.</dd>
-        <dt>Dominio de envío verificado</dt><dd>Un dominio tuyo con DKIM + SPF publicados y validados en Mandrill.</dd>
+        <dt>API key</dt><dd>Token to call the Transactional API from n8n.</dd>
+        <dt>Verified sending domain</dt><dd>A domain you control with DKIM + SPF records published and verified in Mandrill.</dd>
       </dl>
-      <h4>Dónde encontrarlo</h4>
+      <h4>Where to find it</h4>
       <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> API key:&nbsp; Mandrill &nbsp;→&nbsp; Settings &nbsp;→&nbsp; SMTP & API Info &nbsp;→&nbsp; New API key</div><br>
-      <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Dominios:&nbsp; Settings &nbsp;→&nbsp; Sending Domains</div>
+      <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Domains:&nbsp; Settings &nbsp;→&nbsp; Sending Domains</div>
       <div class="callout callout--warn" style="margin-top:1.5rem;">
         <div class="callout__icon">⚠️</div>
         <div class="callout__body">
-          <h4>Cuidado</h4>
-          <p>Sin dominio verificado, Mandrill rechaza <strong>todos</strong> tus envíos con <code>unsigned</code>. Es el error nº 1 de los que empiezan. Publica los TXT records antes de montar el flow.</p>
+          <h4>Watch out</h4>
+          <p>Without a verified domain, Mandrill rejects <strong>every</strong> send with <code>unsigned</code>. It's the number-one error beginners hit. Publish the TXT records before you wire up the flow.</p>
         </div>
       </div>
     </div>
     <div class="tabs__panel" data-panel="ga4">
-      <h4>Qué necesitas</h4>
+      <h4>What you need</h4>
       <dl>
-        <dt>Measurement ID</dt><dd>Identificador <code>G-XXXXXXX</code> del web stream.</dd>
+        <dt>Measurement ID</dt><dd>The <code>G-XXXXXXX</code> identifier of the web data stream.</dd>
       </dl>
-      <h4>Dónde encontrarlo</h4>
-      <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> GA4 &nbsp;→&nbsp; Admin &nbsp;→&nbsp; Data streams &nbsp;→&nbsp; Web &nbsp;→&nbsp; tu stream</div>
-      <p style="color:var(--text-2); font-size:.92rem; margin-top:1rem;">Este ID <strong>sí</strong> puede ir en el HTML público: está diseñado para ser visible. GA4 distingue sesiones mediante cookies y parámetros de URL, no por el ID en sí.</p>
+      <h4>Where to find it</h4>
+      <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> GA4 &nbsp;→&nbsp; Admin &nbsp;→&nbsp; Data streams &nbsp;→&nbsp; Web &nbsp;→&nbsp; your stream</div>
+      <p style="color:var(--text-2); font-size:.92rem; margin-top:1rem;">This one <strong>is</strong> safe to expose in public HTML — it's designed to be visible. GA4 distinguishes sessions via cookies and URL parameters, not by the ID itself.</p>
     </div>
   </div>
 </section>
@@ -1274,48 +1270,48 @@
 <section class="section" id="onebox">
   <div class="sec-header" data-reveal>
     <span class="sec-num">05 · 🎟️ ONEBOX</span>
-    <h2 class="sec-title">La API de ticketing</h2>
-    <p class="sec-lead">ONEBOX TDS es la plataforma donde el RC Celta vende sus entradas online. Expone una REST API profesional que nosotros usamos exclusivamente en modo <strong>lectura</strong> — jamás modificamos datos.</p>
+    <h2 class="sec-title">The ticketing API</h2>
+    <p class="sec-lead">ONEBOX TDS is the platform where RC Celta sells tickets online. It exposes a professional REST API that we use exclusively in <strong>read mode</strong> — we never modify data in ONEBOX.</p>
   </div>
 
-  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">Modelo de datos (con nombres que entiende marketing)</h3>
+  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">Data model (with names a marketer understands)</h3>
   <div class="tree" data-reveal>
-<span class="tree__key">Partido</span> <span class="tree__annot">(ej. «Celta – Athletic · Jornada 29»)</span>
-  └── <span class="tree__key">Sesión</span> <span class="tree__annot">(un partido concreto, con fecha y hora)</span>
-        ├── <span class="tree__key">Tipos de precio</span> <span class="tree__annot">(General, Junior, Abonado…)</span>
-        └── <span class="tree__key">Gradas</span> <span class="tree__annot">(Pista B1, Río Alto, Marcador…)</span>
-              └── <span class="tree__key">disponibilidad</span> <span class="tree__annot">= N asientos libres</span>
+<span class="tree__key">Event</span> <span class="tree__annot">(e.g. «Celta – Athletic · Matchday 29»)</span>
+  └── <span class="tree__key">Session</span> <span class="tree__annot">(a specific performance, with date and time)</span>
+        ├── <span class="tree__key">Price types</span> <span class="tree__annot">(General, Junior, Season ticket…)</span>
+        └── <span class="tree__key">Sections</span> <span class="tree__annot">(Pista B1, Río Alto, Marcador…)</span>
+              └── <span class="tree__key">availability</span> <span class="tree__annot">= N free seats</span>
   </div>
 
   <div class="callout callout--tip" data-reveal>
     <div class="callout__icon">💡</div>
     <div class="callout__body">
-      <h4>Para recordar</h4>
-      <p>Al aficionado le hablamos de <strong>partido</strong> y <strong>grada</strong>. Los IDs internos (<code>session_id</code>, <code>grada_id</code>) son para las máquinas.</p>
+      <h4>Key takeaway</h4>
+      <p>To the fan we speak <strong>match</strong> and <strong>section</strong>. The internal IDs (<code>session_id</code>, <code>grada_id</code>) are for the machines.</p>
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2rem 0 .75rem; font-size:1.2rem;">Los tres endpoints que usamos</h3>
+  <h3 style="color:var(--text-0); margin:2rem 0 .75rem; font-size:1.2rem;">The three endpoints we use</h3>
   <div data-reveal>
     <div class="endpoint">
       <span class="endpoint__method endpoint__method--post">POST</span>
       <span class="endpoint__path">/oauth/token</span>
-      <span class="endpoint__purpose">Pedir un token de acceso (válido 12 horas)</span>
+      <span class="endpoint__purpose">Request an access token (valid 12 hours)</span>
     </div>
     <div class="endpoint">
       <span class="endpoint__method endpoint__method--get">GET</span>
       <span class="endpoint__path">/catalog-api/v1/sessions</span>
-      <span class="endpoint__purpose">Listar todos los partidos del canal</span>
+      <span class="endpoint__purpose">List every match in the channel</span>
     </div>
     <div class="endpoint">
       <span class="endpoint__method endpoint__method--get">GET</span>
       <span class="endpoint__path">/catalog-api/v1/sessions/{id}/availability</span>
-      <span class="endpoint__purpose">Disponibilidad por grada de un partido</span>
+      <span class="endpoint__purpose">Per-section availability for a match</span>
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2rem 0 .75rem; font-size:1.2rem;">🔗 El enlace de compra (deep-link)</h3>
-  <p style="color:var(--text-2);">Cuando enviamos el email de aviso, el botón <strong>Comprar entrada</strong> apunta a una URL que abre ONEBOX directamente en el mapa de butacas, con los UTMs necesarios para que GA4 atribuya la conversión:</p>
+  <h3 style="color:var(--text-0); margin:2rem 0 .75rem; font-size:1.2rem;">🔗 The purchase deep-link</h3>
+  <p style="color:var(--text-2);">When we send the alert email, the <strong>Buy ticket</strong> button points at a URL that opens ONEBOX directly on the seat map, with every UTM GA4 needs to attribute the conversion:</p>
   <div class="url-box" data-reveal>
 https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
 &nbsp;&nbsp;&nbsp;<strong>viewCode=V_blockmap</strong>
@@ -1325,8 +1321,8 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
 &nbsp;&nbsp;&nbsp;&amp;utm_content=event-<em>{eventId}</em>-grada-<em>{gradaId}</em>
   </div>
   <p style="color:var(--text-3); font-size:.85rem;">
-    • <code style="color:var(--celta-red-2);">viewCode=V_blockmap</code> es funcional (abre el mapa directamente).<br>
-    • Los cuatro <code>utm_*</code> permiten a GA4 atribuir la compra al email concreto que generó el clic.
+    • <code style="color:var(--celta-red-2);">viewCode=V_blockmap</code> is functional — it opens the seat map directly.<br>
+    • The four <code>utm_*</code> parameters let GA4 attribute any resulting purchase to the exact email that drove the click.
   </p>
 </section>
 
@@ -1334,60 +1330,60 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
 <section class="section" id="landing">
   <div class="sec-header" data-reveal>
     <span class="sec-num">06 · 🌐 Landing Page</span>
-    <h2 class="sec-title">Estática, brandeada y conectada a ONEBOX</h2>
-    <p class="sec-lead">Una página HTML estática que imita el look & feel de las landing oficiales del RC Celta. Los datos del partido (imagen, fecha, gradas disponibles) se incrustan al compilar, leyéndolos en directo de ONEBOX.</p>
+    <h2 class="sec-title">Static, branded, and wired to ONEBOX</h2>
+    <p class="sec-lead">A static HTML page that mirrors RC Celta's official landing look & feel. The match data (image, date, available sections) is baked in at build time by reading ONEBOX directly.</p>
   </div>
 
   <div class="grid grid-2" data-reveal>
     <div class="card">
       <div class="card__icon" style="background:rgba(122,177,217,.1);">⚡</div>
-      <div class="card__role">Qué es</div>
-      <h3 class="card__title">HTML estático · GitHub Pages</h3>
-      <p class="card__text">Una página generada en build-time a partir de un template Node.js. Se sirve directamente desde GitHub Pages con HTTPS automático.</p>
+      <div class="card__role">What it is</div>
+      <h3 class="card__title">Static HTML · GitHub Pages</h3>
+      <p class="card__text">A page generated at build time from a Node.js template. Served directly from GitHub Pages with automatic HTTPS.</p>
     </div>
     <div class="card">
       <div class="card__icon" style="background:rgba(255,255,102,.1);">🏗️</div>
-      <div class="card__role">Por qué estática</div>
-      <h3 class="card__title">Menos partes = más estable</h3>
-      <p class="card__text">Sin servidor en runtime, sin bases de datos en el hot path. Gratis de alojar. Trivial de cachear en CDN.</p>
+      <div class="card__role">Why static</div>
+      <h3 class="card__title">Fewer parts = more stable</h3>
+      <p class="card__text">No runtime server, no database in the hot path. Free to host. Trivial to cache on a CDN.</p>
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">Flujo de envío del formulario</h3>
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">Form submission flow</h3>
   <div class="flow" data-reveal>
     <div class="flow__step">
       <span class="flow__num">1</span>
-      <h5>Usuario rellena</h5>
-      <p>Nombre, email, grada, consentimientos.</p>
+      <h5>User fills it in</h5>
+      <p>Name, email, section, consents.</p>
     </div>
     <div class="flow__step">
       <span class="flow__num">2</span>
-      <h5>Browser captura UTMs</h5>
-      <p>Fuente, campaña, idioma, user-agent.</p>
+      <h5>Browser captures UTMs</h5>
+      <p>Source, campaign, locale, user-agent.</p>
     </div>
     <div class="flow__step">
       <span class="flow__num">3</span>
-      <h5>Envío a automatización</h5>
-      <p>Validación + upsert a Mailchimp.</p>
+      <h5>Sent to automation</h5>
+      <p>Validation + upsert to Mailchimp.</p>
     </div>
     <div class="flow__step">
       <span class="flow__num">4</span>
       <h5>Thank-you + GA4</h5>
-      <p>Evento <code>generate_lead</code>.</p>
+      <p><code>generate_lead</code> event fires.</p>
     </div>
   </div>
 
   <div class="callout callout--tip" data-reveal>
     <div class="callout__icon">💡</div>
     <div class="callout__body">
-      <h4>Para recordar</h4>
-      <p>El navegador nunca habla directamente con Mailchimp. Una automatización intermedia permite validar datos, aplicar lógica y mantener las API keys fuera del cliente.</p>
+      <h4>Key takeaway</h4>
+      <p>The browser never talks directly to Mailchimp. An intermediate automation validates the data, enforces business logic, and keeps API keys off the client.</p>
     </div>
   </div>
 
   <p style="margin-top:2rem;">
     <a class="btn btn--secondary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
-      Probar landing en vivo
+      Try the live landing
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
     </a>
   </p>
@@ -1397,24 +1393,24 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
 <section class="section" id="mailchimp">
   <div class="sec-header" data-reveal>
     <span class="sec-num">07 · 📬 Mailchimp</span>
-    <h2 class="sec-title">La lista central, segmentable sin SQL</h2>
-    <p class="sec-lead">Aquí vive cada fan registrado. Dos mecanismos distintos organizan sus datos: <strong>merge fields</strong> (su ficha) y <strong>tags</strong> (su historial de intereses). Cada uno tiene una semántica diferente y eso cambia cómo los usamos.</p>
+    <h2 class="sec-title">The central list, segmentable without SQL</h2>
+    <p class="sec-lead">Every registered fan lives here. Two distinct mechanisms organise their data: <strong>merge fields</strong> (their profile) and <strong>tags</strong> (their interest history). Each has different semantics, and that changes how we use them.</p>
   </div>
 
   <div class="compare" data-reveal>
     <div class="compare__col compare__col--merge">
-      <h4>🗂️ Merge fields <span class="tag-vs">Sobrescriben</span></h4>
-      <p>La «ficha» del contacto. Cada campo guarda <em>un solo valor</em>: el más reciente. Ideal para datos que son por naturaleza únicos por contacto.</p>
-      <p style="color:var(--text-3); font-size:.85rem; margin-top:1rem;"><strong>Ejemplo</strong>: Ana firma por Pista B1 hoy. Mañana firma por Río Alto.</p>
+      <h4>🗂️ Merge fields <span class="tag-vs">Overwrite</span></h4>
+      <p>The contact's "profile". Each field holds <em>one value</em>: the most recent one. Ideal for data that's by its nature unique per contact.</p>
+      <p style="color:var(--text-3); font-size:.85rem; margin-top:1rem;"><strong>Example</strong>: Ana signs up for Pista B1 today. Tomorrow she signs up for Río Alto.</p>
       <div class="compare__example">
         <span class="overwritten">GRADA_NAME: <del>Pista B1</del> → <strong>Río Alto</strong></span><br>
         <span class="overwritten">GRADA_ID: <del>224549</del> → <strong>224562</strong></span>
       </div>
     </div>
     <div class="compare__col compare__col--tags">
-      <h4>🏷️ Tags <span class="tag-vs">Se acumulan</span></h4>
-      <p>Preservan <em>todo el historial</em>. Un contacto puede llevar decenas de tags simultáneamente. Ideal para segmentar por intereses o comportamientos.</p>
-      <p style="color:var(--text-3); font-size:.85rem; margin-top:1rem;"><strong>Mismo caso</strong>: Ana firma por Pista B1 y luego por Río Alto.</p>
+      <h4>🏷️ Tags <span class="tag-vs">Stack</span></h4>
+      <p>They preserve <em>the full history</em>. A contact can carry dozens of tags at once. Ideal for segmenting by interests or behaviour.</p>
+      <p style="color:var(--text-3); font-size:.85rem; margin-top:1rem;"><strong>Same case</strong>: Ana signs up for Pista B1 and later for Río Alto.</p>
       <div class="compare__example">
         <span class="added">grada:224549 (Pista B1)</span><br>
         <span class="added">grada:224562 (Río Alto)</span><br>
@@ -1427,27 +1423,27 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
   <div class="callout callout--tip" data-reveal>
     <div class="callout__icon">💡</div>
     <div class="callout__body">
-      <h4>Para recordar</h4>
-      <p>Para <strong>segmentar</strong> usa tags. Para la <strong>ficha visible</strong> en el panel de Mailchimp usa merge fields. Son complementarios, no alternativos.</p>
+      <h4>Key takeaway</h4>
+      <p>Use tags to <strong>segment</strong>. Use merge fields for the <strong>visible profile</strong> in the Mailchimp UI. They're complementary, not alternatives.</p>
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">Segmento típico: «Avisar al abrir Sector 316 del Celta–Athletic»</h3>
-  <pre style="background:var(--bg-1); border:1px solid var(--line); border-radius:var(--radius); padding:1.25rem; font-size:.85rem; color:var(--text-1); margin-top:1rem;" data-reveal>tag contains  <strong style="color:var(--celta-blue);">grada:224515</strong>         <span style="color:var(--text-3);">Y</span>
-tag contains  <strong style="color:var(--celta-blue);">event:4587</strong>           <span style="color:var(--text-3);">Y</span>
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">Typical segment: "Notify when Sector 316 of the Celta–Athletic match opens"</h3>
+  <pre style="background:var(--bg-1); border:1px solid var(--line); border-radius:var(--radius); padding:1.25rem; font-size:.85rem; color:var(--text-1); margin-top:1rem;" data-reveal>tag contains  <strong style="color:var(--celta-blue);">grada:224515</strong>         <span style="color:var(--text-3);">AND</span>
+tag contains  <strong style="color:var(--celta-blue);">event:4587</strong>           <span style="color:var(--text-3);">AND</span>
 tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-grada-224515</strong></pre>
-  <p style="color:var(--text-3); font-size:.85rem;">Marketing construye este segmento en la UI de Mailchimp. n8n lo consume para enviar el aviso una sola vez por fan y grada.</p>
+  <p style="color:var(--text-3); font-size:.85rem;">Marketing builds this segment in Mailchimp's UI. n8n consumes it to send the alert at most once per fan and section.</p>
 </section>
 
 <!-- ============================== §8 MANDRILL ============================== -->
 <section class="section" id="mandrill">
   <div class="sec-header" data-reveal>
     <span class="sec-num">08 · ✉️ Mandrill</span>
-    <h2 class="sec-title">Transaccional, no masivo</h2>
-    <p class="sec-lead">Mailchimp es para campañas programadas a listas grandes. Mandrill es para envíos inmediatos, personalizados, con analítica individual de aperturas y clics.</p>
+    <h2 class="sec-title">Transactional, not bulk</h2>
+    <p class="sec-lead">Mailchimp is for scheduled campaigns to large lists. Mandrill is for immediate, personalised sends with per-message open and click analytics.</p>
   </div>
 
-  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">🎨 Anatomía del email</h3>
+  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">🎨 Anatomy of the email</h3>
   <div class="email" data-reveal>
     <div class="email__header">
       <span class="email__header-brand">RC Celta · Entradas</span>
@@ -1476,26 +1472,27 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
     </div>
     <div class="email__footer">Te registraste en avisame.rccelta.es · No garantiza reserva</div>
   </div>
+  <p style="color:var(--text-3); font-size:.8rem; text-align:center; margin-top:-1rem;">Email body kept in Spanish — it's the actual output for Spanish-speaking fans.</p>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">📊 Qué se mide por envío</h3>
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">📊 What we measure per send</h3>
   <div class="grid grid-2" data-reveal>
     <div class="card">
-      <div class="card__role">Tracking activado</div>
+      <div class="card__role">Tracking enabled</div>
       <h3 class="card__title">Open rate · CTR</h3>
-      <p class="card__text">Mandrill pixel de apertura + redirect-wrapping para clics. Se ve en su panel nativo y en GA4 via UTMs.</p>
+      <p class="card__text">Mandrill open pixel + redirect-wrapping for clicks. Visible in its own dashboard and in GA4 via UTMs.</p>
     </div>
     <div class="card">
-      <div class="card__role">Filtros en el panel</div>
-      <h3 class="card__title">Tags por partido + grada</h3>
-      <p class="card__text">Cada envío lleva <code>avisame</code>, <code>event-{id}</code>, <code>grada-{id}</code>. Vistas cruzadas en Mandrill Analytics.</p>
+      <div class="card__role">Filters in the panel</div>
+      <h3 class="card__title">Tags per match + section</h3>
+      <p class="card__text">Every send carries <code>avisame</code>, <code>event-{id}</code>, <code>grada-{id}</code>. Cross-views available in Mandrill Analytics.</p>
     </div>
   </div>
 
   <div class="callout callout--warn" data-reveal>
     <div class="callout__icon">⚠️</div>
     <div class="callout__body">
-      <h4>Cuidado</h4>
-      <p>El dominio desde el que envías (<code>from_email</code>) <strong>debe</strong> estar verificado en Mandrill con DKIM + SPF. Si no, todos los envíos se rechazan con <code>reject_reason: unsigned</code>. Es el primer error que todo el mundo comete.</p>
+      <h4>Watch out</h4>
+      <p>The domain you send from (<code>from_email</code>) <strong>must</strong> be verified in Mandrill with DKIM + SPF. If it isn't, every send is rejected with <code>reject_reason: unsigned</code>. It's the first mistake everyone makes.</p>
     </div>
   </div>
 </section>
@@ -1504,52 +1501,52 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
 <section class="section" id="n8n">
   <div class="sec-header" data-reveal>
     <span class="sec-num">09 · 🤖 n8n</span>
-    <h2 class="sec-title">El cerebro que conecta todo</h2>
-    <p class="sec-lead">n8n es una herramienta de automatización visual: arrastras cajas, conectas flechas y ejecutas. El equivalente open-source de Zapier, pero sin límite de ejecuciones y con control total.</p>
+    <h2 class="sec-title">The brain that connects everything</h2>
+    <p class="sec-lead">n8n is a visual automation tool: drag boxes, connect arrows, run. The open-source equivalent of Zapier, but without execution caps and with full control.</p>
   </div>
 
-  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">🧩 El pipeline (12 nodos)</h3>
+  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">🧩 The pipeline (12 nodes)</h3>
   <div class="pipeline" data-reveal>
     <div class="pipeline__list">
-      <div class="pipe-node"><span class="pipe-node__num">01</span><span class="pipe-node__emoji">🎬</span><div class="pipe-node__body"><div class="pipe-node__title">Manual Trigger</div><div class="pipe-node__desc">Punto de entrada</div></div></div>
-      <div class="pipe-node"><span class="pipe-node__num">02</span><span class="pipe-node__emoji">📌</span><div class="pipe-node__body"><div class="pipe-node__title">Vars</div><div class="pipe-node__desc">Config central</div></div></div>
-      <div class="pipe-node"><span class="pipe-node__num">03</span><span class="pipe-node__emoji">📬</span><div class="pipe-node__body"><div class="pipe-node__title">Mailchimp Members</div><div class="pipe-node__desc">Traer contactos</div></div></div>
-      <div class="pipe-node"><span class="pipe-node__num">04</span><span class="pipe-node__emoji">📚</span><div class="pipe-node__body"><div class="pipe-node__title">Aggregate</div><div class="pipe-node__desc">Agrupar en lista</div></div></div>
-      <div class="pipe-node"><span class="pipe-node__num">05</span><span class="pipe-node__emoji">🔐</span><div class="pipe-node__body"><div class="pipe-node__title">ONEBOX Auth</div><div class="pipe-node__desc">Pedir token</div></div></div>
-      <div class="pipe-node"><span class="pipe-node__num">06</span><span class="pipe-node__emoji">📅</span><div class="pipe-node__body"><div class="pipe-node__title">ONEBOX Sessions</div><div class="pipe-node__desc">Listar partidos</div></div></div>
-      <div class="pipe-node"><span class="pipe-node__num">07</span><span class="pipe-node__emoji">🔎</span><div class="pipe-node__body"><div class="pipe-node__title">Filter event_id</div><div class="pipe-node__desc">Quedarnos con el target</div></div></div>
-      <div class="pipe-node"><span class="pipe-node__num">08</span><span class="pipe-node__emoji">🎫</span><div class="pipe-node__body"><div class="pipe-node__title">ONEBOX Availability</div><div class="pipe-node__desc">Consultar disponibilidad</div></div></div>
-      <div class="pipe-node"><span class="pipe-node__num">09</span><span class="pipe-node__emoji">🧮</span><div class="pipe-node__body"><div class="pipe-node__title">Gradas availability</div><div class="pipe-node__desc">Aplanar con asientos</div></div></div>
-      <div class="pipe-node"><span class="pipe-node__num">10</span><span class="pipe-node__emoji">🤝</span><div class="pipe-node__body"><div class="pipe-node__title">Find leads</div><div class="pipe-node__desc">Cruzar × tags</div></div></div>
-      <div class="pipe-node"><span class="pipe-node__num">11</span><span class="pipe-node__emoji">🛠️</span><div class="pipe-node__body"><div class="pipe-node__title">Build Mandrill</div><div class="pipe-node__desc">Armar JSON email</div></div></div>
-      <div class="pipe-node"><span class="pipe-node__num">12</span><span class="pipe-node__emoji">✉️</span><div class="pipe-node__body"><div class="pipe-node__title">Mandrill Send</div><div class="pipe-node__desc">Enviar el aviso</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">01</span><span class="pipe-node__emoji">🎬</span><div class="pipe-node__body"><div class="pipe-node__title">Manual Trigger</div><div class="pipe-node__desc">Entry point</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">02</span><span class="pipe-node__emoji">📌</span><div class="pipe-node__body"><div class="pipe-node__title">Vars</div><div class="pipe-node__desc">Central config</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">03</span><span class="pipe-node__emoji">📬</span><div class="pipe-node__body"><div class="pipe-node__title">Mailchimp Members</div><div class="pipe-node__desc">Fetch contacts</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">04</span><span class="pipe-node__emoji">📚</span><div class="pipe-node__body"><div class="pipe-node__title">Aggregate</div><div class="pipe-node__desc">Collapse to a list</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">05</span><span class="pipe-node__emoji">🔐</span><div class="pipe-node__body"><div class="pipe-node__title">ONEBOX Auth</div><div class="pipe-node__desc">Request token</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">06</span><span class="pipe-node__emoji">📅</span><div class="pipe-node__body"><div class="pipe-node__title">ONEBOX Sessions</div><div class="pipe-node__desc">List matches</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">07</span><span class="pipe-node__emoji">🔎</span><div class="pipe-node__body"><div class="pipe-node__title">Filter event_id</div><div class="pipe-node__desc">Keep the target</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">08</span><span class="pipe-node__emoji">🎫</span><div class="pipe-node__body"><div class="pipe-node__title">ONEBOX Availability</div><div class="pipe-node__desc">Query availability</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">09</span><span class="pipe-node__emoji">🧮</span><div class="pipe-node__body"><div class="pipe-node__title">Sections w/ seats</div><div class="pipe-node__desc">Flatten</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">10</span><span class="pipe-node__emoji">🤝</span><div class="pipe-node__body"><div class="pipe-node__title">Find leads</div><div class="pipe-node__desc">Cross-reference × tags</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">11</span><span class="pipe-node__emoji">🛠️</span><div class="pipe-node__body"><div class="pipe-node__title">Build Mandrill</div><div class="pipe-node__desc">Assemble email JSON</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">12</span><span class="pipe-node__emoji">✉️</span><div class="pipe-node__body"><div class="pipe-node__title">Mandrill Send</div><div class="pipe-node__desc">Send the alert</div></div></div>
     </div>
   </div>
 
   <div class="callout callout--good" data-reveal>
     <div class="callout__icon">✅</div>
     <div class="callout__body">
-      <h4>Buena práctica</h4>
-      <p>El workflow completo está en <code>n8n/avisame-workflow.json</code> en el repo. Descárgalo y <strong>Import from File</strong> en tu instancia de n8n — los 12 nodos aparecen listos para conectar con tus credenciales.</p>
+      <h4>Best practice</h4>
+      <p>The full workflow lives in <code>n8n/avisame-workflow.json</code> in the repo. Download it and use <strong>Import from File</strong> in your n8n instance — the 12 nodes appear ready to connect with your credentials.</p>
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🚀 Evoluciones posibles</h3>
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🚀 Possible evolutions</h3>
   <div class="grid grid-3" data-reveal>
     <div class="card">
-      <div class="card__role">Evitar duplicados</div>
-      <h3 class="card__title">Marcar notificados</h3>
-      <p class="card__text">Añadir el tag <code>notified:event-X-grada-Y</code> tras enviar para no duplicar avisos.</p>
+      <div class="card__role">Avoid duplicates</div>
+      <h3 class="card__title">Mark as notified</h3>
+      <p class="card__text">Add a <code>notified:event-X-grada-Y</code> tag after sending so the same fan isn't alerted twice for the same section.</p>
     </div>
     <div class="card">
-      <div class="card__role">Automatizar completamente</div>
+      <div class="card__role">Full automation</div>
       <h3 class="card__title">Scheduler</h3>
-      <p class="card__text">Sustituir el trigger manual por un Schedule node cada 10 min durante ventanas de alta demanda.</p>
+      <p class="card__text">Replace the manual trigger with a Schedule node running every 10 min during peak demand windows.</p>
     </div>
     <div class="card">
-      <div class="card__role">Alertas internas</div>
-      <h3 class="card__title">Canal Slack</h3>
-      <p class="card__text">Segunda salida que avisa al equipo interno en tiempo real cuando se liberan gradas top.</p>
+      <div class="card__role">Internal alerts</div>
+      <h3 class="card__title">Slack channel</h3>
+      <p class="card__text">A second output that notifies the internal team in real time when top sections open up.</p>
     </div>
   </div>
 </section>
@@ -1558,43 +1555,43 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
 <section class="section" id="github">
   <div class="sec-header" data-reveal>
     <span class="sec-num">10 · 🐙 GitHub</span>
-    <h2 class="sec-title">Control de versiones + hosting gratuito</h2>
-    <p class="sec-lead">GitHub hace dos cosas a la vez aquí: guarda la historia de cambios del código (control de versiones) y publica <code>landing.html</code> en HTTPS gratis (GitHub Pages).</p>
+    <h2 class="sec-title">Version control + free hosting</h2>
+    <p class="sec-lead">GitHub plays two roles here at the same time: it keeps the code's change history (version control) and it serves <code>landing.html</code> over HTTPS for free (GitHub Pages).</p>
   </div>
 
   <div class="grid grid-2" data-reveal>
     <div class="card">
       <div class="card__icon" style="background:rgba(122,177,217,.1);">📁</div>
-      <div class="card__role">Repositorio</div>
-      <h3 class="card__title">Público · Rama única</h3>
-      <p class="card__text"><a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform" target="_blank">github.com/.../rc-celta-seat-availability-alert-platform</a>. Una sola rama <code>main</code> — para equipos pequeños, no hace falta más.</p>
+      <div class="card__role">Repository</div>
+      <h3 class="card__title">Public · Single branch</h3>
+      <p class="card__text"><a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform" target="_blank">github.com/.../rc-celta-seat-availability-alert-platform</a>. A single <code>main</code> branch — for a small team, that's enough.</p>
     </div>
     <div class="card">
       <div class="card__icon" style="background:rgba(63,185,80,.1);">🚀</div>
-      <div class="card__role">Deploy automático</div>
+      <div class="card__role">Automatic deploy</div>
       <h3 class="card__title">GitHub Pages</h3>
-      <p class="card__text">Cada <code>git push</code> dispara un redeploy. 30–60 segundos después, los cambios están en vivo con certificado HTTPS auto-renovado.</p>
+      <p class="card__text">Every <code>git push</code> triggers a re-deploy. 30–60 seconds later the changes are live with an auto-renewed HTTPS certificate.</p>
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🧹 Qué se versiona, qué no</h3>
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🧹 What's versioned, what isn't</h3>
   <div class="compare" data-reveal>
     <div class="compare__col" style="border-left:3px solid var(--success);">
-      <h4>✅ En el repo</h4>
+      <h4>✅ In the repo</h4>
       <ul style="list-style:none; padding:0; font-size:.9rem; color:var(--text-1);">
-        <li style="padding:.3rem 0;">Código (<code>generate-landing.js</code>, scripts de build)</li>
-        <li style="padding:.3rem 0;">Landing final (<code>landing.html</code>, <code>index.html</code>)</li>
-        <li style="padding:.3rem 0;">Assets de marca (escudo, logos)</li>
-        <li style="padding:.3rem 0;">Workflow de n8n (con secretos sustituidos)</li>
-        <li style="padding:.3rem 0;">Documentación (<code>README.md</code>, <code>manual.html</code>)</li>
+        <li style="padding:.3rem 0;">Code (<code>generate-landing.js</code>, build scripts)</li>
+        <li style="padding:.3rem 0;">Final landing (<code>landing.html</code>, <code>index.html</code>)</li>
+        <li style="padding:.3rem 0;">Brand assets (crest, logos)</li>
+        <li style="padding:.3rem 0;">n8n workflow (with secrets stubbed out)</li>
+        <li style="padding:.3rem 0;">Documentation (<code>README.md</code>, <code>manual.html</code>)</li>
       </ul>
     </div>
     <div class="compare__col" style="border-left:3px solid var(--error);">
       <h4>🚫 Gitignored</h4>
       <ul style="list-style:none; padding:0; font-size:.9rem; color:var(--text-1);">
-        <li style="padding:.3rem 0;"><code>.env</code> con credenciales reales</li>
-        <li style="padding:.3rem 0;">Artefactos pesados regenerables</li>
-        <li style="padding:.3rem 0;">Config local de herramientas de IDE</li>
+        <li style="padding:.3rem 0;"><code>.env</code> with real credentials</li>
+        <li style="padding:.3rem 0;">Heavy regenerable artifacts</li>
+        <li style="padding:.3rem 0;">Local IDE / tooling config</li>
       </ul>
     </div>
   </div>
@@ -1602,8 +1599,8 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
   <div class="callout callout--good" data-reveal>
     <div class="callout__icon">✅</div>
     <div class="callout__body">
-      <h4>Buena práctica</h4>
-      <p>Antes del primer <code>git push</code> a un repo público, haz un <strong>grep de seguridad</strong>: busca cualquier API key, contraseña o token en los archivos staged. Es un hábito de dos segundos que evita filtraciones.</p>
+      <h4>Best practice</h4>
+      <p>Before the first <code>git push</code> to a public repo, run a <strong>security grep</strong>: scan every staged file for API keys, passwords, tokens. It's a two-second habit that prevents leaks.</p>
     </div>
   </div>
 </section>
@@ -1612,45 +1609,45 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
 <section class="section" id="ga4">
   <div class="sec-header" data-reveal>
     <span class="sec-num">11 · 📊 Google Analytics 4</span>
-    <h2 class="sec-title">Medir lo que importa</h2>
-    <p class="sec-lead">El <code>measurement_id</code> está incrustado en la landing. GA4 captura tráfico y eventos automáticamente; nosotros añadimos un evento custom <code>generate_lead</code> al enviar el formulario.</p>
+    <h2 class="sec-title">Measuring what matters</h2>
+    <p class="sec-lead">The <code>measurement_id</code> is embedded in the landing. GA4 captures traffic and events automatically; we add a custom <code>generate_lead</code> event when the form submits successfully.</p>
   </div>
 
-  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">📈 Dashboard de recuperación — ejemplo ilustrativo</h3>
+  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">📈 Recovery dashboard — illustrative numbers</h3>
   <div class="dash" data-reveal>
-    <div class="dash__title">Avisos de entradas · Últimos 30 días</div>
+    <div class="dash__title">Ticket availability alerts · Last 30 days</div>
     <div class="dash__grid">
       <div class="kpi">
-        <span class="kpi__label">Tasa de registro</span>
-        <div class="kpi__value kpi__value--blue">24,3%</div>
+        <span class="kpi__label">Signup rate</span>
+        <div class="kpi__value kpi__value--blue">24.3%</div>
         <div class="kpi__bar"><div class="kpi__bar-fill" style="width:24%;"></div></div>
         <div class="kpi__delta">page_view → generate_lead</div>
       </div>
       <div class="kpi">
-        <span class="kpi__label">Leads totales</span>
+        <span class="kpi__label">Total leads</span>
         <div class="kpi__value">830</div>
         <div class="kpi__bar"><div class="kpi__bar-fill" style="width:80%;"></div></div>
-        <div class="kpi__delta">+412 última jornada</div>
+        <div class="kpi__delta">+412 last matchday</div>
       </div>
       <div class="kpi">
-        <span class="kpi__label">Emails enviados</span>
+        <span class="kpi__label">Emails sent</span>
         <div class="kpi__value">412</div>
         <div class="kpi__bar"><div class="kpi__bar-fill" style="width:50%;"></div></div>
-        <div class="kpi__delta">vía Mandrill</div>
+        <div class="kpi__delta">via Mandrill</div>
       </div>
       <div class="kpi">
-        <span class="kpi__label">Tasa de recuperación</span>
-        <div class="kpi__value kpi__value--red">12,8%</div>
+        <span class="kpi__label">Recovery rate</span>
+        <div class="kpi__value kpi__value--red">12.8%</div>
         <div class="kpi__bar"><div class="kpi__bar-fill kpi__bar-fill--accent" style="width:12%;"></div></div>
-        <div class="kpi__delta">notificación → compra</div>
+        <div class="kpi__delta">alert → purchase</div>
       </div>
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🎛️ Parámetros custom del evento <code>generate_lead</code></h3>
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🎛️ Custom parameters on <code>generate_lead</code></h3>
   <div class="matrix" data-reveal>
     <table>
-      <thead><tr><th style="width:40%;">Parámetro</th><th>Ejemplo</th><th style="width:15%; text-align:center;">Custom dim</th></tr></thead>
+      <thead><tr><th style="width:40%;">Parameter</th><th>Example</th><th style="width:15%; text-align:center;">Custom dim</th></tr></thead>
       <tbody>
         <tr><td><code>method</code></td><td>avisame_form</td><td style="text-align:center;">—</td></tr>
         <tr><td><code>event_id</code></td><td>4587</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
@@ -1658,7 +1655,7 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
         <tr><td><code>grada_id</code></td><td>224549</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
         <tr><td><code>grada_name</code></td><td>Pista - B1</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
         <tr><td><code>is_duplicate</code></td><td>false</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
-        <tr><td><code>locale</code></td><td>es-ES</td><td style="text-align:center;">opcional</td></tr>
+        <tr><td><code>locale</code></td><td>es-ES</td><td style="text-align:center;">optional</td></tr>
       </tbody>
     </table>
   </div>
@@ -1666,8 +1663,8 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
   <div class="callout callout--tip" data-reveal>
     <div class="callout__icon">💡</div>
     <div class="callout__body">
-      <h4>Para recordar</h4>
-      <p>Sin registrar los parámetros como <strong>custom dimensions</strong> en <em>Admin → Custom definitions</em>, GA4 los captura pero no los expone como breakdowns en los informes. Es un paso obligatorio.</p>
+      <h4>Key takeaway</h4>
+      <p>Without registering the parameters as <strong>custom dimensions</strong> in <em>Admin → Custom definitions</em>, GA4 still captures them but won't expose them as breakdowns in the reports. It's a required step.</p>
     </div>
   </div>
 </section>
@@ -1676,8 +1673,8 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
 <section class="section" id="legal">
   <div class="sec-header" data-reveal>
     <span class="sec-num">12 · ⚖️ Legal &amp; Privacy</span>
-    <h2 class="sec-title">RGPD · LOPDGDD · LSSI-CE</h2>
-    <p class="sec-lead">Tres normativas se cruzan en este proyecto. Todas son obligatorias si operas en España. No son "nice to have" — sin cumplirlas, la plataforma no puede ir a producción.</p>
+    <h2 class="sec-title">GDPR · LOPDGDD · LSSI-CE</h2>
+    <p class="sec-lead">Three regulations overlap in this project. All are mandatory if you operate in Spain. They're not "nice to have" — without compliance, the platform cannot go to production.</p>
   </div>
 
   <div class="laws" data-reveal>
@@ -1685,17 +1682,17 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
       <div class="law__head">
         <span class="law__flag">🇪🇺</span>
         <div>
-          <span class="law__title">RGPD</span>
-          <div class="law__code">Reglamento General de Protección de Datos · UE 2016/679</div>
+          <span class="law__title">GDPR (RGPD)</span>
+          <div class="law__code">General Data Protection Regulation · EU 2016/679</div>
         </div>
       </div>
-      <p class="law__desc">Normativa europea que establece el marco general sobre cómo se deben recoger, tratar y almacenar los datos personales. Aplica a cualquier tratamiento de datos de residentes de la UE.</p>
+      <p class="law__desc">EU regulation that sets the overall framework for how personal data must be collected, processed and stored. Applies to any processing of EU residents' data.</p>
       <ul>
-        <li>Consentimiento <strong>libre, específico, informado e inequívoco</strong> antes de recoger el email</li>
-        <li>Minimización de datos — solo lo estrictamente necesario</li>
-        <li>Limitación de finalidad — usar los datos solo para lo que se consintió</li>
-        <li>Derechos ARCO-POL garantizados contractualmente</li>
-        <li>Registro de actividades de tratamiento documentado</li>
+        <li><strong>Free, specific, informed and unambiguous</strong> consent before collecting the email</li>
+        <li>Data minimisation — collect only what's strictly necessary</li>
+        <li>Purpose limitation — use data only for what was consented</li>
+        <li>Data-subject rights guaranteed contractually (access, rectification, erasure, portability…)</li>
+        <li>Record of Processing Activities documented</li>
       </ul>
     </div>
 
@@ -1704,15 +1701,15 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
         <span class="law__flag">🇪🇸</span>
         <div>
           <span class="law__title">LOPDGDD</span>
-          <div class="law__code">Ley Orgánica 3/2018</div>
+          <div class="law__code">Spanish Organic Law 3/2018</div>
         </div>
       </div>
-      <p class="law__desc">Adaptación española del RGPD. Refuerza los derechos de los usuarios y define el régimen sancionador nacional.</p>
+      <p class="law__desc">The Spanish adaptation of GDPR. Reinforces user rights and sets the national enforcement regime.</p>
       <ul>
-        <li>Edad mínima <strong>14 años</strong> para consentir por sí mismos</li>
-        <li>Derechos digitales: portabilidad, olvido en redes, desconexión digital</li>
-        <li>Sanciones hasta <strong>20 M€ o el 4 % de la facturación global</strong></li>
-        <li>DPO obligatorio en tratamientos a gran escala</li>
+        <li>Minimum age <strong>14 years</strong> to consent on one's own</li>
+        <li>Digital rights: portability, right-to-be-forgotten on social media, digital disconnection</li>
+        <li>Fines up to <strong>€20M or 4% of global turnover</strong></li>
+        <li>Mandatory Data Protection Officer for large-scale processing</li>
       </ul>
     </div>
 
@@ -1721,35 +1718,35 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
         <span class="law__flag">📧</span>
         <div>
           <span class="law__title">LSSI-CE</span>
-          <div class="law__code">Ley 34/2002 · Servicios de la Sociedad de la Información</div>
+          <div class="law__code">Spanish Law 34/2002 · Information Society Services</div>
         </div>
       </div>
-      <p class="law__desc">Regula el envío de comunicaciones comerciales electrónicas y el uso de cookies.</p>
+      <p class="law__desc">Regulates electronic commercial communications and the use of cookies.</p>
       <ul>
-        <li><strong>Opt-in previo y expreso</strong> para emails comerciales (art. 21)</li>
-        <li>Enlace de baja gratuito y sencillo en cada comunicación</li>
-        <li>Identificación clara del remitente</li>
-        <li>Banner de cookies bloqueante para cualquier cookie no estrictamente necesaria (GA4 entra aquí)</li>
-        <li>Sanciones hasta <strong>150 000 €</strong> por infracción grave</li>
+        <li><strong>Prior, express opt-in</strong> for commercial emails (Art. 21)</li>
+        <li>Free and easy unsubscribe link in every communication</li>
+        <li>Clear identification of the sender</li>
+        <li>Blocking cookie banner for any non-strictly-necessary cookie (GA4 falls here)</li>
+        <li>Fines up to <strong>€150,000</strong> for serious infringements</li>
       </ul>
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🔍 Cómo cumple hoy la plataforma</h3>
+  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🔍 Where the platform stands today</h3>
   <div class="matrix" data-reveal>
     <table>
-      <thead><tr><th>Requisito</th><th style="text-align:center; width:80px;">Estado</th></tr></thead>
+      <thead><tr><th>Requirement</th><th style="text-align:center; width:80px;">Status</th></tr></thead>
       <tbody>
-        <tr><td>Consentimiento inequívoco (checkbox sin premarcar)</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
-        <tr><td>Consentimiento separado para marketing</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
-        <tr><td>Información previa — enlace a política de privacidad</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
-        <tr><td>Minimización de datos</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
-        <tr><td>Seguridad: TLS + cifrado en reposo</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
-        <tr><td>Enlace de baja en emails</td><td style="text-align:center;"><span class="status status--err">✗</span></td></tr>
-        <tr><td>Banner de cookies antes de cargar GA4</td><td style="text-align:center;"><span class="status status--err">✗</span></td></tr>
-        <tr><td>Contratos DPA firmados con encargados</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
-        <tr><td>Registro de actividades de tratamiento</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
-        <tr><td>DPO designado y publicado</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
+        <tr><td>Unambiguous consent (unchecked checkbox)</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
+        <tr><td>Separate marketing consent</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
+        <tr><td>Prior information — link to privacy policy</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
+        <tr><td>Data minimisation</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
+        <tr><td>Security: TLS + encryption at rest</td><td style="text-align:center;"><span class="status status--ok">✓</span></td></tr>
+        <tr><td>Unsubscribe link in emails</td><td style="text-align:center;"><span class="status status--err">✗</span></td></tr>
+        <tr><td>Cookie banner before GA4 loads</td><td style="text-align:center;"><span class="status status--err">✗</span></td></tr>
+        <tr><td>DPAs signed with processors</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
+        <tr><td>Record of Processing Activities</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
+        <tr><td>DPO designated and published</td><td style="text-align:center;"><span class="status status--warn">!</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -1757,8 +1754,8 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
   <div class="callout callout--warn" data-reveal>
     <div class="callout__icon">⚠️</div>
     <div class="callout__body">
-      <h4>Cuidado</h4>
-      <p>Un <strong>banner de cookies bloqueante</strong> (que impida cargar <code>gtag.js</code> hasta aceptar) es obligatorio bajo la LSSI-CE. Sin él, la plataforma no puede ir a producción, por impecable que sea el código.</p>
+      <h4>Watch out</h4>
+      <p>A <strong>blocking cookie banner</strong> (one that prevents <code>gtag.js</code> from loading until the user accepts) is mandatory under LSSI-CE. Without it, the platform can't go to production, no matter how clean the code is.</p>
     </div>
   </div>
 </section>
@@ -1774,19 +1771,19 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
         <img src="assets/celta-crest.svg" alt="RC Celta">
         <span>Seat Availability Alert Platform</span>
       </div>
-      <p class="footer-text">Caso de estudio del <strong>AI Marketing Lab</strong> · IE Business School. Una plataforma de recuperación de demanda para el RC Celta de Vigo, construida con herramientas que cualquier equipo de marketing ya tiene en su cinturón.</p>
+      <p class="footer-text">Case study for the <strong>AI Marketing Lab</strong> · IE Business School. A demand-recovery platform for RC Celta de Vigo, built with tools any marketing team already has on its shelf.</p>
     </div>
     <div>
-      <h4>Recursos</h4>
+      <h4>Resources</h4>
       <ul>
-        <li><a href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">Landing en vivo</a></li>
-        <li><a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform" target="_blank">Código fuente</a></li>
-        <li><a href="https://colab.research.google.com/github/inakigorostiza/rc-celta-seat-availability-alert-platform/blob/main/presentation.ipynb" target="_blank">Notebook Colab</a></li>
-        <li><a href="https://youtu.be/-FURuRfDk8I" target="_blank">Vídeo (2 min)</a></li>
+        <li><a href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">Live landing</a></li>
+        <li><a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform" target="_blank">Source code</a></li>
+        <li><a href="https://colab.research.google.com/github/inakigorostiza/rc-celta-seat-availability-alert-platform/blob/main/presentation.ipynb" target="_blank">Colab notebook</a></li>
+        <li><a href="https://youtu.be/-FURuRfDk8I" target="_blank">Video (2 min)</a></li>
       </ul>
     </div>
     <div>
-      <h4>Herramientas</h4>
+      <h4>Tools</h4>
       <ul>
         <li><a href="https://developer.oneboxtds.com/" target="_blank">ONEBOX TDS Docs</a></li>
         <li><a href="https://mailchimp.com/developer/" target="_blank">Mailchimp API</a></li>
@@ -1798,7 +1795,7 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
   </div>
   <div class="bottom">
     <span>© 2026 · IE Business School · AI Marketing Lab</span>
-    <span>Construido con ❤️ y con herramientas que ya conocías</span>
+    <span>Built with ❤️ using tools you already knew</span>
   </div>
 </footer>
 
