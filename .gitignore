@@ -9,7 +9,7 @@
 # and your .env. Regenerate locally with `node generate-landing.js`.
 # landing.html is tracked and published via GitHub Pages.
 sessions.html
-examples.html
+onebox-api-test.html
 
 # Node
 node_modules/

@@ -253,7 +253,7 @@ async function main() {
 </body>
 </html>`;
 
-  const out = join(HERE, "examples.html");
+  const out = join(HERE, "onebox-api-test.html");
   writeFileSync(out, html);
   console.log(`✔ wrote ${out}`);
 }
