@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ONEBOX API — example calls (PRE)</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --req: #1f2430;
+      --res: #132019;
+      --method: #7ee787;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1.25rem 4rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    .wrap { max-width: 960px; margin: 0 auto; }
+    header { border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 2rem; }
+    header h1 { margin: 0 0 .25rem; font-size: 1.6rem; }
+    header .meta { color: var(--muted); font-size: .9rem; }
+    header .meta code { color: var(--accent); }
+    .ex {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem 1.5rem;
+      margin-bottom: 1.75rem;
+    }
+    .ex h2 { margin: 0 0 .5rem; font-size: 1.2rem; color: var(--accent); }
+    .ex h4 { margin: 1rem 0 .4rem; font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+    .ex p { margin: 0; color: var(--text); }
+    .ex p.notes { margin-top: .75rem; color: var(--muted); font-size: .9rem; }
+    pre {
+      background: var(--req);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: .85rem 1rem;
+      overflow-x: auto;
+      margin: 0;
+      font-size: .85rem;
+      line-height: 1.5;
+    }
+    pre.res { background: var(--res); }
+    code { font-family: "SF Mono", Consolas, "Liberation Mono", monospace; }
+    .method { color: var(--method); font-weight: 600; }
+    code code { background: #21262d; padding: 0 .35em; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>ONEBOX API — example calls</h1>
+      <div class="meta">
+        Environment: <code>PRE</code> ·
+        Base URL: <code>https://api.oneboxtds.net</code> ·
+        Channel: <code>2287</code> ·
+        Captured: 2026-04-17T12:50:46.546Z
+      </div>
+    </header>
+    
+    <section class="ex">
+      <h2>1. Authenticate (get access token)</h2>
+      <p>Seller-channel-client OAuth2 client_credentials flow against the PRE environment. Returns a bearer token valid for 12 hours.</p>
+      <h4>Request</h4>
+      <pre class="req"><code><span class="method">POST</span> https://api.oneboxtds.net/oauth/token
+Content-Type: application/x-www-form-urlencoded</code></pre>
+      <h4>Body</h4><pre class="req"><code>grant_type=client_credentials&amp;client_id=seller-channel-client&amp;client_secret=&lt;YOUR_CLIENT_SECRET&gt;&amp;channel_id=2287</code></pre>
+      <h4>Response</h4>
+      <pre class="res"><code>{
+  "access_token": "eyJhbG…iHVQ (redacted)",
+  "token_type": "bearer",
+  "expires_in": 43200,
+  "scope": "api-channels-all api-distribution-all api-catalog-all api-external-all api-gateway api-customers-mgmt-all api-orders-mgmt-all",
+  "authInfo": "&lt;redacted&gt;",
+  "jti": "MjIO-ofeMzKL0QucyBLYMjIPDWU",
+  "refresh_token": "&lt;redacted&gt;"
+}</code></pre>
+      <p class="notes">access_token and refresh_token are redacted in this example. Use access_token as a bearer token for subsequent calls.</p>
+    </section>
+  
+
+    <section class="ex">
+      <h2>2. List sessions</h2>
+      <p>Returns all sessions visible to this sales channel, paginated (default limit=100).</p>
+      <h4>Request</h4>
+      <pre class="req"><code><span class="method">GET</span> https://api.oneboxtds.net/catalog-api/v1/sessions
+Authorization: Bearer &lt;ACCESS_TOKEN&gt;
+Accept: application/json</code></pre>
+      
+      <h4>Response</h4>
+      <pre class="res"><code>{
+  "metadata": {
+    "limit": 100,
+    "total": 21,
+    "offset": 0
+  },
+  "data": [
+    {
+      "id": 240895,
+      "name": "NUMERADO",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "&lt;p align=\"LEFT\"&gt;Descripción corta ñ.`+^'w8rqwht' Ñ' ?&lt;/p&gt;"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "&lt;p align=\"LEFT\"&gt;Hola qué tal&lt;/p&gt;"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2020-02-12T21:00:00+01:00",
+        "end": "2027-02-06T21:00:00+01:00",
+        "sale_start": "2019-05-10T10:00:00+02:00",
+        "sale_end": "2027-02-06T21:00:00+01:00",
+        "booking_start": "2019-11-30T23:00:00Z",
+        "booking_end": "2025-02-01T20:00:00Z",
+        "start_unconfirmed": false
+      },
+      "texts": {
+        "title": {
+          "es-ES": "numerado"
+        },
+        "description": {
+          "es-ES": "&lt;p&gt;descripcion&lt;/p&gt;"
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "price": {
+        "min": {
+          "value": 10,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 50,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 22,
+              "name": "IVA 6,5%",
+              "value": 6.5
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 22,
+              "name": "IVA 6,5%",
+              "value": 6.5,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER",
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 7,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 10,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 9.39,
+          "surcharge": {
+            "promoter": 3.76,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 6.57,
+          "surcharge": {
+            "promoter": 3.76,
+            "channel": 0
+          },
+          "original_price": 9.39,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 46.95,
+          "surcharge": {
+            "promoter": 3.76,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 10,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 50,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 7,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 10,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "availability": {
+        "price_types": [
+          {
+            "id": 32713,
+            "name": "PISTA",
+            "availability": {
+              "type": "BOUNDED",
+              "total": 340,
+              "available": 199
+            }
+          },
+          {
+            "id": 32714,
+            "name": "VIP",
+            "availability": {
+              "type": "BOUNDED",
+              "total": 2176,
+              "available": 2086
+            }
+          },
+          {
+            "id": 32715,
+            "name": "PISO 1",
+            "availability": {
+              "type": "BOUNDED",
+              "total": 4625,
+              "available": 4442
+            }
+          },
+          {
+            "id": 32716,
+            "name": "PISO 2",
+            "availability": {
+              "type": "BOUNDED",
+              "total": 5422,
+              "available": 5269
+            }
+          },
+          {
+            "id": 32717,
+            "name": "PISO 3",
+            "availability": {
+              "type": "BOUNDED",
+              "total": 2396,
+              "available": 2376
+            }
+          }
+        ]
+      },
+      "for_sale": true,
+      "on_sale": true,
+      "sold_out": false,
+      "rates": [
+        {
+          "id": 6242,
+          "name": "Junior",
+          "default": false
+        },
+        {
+          "id": 6238,
+          "name": "General",
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": 249468,
+      "name": "NUMERADO",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "&lt;p align=\"LEFT\"&gt;Descripción corta ñ.`+^'w8rqwht' Ñ' ?&lt;/p&gt;"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "&lt;p align=\"LEFT\"&gt;Hola qué tal&lt;/p&gt;"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2020-11-25T15:00:00+01:00",
+        "end": "2027-11-20T20:00:00+01:00",
+        "sale_start": "2020-02-21T08:00:00+01:00",
+        "sale_end": "2027-11-20T20:00:00+01:00",
+        "booking_start": "2020-09-12T22:00:00Z",
+        "booking_end": "2025-11-15T19:00:00Z",
+        "start_unconfirmed": false
+      },
+      "texts": {
+        "title": {
+          "es-ES": ""
+        },
+        "description": {
+          "es-ES": ""
+        }
+      },
+      "images": {
+        "main": {
+          "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/249468/227974_561209_1739950912334.jpg",
+          "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/249468/227976_174625_1739950940680.jpg",
+          "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/249468/177203_634020_1739950849300.jpg"
+        },
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/249468/227975_723572_1739950913020.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/249468/227977_294161_1739950941304.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/249468/227973_592200_1739950876381.jpg"
+          }
+        ]
+      },
+      "price": {
+        "min": {
+          "value": 10,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 50,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 22,
+              "name": "IVA 6,5%",
+              "value": 6.5
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 22,
+              "name": "IVA 6,5%",
+              "value": 6.5,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER",
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 7,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 10,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 9.39,
+          "surcharge": {
+            "promoter": 3.76,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 6.57,
+          "surcharge": {
+            "promoter": 3.76,
+            "channel": 0
+          },
+          "original_price": 9.39,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 46.95,
+          "surcharge": {
+            "promoter": 3.76,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 10,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 50,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 7,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 10,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "availability": {
+        "price_types": [
+          {
+            "id": 32713,
+            "name": "PISTA",
+            "availability": {
+              "type": "BOUNDED",
+              "total": 340,
+              "available": 12
+            }
+          },
+          {
+            "id": 32714,
+            "name": "VIP",
+            "availability": {
+              "type": "BOUNDED",
+              "total": 2176,
+              "available": 2118
+            }
+          },
+          {
+            "id": 32715,
+            "name": "PISO 1",
+            "availability": {
+              "type": "BOUNDED",
+              "total": 4625,
+              "available": 4345
+            }
+          },
+          {
+            "id": 32716,
+            "name": "PISO 2",
+            "availability": {
+              "type": "BOUNDED",
+              "total": 5422,
+              "available": 5364
+            }
+          },
+          {
+            "id": 32717,
+            "name": "PISO 3",
+            "availability": {
+              "type": "BOUNDED",
+              "total": 2395,
+              "available": 2321
+            }
+          }
+        ]
+      },
+      "for_sale": true,
+      "on_sale": true,
+      "sold_out": false,
+      "external_reference": "206416",
+      "rates": [
+        {
+          "id": 6242,
+          "name": "Junior",
+          "default": false
+        },
+        {
+          "id": 6238,
+          "name": "General",
+          "default": true
+        }
+      ]
+    }
+  ]
+}</code></pre>
+      <p class="notes">Response truncated to first 2 entries for readability. Full call returned <code>metadata.total = 21</code>.</p>
+    </section>
+  
+
+    <section class="ex">
+      <h2>3. Get session availability</h2>
+      <p>Availability breakdown for a single session (sectors, price types, and counts). Example uses session 240895 "NUMERADO".</p>
+      <h4>Request</h4>
+      <pre class="req"><code><span class="method">GET</span> https://api.oneboxtds.net/catalog-api/v1/sessions/240895/availability
+Authorization: Bearer &lt;ACCESS_TOKEN&gt;
+Accept: application/json</code></pre>
+      
+      <h4>Response</h4>
+      <pre class="res"><code>{
+  "id": 240895,
+  "name": "NUMERADO",
+  "availability": {
+    "type": "BOUNDED",
+    "total": 14786,
+    "available": 14372
+  },
+  "price_types": [
+    {
+      "id": 32713,
+      "name": "PISTA",
+      "availability": {
+        "type": "BOUNDED",
+        "total": 290,
+        "available": 199
+      },
+      "texts": {
+        "name": {
+          "en-US": "PISTA ING",
+          "es-ES": "PISTA CAST"
+        },
+        "description": {
+          "en-US": "&lt;p&gt;PISTA ING DESC&lt;/p&gt;",
+          "es-ES": "&lt;p&gt;PISTA CAST DESC&lt;/p&gt;"
+        }
+      },
+      "ui_settings": {
+        "order": 2,
+        "color": "#9E4500"
+      },
+      "code": "ZP1"
+    },
+    {
+      "id": 32714,
+      "name": "VIP",
+      "availability": {
+        "type": "BOUNDED",
+        "total": 1616,
+        "available": 1526
+      },
+      "ui_settings": {
+        "order": 1,
+        "color": "#FF9966"
+      },
+      "code": "VIP"
+    },
+    {
+      "id": 32715,
+      "name": "PISO 1",
+      "availability": {
+        "type": "BOUNDED",
+        "total": 3098,
+        "available": 2915
+      },
+      "ui_settings": {
+        "order": 3,
+        "color": "#FF6600"
+      },
+      "code": "PISO 1"
+    },
+    {
+      "id": 32716,
+      "name": "PISO 2",
+      "availability": {
+        "type": "BOUNDED",
+        "total": 3973,
+        "available": 3945
+      },
+      "ui_settings": {
+        "order": 4,
+        "color": "#0099FF"
+      },
+      "code": "PISO 2"
+    },
+    {
+      "id": 32717,
+      "name": "PISO 3",
+      "availability": {
+        "type": "BOUNDED",
+        "total": 1724,
+        "available": 1704
+      },
+      "ui_settings": {
+        "order": 5,
+        "color": "#0033CC"
+      },
+      "code": "PISO 3"
+    }
+  ],
+  "sectors": [
+    {
+      "id": 224515,
+      "name": "Sector 316",
+      "code": "Sector 316",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 88,
+            "available": 83
+          }
+        }
+      ]
+    },
+    {
+      "id": 224514,
+      "name": "Sector 315",
+      "code": "Sector 315",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 106,
+            "available": 106
+          }
+        }
+      ]
+    },
+    {
+      "id": 224513,
+      "name": "Sector 314",
+      "code": "Sector 314",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 112,
+            "available": 112
+          }
+        }
+      ]
+    },
+    {
+      "id": 224512,
+      "name": "Sector 313",
+      "code": "Sector 313",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 106,
+            "available": 104
+          }
+        }
+      ]
+    },
+    {
+      "id": 224519,
+      "name": "Sector 320",
+      "code": "Sector 320",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 106,
+            "available": 106
+          }
+        }
+      ]
+    },
+    {
+      "id": 224518,
+      "name": "Sector 319",
+      "code": "Sector 319",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 112,
+            "available": 112
+          }
+        }
+      ]
+    },
+    {
+      "id": 224517,
+      "name": "Sector 318",
+      "code": "Sector 318",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 82,
+            "available": 81
+          }
+        }
+      ]
+    },
+    {
+      "id": 224516,
+      "name": "Sector 317",
+      "code": "Sector 317",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 36,
+            "available": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": 224521,
+      "name": "Sector 322",
+      "code": "Sector 322",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 106,
+            "available": 102
+          }
+        }
+      ]
+    },
+    {
+      "id": 224520,
+      "name": "Sector 321",
+      "code": "Sector 321",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 112,
+            "available": 109
+          }
+        }
+      ]
+    },
+    {
+      "id": 224531,
+      "name": "Sector 107 E",
+      "code": "Sector 107 E",
+      "price_types": [
+        {
+          "id": 32714,
+          "name": "VIP",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 112,
+            "available": 106
+          }
+        }
+      ]
+    },
+    {
+      "id": 224530,
+      "name": "Sector 106 E",
+      "code": "Sector 106 E",
+      "price_types": [
+        {
+          "id": 32714,
+          "name": "VIP",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 84,
+            "available": 83
+          }
+        }
+      ]
+    },
+    {
+      "id": 224529,
+      "name": "Sector 105 E",
+      "code": "Sector 105 E",
+      "price_types": [
+        {
+          "id": 32714,
+          "name": "VIP",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 84,
+            "available": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": 224535,
+      "name": "Sector 113 D",
+      "code": "Sector 113 D",
+      "price_types": [
+        {
+          "id": 32714,
+          "name": "VIP",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 240,
+            "available": 217
+          }
+        }
+      ]
+    },
+    {
+      "id": 224534,
+      "name": "Sector 112 D",
+      "code": "Sector 112 D",
+      "price_types": [
+        {
+          "id": 32714,
+          "name": "VIP",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 120,
+            "available": 120
+          }
+        }
+      ]
+    },
+    {
+      "id": 224533,
+      "name": "Sector 109 E",
+      "code": "Sector 109 E",
+      "price_types": [
+        {
+          "id": 32714,
+          "name": "VIP",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 56,
+            "available": 55
+          }
+        }
+      ]
+    },
+    {
+      "id": 224532,
+      "name": "Sector 108 E",
+      "code": "Sector 108 E",
+      "price_types": [
+        {
+          "id": 32714,
+          "name": "VIP",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 112,
+            "available": 110
+          }
+        }
+      ]
+    },
+    {
+      "id": 224539,
+      "name": "Sector 119 E",
+      "code": "Sector 119 E",
+      "price_types": [
+        {
+          "id": 32714,
+          "name": "VIP",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 112,
+            "available": 108
+          }
+        }
+      ]
+    },
+    {
+      "id": 224538,
+      "name": "Sector 118 E",
+      "code": "Sector 118 E",
+      "price_types": [
+        {
+          "id": 32714,
+          "name": "VIP",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 56,
+            "available": 55
+          }
+        }
+      ]
+    },
+    {
+      "id": 224537,
+      "name": "Sector 115 D",
+      "code": "Sector 115 D",
+      "price_types": [
+        {
+          "id": 32714,
+          "name": "VIP",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 120,
+            "available": 119
+          }
+        }
+      ]
+    },
+    {
+      "id": 224536,
+      "name": "Sector 114 D",
+      "code": "Sector 114 D",
+      "price_types": [
+        {
+          "id": 32714,
+          "name": "VIP",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 240,
+            "available": 238
+          }
+        }
+      ]
+    },
+    {
+      "id": 224542,
+      "name": "Sector 122 E",
+      "code": "Sector 122 E",
+      "price_types": [
+        {
+          "id": 32714,
+          "name": "VIP",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 84,
+            "available": 79
+          }
+        }
+      ]
+    },
+    {
+      "id": 224541,
+      "name": "Sector 121 E",
+      "code": "Sector 121 E",
+      "price_types": [
+        {
+          "id": 32714,
+          "name": "VIP",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 84,
+            "available": 80
+          }
+        }
+      ]
+    },
+    {
+      "id": 224540,
+      "name": "Sector 120 E",
+      "code": "Sector 120 E",
+      "price_types": [
+        {
+          "id": 32714,
+          "name": "VIP",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 112,
+            "available": 110
+          }
+        }
+      ]
+    },
+    {
+      "id": 224551,
+      "name": "Pista - B3",
+      "code": "Pista - B3",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 10,
+            "available": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": 224550,
+      "name": "Pista - B2",
+      "code": "Pista - B2",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 20,
+            "available": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": 224549,
+      "name": "Pista - B1",
+      "code": "Pista - B1",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 20,
+            "available": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": 224555,
+      "name": "Pista A2",
+      "code": "Pista A2",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 20,
+            "available": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": 224554,
+      "name": "Pista A1",
+      "code": "Pista A1",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 10,
+            "available": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": 224553,
+      "name": "Pista C2",
+      "code": "Pista C2",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 40,
+            "available": 21
+          }
+        }
+      ]
+    },
+    {
+      "id": 224552,
+      "name": "Pista C1",
+      "code": "Pista C1",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 40,
+            "available": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": 224559,
+      "name": "Pista B3",
+      "code": "Pista B3",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 10,
+            "available": 9
+          }
+        }
+      ]
+    },
+    {
+      "id": 224558,
+      "name": "Pista B2",
+      "code": "Pista B2",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 20,
+            "available": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": 224557,
+      "name": "Pista B1",
+      "code": "Pista B1",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 20,
+            "available": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": 224556,
+      "name": "Pista A3",
+      "code": "Pista A3",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 20,
+            "available": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": 224563,
+      "name": "Minusvalidos A",
+      "code": "Minusvalidos A",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 10,
+            "available": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": 224562,
+      "name": "Minusvalidos B",
+      "code": "Minusvalidos B",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 10,
+            "available": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": 224561,
+      "name": "Pista - C2",
+      "code": "Pista - C2",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 20,
+            "available": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": 224560,
+      "name": "Pista - C1",
+      "code": "Pista - C1",
+      "price_types": [
+        {
+          "id": 32713,
+          "name": "PISTA",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 20,
+            "available": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": 224455,
+      "name": "Sector 107",
+      "code": "vacio",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 193,
+            "available": 183
+          }
+        }
+      ]
+    },
+    {
+      "id": 224454,
+      "name": "Sector 106",
+      "code": "vacio",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 184,
+            "available": 172
+          }
+        }
+      ]
+    },
+    {
+      "id": 224453,
+      "name": "Sector 105",
+      "code": "vacio",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 181,
+            "available": 175
+          }
+        }
+      ]
+    },
+    {
+      "id": 224459,
+      "name": "Sector 111",
+      "code": "vacio",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 66,
+            "available": 66
+          }
+        }
+      ]
+    },
+    {
+      "id": 224458,
+      "name": "Sector 110",
+      "code": "vacio",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 130,
+            "available": 130
+          }
+        }
+      ]
+    },
+    {
+      "id": 224457,
+      "name": "Sector 109",
+      "code": "vacio",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 193,
+            "available": 189
+          }
+        }
+      ]
+    },
+    {
+      "id": 224456,
+      "name": "Sector 108",
+      "code": "vacio",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 193,
+            "available": 176
+          }
+        }
+      ]
+    },
+    {
+      "id": 224463,
+      "name": "Sector 116",
+      "code": "Sector 116",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 66,
+            "available": 66
+          }
+        }
+      ]
+    },
+    {
+      "id": 224462,
+      "name": "Sector 114",
+      "code": "Sector 114",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 193,
+            "available": 155
+          }
+        }
+      ]
+    },
+    {
+      "id": 224461,
+      "name": "Sector 113",
+      "code": "Sector 113",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 193,
+            "available": 175
+          }
+        }
+      ]
+    },
+    {
+      "id": 224460,
+      "name": "Sector 112",
+      "code": "Sector 112",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 216,
+            "available": 213
+          }
+        }
+      ]
+    },
+    {
+      "id": 224467,
+      "name": "Sector 119",
+      "code": "Sector 119",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 193,
+            "available": 185
+          }
+        }
+      ]
+    },
+    {
+      "id": 224466,
+      "name": "Sector 118",
+      "code": "Sector 118",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 193,
+            "available": 190
+          }
+        }
+      ]
+    },
+    {
+      "id": 224465,
+      "name": "Sector 117",
+      "code": "Sector 117",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 135,
+            "available": 134
+          }
+        }
+      ]
+    },
+    {
+      "id": 224464,
+      "name": "Sector 115",
+      "code": "Sector 115",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 211,
+            "available": 172
+          }
+        }
+      ]
+    },
+    {
+      "id": 224470,
+      "name": "Sector 122",
+      "code": "Sector 122",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 184,
+            "available": 169
+          }
+        }
+      ]
+    },
+    {
+      "id": 224469,
+      "name": "Sector 121",
+      "code": "Sector 121",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 181,
+            "available": 174
+          }
+        }
+      ]
+    },
+    {
+      "id": 224468,
+      "name": "Sector 120",
+      "code": "Sector 120",
+      "price_types": [
+        {
+          "id": 32715,
+          "name": "PISO 1",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 193,
+            "available": 191
+          }
+        }
+      ]
+    },
+    {
+      "id": 224479,
+      "name": "Sector Palco / Llotja",
+      "code": "Sector Palco / Llotja",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 204,
+            "available": 204
+          }
+        }
+      ]
+    },
+    {
+      "id": 224483,
+      "name": "Sector 210",
+      "code": "Sector 210",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 120,
+            "available": 120
+          }
+        }
+      ]
+    },
+    {
+      "id": 224482,
+      "name": "Sector 209",
+      "code": "Sector 209",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 240,
+            "available": 233
+          }
+        }
+      ]
+    },
+    {
+      "id": 224481,
+      "name": "Sector 208",
+      "code": "Sector 208",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 250,
+            "available": 247
+          }
+        }
+      ]
+    },
+    {
+      "id": 224480,
+      "name": "Sector 207",
+      "code": "Sector 207",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 172,
+            "available": 170
+          }
+        }
+      ]
+    },
+    {
+      "id": 224487,
+      "name": "Sector 214",
+      "code": "Sector 214",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 258,
+            "available": 257
+          }
+        }
+      ]
+    },
+    {
+      "id": 224486,
+      "name": "Sector 213",
+      "code": "Sector 213",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 256,
+            "available": 254
+          }
+        }
+      ]
+    },
+    {
+      "id": 224485,
+      "name": "Sector 212",
+      "code": "Sector 212",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 258,
+            "available": 255
+          }
+        }
+      ]
+    },
+    {
+      "id": 224484,
+      "name": "Sector 211",
+      "code": "Sector 211",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 282,
+            "available": 280
+          }
+        }
+      ]
+    },
+    {
+      "id": 224491,
+      "name": "Sector 218",
+      "code": "Sector 218",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 240,
+            "available": 238
+          }
+        }
+      ]
+    },
+    {
+      "id": 224490,
+      "name": "Sector 217",
+      "code": "Sector 217",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 130,
+            "available": 129
+          }
+        }
+      ]
+    },
+    {
+      "id": 224489,
+      "name": "Sector 216",
+      "code": "Sector 216",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 272,
+            "available": 272
+          }
+        }
+      ]
+    },
+    {
+      "id": 224488,
+      "name": "Sector 215",
+      "code": "Sector 215",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 256,
+            "available": 256
+          }
+        }
+      ]
+    },
+    {
+      "id": 224495,
+      "name": "Sector 222",
+      "code": "Sector 222",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 265,
+            "available": 261
+          }
+        }
+      ]
+    },
+    {
+      "id": 224494,
+      "name": "Sector 221",
+      "code": "Sector 221",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 270,
+            "available": 270
+          }
+        }
+      ]
+    },
+    {
+      "id": 224493,
+      "name": "Sector 220",
+      "code": "Sector 220",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 250,
+            "available": 249
+          }
+        }
+      ]
+    },
+    {
+      "id": 224492,
+      "name": "Sector 219",
+      "code": "Sector 219",
+      "price_types": [
+        {
+          "id": 32716,
+          "name": "PISO 2",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 250,
+            "available": 250
+          }
+        }
+      ]
+    },
+    {
+      "id": 224507,
+      "name": "Sector 308",
+      "code": "Sector 308",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 106,
+            "available": 106
+          }
+        }
+      ]
+    },
+    {
+      "id": 224506,
+      "name": "Sector 307",
+      "code": "Sector 307",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 112,
+            "available": 111
+          }
+        }
+      ]
+    },
+    {
+      "id": 224505,
+      "name": "Sector 306",
+      "code": "Sector 306",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 106,
+            "available": 106
+          }
+        }
+      ]
+    },
+    {
+      "id": 224504,
+      "name": "Sector 305",
+      "code": "Sector 305",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 116,
+            "available": 113
+          }
+        }
+      ]
+    },
+    {
+      "id": 224511,
+      "name": "Sector 312",
+      "code": "Sector 312",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 112,
+            "available": 112
+          }
+        }
+      ]
+    },
+    {
+      "id": 224510,
+      "name": "Sector 311",
+      "code": "Sector 311",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 88,
+            "available": 88
+          }
+        }
+      ]
+    },
+    {
+      "id": 224509,
+      "name": "Sector 310",
+      "code": "Sector 310",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 30,
+            "available": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": 224508,
+      "name": "Sector 309",
+      "code": "Sector 309",
+      "price_types": [
+        {
+          "id": 32717,
+          "name": "PISO 3",
+          "availability": {
+            "type": "BOUNDED",
+            "total": 88,
+            "available": 88
+          }
+        }
+      ]
+    }
+  ]
+}</code></pre>
+      <p class="notes">The <code>avisame-celta</code> flow calls this per session ID returned from step 2 to consult real-time availability.</p>
+    </section>
+  
+  </div>
+</body>
+</html>
