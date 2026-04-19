@@ -1455,14 +1455,15 @@
     <li class="nav__item"><a href="#stack">      <span class="nav__num">02</span>Stack</a></li>
     <li class="nav__item"><a href="#roadmap">    <span class="nav__num">03</span>Roadmap</a></li>
     <li class="nav__item"><a href="#credentials"><span class="nav__num">04</span>Credentials</a></li>
-    <li class="nav__item"><a href="#onebox">     <span class="nav__num">05</span>ONEBOX</a></li>
-    <li class="nav__item"><a href="#landing">    <span class="nav__num">06</span>Landing</a></li>
-    <li class="nav__item"><a href="#mailchimp">  <span class="nav__num">07</span>Mailchimp</a></li>
-    <li class="nav__item"><a href="#mandrill">   <span class="nav__num">08</span>Mandrill</a></li>
-    <li class="nav__item"><a href="#n8n">        <span class="nav__num">09</span>n8n</a></li>
-    <li class="nav__item"><a href="#github">     <span class="nav__num">10</span>GitHub</a></li>
-    <li class="nav__item"><a href="#ga4">        <span class="nav__num">11</span>GA4</a></li>
-    <li class="nav__item"><a href="#legal">      <span class="nav__num">12</span>Legal</a></li>
+    <li class="nav__item"><a href="#claude-code"><span class="nav__num">05</span>Claude Code</a></li>
+    <li class="nav__item"><a href="#onebox">     <span class="nav__num">06</span>ONEBOX</a></li>
+    <li class="nav__item"><a href="#landing">    <span class="nav__num">07</span>Landing</a></li>
+    <li class="nav__item"><a href="#mailchimp">  <span class="nav__num">08</span>Mailchimp</a></li>
+    <li class="nav__item"><a href="#mandrill">   <span class="nav__num">09</span>Mandrill</a></li>
+    <li class="nav__item"><a href="#n8n">        <span class="nav__num">10</span>n8n</a></li>
+    <li class="nav__item"><a href="#github">     <span class="nav__num">11</span>GitHub</a></li>
+    <li class="nav__item"><a href="#ga4">        <span class="nav__num">12</span>GA4</a></li>
+    <li class="nav__item"><a href="#legal">      <span class="nav__num">13</span>Legal</a></li>
   </ul>
   <div class="nav__ctas">
     <a class="nav__cta nav__cta--primary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
@@ -1839,10 +1840,114 @@
   </div>
 </section>
 
-<!-- ============================== §5 ONEBOX ============================== -->
-<section class="section" id="onebox">
+<!-- ============================== §5 CLAUDE CODE ============================== -->
+<section class="section" id="claude-code">
   <div class="sec-header" data-reveal>
     <div class="sec-num">05</div>
+    <div class="sec-title-wrap">
+      <span class="sec-eyebrow">Claude Code</span>
+      <h2 class="sec-title">The AI that built this platform.</h2>
+      <p class="sec-lead">Anthropic's agentic coding assistant. Lives in your terminal or IDE, reads your codebase, edits files, runs commands, and iterates with you in plain English. Every commit in this case study's repo came from a Claude Code session.</p>
+    </div>
+  </div>
+
+  <h3 class="h-sub">What is Claude Code</h3>
+  <div class="grid grid-3" data-reveal>
+    <div class="card card--light">
+      <div class="card__icon">💬</div>
+      <div class="card__role">Natural language</div>
+      <h3 class="card__title">Describe, don't specify</h3>
+      <p class="card__text">Tell it what you want — <em>"build a signup form styled like Celta's site and sync submissions to Mailchimp"</em> — and it writes, edits, tests, and iterates until it works.</p>
+    </div>
+    <div class="card card--light">
+      <div class="card__icon">🛠️</div>
+      <div class="card__role">Agentic</div>
+      <h3 class="card__title">Reads, writes, runs</h3>
+      <p class="card__text">Not autocomplete. It explores the codebase with <code>grep</code> and <code>read</code>, edits multiple files at once, runs builds, tests the output, and deploys when ready.</p>
+    </div>
+    <div class="card card--light">
+      <div class="card__icon">🔄</div>
+      <div class="card__role">Iterative</div>
+      <h3 class="card__title">Visual feedback loop</h3>
+      <p class="card__text">Paste a screenshot of a broken layout — it reads the image, finds the CSS bug, fixes it, asks you to refresh. Like pair programming with a colleague who never sleeps.</p>
+    </div>
+  </div>
+
+  <h3 class="h-sub">Why it matters here</h3>
+  <p style="color:var(--ink-3); max-width:720px;">This case study isn't only <em>about</em> AI marketing — it's a case <em>built with</em> AI. Every artefact you're reading — the landing page, the Mailchimp sync, the n8n workflow JSON, the legal copy, <strong>this manual itself</strong> — was produced through conversation with Claude Code. The commit history at <a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform/commits/main" target="_blank">github.com/.../commits/main</a> is the paper trail of that conversation.</p>
+
+  <div class="callout callout--tip" data-reveal>
+    <div class="callout__icon">💡</div>
+    <div class="callout__body">
+      <h4>Key takeaway</h4>
+      <p>For a marketing team, this changes the economics of launching technical experiments. What used to require a sprint with an engineer now takes an afternoon with an AI that already knows your stack.</p>
+    </div>
+  </div>
+
+  <h3 class="h-sub">Setup in Visual Studio Code · 5 minutes</h3>
+  <div class="flow" data-reveal>
+    <div class="flow__step">
+      <span class="flow__num">01</span>
+      <h5>Get an Anthropic account</h5>
+      <p>Sign up at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>. Free tier works to try it; paid plan recommended for serious use.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">02</span>
+      <h5>Install the extension</h5>
+      <p>In VS Code, open Extensions (<code>Cmd ⇧ X</code> / <code>Ctrl ⇧ X</code>), search <strong>"Claude Code"</strong>, install the official Anthropic extension.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">03</span>
+      <h5>Sign in</h5>
+      <p>Command Palette (<code>Cmd ⇧ P</code>) → run <strong>Claude Code: Sign In</strong>. A browser window handles OAuth with your Anthropic account.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">04</span>
+      <h5>Open a project + the panel</h5>
+      <p>Open any folder. Click the Claude icon in the activity bar (left sidebar) to reveal the Claude Code panel. Start typing.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--good" data-reveal>
+    <div class="callout__icon">✅</div>
+    <div class="callout__body">
+      <h4>First prompt to try</h4>
+      <p><em>"Give me a one-paragraph summary of what this project does. Look at the README and the landing page."</em> — watch it grep the repo, read the relevant files, and answer. That exploration step is the whole magic.</p>
+    </div>
+  </div>
+
+  <h3 class="h-sub">Tips for effective use</h3>
+  <div class="grid grid-3" data-reveal>
+    <div class="card card--light">
+      <div class="card__role">Be specific</div>
+      <h3 class="card__title">Name files + constraints</h3>
+      <p class="card__text"><em>"Update <code>generate-landing.js</code> so the form submits to a new URL at the top. Keep the existing styling."</em> works better than <em>"change where the form goes"</em>.</p>
+    </div>
+    <div class="card card--light">
+      <div class="card__role">Iterate</div>
+      <h3 class="card__title">Screenshot, don't describe</h3>
+      <p class="card__text">When a UI is off, paste a screenshot into the chat. Claude reads the image and edits the CSS. Explaining <em>"the button is too far right"</em> in words is slower than dragging in a PNG.</p>
+    </div>
+    <div class="card card--light">
+      <div class="card__role">Commit often</div>
+      <h3 class="card__title">Let Claude commit for you</h3>
+      <p class="card__text">Ask it to commit after each working change. The history becomes a clean, reviewable log of decisions. Revert with a click if anything goes sideways.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--warn" data-reveal>
+    <div class="callout__icon">⚠️</div>
+    <div class="callout__body">
+      <h4>Watch out</h4>
+      <p>Claude Code can run shell commands and modify files autonomously. Work on a clean Git branch the first few times — easy to roll back if it does something unexpected. Never paste real production secrets into the chat without thinking twice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== §6 ONEBOX ============================== -->
+<section class="section" id="onebox">
+  <div class="sec-header" data-reveal>
+    <div class="sec-num">06</div>
     <div class="sec-title-wrap">
       <span class="sec-eyebrow">ONEBOX</span>
       <h2 class="sec-title">The ticketing API.</h2>
@@ -1904,7 +2009,7 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
 <!-- ============================== §6 LANDING ============================== -->
 <section class="section" id="landing">
   <div class="sec-header" data-reveal>
-    <div class="sec-num">06</div>
+    <div class="sec-num">07</div>
     <div class="sec-title-wrap">
       <span class="sec-eyebrow">Landing Page</span>
       <h2 class="sec-title">Static, branded, wired to ONEBOX.</h2>
@@ -1970,7 +2075,7 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
 <!-- ============================== §7 MAILCHIMP ============================== -->
 <section class="section" id="mailchimp">
   <div class="sec-header" data-reveal>
-    <div class="sec-num">07</div>
+    <div class="sec-num">08</div>
     <div class="sec-title-wrap">
       <span class="sec-eyebrow">Mailchimp</span>
       <h2 class="sec-title">The central list, segmentable without SQL.</h2>
@@ -2019,7 +2124,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
 <!-- ============================== §8 MANDRILL ============================== -->
 <section class="section" id="mandrill">
   <div class="sec-header" data-reveal>
-    <div class="sec-num">08</div>
+    <div class="sec-num">09</div>
     <div class="sec-title-wrap">
       <span class="sec-eyebrow">Mandrill</span>
       <h2 class="sec-title">Transactional, not bulk.</h2>
@@ -2084,7 +2189,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
 <!-- ============================== §9 N8N ============================== -->
 <section class="section" id="n8n">
   <div class="sec-header" data-reveal>
-    <div class="sec-num">09</div>
+    <div class="sec-num">10</div>
     <div class="sec-title-wrap">
       <span class="sec-eyebrow">n8n</span>
       <h2 class="sec-title">The brain that connects everything.</h2>
@@ -2141,7 +2246,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
 <!-- ============================== §10 GITHUB ============================== -->
 <section class="section" id="github">
   <div class="sec-header" data-reveal>
-    <div class="sec-num">10</div>
+    <div class="sec-num">11</div>
     <div class="sec-title-wrap">
       <span class="sec-eyebrow">GitHub</span>
       <h2 class="sec-title">Version control + free hosting.</h2>
@@ -2198,7 +2303,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
 <!-- ============================== §11 GA4 ============================== -->
 <section class="section" id="ga4">
   <div class="sec-header" data-reveal>
-    <div class="sec-num">11</div>
+    <div class="sec-num">12</div>
     <div class="sec-title-wrap">
       <span class="sec-eyebrow">Google Analytics 4</span>
       <h2 class="sec-title">Measuring what matters.</h2>
@@ -2265,7 +2370,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
 <!-- ============================== §12 LEGAL ============================== -->
 <section class="section" id="legal">
   <div class="sec-header" data-reveal>
-    <div class="sec-num">12</div>
+    <div class="sec-num">13</div>
     <div class="sec-title-wrap">
       <span class="sec-eyebrow">Legal &amp; Privacy</span>
       <h2 class="sec-title">GDPR · LOPDGDD · LSSI-CE.</h2>
