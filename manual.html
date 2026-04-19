@@ -2126,7 +2126,7 @@
     <div class="callout__icon">✅</div>
     <div class="callout__body">
       <h4>First prompt to try</h4>
-      <p><em>"Give me a one-paragraph summary of what this project does. Look at the README and the landing page."</em> — watch it grep the repo, read the relevant files, and answer. That exploration step is the whole magic.</p>
+      <p><em>"I'm starting a new project — the RC Celta «¡Avísame!» platform: a landing page that captures emails when matches are sold out and an automation that alerts fans when seats free up. Create a <code>README.md</code> in this empty folder with a short intro and the list of tools I'll use: ONEBOX, Mailchimp, Mandrill, n8n, GA4, Claude Code."</em> — watch Claude create the file right in front of you. That first write is when the magic clicks.</p>
     </div>
   </div>
 
@@ -2153,7 +2153,7 @@
     <div class="callout__icon">⚠️</div>
     <div class="callout__body">
       <h4>Watch out</h4>
-      <p>Claude Code can run shell commands and modify files autonomously. Work on a clean Git branch the first few times — easy to roll back if it does something unexpected. Never paste real production secrets into the chat without thinking twice.</p>
+      <p>Claude Code can run shell commands and modify files autonomously. Keep your project in a <strong>dedicated empty folder</strong> the first few times — easy to delete and restart if anything gets weird. Never paste real production secrets into the chat without thinking twice.</p>
     </div>
   </div>
 </section>
@@ -2636,8 +2636,8 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
     </div>
     <div class="flow__step">
       <span class="flow__num">02</span>
-      <h5>Import the workflow</h5>
-      <p>Download <code>n8n/avisame-workflow.json</code> from the repo. In n8n: <strong>Workflows → Import from File</strong> → pick the JSON. The 12 nodes below appear pre-wired, ready for your credentials.</p>
+      <h5>Import the reference workflow</h5>
+      <p>Download the reference file from the case-study repo: <a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform/blob/main/n8n/avisame-workflow.json" target="_blank">n8n/avisame-workflow.json</a> (open it on GitHub, click <strong>Raw</strong>, then save the page as a file). Back in n8n: <strong>Workflows → Import from File</strong> → pick the JSON. The 12 nodes below appear pre-wired, ready for your credentials.</p>
     </div>
     <div class="flow__step">
       <span class="flow__num">03</span>
@@ -2687,8 +2687,8 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
   <div class="callout callout--good" data-reveal>
     <div class="callout__icon">✅</div>
     <div class="callout__body">
-      <h4>Best practice</h4>
-      <p>The full workflow lives in <code>n8n/avisame-workflow.json</code> in the repo. Download it and use <strong>Import from File</strong> in your n8n instance — the 12 nodes appear ready to connect with your credentials.</p>
+      <h4>Best practice — one source of truth</h4>
+      <p>Every ID and key in this workflow lives in the <strong>Vars</strong> node (step 02 of the pipeline). Need to watch a different match, swap Mailchimp audience, or rotate an API key? Edit Vars and the 11 downstream nodes pick it up automatically — no other node needs touching.</p>
     </div>
   </div>
 
