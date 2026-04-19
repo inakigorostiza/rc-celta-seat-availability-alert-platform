@@ -584,7 +584,7 @@
     /* =========================================================
        FLOW DIAGRAM — interactive architecture
     ========================================================= */
-    .flow {
+    .connect {
       margin: 2rem 0;
       padding: 2.5rem 2rem;
       background: var(--bg-soft);
@@ -617,8 +617,8 @@
     }
     .flow__path--accent { stroke: var(--ie-red); }
     @keyframes flow-march { to { stroke-dashoffset: -14; } }
-    .flow.is-focused .flow__path { opacity: .15; }
-    .flow.is-focused .flow__path.is-active {
+    .connect.is-focused .flow__path { opacity: .15; }
+    .connect.is-focused .flow__path.is-active {
       opacity: 1;
       stroke-width: 3.5;
     }
@@ -641,7 +641,7 @@
       transform: translate(-50%, calc(-50% - 3px));
       box-shadow: 0 10px 28px rgba(0, 48, 168, .16);
     }
-    .flow.is-focused .flow__node:not(.is-active) { opacity: .32; }
+    .connect.is-focused .flow__node:not(.is-active) { opacity: .32; }
     .flow__node--dark {
       background: var(--ink);
       border-color: var(--ink);
@@ -725,7 +725,7 @@
       font-weight: 700;
     }
     @media (max-width: 720px) {
-      .flow { padding: 1.5rem .75rem; }
+      .connect { padding: 1.5rem .75rem; }
       .flow__stage { height: 560px; }
       .flow__node { width: 140px; padding: .7rem .8rem; }
       .flow__node--end { width: 56px; padding: .4rem; }
@@ -1641,7 +1641,7 @@
   </div>
 
   <h3 class="h-sub">How it all connects</h3>
-  <div class="flow" data-reveal>
+  <div class="connect" data-reveal>
     <div class="flow__stage">
       <!-- Connecting lines with animated flow pulses -->
       <svg class="flow__svg" viewBox="0 0 900 360" preserveAspectRatio="none">
@@ -2444,7 +2444,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
   });
 
   // -------------- FLOW DIAGRAM --------------
-  document.querySelectorAll('.flow').forEach(flow => {
+  document.querySelectorAll('.connect').forEach(flow => {
     const nodes = flow.querySelectorAll('.flow__node');
     const paths = flow.querySelectorAll('.flow__path');
     const pathById = new Map(Array.from(paths).map(p => [p.id, p]));
