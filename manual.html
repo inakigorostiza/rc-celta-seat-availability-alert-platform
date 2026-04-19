@@ -1416,6 +1416,102 @@
     }
 
     /* =========================================================
+       PROMPT CARDS — tutorial step recipes for Claude Code
+    ========================================================= */
+    .prompt {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 1.25rem;
+      padding: 1.75rem;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      margin: 1rem 0;
+      align-items: start;
+      transition: border-color var(--trans);
+    }
+    .prompt:hover { border-color: var(--ie-blue); }
+    .prompt__badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px; height: 44px;
+      background: var(--ie-blue);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: .9rem;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+    .prompt__body { min-width: 0; }
+    .prompt__head {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: .85rem;
+      flex-wrap: wrap;
+    }
+    .prompt__title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -.005em;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+    .prompt__artefact {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--ink-4);
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: .2rem .5rem;
+    }
+    .prompt__quote {
+      background: var(--bg-soft);
+      border-left: 3px solid var(--ie-blue);
+      padding: 1rem 1.2rem;
+      font-family: var(--font-mono);
+      font-size: .9rem;
+      line-height: 1.65;
+      color: var(--ink-2);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .prompt__quote::before {
+      content: "PROMPT";
+      position: absolute;
+      top: -8px; left: 12px;
+      background: var(--bg);
+      padding: 0 .5rem;
+      font-family: var(--font-sans);
+      font-size: .6rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      color: var(--ie-blue);
+    }
+    .prompt__result {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      font-size: .9rem;
+      color: var(--ink-3);
+      line-height: 1.55;
+    }
+    .prompt__result::before {
+      content: "→";
+      color: var(--success);
+      font-weight: 700;
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+      padding-top: .1rem;
+    }
+    .prompt__result strong { color: var(--ink); }
+    @media (max-width: 600px) {
+      .prompt { grid-template-columns: 1fr; gap: .75rem; }
+      .prompt__badge { width: 36px; height: 36px; font-size: .82rem; }
+    }
+
+    /* =========================================================
        SCROLL-TRIGGERED REVEAL
     ========================================================= */
     [data-reveal] {
@@ -2004,9 +2100,88 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
   <p style="color:var(--ink-4); font-size:.88rem;">
     <code style="color:var(--ie-red);">viewCode=V_blockmap</code> is functional — it opens the seat map directly. The four <code>utm_*</code> parameters let GA4 attribute any resulting purchase to the exact email that drove the click.
   </p>
+
+  <h3 class="h-sub">Try it yourself · Test ONEBOX in a webpage</h3>
+  <p style="color:var(--ink-3); max-width:720px;">Use Claude Code (see §05) to go from zero to a working API test harness in under an hour. These are the exact five prompts that produced the four live webpages shipping with this case study — copy them into your Claude Code panel one by one.</p>
+
+  <div class="callout callout--warn" data-reveal>
+    <div class="callout__icon">⚙️</div>
+    <div class="callout__body">
+      <h4>Before you start</h4>
+      <p>You need: ONEBOX PRE credentials (<code>client_secret</code> + <code>channel_id</code>), Node.js 18+, VS Code with the Claude Code extension, and an empty folder opened as a workspace. Create a <code>.env</code> file in the folder with your two ONEBOX values.</p>
+    </div>
+  </div>
+
+  <div class="prompt" data-reveal>
+    <div class="prompt__badge">01</div>
+    <div class="prompt__body">
+      <div class="prompt__head">
+        <span class="prompt__title">Authenticate against ONEBOX</span>
+        <span class="prompt__artefact">→ test-onebox.js</span>
+      </div>
+      <div class="prompt__quote">Create a Node.js script called <strong>test-onebox.js</strong> that authenticates against the ONEBOX PRE environment at <strong>https://api.oneboxtds.net/oauth/token</strong> using the seller-channel-client OAuth2 flow. Read ONEBOX_CLIENT_SECRET and ONEBOX_CHANNEL_ID from a .env file. Use native Node.js fetch (no npm install). On success, print the token expiry and granted scopes. On failure, print the HTTP status and response body and exit 1.</div>
+      <p class="prompt__result"><strong>What you should see:</strong> Claude creates the script, runs it, and prints <code>✔ token acquired, expires_in=43200s, scope=api-catalog-all api-distribution-all…</code>. If it fails, Claude will read the error and ask you to double-check the credentials.</p>
+    </div>
+  </div>
+
+  <div class="prompt" data-reveal>
+    <div class="prompt__badge">02</div>
+    <div class="prompt__body">
+      <div class="prompt__head">
+        <span class="prompt__title">Make your first real API call</span>
+        <span class="prompt__artefact">→ extends test-onebox.js</span>
+      </div>
+      <div class="prompt__quote">Extend test-onebox.js so that after authentication it also GETs <strong>/catalog-api/v1/sessions</strong> with the bearer token. Print how many sessions came back (metadata.total), plus the first session's name and event name.</div>
+      <p class="prompt__result"><strong>What you should see:</strong> <code>✔ 21 sessions · first: NUMERADO in * API NUMBERED EVENT</code>. This proves authentication + catalog read end-to-end.</p>
+    </div>
+  </div>
+
+  <div class="prompt" data-reveal>
+    <div class="prompt__badge">03</div>
+    <div class="prompt__body">
+      <div class="prompt__head">
+        <span class="prompt__title">Render a live documentation page</span>
+        <span class="prompt__artefact">→ generate-examples.js · examples.html</span>
+      </div>
+      <div class="prompt__quote">Create generate-examples.js that runs live calls to (1) /oauth/token, (2) /catalog-api/v1/sessions, and (3) /catalog-api/v1/sessions/{id}/availability for the first session. Render the results into a static examples.html page with three labelled sections — one per call — showing the request method/URL/headers and the JSON response. Use a dark theme with monospace code blocks. Redact the access_token and refresh_token in the output.</div>
+      <p class="prompt__result"><strong>What you should see:</strong> <code>open examples.html</code> shows a clean three-section doc of live request/response examples. Safe to share with teammates — secrets are hidden.</p>
+    </div>
+  </div>
+
+  <div class="prompt" data-reveal>
+    <div class="prompt__badge">04</div>
+    <div class="prompt__body">
+      <div class="prompt__head">
+        <span class="prompt__title">Visualise the catalog as a card grid</span>
+        <span class="prompt__artefact">→ generate-sessions.js · sessions.html</span>
+      </div>
+      <div class="prompt__quote">Create generate-sessions.js that fetches every session and its availability, then produces sessions.html — a responsive card grid. Each card shows the event image, event name, venue + city, start date in the venue timezone, price range, availability bar (green > 50%, amber > 15%, red below), price-type breakdown using ui_settings.color for each, sectors in a collapsible, and a Raw JSON toggle. Add a live-filter input at the top that matches by event or venue name.</div>
+      <p class="prompt__result"><strong>What you should see:</strong> <code>open sessions.html</code> shows all 21 sessions as branded cards. Hover a card, expand a sector, type a venue name in the filter — all data is live from ONEBOX.</p>
+    </div>
+  </div>
+
+  <div class="prompt" data-reveal>
+    <div class="prompt__badge">05</div>
+    <div class="prompt__body">
+      <div class="prompt__head">
+        <span class="prompt__title">Build the branded signup landing</span>
+        <span class="prompt__artefact">→ generate-landing.js · landing.html</span>
+      </div>
+      <div class="prompt__quote">Create generate-landing.js that builds landing.html for a single ONEBOX session (hardcode the session_id at the top of the file). The landing should mirror avisame-celta.netlify.app visually: sky-blue hero with RC Celta crest, big white "¡Avísame!" title, white card with Nombre / Apellidos / Email fields and a Grada dropdown populated from that session's sectors. On submit, validate the form and log the payload to the console for now.</div>
+      <p class="prompt__result"><strong>What you should see:</strong> <code>open landing.html</code> shows a production-looking fan-facing form. Fill it in, submit, open DevTools console — the payload is there, ready to wire to Mailchimp in §08.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--good" data-reveal>
+    <div class="callout__icon">✅</div>
+    <div class="callout__body">
+      <h4>What's next</h4>
+      <p>You now have a working ONEBOX test harness plus a branded landing. The next sections show how we sent every form submission to Mailchimp (§08), how we detected availability and fired email alerts with Mandrill (§09), and how the whole thing was orchestrated with n8n (§10).</p>
+    </div>
+  </div>
 </section>
 
-<!-- ============================== §6 LANDING ============================== -->
+<!-- ============================== §7 LANDING ============================== -->
 <section class="section" id="landing">
   <div class="sec-header" data-reveal>
     <div class="sec-num">07</div>
