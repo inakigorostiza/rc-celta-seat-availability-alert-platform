@@ -542,6 +542,16 @@
       font-size: 1.3rem;
       margin-bottom: 1.25rem;
     }
+    .card__icon--logo {
+      background: #fff;
+      padding: 6px;
+    }
+    .card__icon--logo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
     .card__role {
       font-size: .62rem;
       font-weight: 700;
@@ -1825,7 +1835,7 @@
       <p class="card__text">Public static page with the "notify me when tickets open" form. Designed with the Celta look &amp; feel and hosted free on GitHub Pages.</p>
     </div>
     <div class="card">
-      <div class="card__icon">📬</div>
+      <div class="card__icon card__icon--logo"><img src="assets/mailchimp-logo.svg" alt="Mailchimp" /></div>
       <div class="card__role">Contact list</div>
       <h3 class="card__title">Mailchimp</h3>
       <p class="card__text">The CRM audience. Every registered fan lives here with merge fields (their data) and tags (by match and section) so the team can segment without writing SQL.</p>
@@ -1837,7 +1847,7 @@
       <p class="card__text">The service that sends the one-to-one alert emails. Optimised for latency and individual tracking. Same login as Mailchimp.</p>
     </div>
     <div class="card">
-      <div class="card__icon">🤖</div>
+      <div class="card__icon card__icon--logo"><img src="assets/n8n-logo.svg" alt="n8n" /></div>
       <div class="card__role">Automation</div>
       <h3 class="card__title">n8n</h3>
       <p class="card__text">The visual glue: polls ONEBOX, cross-references Mailchimp, triggers Mandrill. Free cloud tier or self-hosted. Zero code for the marketer.</p>
@@ -1849,7 +1859,7 @@
       <p class="card__text">The analytics layer: page views, custom events (<code>generate_lead</code>), UTM attribution, and a full funnel all the way to conversion.</p>
     </div>
     <div class="card">
-      <div class="card__icon">✨</div>
+      <div class="card__icon card__icon--logo"><img src="assets/claude-logo.svg" alt="Claude Code" /></div>
       <div class="card__role">Build environment</div>
       <h3 class="card__title">Claude Code</h3>
       <p class="card__text">Anthropic's agentic CLI — the tool this entire case study was built in. Describe what you want in natural language; it reads the codebase, writes the code, runs the commands, deploys the services, and iterates visually alongside you. Every line of this platform shipped through Claude Code.</p>
