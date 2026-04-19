@@ -582,75 +582,153 @@
     .card--light code { background: var(--bg-soft); color: var(--ink); }
 
     /* =========================================================
-       ARCHITECTURE DIAGRAM
+       FLOW DIAGRAM — interactive architecture
     ========================================================= */
-    .arch {
+    .flow {
       margin: 2rem 0;
       padding: 2.5rem 2rem;
       background: var(--bg-soft);
       border: 1px solid var(--line);
-      overflow-x: auto;
+      position: relative;
+      overflow: hidden;
     }
-    .arch__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      min-width: 720px;
+    .flow__stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 900 / 360;
+      max-width: 900px;
+      margin: 0 auto;
     }
-    .arch__node {
+    .flow__svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: visible;
+    }
+    .flow__path {
+      fill: none;
+      stroke: var(--ie-blue);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-dasharray: 6 8;
+      animation: flow-march 1.5s linear infinite;
+      transition: stroke-width .3s, opacity .3s;
+    }
+    .flow__path--accent { stroke: var(--ie-red); }
+    @keyframes flow-march { to { stroke-dashoffset: -14; } }
+    .flow.is-focused .flow__path { opacity: .15; }
+    .flow.is-focused .flow__path.is-active {
+      opacity: 1;
+      stroke-width: 3.5;
+    }
+    .flow__node {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 160px;
+      padding: .85rem 1rem;
       background: var(--bg);
       border: 1px solid var(--line);
-      padding: 1.3rem 1.1rem;
       text-align: center;
-      transition: all var(--trans);
+      transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans), opacity var(--trans), background var(--trans);
+      cursor: pointer;
+      z-index: 2;
+      user-select: none;
     }
-    .arch__node:hover {
+    .flow__node:hover,
+    .flow__node.is-active {
       border-color: var(--ie-blue);
+      transform: translate(-50%, calc(-50% - 3px));
+      box-shadow: 0 10px 28px rgba(0, 48, 168, .16);
     }
-    .arch__node--source {
-      grid-column: 1 / span 3;
+    .flow.is-focused .flow__node:not(.is-active) { opacity: .32; }
+    .flow__node--dark {
       background: var(--ink);
       border-color: var(--ink);
     }
-    .arch__node--source h5 { color: #fff; }
-    .arch__node--source p { color: rgba(255,255,255,.7); }
-    .arch__node--mid-left  { grid-column: 1; grid-row: 2; }
-    .arch__node--mid-right { grid-column: 3; grid-row: 2; }
-    .arch__node--out-left  { grid-column: 1; grid-row: 3; }
-    .arch__node--out-right { grid-column: 3; grid-row: 3; }
-    .arch__node--analytics {
-      grid-column: 1 / span 3; grid-row: 4;
+    .flow__node--dark .flow__node__title { color: #fff; }
+    .flow__node--dark .flow__node__desc  { color: rgba(255,255,255,.7); }
+    .flow__node--accent {
       background: var(--ie-blue);
       border-color: var(--ie-blue);
     }
-    .arch__node--analytics h5 { color: #fff; }
-    .arch__node--analytics p { color: rgba(255,255,255,.85); }
-    .arch__node h5 {
-      font-size: .85rem;
-      color: var(--ink);
-      font-weight: 700;
-      margin-bottom: .3rem;
-      letter-spacing: .05em;
-      text-transform: uppercase;
+    .flow__node--accent .flow__node__title { color: #fff; }
+    .flow__node--accent .flow__node__desc  { color: rgba(255,255,255,.85); }
+    .flow__node--end {
+      width: 72px;
+      padding: .55rem;
+      background: transparent;
+      border: 1px dashed var(--ie-red);
     }
-    .arch__node p {
-      font-size: .78rem;
-      color: var(--ink-4);
+    .flow__node--end .flow__node__emoji {
+      font-size: 1.8rem;
       margin: 0;
     }
-    .arch__node__emoji {
-      font-size: 1.7rem;
+    .flow__node__emoji {
+      font-size: 1.55rem;
       display: block;
-      margin-bottom: .55rem;
+      margin-bottom: .3rem;
     }
-    .arch__legend {
-      font-size: .7rem;
-      color: var(--ink-4);
-      text-align: center;
-      margin-top: 1.25rem;
+    .flow__node__title {
+      display: block;
+      font-size: .72rem;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: .16em;
-      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: .08em;
+      line-height: 1.2;
+    }
+    .flow__node__desc {
+      display: block;
+      font-size: .65rem;
+      color: var(--ink-4);
+      margin-top: .15rem;
+      line-height: 1.3;
+    }
+    .flow__label {
+      position: absolute;
+      font-size: .6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--ie-blue);
+      background: var(--bg-soft);
+      padding: .15rem .45rem;
+      z-index: 3;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .flow__measure {
+      margin-top: 1.25rem;
+      padding: 1.1rem 1.25rem;
+      background: var(--ie-blue);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .flow__measure__emoji { font-size: 1.4rem; }
+    .flow__measure__text {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      line-height: 1.4;
+    }
+    .flow__hint {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: .65rem;
+      color: var(--ink-4);
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-weight: 700;
+    }
+    @media (max-width: 720px) {
+      .flow { padding: 1.5rem .75rem; }
+      .flow__stage { aspect-ratio: auto; height: 640px; }
+      .flow__node { width: 150px; }
     }
 
     /* =========================================================
@@ -1563,40 +1641,74 @@
   </div>
 
   <h3 class="h-sub">How it all connects</h3>
-  <div class="arch" data-reveal>
-    <div class="arch__grid">
-      <div class="arch__node arch__node--source">
-        <span class="arch__node__emoji">🎟️</span>
-        <h5>ONEBOX TDS</h5>
-        <p>Source of truth for inventory</p>
+  <div class="flow" data-reveal>
+    <div class="flow__stage">
+      <!-- Connecting lines with animated flow pulses -->
+      <svg class="flow__svg" viewBox="0 0 900 360" preserveAspectRatio="none">
+        <defs>
+          <marker id="arr-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 Z" fill="#0030A8"/>
+          </marker>
+          <marker id="arr-red" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 Z" fill="#E4002B"/>
+          </marker>
+        </defs>
+        <!-- p1: Landing → Mailchimp (user signup) -->
+        <path id="fp-signup" class="flow__path" d="M 175,80 L 495,80" marker-end="url(#arr-blue)"/>
+        <!-- p2: ONEBOX → n8n (polling availability) -->
+        <path id="fp-poll" class="flow__path" d="M 175,250 L 370,250" marker-end="url(#arr-blue)"/>
+        <!-- p3: n8n ↑ Mailchimp (reads subscribers) -->
+        <path id="fp-read" class="flow__path" d="M 475,210 C 475,150 560,130 585,115" marker-end="url(#arr-blue)"/>
+        <!-- p4: n8n → Mandrill (trigger send) -->
+        <path id="fp-trigger" class="flow__path" d="M 530,250 L 660,250" marker-end="url(#arr-blue)"/>
+        <!-- p5: Mandrill → fan inbox -->
+        <path id="fp-deliver" class="flow__path flow__path--accent" d="M 800,250 L 840,250" marker-end="url(#arr-red)"/>
+      </svg>
+
+      <!-- Path labels -->
+      <span class="flow__label" style="left:38%; top:17%;">Signup</span>
+      <span class="flow__label" style="left:31%; top:63%;">Polls</span>
+      <span class="flow__label" style="left:59%; top:47%;">Reads</span>
+      <span class="flow__label" style="left:65%; top:63%;">Triggers</span>
+
+      <!-- Nodes -->
+      <div class="flow__node" style="left:10%; top:22%;" data-node="landing" data-paths="fp-signup">
+        <span class="flow__node__emoji">🌐</span>
+        <span class="flow__node__title">Landing</span>
+        <span class="flow__node__desc">GitHub Pages</span>
       </div>
-      <div class="arch__node arch__node--mid-left">
-        <span class="arch__node__emoji">🌐</span>
-        <h5>Landing page</h5>
-        <p>GitHub Pages</p>
+      <div class="flow__node" style="left:65%; top:22%;" data-node="mailchimp" data-paths="fp-signup,fp-read">
+        <span class="flow__node__emoji">📬</span>
+        <span class="flow__node__title">Mailchimp</span>
+        <span class="flow__node__desc">Audience + tags</span>
       </div>
-      <div class="arch__node arch__node--mid-right">
-        <span class="arch__node__emoji">🤖</span>
-        <h5>n8n</h5>
-        <p>ONEBOX → MC → Mandrill</p>
+      <div class="flow__node flow__node--dark" style="left:10%; top:69%;" data-node="onebox" data-paths="fp-poll">
+        <span class="flow__node__emoji">🎟️</span>
+        <span class="flow__node__title">ONEBOX TDS</span>
+        <span class="flow__node__desc">Inventory truth</span>
       </div>
-      <div class="arch__node arch__node--out-left">
-        <span class="arch__node__emoji">📬</span>
-        <h5>Mailchimp</h5>
-        <p>Audience + tags</p>
+      <div class="flow__node flow__node--accent" style="left:44.5%; top:69%;" data-node="n8n" data-paths="fp-poll,fp-read,fp-trigger">
+        <span class="flow__node__emoji">🤖</span>
+        <span class="flow__node__title">n8n</span>
+        <span class="flow__node__desc">Automation</span>
       </div>
-      <div class="arch__node arch__node--out-right">
-        <span class="arch__node__emoji">✉️</span>
-        <h5>Mandrill</h5>
-        <p>One-to-one email</p>
+      <div class="flow__node flow__node--accent" style="left:81%; top:69%;" data-node="mandrill" data-paths="fp-trigger,fp-deliver">
+        <span class="flow__node__emoji">✉️</span>
+        <span class="flow__node__title">Mandrill</span>
+        <span class="flow__node__desc">Transactional</span>
       </div>
-      <div class="arch__node arch__node--analytics">
-        <span class="arch__node__emoji">📊</span>
-        <h5>Google Analytics 4</h5>
-        <p>End-to-end funnel measurement</p>
+      <div class="flow__node flow__node--end" style="left:96%; top:69%;" data-node="fan" data-paths="fp-deliver">
+        <span class="flow__node__emoji">📧</span>
       </div>
     </div>
-    <p class="arch__legend">Navigate sections below for detail</p>
+
+    <!-- GA4 measurement band — watches the whole flow -->
+    <div class="flow__measure">
+      <span class="flow__measure__emoji">📊</span>
+      <span class="flow__measure__text">Google Analytics 4 &nbsp;·&nbsp; measures every step of the funnel</span>
+    </div>
+
+    <p class="flow__hint">Hover any tool to highlight its connections</p>
   </div>
 </section>
 
@@ -2328,6 +2440,37 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
         triggers.forEach(x => x.classList.toggle('active', x === t));
         panels.forEach(p => p.classList.toggle('active', p.dataset.panel === target));
       });
+    });
+  });
+
+  // -------------- FLOW DIAGRAM --------------
+  document.querySelectorAll('.flow').forEach(flow => {
+    const nodes = flow.querySelectorAll('.flow__node');
+    const paths = flow.querySelectorAll('.flow__path');
+    const pathById = new Map(Array.from(paths).map(p => [p.id, p]));
+
+    const focus = (node) => {
+      const active = new Set((node.dataset.paths || '').split(',').filter(Boolean));
+      flow.classList.add('is-focused');
+      paths.forEach(p => p.classList.toggle('is-active', active.has(p.id)));
+      nodes.forEach(n => {
+        const ids = (n.dataset.paths || '').split(',').filter(Boolean);
+        const isConnected = n === node || ids.some(id => active.has(id));
+        n.classList.toggle('is-active', isConnected);
+      });
+    };
+    const unfocus = () => {
+      flow.classList.remove('is-focused');
+      paths.forEach(p => p.classList.remove('is-active'));
+      nodes.forEach(n => n.classList.remove('is-active'));
+    };
+
+    nodes.forEach(node => {
+      node.addEventListener('mouseenter', () => focus(node));
+      node.addEventListener('mouseleave', unfocus);
+      node.addEventListener('focus', () => focus(node));
+      node.addEventListener('blur', unfocus);
+      node.tabIndex = 0;
     });
   });
 </script>
