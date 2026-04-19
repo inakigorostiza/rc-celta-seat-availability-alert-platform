@@ -42,7 +42,7 @@ A lead-recovery platform that captures demand while tickets are sold-out, detect
 | [`presentation.ipynb`](presentation.ipynb) | Same 12-section walkthrough in Google Colab format — for instructors who prefer a notebook. |
 | [`test-onebox.js`](test-onebox.js) | Minimal Node script that auths against ONEBOX and pokes a couple of endpoints. |
 | [`generate-examples.js`](generate-examples.js) | Produces `onebox-api-test.html` — a static doc page with live API request/response examples. |
-| [`generate-sessions.js`](generate-sessions.js) | Produces `sessions.html` — a card-grid view of every session with per-sector availability. |
+| [`generate-sessions.js`](generate-sessions.js) | Produces `onebox-sessions-cards.html` — a card-grid view of every session with per-sector availability. |
 | [`generate-landing.js`](generate-landing.js) | Produces [`landing.html`](landing.html) — the "¡Avísame!" signup form, themed like the RC Celta landing. GA4 tracking + `generate_lead` event included. |
 | [`landing.html`](landing.html) · [`index.html`](index.html) | Generated landing page, served by GitHub Pages. |
 | [`n8n/avisame-workflow.json`](n8n/avisame-workflow.json) | Importable n8n workflow — the notifier side of the platform. |
@@ -78,7 +78,7 @@ Expected output: `✔ token acquired …` followed by `200 OK` on a catalog endp
 
 ```bash
 node generate-landing.js     # → landing.html
-node generate-sessions.js    # → sessions.html
+node generate-sessions.js    # → onebox-sessions-cards.html
 node generate-examples.js    # → onebox-api-test.html
 open landing.html
 ```

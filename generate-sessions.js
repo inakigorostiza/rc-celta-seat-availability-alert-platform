@@ -505,7 +505,7 @@ async function main() {
 </body>
 </html>`;
 
-  const out = join(HERE, "sessions.html");
+  const out = join(HERE, "onebox-sessions-cards.html");
   writeFileSync(out, html);
   console.log(`✔ wrote ${out}`);
 }
