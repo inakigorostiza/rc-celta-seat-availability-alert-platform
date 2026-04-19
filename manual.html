@@ -275,7 +275,7 @@
     .hero__eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: .8rem;
+      gap: 1rem;
       font-size: .72rem;
       font-weight: 700;
       letter-spacing: .18em;
@@ -283,10 +283,15 @@
       color: var(--ink);
       margin-bottom: 2.5rem;
     }
-    .hero__eyebrow::before {
-      content: "";
-      width: 44px; height: 2px;
-      background: var(--ie-red);
+    .hero__eyebrow-logo {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+    .hero__eyebrow-divider {
+      width: 1px;
+      height: 22px;
+      background: var(--line);
     }
     .hero__title {
       font-family: var(--font-sans);
@@ -1700,7 +1705,11 @@
 
 <!-- ============================== HERO ============================== -->
 <section class="hero" id="hero">
-  <div class="hero__eyebrow">IE Business School · AI Marketing Lab</div>
+  <div class="hero__eyebrow">
+    <img class="hero__eyebrow-logo" src="assets/ie-logo.svg" alt="IE Business School" />
+    <span class="hero__eyebrow-divider" aria-hidden="true"></span>
+    <span>AI Marketing Lab</span>
+  </div>
   <h1 class="hero__title">
     Recovering<br>
     lost <span class="accent">demand</span>.
