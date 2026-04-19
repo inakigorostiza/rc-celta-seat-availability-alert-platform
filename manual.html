@@ -1165,6 +1165,104 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    .workflow-shot {
+      margin: 1.5rem 0 2rem;
+      background: #f3f5f8;
+      border: 1px solid var(--line);
+      padding: 1rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .workflow-shot img {
+      display: block;
+      min-width: 980px;
+      max-width: 100%;
+      height: auto;
+    }
+    .workflow-shot__caption {
+      margin-top: .75rem;
+      color: var(--ink-4);
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      text-align: center;
+    }
+    .node-detail {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.25rem 0 2rem;
+    }
+    .node-row {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 1.1rem;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: 1.1rem 1.25rem;
+      transition: all var(--trans);
+    }
+    .node-row:hover { border-color: var(--ie-blue); }
+    .node-row__rail {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .35rem;
+    }
+    .node-row__num {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--ie-blue);
+      font-weight: 700;
+      letter-spacing: .1em;
+    }
+    .node-row__emoji { font-size: 1.6rem; line-height: 1; }
+    .node-row__body { min-width: 0; }
+    .node-row__title {
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin: 0 0 .1rem;
+    }
+    .node-row__kind {
+      font-family: var(--font-mono);
+      font-size: .66rem;
+      color: var(--ink-4);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: .55rem;
+    }
+    .node-row__text {
+      color: var(--ink-3);
+      font-size: .88rem;
+      line-height: 1.55;
+      margin: 0 0 .7rem;
+    }
+    .node-row__meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: .45rem .9rem;
+      border-top: 1px dashed var(--line);
+      padding-top: .65rem;
+    }
+    .node-row__meta-item {
+      font-size: .78rem;
+      color: var(--ink-3);
+      line-height: 1.5;
+    }
+    .node-row__label {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: .64rem;
+      color: var(--ie-blue);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-right: .4rem;
+    }
+    .node-row__label--warn { color: var(--ie-red); }
 
     /* =========================================================
        GA4 MOCK DASHBOARD — IE blue-themed
@@ -2543,6 +2641,47 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
     </div>
   </div>
 
+  <h3 class="h-sub">Set up n8n · 10 minutes</h3>
+  <p style="color:var(--ink-3); max-width:720px;">n8n is where every previous tool meets. You won't write any glue code — you'll import a workflow, paste a handful of keys, and press <strong>Execute</strong>. The free cloud tier is enough for this case study; self-hosting via Docker is an option if you'd rather keep data on-prem.</p>
+
+  <div class="flow" data-reveal>
+    <div class="flow__step">
+      <span class="flow__num">01</span>
+      <h5>Create your n8n workspace</h5>
+      <p>Go to <a href="https://n8n.cloud" target="_blank">n8n.cloud</a> and sign up for the free tier (14-day trial, then free community plan). Prefer self-hosting? Run <code>npx n8n</code> or <code>docker run -p 5678:5678 n8nio/n8n</code> — same editor, on <code>localhost:5678</code>.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">02</span>
+      <h5>Import the workflow</h5>
+      <p>Download <code>n8n/avisame-workflow.json</code> from the repo. In n8n: <strong>Workflows → Import from File</strong> → pick the JSON. The 12 nodes below appear pre-wired, ready for your credentials.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">03</span>
+      <h5>Fill in the Vars node</h5>
+      <p>Open the <strong>Vars</strong> node (step 02 in the pipeline). Replace every <code>REPLACE_WITH_*</code> placeholder with your own values: ONEBOX client secret + channel, Mailchimp list ID + Basic-Auth token, Mandrill API key, and the <code>event_id</code> of the match to watch.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">04</span>
+      <h5>Link Mailchimp &amp; run</h5>
+      <p>Click the <strong>Mailchimp Members</strong> node → <em>Credential to connect with</em> → paste your Mailchimp API key. Click <strong>Execute workflow</strong>. The arrows light up left-to-right; green ticks appear under each node as items flow through.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--warn" data-reveal>
+    <div class="callout__icon">⚠️</div>
+    <div class="callout__body">
+      <h4>Watch out</h4>
+      <p>The Mailchimp Basic-Auth token in Vars is the Base64 encoding of <code>anystring:YOUR_API_KEY</code>. Compute it once (Claude Code: <em>"give me the base64 for anystring:&lt;key&gt;"</em>) and paste — n8n expressions don't expose a <code>$base64()</code> helper, so doing this at runtime will 401.</p>
+    </div>
+  </div>
+
+  <h3 class="h-sub">What you'll see after Execute</h3>
+  <p style="color:var(--ink-3); max-width:720px;">The canvas looks like this on a successful run. Read it left to right — each grey label between boxes shows how many items passed through at that step. Watching the item counts is the fastest way to spot where a pipeline starts leaking.</p>
+  <figure class="workflow-shot" data-reveal>
+    <img src="assets/n8n-workflow.png" alt="n8n canvas showing the 12-node avisame workflow executing successfully, with item counts on each connection." />
+    <figcaption class="workflow-shot__caption">Successful run · 1 fan matched × 6 gradas with seats → 6 personalised Mandrill sends</figcaption>
+  </figure>
+
   <h3 class="h-sub">The pipeline — 12 nodes</h3>
   <div class="pipeline" data-reveal>
     <div class="pipeline__list">
@@ -2569,6 +2708,174 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
     </div>
   </div>
 
+  <h3 class="h-sub">Anatomy of each node</h3>
+  <p style="color:var(--ink-3); max-width:720px;">The workflow reads left to right: collect fans → collect seat availability → cross-reference the two → send personalised emails to the matches. Each node does exactly one thing, so when a run fails you can see on the canvas which step leaked.</p>
+
+  <div class="node-detail" data-reveal>
+
+    <div class="node-row">
+      <div class="node-row__rail"><span class="node-row__num">01</span><span class="node-row__emoji">🎬</span></div>
+      <div class="node-row__body">
+        <h4 class="node-row__title">Manual Trigger</h4>
+        <div class="node-row__kind">n8n-nodes-base.manualTrigger</div>
+        <p class="node-row__text">The on/off switch. Pressing <strong>Execute workflow</strong> fires one item into the pipeline — useful while building and debugging. In production you swap this for a <em>Schedule Trigger</em> that runs every 10 minutes.</p>
+        <div class="node-row__meta">
+          <div class="node-row__meta-item"><span class="node-row__label">In</span>—</div>
+          <div class="node-row__meta-item"><span class="node-row__label">Out</span>1 item (the start signal)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-row__rail"><span class="node-row__num">02</span><span class="node-row__emoji">📌</span></div>
+      <div class="node-row__body">
+        <h4 class="node-row__title">Vars</h4>
+        <div class="node-row__kind">n8n-nodes-base.set · Edit Fields</div>
+        <p class="node-row__text">The single source of truth for every key, ID, and template used downstream: <code>event_id</code>, <code>channel_id</code>, <code>onebox_client_secret</code>, <code>mailchimp_list_id</code>, <code>mandrill_api_key</code>, <code>mandrill_from_email</code>, <code>mandrill_from_name</code>, and <code>purchase_url_template</code>. Change any value once here — every other node references it via <code>{{ $('Vars').first().json.&lt;field&gt; }}</code>.</p>
+        <div class="node-row__meta">
+          <div class="node-row__meta-item"><span class="node-row__label">In</span>1 item from Trigger</div>
+          <div class="node-row__meta-item"><span class="node-row__label">Out</span>1 item with 8 config fields</div>
+          <div class="node-row__meta-item"><span class="node-row__label node-row__label--warn">Gotcha</span>After import, replace every <code>REPLACE_WITH_*</code> placeholder before running.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-row__rail"><span class="node-row__num">03</span><span class="node-row__emoji">📬</span></div>
+      <div class="node-row__body">
+        <h4 class="node-row__title">Mailchimp Members</h4>
+        <div class="node-row__kind">n8n-nodes-base.mailchimp · List Member · Get All</div>
+        <p class="node-row__text">Pulls every subscriber in your audience that has <code>status = subscribed</code>. Each member arrives as its own n8n item with <code>email_address</code>, <code>merge_fields</code> (FNAME, LNAME, EVENT_ID, EVENT_NAME, GRADA_ID, GRADA_NAME…), and the <code>tags</code> array we'll use to match fans to seat openings.</p>
+        <div class="node-row__meta">
+          <div class="node-row__meta-item"><span class="node-row__label">In</span>1 item</div>
+          <div class="node-row__meta-item"><span class="node-row__label">Out</span>N items (one per subscriber)</div>
+          <div class="node-row__meta-item"><span class="node-row__label node-row__label--warn">Credential</span>Link the <em>Mailchimp API</em> credential after import — it's the only node in the flow that needs one.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-row__rail"><span class="node-row__num">04</span><span class="node-row__emoji">📚</span></div>
+      <div class="node-row__body">
+        <h4 class="node-row__title">Aggregate members</h4>
+        <div class="node-row__kind">n8n-nodes-base.aggregate · All Item Data</div>
+        <p class="node-row__text">Collapses N subscriber items into a single item with a <code>members</code> array. We do this because the downstream <em>Find leads</em> step needs to loop over every subscriber inside a bigger loop over gradas — working with one bundled list is faster than exploding the cartesian product across the canvas.</p>
+        <div class="node-row__meta">
+          <div class="node-row__meta-item"><span class="node-row__label">In</span>N items</div>
+          <div class="node-row__meta-item"><span class="node-row__label">Out</span>1 item · <code>json.members[]</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-row__rail"><span class="node-row__num">05</span><span class="node-row__emoji">🔐</span></div>
+      <div class="node-row__body">
+        <h4 class="node-row__title">ONEBOX Auth</h4>
+        <div class="node-row__kind">n8n-nodes-base.httpRequest · POST /oauth/token</div>
+        <p class="node-row__text">Exchanges the ONEBOX client secret for a 12-hour bearer token using the seller-channel-client OAuth2 flow (<code>grant_type=client_credentials</code>). The resulting <code>access_token</code> is reused by every subsequent ONEBOX call via <code>{{ $('ONEBOX Auth').first().json.access_token }}</code> — no need to re-authenticate per request.</p>
+        <div class="node-row__meta">
+          <div class="node-row__meta-item"><span class="node-row__label">In</span>1 item</div>
+          <div class="node-row__meta-item"><span class="node-row__label">Out</span>1 item · <code>access_token</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-row__rail"><span class="node-row__num">06</span><span class="node-row__emoji">📅</span></div>
+      <div class="node-row__body">
+        <h4 class="node-row__title">ONEBOX Sessions</h4>
+        <div class="node-row__kind">n8n-nodes-base.httpRequest · GET /catalog-api/v1/sessions</div>
+        <p class="node-row__text">Asks ONEBOX for every upcoming match (<em>session</em>) visible to this sales channel. Returns the full catalogue in a single response — typically a few dozen fixtures with nested <code>event</code> metadata we'll filter on next.</p>
+        <div class="node-row__meta">
+          <div class="node-row__meta-item"><span class="node-row__label">In</span>1 item (token)</div>
+          <div class="node-row__meta-item"><span class="node-row__label">Out</span>1 item · <code>data[]</code> with ~21 sessions</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-row__rail"><span class="node-row__num">07</span><span class="node-row__emoji">🔎</span></div>
+      <div class="node-row__body">
+        <h4 class="node-row__title">Filter by event_id</h4>
+        <div class="node-row__kind">n8n-nodes-base.code · Run Once for All Items</div>
+        <p class="node-row__text">Keeps only the sessions whose <code>event.id</code> matches the <code>event_id</code> you set in Vars — the match you're watching right now. Emits one item per matching session with the fields we need downstream (<code>session_id</code>, <code>session_name</code>, <code>event_id</code>, <code>event_name</code>, <code>on_sale</code>, <code>sold_out</code>).</p>
+        <div class="node-row__meta">
+          <div class="node-row__meta-item"><span class="node-row__label">In</span>1 item (full catalogue)</div>
+          <div class="node-row__meta-item"><span class="node-row__label">Out</span>1–N items (matching sessions)</div>
+          <div class="node-row__meta-item"><span class="node-row__label node-row__label--warn">Why</span>Also rescues <code>event_name</code> — ONEBOX's <code>/availability</code> response lacks it, so we pass it through here.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-row__rail"><span class="node-row__num">08</span><span class="node-row__emoji">🎫</span></div>
+      <div class="node-row__body">
+        <h4 class="node-row__title">ONEBOX Availability</h4>
+        <div class="node-row__kind">n8n-nodes-base.httpRequest · GET /sessions/{id}/availability</div>
+        <p class="node-row__text">For each session kept in step 07, fetches its per-sector availability breakdown. The response nests <code>sectors[] → price_types[] → availability</code> (available + total seats). n8n runs this node once per input item automatically — so 3 sessions means 3 API calls, all in parallel.</p>
+        <div class="node-row__meta">
+          <div class="node-row__meta-item"><span class="node-row__label">In</span>N items</div>
+          <div class="node-row__meta-item"><span class="node-row__label">Out</span>N items · nested <code>sectors[]</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-row__rail"><span class="node-row__num">09</span><span class="node-row__emoji">🧮</span></div>
+      <div class="node-row__body">
+        <h4 class="node-row__title">Gradas with availability</h4>
+        <div class="node-row__kind">n8n-nodes-base.code · Run Once for All Items</div>
+        <p class="node-row__text">Flattens each session's nested sector tree and keeps only the sectors with at least one free seat. Sums <code>available</code> across price types so each output item represents one grada-session combo with real inventory: <code>{event_id, session_id, event_name, grada_id, grada_name, available, total}</code>.</p>
+        <div class="node-row__meta">
+          <div class="node-row__meta-item"><span class="node-row__label">In</span>N session responses</div>
+          <div class="node-row__meta-item"><span class="node-row__label">Out</span>M items (gradas with seats)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-row__rail"><span class="node-row__num">10</span><span class="node-row__emoji">🤝</span></div>
+      <div class="node-row__body">
+        <h4 class="node-row__title">Find leads</h4>
+        <div class="node-row__kind">n8n-nodes-base.code · Run Once for All Items</div>
+        <p class="node-row__text">The heart of the pipeline. For every grada with availability, iterates over the aggregated Mailchimp members and keeps those whose tags contain <em>all three</em> of <code>source:avisame</code>, <code>event:&lt;id&gt;</code>, and <code>grada:&lt;id&gt;</code>. Each match becomes one output item with fan details + seat context + a ready-to-click <code>purchase_url</code> (the Vars template with <code>{sessionId}</code> / <code>{eventId}</code> / <code>{gradaId}</code> substituted).</p>
+        <div class="node-row__meta">
+          <div class="node-row__meta-item"><span class="node-row__label">In</span>M gradas · N members</div>
+          <div class="node-row__meta-item"><span class="node-row__label">Out</span>K items (fans to email)</div>
+          <div class="node-row__meta-item"><span class="node-row__label node-row__label--warn">Gotcha</span>If K = 0 your fans' tags don't match the grada IDs — check the landing form's tag writer.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-row__rail"><span class="node-row__num">11</span><span class="node-row__emoji">🛠️</span></div>
+      <div class="node-row__body">
+        <h4 class="node-row__title">Build Mandrill body</h4>
+        <div class="node-row__kind">n8n-nodes-base.code · Run Once for Each Item</div>
+        <p class="node-row__text">Assembles the full Mandrill <code>/messages/send.json</code> payload per fan: subject line (<em>"¡Hay entradas en {grada} para {event}!"</em>), hidden pre-header, the branded HTML email body (sky-blue header, red title, seat recap card, red CTA), recipient block, and tags (<code>avisame</code>, <code>event-{id}</code>, <code>grada-{id}</code>) for Mandrill Analytics. Open + click tracking are enabled.</p>
+        <div class="node-row__meta">
+          <div class="node-row__meta-item"><span class="node-row__label">In</span>K lead items</div>
+          <div class="node-row__meta-item"><span class="node-row__label">Out</span>K items · <code>json.mandrillBody</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node-row">
+      <div class="node-row__rail"><span class="node-row__num">12</span><span class="node-row__emoji">✉️</span></div>
+      <div class="node-row__body">
+        <h4 class="node-row__title">Mandrill Send</h4>
+        <div class="node-row__kind">n8n-nodes-base.httpRequest · POST /messages/send.json</div>
+        <p class="node-row__text">Fires one POST to Mandrill per lead. The Mandrill API key travels inside the JSON body (no bearer header), so no n8n credential is needed — it's read straight from Vars. <code>neverError: true</code> is set on the response so one bad address doesn't abort the batch; inspect the response array for per-recipient <code>status</code> (<em>sent / queued / rejected</em>) and <code>reject_reason</code>.</p>
+        <div class="node-row__meta">
+          <div class="node-row__meta-item"><span class="node-row__label">In</span>K ready-to-send bodies</div>
+          <div class="node-row__meta-item"><span class="node-row__label">Out</span>K Mandrill responses</div>
+          <div class="node-row__meta-item"><span class="node-row__label node-row__label--warn">Gotcha</span>If every response is <code>reject_reason: unsigned</code>, your <code>from_email</code> domain isn't DKIM-verified in Mandrill (see §09 step 02).</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   <h3 class="h-sub">Possible evolutions</h3>
   <div class="grid grid-3" data-reveal>
     <div class="card card--light">
@@ -2585,6 +2892,14 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
       <div class="card__role">Internal alerts</div>
       <h3 class="card__title">Slack channel</h3>
       <p class="card__text">A second output that notifies the internal team in real time when top sections open up.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--good" data-reveal>
+    <div class="callout__icon">✅</div>
+    <div class="callout__body">
+      <h4>What's next</h4>
+      <p>Your workflow runs on demand. Section 11 introduces <strong>GitHub</strong> — where the whole case study (landing page, scripts, n8n JSON) lives so classmates can fork it, and where <strong>GitHub Pages</strong> serves the signup form for free.</p>
     </div>
   </div>
 </section>
@@ -2612,6 +2927,56 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
       <div class="card__role">Automatic deploy</div>
       <h3 class="card__title">GitHub Pages</h3>
       <p class="card__text">Every <code>git push</code> triggers a re-deploy. 30–60 seconds later the changes are live with an auto-renewed HTTPS certificate.</p>
+    </div>
+  </div>
+
+  <h3 class="h-sub">Set up GitHub &amp; Pages · 10 minutes</h3>
+  <p style="color:var(--ink-3); max-width:720px;">Think of GitHub as Google Drive for code — with two superpowers on top: it remembers every change forever, and it can publish any HTML file in your folder as a real HTTPS website, free. You only need to click around a website; Claude Code handles the technical parts of uploading.</p>
+
+  <div class="flow" data-reveal>
+    <div class="flow__step">
+      <span class="flow__num">01</span>
+      <h5>Create a free GitHub account</h5>
+      <p>Go to <a href="https://github.com/signup" target="_blank">github.com/signup</a>. Pick a username you're comfortable being public — it shows up in your repo URL. The free plan gives you unlimited public repositories forever.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">02</span>
+      <h5>Create an empty repository</h5>
+      <p>Click the <strong>+</strong> in the top-right → <strong>New repository</strong>. Name it (e.g. <code>avisame-celta</code>), keep it <strong>Public</strong>, and leave every other box unchecked. Hit <strong>Create</strong>. You'll land on a page with instructions — ignore them, Claude Code will handle this.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">03</span>
+      <h5>Let Claude Code push your files</h5>
+      <p>Copy the repo URL from your browser's address bar. Go back to Claude Code in VS Code and run the prompt below — it'll commit your local project and push it to GitHub in one step.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">04</span>
+      <h5>Turn on GitHub Pages</h5>
+      <p>On your repository page: <strong>Settings → Pages</strong>. Under <em>Source</em> pick <strong>Deploy from a branch</strong>, branch <strong>main</strong>, folder <strong>/ (root)</strong> → <strong>Save</strong>. After ~60 seconds the same page shows your live URL (<code>&lt;user&gt;.github.io/&lt;repo&gt;</code>).</p>
+    </div>
+  </div>
+
+  <div class="callout callout--warn" data-reveal>
+    <div class="callout__icon">⚠️</div>
+    <div class="callout__body">
+      <h4>Watch out — never commit <code>.env</code></h4>
+      <p>Your <strong>.env</strong> file has real ONEBOX / Mailchimp / Mandrill keys. Anyone who copies it can send emails on your behalf. The project's <code>.gitignore</code> already excludes it — but before the first push, tell Claude Code: <em>"make sure my .env file is in .gitignore and not staged for the commit"</em>. Two seconds of paranoia prevents a leaked-key incident.</p>
+    </div>
+  </div>
+
+  <h3 class="h-sub">Publish the project · 1 prompt</h3>
+  <p style="color:var(--ink-3); max-width:720px;">Once you've created the empty repo on github.com, this one prompt packages up your local folder, confirms no secrets are leaking, and pushes everything live.</p>
+
+  <div class="prompt" data-reveal>
+    <div class="prompt__badge">01</div>
+    <div class="prompt__body">
+      <div class="prompt__head">
+        <span class="prompt__title">Publish the project to GitHub and turn on Pages</span>
+        <span class="prompt__artefact">→ live site</span>
+      </div>
+      <div class="prompt__quote">Publish this project to GitHub. The empty repository is at <strong>https://github.com/&lt;your-username&gt;/avisame-celta</strong>. Before anything gets uploaded: check my <strong>.gitignore</strong> excludes <code>.env</code>, <code>node_modules</code>, and anything else with secrets, and grep every file for things that look like API keys or passwords — if you find any, stop and tell me. Then initialise git if needed, commit everything with the message <em>"Initial commit — RC Celta avisame platform"</em>, set <code>main</code> as the default branch, add the remote, and push. When the push is done, make <strong>landing.html</strong> also accessible as <strong>index.html</strong> (copy or symlink) so GitHub Pages serves it at the root URL. Finally, print the URL I'll see once Pages finishes deploying.</div>
+      <p class="prompt__result"><strong>What Claude will do:</strong> check <code>.gitignore</code>, scan for leaked secrets, run <code>git init</code> / <code>add</code> / <code>commit</code> / <code>remote add origin</code> / <code>push -u origin main</code>, duplicate <code>landing.html → index.html</code>, and return your future Pages URL.</p>
+      <p class="prompt__result"><strong>How to verify:</strong> refresh your repository page on github.com — you see your files. Wait 60 seconds, then open the URL Claude printed. You'll see the branded "¡Avísame!" form live over HTTPS.</p>
     </div>
   </div>
 
@@ -2644,6 +3009,14 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
       <p>Before the first <code>git push</code> to a public repo, run a <strong>security grep</strong>: scan every staged file for API keys, passwords, tokens. It's a two-second habit that prevents leaks.</p>
     </div>
   </div>
+
+  <div class="callout callout--good" data-reveal>
+    <div class="callout__icon">✅</div>
+    <div class="callout__body">
+      <h4>What's next</h4>
+      <p>Your landing is live on the internet. Section 12 adds <strong>Google Analytics 4</strong> — the dashboard that tells you how many people saw the form, how many signed up, and (eventually) how many bought a ticket after an <em>¡Avísame!</em> email.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ============================== §11 GA4 ============================== -->
@@ -2654,6 +3027,56 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
       <span class="sec-eyebrow">Google Analytics 4</span>
       <h2 class="sec-title">Measuring what matters.</h2>
       <p class="sec-lead">The <code>measurement_id</code> is embedded in the landing. GA4 captures traffic and events automatically; we add a custom <code>generate_lead</code> event when the form submits successfully.</p>
+    </div>
+  </div>
+
+  <h3 class="h-sub">Set up GA4 · 15 minutes</h3>
+  <p style="color:var(--ink-3); max-width:720px;">GA4 is Google's analytics product — free, and the tool most marketing teams already look at daily. The setup has four clicks-only steps inside Google's admin, then one prompt to wire it into your landing page.</p>
+
+  <div class="flow" data-reveal>
+    <div class="flow__step">
+      <span class="flow__num">01</span>
+      <h5>Create a GA4 property</h5>
+      <p>Go to <a href="https://analytics.google.com" target="_blank">analytics.google.com</a> → sign in → <strong>Admin</strong> (gear icon, bottom-left) → <strong>Create → Property</strong>. Name it <em>"RC Celta Avisame"</em>, pick your timezone and currency, click through.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">02</span>
+      <h5>Add a Web data stream</h5>
+      <p>When prompted, pick <strong>Web</strong> → enter your GitHub Pages URL from §11 (<code>&lt;user&gt;.github.io/&lt;repo&gt;</code>) → <strong>Create stream</strong>. At the top of the stream's page you'll see a <strong>Measurement ID</strong> starting with <code>G-</code> — copy it.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">03</span>
+      <h5>Register custom dimensions</h5>
+      <p>Admin → <strong>Custom definitions → Create custom dimensions</strong>. Add one dimension per field you want to slice reports by: <code>event_id</code>, <code>event_name</code>, <code>grada_id</code>, <code>grada_name</code>, <code>is_duplicate</code>. Scope: <strong>Event</strong>. Without this step the data is captured but not visible in reports.</p>
+    </div>
+    <div class="flow__step">
+      <span class="flow__num">04</span>
+      <h5>Mark <code>generate_lead</code> as Key Event</h5>
+      <p>Admin → <strong>Events</strong> → once <code>generate_lead</code> has fired at least once it appears in the list. Toggle <strong>Mark as Key event</strong> (previously called <em>conversion</em>). That's what turns a signup into a countable business outcome in the reports.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--tip" data-reveal>
+    <div class="callout__icon">💡</div>
+    <div class="callout__body">
+      <h4>About that <code>G-</code> Measurement ID</h4>
+      <p>This is the only GA4 secret you'll paste into code — and it's <strong>not</strong> actually a secret. It's published in every site's HTML source. Anyone can see yours by viewing source on the live page; that's by design. So unlike ONEBOX / Mailchimp / Mandrill keys, this one doesn't need to live in <code>.env</code>.</p>
+    </div>
+  </div>
+
+  <h3 class="h-sub">Wire GA4 into the landing · 1 prompt</h3>
+  <p style="color:var(--ink-3); max-width:720px;">One prompt adds the GA4 loader to your landing and fires the <code>generate_lead</code> event with all the custom parameters the dashboard needs.</p>
+
+  <div class="prompt" data-reveal>
+    <div class="prompt__badge">01</div>
+    <div class="prompt__body">
+      <div class="prompt__head">
+        <span class="prompt__title">Add GA4 tracking to the landing page</span>
+        <span class="prompt__artefact">→ landing.html</span>
+      </div>
+      <div class="prompt__quote">Add Google Analytics 4 tracking to my <strong>landing.html</strong>. My Measurement ID is <strong>G-XXXXXXXXXX</strong> (replace this with yours). Inject the standard <code>gtag.js</code> loader in the <code>&lt;head&gt;</code>. Then, when the form is submitted successfully (after the fan's email is accepted by Mailchimp), fire a <code>generate_lead</code> event with these parameters: <code>method</code> (always <em>"avisame_form"</em>), <code>event_id</code>, <code>event_name</code>, <code>grada_id</code>, <code>grada_name</code>, <code>is_duplicate</code> (true if the backend returns a duplicate, false otherwise), and <code>locale</code> (from the browser's <code>navigator.language</code>). Don't fire it on validation errors — only on confirmed signup. Keep the existing <code>page_view</code> automatic.</div>
+      <p class="prompt__result"><strong>What Claude will do:</strong> add the <code>gtag.js</code> snippet to the <code>&lt;head&gt;</code> of <code>landing.html</code>, locate the success-branch of the form submit handler, and insert a <code>gtag('event', 'generate_lead', {…})</code> call with the seven parameters.</p>
+      <p class="prompt__result"><strong>How to verify:</strong> open GA4 → <strong>Reports → Realtime</strong>. Submit your own form in another tab with test data. Within ~30 seconds a <code>page_view</code> and a <code>generate_lead</code> event appear. Click <code>generate_lead</code> to see the custom parameters attached.</p>
     </div>
   </div>
 
@@ -2709,6 +3132,14 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
     <div class="callout__body">
       <h4>Key takeaway</h4>
       <p>Without registering the parameters as <strong>custom dimensions</strong> in <em>Admin → Custom definitions</em>, GA4 still captures them but won't expose them as breakdowns in the reports. It's a required step.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--good" data-reveal>
+    <div class="callout__icon">✅</div>
+    <div class="callout__body">
+      <h4>What's next</h4>
+      <p>The technical build is complete: data flows ONEBOX → form → Mailchimp → n8n → Mandrill → GA4. Section 13 covers the non-negotiable layer that turns a demo into something you can legally operate in Spain — <strong>GDPR, LOPDGDD, and LSSI-CE</strong>.</p>
     </div>
   </div>
 </section>
