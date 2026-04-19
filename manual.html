@@ -2646,7 +2646,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
     <div class="flow__step">
       <span class="flow__num">02</span>
       <h5>Import the reference workflow</h5>
-      <p>Download the reference file from the case-study repo: <a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform/blob/main/n8n/avisame-workflow.json" target="_blank">n8n/avisame-workflow.json</a> (open it on GitHub, click <strong>Raw</strong>, then save the page as a file). Back in n8n: <strong>Workflows → Import from File</strong> → pick the JSON. The 12 nodes below appear pre-wired, ready for your credentials.</p>
+      <p>Download the reference file from the case-study repo: <a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform/blob/main/n8n/avisame-workflow.json" target="_blank">n8n/avisame-workflow.json</a> (open it on GitHub, click <strong>Raw</strong>, then save the page as a file). Back in n8n: <strong>Workflows → Import from File</strong> → pick the JSON. The 11 nodes below appear pre-wired, ready for your credentials.</p>
     </div>
     <div class="flow__step">
       <span class="flow__num">03</span>
@@ -2655,8 +2655,8 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
     </div>
     <div class="flow__step">
       <span class="flow__num">04</span>
-      <h5>Link Mailchimp &amp; run</h5>
-      <p>Click the <strong>Mailchimp Members</strong> node → <em>Credential to connect with</em> → paste your Mailchimp API key. Click <strong>Execute workflow</strong>. The arrows light up left-to-right; green ticks appear under each node as items flow through.</p>
+      <h5>Link credentials &amp; run</h5>
+      <p>Open the <strong>Mailchimp Members</strong> node → <em>Credential to connect with</em> → paste your Mailchimp API key. Repeat on the <strong>Mandrill Send</strong> node with your Mandrill key. Click <strong>Execute workflow</strong>. The arrows light up left-to-right; green ticks appear under each node as items flow through.</p>
     </div>
   </div>
 
@@ -2671,11 +2671,11 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
   <h3 class="h-sub">What you'll see after Execute</h3>
   <p style="color:var(--ink-3); max-width:720px;">The canvas looks like this on a successful run. Read it left to right — each grey label between boxes shows how many items passed through at that step. Watching the item counts is the fastest way to spot where a pipeline starts leaking.</p>
   <figure class="workflow-shot" data-reveal>
-    <img src="assets/n8n-workflow.png" alt="n8n canvas showing the 12-node avisame workflow executing successfully, with item counts on each connection." />
+    <img src="assets/n8n-workflow.png" alt="n8n canvas showing the 11-node avisame workflow executing successfully, with item counts on each connection." />
     <figcaption class="workflow-shot__caption">Successful run · 1 fan matched × 6 gradas with seats → 6 personalised Mandrill sends</figcaption>
   </figure>
 
-  <h3 class="h-sub">The pipeline — 12 nodes</h3>
+  <h3 class="h-sub">The pipeline — 11 nodes</h3>
   <div class="pipeline" data-reveal>
     <div class="pipeline__list">
       <div class="pipe-node"><span class="pipe-node__num">01</span><span class="pipe-node__emoji">🎬</span><div class="pipe-node__body"><div class="pipe-node__title">Manual Trigger</div><div class="pipe-node__desc">Entry point</div></div></div>
@@ -2688,8 +2688,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
       <div class="pipe-node"><span class="pipe-node__num">08</span><span class="pipe-node__emoji">🎫</span><div class="pipe-node__body"><div class="pipe-node__title">ONEBOX Availability</div><div class="pipe-node__desc">Query availability</div></div></div>
       <div class="pipe-node"><span class="pipe-node__num">09</span><span class="pipe-node__emoji">🧮</span><div class="pipe-node__body"><div class="pipe-node__title">Sections w/ seats</div><div class="pipe-node__desc">Flatten</div></div></div>
       <div class="pipe-node"><span class="pipe-node__num">10</span><span class="pipe-node__emoji">🤝</span><div class="pipe-node__body"><div class="pipe-node__title">Find leads</div><div class="pipe-node__desc">Cross-reference × tags</div></div></div>
-      <div class="pipe-node"><span class="pipe-node__num">11</span><span class="pipe-node__emoji">🛠️</span><div class="pipe-node__body"><div class="pipe-node__title">Build Mandrill</div><div class="pipe-node__desc">Assemble email JSON</div></div></div>
-      <div class="pipe-node"><span class="pipe-node__num">12</span><span class="pipe-node__emoji">✉️</span><div class="pipe-node__body"><div class="pipe-node__title">Mandrill Send</div><div class="pipe-node__desc">Send the alert</div></div></div>
+      <div class="pipe-node"><span class="pipe-node__num">11</span><span class="pipe-node__emoji">✉️</span><div class="pipe-node__body"><div class="pipe-node__title">Mandrill Send</div><div class="pipe-node__desc">Send the alert</div></div></div>
     </div>
   </div>
 
@@ -2697,7 +2696,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
     <div class="callout__icon">✅</div>
     <div class="callout__body">
       <h4>Best practice — one source of truth</h4>
-      <p>Every ID and key in this workflow lives in the <strong>Vars</strong> node (step 02 of the pipeline). Need to watch a different match, swap Mailchimp audience, or rotate an API key? Edit Vars and the 11 downstream nodes pick it up automatically — no other node needs touching.</p>
+      <p>Every ID and key in this workflow lives in the <strong>Vars</strong> node (step 02 of the pipeline). Need to watch a different match, swap Mailchimp audience, or rotate an API key? Edit Vars and the 9 downstream nodes pick it up automatically — no other node needs touching.</p>
     </div>
   </div>
 
@@ -2742,7 +2741,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
         <div class="node-row__meta">
           <div class="node-row__meta-item"><span class="node-row__label">In</span>1 item</div>
           <div class="node-row__meta-item"><span class="node-row__label">Out</span>N items (one per subscriber)</div>
-          <div class="node-row__meta-item"><span class="node-row__label node-row__label--warn">Credential</span>Link the <em>Mailchimp API</em> credential after import — it's the only node in the flow that needs one.</div>
+          <div class="node-row__meta-item"><span class="node-row__label node-row__label--warn">Credential</span>Link the <em>Mailchimp API</em> credential after import — together with the Mandrill credential on step 11, these are the only two the workflow needs.</div>
         </div>
       </div>
     </div>
@@ -2841,27 +2840,15 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
     </div>
 
     <div class="node-row">
-      <div class="node-row__rail"><span class="node-row__num">11</span><span class="node-row__emoji">🛠️</span></div>
-      <div class="node-row__body">
-        <h4 class="node-row__title">Build Mandrill body</h4>
-        <div class="node-row__kind">n8n-nodes-base.code · Run Once for Each Item</div>
-        <p class="node-row__text">Assembles the full Mandrill <code>/messages/send.json</code> payload per fan: subject line (<em>"¡Hay entradas en {grada} para {event}!"</em>), hidden pre-header, the branded HTML email body (sky-blue header, red title, seat recap card, red CTA), recipient block, and tags (<code>avisame</code>, <code>event-{id}</code>, <code>grada-{id}</code>) for Mandrill Analytics. Open + click tracking are enabled.</p>
-        <div class="node-row__meta">
-          <div class="node-row__meta-item"><span class="node-row__label">In</span>K lead items</div>
-          <div class="node-row__meta-item"><span class="node-row__label">Out</span>K items · <code>json.mandrillBody</code></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="node-row">
-      <div class="node-row__rail"><span class="node-row__num">12</span><span class="node-row__emoji">✉️</span></div>
+      <div class="node-row__rail"><span class="node-row__num">11</span><span class="node-row__emoji">✉️</span></div>
       <div class="node-row__body">
         <h4 class="node-row__title">Mandrill Send</h4>
-        <div class="node-row__kind">n8n-nodes-base.httpRequest · POST /messages/send.json</div>
-        <p class="node-row__text">Fires one POST to Mandrill per lead. The Mandrill API key travels inside the JSON body (no bearer header), so no n8n credential is needed — it's read straight from Vars. <code>neverError: true</code> is set on the response so one bad address doesn't abort the batch; inspect the response array for per-recipient <code>status</code> (<em>sent / queued / rejected</em>) and <code>reject_reason</code>.</p>
+        <div class="node-row__kind">n8n-nodes-base.mandrill · Message · sendHtml</div>
+        <p class="node-row__text">Sends one personalised email per lead using n8n's built-in Mandrill node. Everything the email needs is configured directly on the node — subject line (<em>"¡Hay entradas en {grada} para {event}!"</em>), the branded HTML body (sky-blue header, red title, seat recap card, red CTA pointing at <code>purchase_url</code>), <code>from_email</code> / <code>from_name</code>, the recipient's email, and tags (<code>avisame</code>, <code>event-{id}</code>, <code>grada-{id}</code>) so Mandrill Analytics can filter by match and section. Open + click tracking toggles are on.</p>
         <div class="node-row__meta">
-          <div class="node-row__meta-item"><span class="node-row__label">In</span>K ready-to-send bodies</div>
+          <div class="node-row__meta-item"><span class="node-row__label">In</span>K lead items</div>
           <div class="node-row__meta-item"><span class="node-row__label">Out</span>K Mandrill responses</div>
+          <div class="node-row__meta-item"><span class="node-row__label node-row__label--warn">Credential</span>Link the <em>Mandrill API</em> credential after import — along with Mailchimp, it's one of the two credentials this workflow needs.</div>
           <div class="node-row__meta-item"><span class="node-row__label node-row__label--warn">Gotcha</span>If every response is <code>reject_reason: unsigned</code>, your <code>from_email</code> domain isn't DKIM-verified in Mandrill (see §09 step 02).</div>
         </div>
       </div>
