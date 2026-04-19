@@ -7,7 +7,7 @@
 
 # Generated artifacts — produced by the generate-*.js scripts from live APIs
 # and your .env. Regenerate locally with `node generate-landing.js`.
-landing.html
+# landing.html is tracked and published via GitHub Pages.
 sessions.html
 examples.html
 
