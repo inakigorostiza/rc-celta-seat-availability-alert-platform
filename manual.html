@@ -2367,21 +2367,43 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
   </div>
 
   <h3 class="h-sub">Try it yourself — build the «¡Avísame!» page</h3>
-  <p style="color:var(--ink-3); max-width:720px;">Once you've completed the four ONEBOX prompts in §06, you already have the data layer. One more prompt turns it into the fan-facing signup form.</p>
+  <p style="color:var(--ink-3); max-width:720px;">With your ONEBOX credentials from §06 already in the <code>.env</code> file, two prompts take you from an empty folder to a live, branded signup form with the real stadium sections in the dropdown. We split it on purpose — first the look, then the data — so each step is easy to verify.</p>
 
   <div class="prompt" data-reveal>
     <div class="prompt__badge">01</div>
     <div class="prompt__body">
       <div class="prompt__head">
-        <span class="prompt__title">Build the signup landing page</span>
+        <span class="prompt__title">Build the UI — branded page + form</span>
         <span class="prompt__artefact">→ landing.html</span>
       </div>
-      <div class="prompt__quote">Build a landing page for one specific RC Celta match. It should look like the «¡Avísame!» page: sky-blue hero with the Celta crest, big white title, and a simple form asking for <strong>name</strong>, <strong>surname</strong>, <strong>email</strong>, and a dropdown to pick which <strong>grada</strong> (section of the stadium) the fan wants. The grada options should be the real ones from that match's seat map in ONEBOX. When someone submits the form, log the data to the browser console for now. Save it as <strong>landing.html</strong>.</div>
-      <p class="prompt__result"><strong>What you'll see:</strong> A production-quality, club-branded landing page that actually works — backed by real ONEBOX data. Submit the form, open the browser's DevTools → Console, and you'll see the fan's choice printed there, ready to forward to Mailchimp. That's the hand-off to §08.</p>
+      <div class="prompt__quote">Build a landing page for the RC Celta «¡Avísame!» alert signup. Sky-blue hero, the Celta crest (SVG already at <code>assets/celta-crest.svg</code>), a big white «¡Avísame!» title, one short intro line in Spanish, and a form asking for: <strong>name</strong>, <strong>surname</strong>, <strong>email</strong>, a <strong>grada</strong> (stadium section) dropdown with three placeholder options for now (<em>"Pista Alta"</em>, <em>"Río Alto"</em>, <em>"Marcador"</em>), and a consent checkbox for the privacy policy. The submit button should be red with white text. When the form is submitted, just log the data to the browser console — we'll wire the backend later. Save it as <strong>landing.html</strong>.</div>
+      <p class="prompt__result"><strong>What Claude will do:</strong> create <code>landing.html</code> with embedded CSS and a tiny submit handler. No data layer yet — the dropdown is hardcoded.</p>
+      <p class="prompt__result"><strong>How to verify:</strong> open <code>landing.html</code> in your browser. Form looks on-brand, the three placeholder gradas appear in the dropdown, submitting logs an object like <code>{name, email, grada}</code> to the DevTools console.</p>
+    </div>
+  </div>
+
+  <div class="prompt" data-reveal>
+    <div class="prompt__badge">02</div>
+    <div class="prompt__body">
+      <div class="prompt__head">
+        <span class="prompt__title">Wire the grada dropdown to ONEBOX</span>
+        <span class="prompt__artefact">→ generate-landing.js</span>
+      </div>
+      <div class="prompt__quote">Now replace the three placeholder gradas with the real ones from ONEBOX. Pick one match to watch — use session ID <strong>240895</strong> (or whichever session from the cards page in §06 I want to watch). Write a short Node script called <strong>generate-landing.js</strong> that reads the ONEBOX credentials from my <code>.env</code>, gets an access token, calls <code>/catalog-api/v1/sessions/240895/availability</code>, collects every <code>sector</code> from the response (id + name), and <strong>rewrites landing.html</strong> so the grada dropdown's <code>&lt;option&gt;</code> list reflects those real sectors. Each option's <code>value</code> should be the sector ID, the visible text the sector name. Leave the rest of <code>landing.html</code> untouched. At the end, print the number of sectors baked in so I know it worked.</div>
+      <p class="prompt__result"><strong>What Claude will do:</strong> create <code>generate-landing.js</code>, run it once so the file actually ships into <code>landing.html</code>, and print something like <em>"✔ baked 8 sectors into landing.html"</em>.</p>
+      <p class="prompt__result"><strong>How to verify:</strong> refresh <code>landing.html</code> in the browser — the dropdown now shows the real RC Celta stadium sections (Pista A1, Río Alto, Marcador Norte…). Right-click the dropdown → Inspect: each <code>&lt;option value="..."&gt;</code> carries a real sector ID.</p>
       <a class="prompt__preview" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/landing.html" target="_blank">
         See the live result
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
       </a>
+    </div>
+  </div>
+
+  <div class="callout callout--warn" data-reveal>
+    <div class="callout__icon">⚠️</div>
+    <div class="callout__body">
+      <h4>Watch out — this is a build-time fetch, not runtime</h4>
+      <p>The page served to fans is plain static HTML with <strong>no</strong> ONEBOX call at page-load. <code>generate-landing.js</code> runs once in your terminal and bakes the sectors into the file. That's why your ONEBOX secret never leaves your laptop: it only lives in <code>.env</code> during the build. Rerun <code>node generate-landing.js</code> any time the catalog changes, then commit the regenerated <code>landing.html</code>.</p>
     </div>
   </div>
 
