@@ -440,19 +440,47 @@ async function main() {
     .zone-hint .chip { display: inline-flex; align-items: center; gap: .3rem; background: var(--celta-blue-soft); padding: .15rem .5rem; border-radius: 999px; }
     .zone-hint .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
-    .success {
-      display: none;
-      background: #eaf7f0; border: 1px solid #b9e3cd;
-      color: #0b5c3a; padding: 1rem 1.25rem; border-radius: 10px;
-      margin-top: 1rem; font-size: .9rem;
-    }
+    .success { display: none; }
     .success.show { display: block; }
-    .success strong { color: var(--success); }
-    .success pre {
-      background: #fff; border: 1px solid #d6ece0; padding: .6rem .75rem;
-      border-radius: 6px; overflow: auto; font-size: .75rem; margin: .5rem 0 0;
-      font-family: "SF Mono", Consolas, "Liberation Mono", monospace;
+    .success-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #e6f5ec; color: var(--success);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
     }
+    .success-icon svg { width: 28px; height: 28px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .success h2 {
+      margin: 0 0 .5rem; color: var(--text-navy); font-size: 1.5rem;
+      font-weight: 800; text-align: center;
+    }
+    .success .intro {
+      margin: 0 auto 1.25rem; max-width: 420px;
+      font-size: .95rem; color: #10213f; text-align: center; line-height: 1.55;
+    }
+    .success .intro strong { color: var(--text-navy); }
+    .success .recap {
+      background: var(--celta-blue-soft);
+      border-radius: 10px; padding: 1rem 1.15rem;
+      display: grid; gap: .55rem;
+      margin-bottom: 1.25rem;
+    }
+    .success .recap-row { display: flex; gap: .75rem; align-items: baseline; font-size: .88rem; }
+    .success .recap-label { flex: 0 0 82px; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: #5d6c80; font-weight: 700; padding-top: .15rem; }
+    .success .recap-value { color: var(--text-navy); font-weight: 600; word-break: break-word; }
+    .success .next-steps {
+      font-size: .85rem; color: var(--muted); margin: 0 0 1.25rem;
+      text-align: center; line-height: 1.55;
+    }
+    .success .next-steps strong { color: var(--text-navy); }
+    .success-actions { display: flex; justify-content: center; }
+    .success-actions button {
+      background: transparent; color: var(--celta-blue-darker);
+      border: 1px solid var(--celta-blue-line);
+      padding: .6rem 1.1rem; border-radius: 8px;
+      font: inherit; font-size: .85rem; font-weight: 600;
+      cursor: pointer;
+    }
+    .success-actions button:hover { background: var(--celta-blue-soft); }
 
     footer.site {
       background: var(--celta-blue);
@@ -531,9 +559,24 @@ async function main() {
           <button type="submit" id="submit-btn">Quiero recibir el aviso</button>
         </form>
 
-        <div id="success" class="success">
-          <strong>¡Listo!</strong> Te avisaremos en cuanto detectemos disponibilidad.
-          <pre id="success-detail"></pre>
+        <div id="success" class="success" role="status" aria-live="polite">
+          <div class="success-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2>¡Listo, <span id="success-name">aficionad@</span>!</h2>
+          <p class="intro">Hemos registrado tu aviso. Te enviaremos un email a <strong id="success-email">tu correo</strong> en cuanto haya entradas disponibles para la grada que has elegido.</p>
+
+          <div class="recap">
+            <div class="recap-row"><span class="recap-label">Partido</span><span class="recap-value" id="success-event">—</span></div>
+            <div class="recap-row"><span class="recap-label">Grada</span><span class="recap-value" id="success-grada">—</span></div>
+            <div class="recap-row"><span class="recap-label">Aviso a</span><span class="recap-value" id="success-email-2">—</span></div>
+          </div>
+
+          <p class="next-steps">Puedes cerrar esta página: no necesitas hacer nada más. <strong>Revisa tu carpeta de spam</strong> las primeras veces para asegurarte de no perderte el aviso.</p>
+
+          <div class="success-actions">
+            <button type="button" id="success-reset">Registrar otro aviso</button>
+          </div>
         </div>
 
         <p class="disclaimer">Este formulario no garantiza disponibilidad ni reserva de entrada.</p>
@@ -600,8 +643,24 @@ async function main() {
 
     const form = document.getElementById("notify-form");
     const success = document.getElementById("success");
-    const successDetail = document.getElementById("success-detail");
     const submitBtn = document.getElementById("submit-btn");
+    const successName   = document.getElementById("success-name");
+    const successEmail  = document.getElementById("success-email");
+    const successEmail2 = document.getElementById("success-email-2");
+    const successEvent  = document.getElementById("success-event");
+    const successGrada  = document.getElementById("success-grada");
+    const successReset  = document.getElementById("success-reset");
+
+    successReset.addEventListener("click", () => {
+      success.classList.remove("show");
+      form.style.display = "";
+      form.reset();
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Quiero recibir el aviso";
+      gradaSel.value = "";
+      document.getElementById("email").focus();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
 
     function readUtm() {
       const q = new URLSearchParams(window.location.search);
@@ -694,16 +753,16 @@ async function main() {
         return;
       }
 
-      const detail = {
-        ...payload,
-        stored: result.stored,
-        duplicate: result.duplicate,
-        mailchimp: result.mailchimp,
-        submittedAt: new Date().toISOString(),
-      };
-      successDetail.textContent = JSON.stringify(detail, null, 2);
+      // Populate the confirmation panel with the user's own submission
+      successName.textContent   = payload.first_name || "aficionad@";
+      successEmail.textContent  = payload.email;
+      successEmail2.textContent = payload.email;
+      successEvent.textContent  = event.eventName || "—";
+      successGrada.textContent  = grada ? grada.name : "—";
+
       form.style.display = "none";
       success.classList.add("show");
+      success.scrollIntoView({ behavior: "smooth", block: "start" });
 
       // GA4: fire recommended 'generate_lead' event on successful signup.
       if (typeof gtag === "function") {
