@@ -4,350 +4,516 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RC Celta · Seat Availability Alert Platform — IE Business School</title>
-  <meta name="description" content="Case study for the AI Marketing Lab at IE Business School: how to recover lost ticketing demand using ONEBOX, Mailchimp, Mandrill, n8n and GA4." />
+  <meta name="description" content="Case study for the AI Marketing Lab at IE Business School: recovering lost ticketing demand with ONEBOX, Mailchimp, Mandrill, n8n and GA4." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <style>
     /* =========================================================
-       DESIGN SYSTEM
+       DESIGN SYSTEM — IE Business School inspired
     ========================================================= */
     :root {
-      --bg-0:        #0A1628;
-      --bg-1:        #0F1E35;
-      --bg-2:        #162942;
-      --bg-3:        #1F3451;
-      --line:        #24395A;
-      --text-0:      #F7FAFC;
-      --text-1:      #C9D6E8;
-      --text-2:      #95A8C2;
-      --text-3:      #6B7F9E;
-      --celta-blue:  #8BB8DC;
-      --celta-blue-2:#7AB1D9;
-      --celta-blue-3:#4A89C3;
-      --celta-red:   #E30613;
-      --celta-red-2: #FF1A2E;
-      --success:     #3FB950;
-      --warning:     #D29922;
-      --error:       #F85149;
-      --grad-hero:   linear-gradient(135deg, #7AB1D9 0%, #4A89C3 50%, #2A5A8E 100%);
-      --grad-accent: linear-gradient(135deg, #E30613 0%, #FF1A2E 100%);
-      --grad-celta:  linear-gradient(90deg, #7AB1D9 0%, #4A89C3 40%, #E30613 100%);
-      --shadow-soft: 0 4px 24px rgba(0,0,0,.3);
-      --shadow-lift: 0 12px 40px rgba(122,177,217,.15);
+      /* Surfaces */
+      --bg:          #FFFFFF;
+      --bg-soft:     #F7F7F7;
+      --bg-elev:     #FAFAFA;
+      --surface-hi:  #0A0A0A;    /* inverse surface for contrast blocks */
+
+      /* Text */
+      --ink:         #0A0A0A;
+      --ink-2:       #1F1F1F;
+      --ink-3:       #444444;
+      --ink-4:       #737373;
+      --ink-5:       #A3A3A3;
+
+      /* Accents */
+      --red:         #E4002B;    /* IE Red — the signature */
+      --red-dark:    #B8001F;
+      --red-soft:    #FBE6EB;
+      --celta-blue:  #7AB1D9;
+      --celta-navy:  #0A1A3A;
+
+      /* Lines & utility */
+      --line:        #E5E5E5;
+      --line-hi:     #D4D4D4;
+      --success:     #0A8754;
+      --warning:     #B45309;
+      --error:       #DC2626;
+
       --radius:      14px;
-      --radius-sm:   8px;
-      --trans:       .25s cubic-bezier(.4, 0, .2, 1);
+      --radius-sm:   6px;
+      --trans:       .2s cubic-bezier(.4, 0, .2, 1);
+      --ease-out:    cubic-bezier(.16, 1, .3, 1);
+
+      --font-sans:   "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-serif:  "Instrument Serif", Georgia, "Times New Roman", serif;
+      --font-mono:   "SF Mono", Menlo, Monaco, Consolas, monospace;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: var(--bg-0);
-      color: var(--text-1);
-      line-height: 1.6;
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--ink-2);
+      line-height: 1.55;
+      font-size: 16px;
+      font-weight: 400;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
+      font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
     }
-    a { color: var(--celta-blue); text-decoration: none; transition: color var(--trans); }
-    a:hover { color: var(--celta-blue-2); }
-    code { font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: .88em; color: var(--celta-blue); background: var(--bg-2); padding: .1em .4em; border-radius: 4px; }
-    pre { font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; overflow-x: auto; }
+    ::selection { background: var(--red); color: #fff; }
+    a { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color var(--trans); }
+    a:hover { color: var(--red); }
+    code { font-family: var(--font-mono); font-size: .88em; background: var(--bg-soft); padding: .1em .35em; border-radius: 4px; color: var(--ink); font-weight: 500; }
+    pre { font-family: var(--font-mono); overflow-x: auto; }
 
     /* =========================================================
-       LAYOUT: SIDEBAR NAV + MAIN
+       LAYOUT
     ========================================================= */
     .layout {
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 300px 1fr;
       min-height: 100vh;
     }
     .nav {
       position: sticky; top: 0;
       height: 100vh;
-      background: var(--bg-1);
+      background: var(--bg);
       border-right: 1px solid var(--line);
-      padding: 2rem 1.25rem;
+      padding: 2.5rem 1.75rem;
       overflow-y: auto;
       z-index: 50;
     }
     .nav__brand {
-      display: flex; align-items: center; gap: .75rem;
-      padding-bottom: 1.25rem;
-      margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: .9rem;
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
       border-bottom: 1px solid var(--line);
     }
     .nav__crest {
-      width: 40px; height: 40px; flex-shrink: 0;
+      width: 36px; height: 36px; flex-shrink: 0;
     }
-    .nav__brand-text { font-size: .8rem; line-height: 1.3; }
-    .nav__brand-title { font-weight: 800; color: var(--text-0); display: block; }
-    .nav__brand-sub { color: var(--text-3); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
+    .nav__brand-text {
+      display: block;
+      font-family: var(--font-sans);
+      line-height: 1.2;
+    }
+    .nav__brand-title {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.01em;
+      display: block;
+    }
+    .nav__brand-sub {
+      font-size: .7rem;
+      color: var(--ink-4);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      margin-top: .2rem;
+    }
     .nav__label {
-      font-size: .65rem; font-weight: 700; letter-spacing: .18em;
-      color: var(--text-3); text-transform: uppercase;
-      margin: 1.5rem 0 .4rem;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      color: var(--ink-5);
+      text-transform: uppercase;
+      margin: 1.75rem 0 .75rem;
     }
-    .nav__list { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .nav__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .05rem;
+    }
     .nav__item a {
-      display: flex; align-items: center; gap: .6rem;
-      padding: .55rem .75rem;
+      display: flex;
+      align-items: baseline;
+      gap: .75rem;
+      padding: .5rem .6rem;
+      color: var(--ink-3);
+      font-size: .9rem;
+      font-weight: 500;
+      text-decoration: none;
       border-radius: var(--radius-sm);
-      color: var(--text-2);
-      font-size: .88rem;
       transition: all var(--trans);
+      position: relative;
     }
-    .nav__item a:hover { background: var(--bg-2); color: var(--text-0); }
+    .nav__item a:hover {
+      color: var(--ink);
+      background: var(--bg-soft);
+    }
     .nav__item a.active {
-      background: linear-gradient(90deg, rgba(122,177,217,.15), transparent);
-      color: var(--celta-blue);
-      border-left: 3px solid var(--celta-blue);
-      padding-left: calc(.75rem - 3px);
+      color: var(--ink);
+      background: var(--red-soft);
+      font-weight: 600;
+    }
+    .nav__item a.active::before {
+      content: "";
+      position: absolute;
+      left: -1.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px; height: 18px;
+      background: var(--red);
+      border-radius: 0 3px 3px 0;
     }
     .nav__num {
-      font-size: .7rem; font-family: "SF Mono", monospace;
-      color: var(--text-3);
-      width: 1.2rem; text-align: center;
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--ink-5);
+      min-width: 1.6rem;
+      font-variant-numeric: tabular-nums;
     }
-    .nav__item a.active .nav__num { color: var(--celta-blue); }
-    .nav__ctas { margin-top: 2rem; display: flex; flex-direction: column; gap: .5rem; }
+    .nav__item a.active .nav__num { color: var(--red); font-weight: 700; }
+
+    .nav__ctas {
+      margin-top: 2.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
     .nav__cta {
-      display: flex; align-items: center; justify-content: center; gap: .5rem;
-      padding: .55rem .75rem; border-radius: var(--radius-sm);
-      font-size: .8rem; font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .7rem .9rem;
+      border-radius: var(--radius-sm);
+      font-size: .82rem;
+      font-weight: 500;
       border: 1px solid var(--line);
-      color: var(--text-1);
+      color: var(--ink);
+      background: var(--bg);
+      text-decoration: none;
       transition: all var(--trans);
     }
-    .nav__cta:hover { border-color: var(--celta-blue); color: var(--celta-blue); background: var(--bg-2); }
-    .nav__cta--primary {
-      background: var(--grad-hero);
-      color: #fff;
-      border: none;
+    .nav__cta:hover {
+      border-color: var(--ink);
+      color: var(--ink);
     }
-    .nav__cta--primary:hover { color: #fff; filter: brightness(1.15); }
+    .nav__cta--primary {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+    .nav__cta--primary:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
 
     main { padding: 0; }
     .section {
-      padding: 6rem 2.5rem;
-      max-width: 1280px;
+      padding: 7rem 4rem;
+      max-width: 1120px;
       margin: 0 auto;
-      border-bottom: 1px solid var(--bg-2);
+      border-top: 1px solid var(--line);
     }
-    .section:last-child { border-bottom: none; }
+    .section:first-of-type { border-top: none; }
 
-    /* =========================================================
-       MOBILE
-    ========================================================= */
+    /* Mobile */
     .nav__toggle { display: none; }
-    @media (max-width: 900px) {
+    @media (max-width: 980px) {
       .layout { grid-template-columns: 1fr; }
       .nav {
-        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        position: fixed; top: 0; left: 0;
         transform: translateX(-100%);
         transition: transform var(--trans);
-        width: 280px;
+        width: 300px;
       }
       .nav.is-open { transform: translateX(0); }
       .nav__toggle {
-        display: flex; align-items: center; justify-content: center;
+        display: flex;
+        align-items: center; justify-content: center;
         position: fixed; top: 1rem; right: 1rem; z-index: 100;
         width: 44px; height: 44px;
-        background: var(--bg-2); border: 1px solid var(--line); color: var(--text-0);
-        border-radius: 10px; cursor: pointer;
+        background: var(--ink); border: none; color: #fff;
+        border-radius: 8px; cursor: pointer;
       }
-      .section { padding: 4rem 1.25rem; }
-      .hero__title { font-size: 2.5rem !important; }
+      .section { padding: 4.5rem 1.5rem; }
+      .hero { padding: 6rem 1.5rem 4rem !important; }
+      .hero__title { font-size: 3rem !important; }
+      .hero__meta { gap: 1.5rem !important; }
     }
 
     /* =========================================================
-       HERO
+       HERO — editorial, typography-led
     ========================================================= */
     .hero {
-      padding: 7rem 2.5rem 6rem;
+      padding: 9rem 4rem 6rem;
+      max-width: 1120px;
+      margin: 0 auto;
       position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid var(--bg-2);
     }
-    .hero::before {
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 3rem;
+    }
+    .hero__eyebrow::before {
       content: "";
-      position: absolute;
-      top: -20%; right: -10%;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(122,177,217,.25) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      bottom: -40%; left: -20%;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(227,6,19,.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero__inner { position: relative; max-width: 1000px; margin: 0 auto; }
-    .hero__badge {
-      display: inline-flex; align-items: center; gap: .5rem;
-      padding: .4rem .9rem;
-      background: rgba(122,177,217,.1);
-      border: 1px solid rgba(122,177,217,.3);
-      border-radius: 999px;
-      font-size: .75rem; font-weight: 600; letter-spacing: .08em;
-      color: var(--celta-blue);
-      margin-bottom: 1.5rem;
+      width: 40px; height: 2px;
+      background: var(--red);
     }
     .hero__title {
-      font-size: clamp(2.5rem, 6vw, 4.25rem);
-      font-weight: 800;
-      color: var(--text-0);
-      line-height: 1.05;
-      letter-spacing: -.02em;
-      margin-bottom: 1.25rem;
+      font-family: var(--font-sans);
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: .95;
+      letter-spacing: -.035em;
+      margin-bottom: 2rem;
     }
-    .hero__title span { background: var(--grad-celta); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .hero__lead { font-size: 1.15rem; color: var(--text-2); max-width: 680px; margin-bottom: 2.25rem; }
-    .hero__ctas { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .hero__title .accent {
+      color: var(--red);
+      font-style: italic;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      letter-spacing: -.01em;
+    }
+    .hero__lead {
+      font-size: 1.25rem;
+      color: var(--ink-3);
+      max-width: 660px;
+      line-height: 1.55;
+      margin-bottom: 3rem;
+      font-weight: 400;
+    }
+    .hero__ctas {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+      margin-bottom: 5rem;
+    }
     .btn {
-      display: inline-flex; align-items: center; gap: .55rem;
-      padding: .85rem 1.4rem;
-      border-radius: var(--radius-sm);
-      font-weight: 600; font-size: .95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: 1rem 1.75rem;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: .92rem;
+      font-weight: 600;
       transition: all var(--trans);
-      cursor: pointer; border: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
     }
     .btn--primary {
-      background: var(--grad-accent);
+      background: var(--ink);
       color: #fff;
     }
-    .btn--primary:hover { filter: brightness(1.15); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(227,6,19,.35); }
+    .btn--primary:hover {
+      background: var(--red);
+      color: #fff;
+      transform: translateY(-1px);
+    }
     .btn--secondary {
-      background: var(--bg-2);
-      border: 1px solid var(--line);
-      color: var(--text-0);
+      background: transparent;
+      border-color: var(--ink);
+      color: var(--ink);
     }
-    .btn--secondary:hover { border-color: var(--celta-blue); color: var(--celta-blue); }
+    .btn--secondary:hover {
+      background: var(--ink);
+      color: #fff;
+    }
+
     .hero__meta {
-      display: flex; gap: 2.5rem; flex-wrap: wrap;
-      margin-top: 3.5rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--bg-2);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--line);
     }
-    .hero__metaitem { font-size: .85rem; }
+    @media (max-width: 700px) { .hero__meta { grid-template-columns: repeat(2, 1fr); } }
+    .hero__metaitem {
+      font-size: .85rem;
+      color: var(--ink-4);
+    }
     .hero__metaval {
       display: block;
-      font-size: 2rem; font-weight: 800; color: var(--text-0);
+      font-family: var(--font-sans);
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--ink);
       line-height: 1;
-      margin-bottom: .3rem;
+      letter-spacing: -.02em;
+      margin-bottom: .5rem;
     }
-    .hero__metalabel { color: var(--text-3); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; }
+    .hero__metalabel {
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--ink-4);
+    }
 
     /* =========================================================
        SECTION HEADER
     ========================================================= */
-    .sec-header { margin-bottom: 3rem; }
-    .sec-num {
-      display: inline-block;
-      font-size: .75rem; font-weight: 700; letter-spacing: .18em;
-      color: var(--celta-blue);
-      text-transform: uppercase;
-      margin-bottom: .75rem;
-      padding: .25rem .75rem;
-      background: rgba(122,177,217,.1);
-      border-radius: 999px;
+    .sec-header {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 3rem;
+      margin-bottom: 4rem;
+      align-items: start;
     }
-    .sec-title {
-      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
-      font-weight: 800;
-      color: var(--text-0);
-      line-height: 1.15;
-      letter-spacing: -.01em;
+    @media (max-width: 700px) {
+      .sec-header { grid-template-columns: 1fr; gap: 1rem; }
+    }
+    .sec-num {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      color: var(--red);
+      line-height: 1;
+      font-weight: 400;
+      font-style: italic;
+      padding-top: .3rem;
+      letter-spacing: -.02em;
+    }
+    .sec-title-wrap { }
+    .sec-eyebrow {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--red);
       margin-bottom: 1rem;
     }
-    .sec-lead { color: var(--text-2); font-size: 1.05rem; max-width: 720px; }
+    .sec-title {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.05;
+      letter-spacing: -.025em;
+      margin-bottom: 1.25rem;
+    }
+    .sec-lead {
+      color: var(--ink-3);
+      font-size: 1.12rem;
+      line-height: 1.6;
+      max-width: 720px;
+      font-weight: 400;
+    }
+
+    h3.h-sub, .h-sub {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.01em;
+      margin: 3rem 0 1.25rem;
+      line-height: 1.2;
+    }
 
     /* =========================================================
-       CALLOUT BOXES
+       CALLOUT BOXES — IE style: minimal with top accent
     ========================================================= */
     .callout {
-      display: flex; gap: 1rem;
-      padding: 1.15rem 1.4rem;
-      border-radius: var(--radius);
-      background: var(--bg-2);
-      border: 1px solid var(--line);
-      margin: 1.5rem 0;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      padding: 1.5rem 1.75rem;
+      background: var(--bg-soft);
+      border-radius: var(--radius-sm);
+      margin: 2rem 0;
+      border-left: 3px solid var(--ink);
     }
     .callout__icon {
-      font-size: 1.25rem;
-      flex-shrink: 0;
+      font-size: 1.15rem;
       line-height: 1.4;
     }
     .callout__body h4 {
-      font-size: .78rem; font-weight: 800; letter-spacing: .1em;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .14em;
       text-transform: uppercase;
-      margin-bottom: .35rem;
+      margin-bottom: .5rem;
+      color: var(--ink);
     }
-    .callout__body p { margin: 0; color: var(--text-1); font-size: .94rem; }
-    .callout--tip        { border-left: 3px solid var(--celta-blue); }
-    .callout--tip h4     { color: var(--celta-blue); }
-    .callout--good       { border-left: 3px solid var(--success); }
-    .callout--good h4    { color: var(--success); }
-    .callout--warn       { border-left: 3px solid var(--warning); }
-    .callout--warn h4    { color: var(--warning); }
-    .callout--class      { border-left: 3px solid #C77DFF; }
-    .callout--class h4   { color: #C77DFF; }
+    .callout__body p {
+      margin: 0;
+      color: var(--ink-2);
+      font-size: .98rem;
+      line-height: 1.6;
+    }
+    .callout--tip  { border-left-color: var(--red); }
+    .callout--tip h4  { color: var(--red); }
+    .callout--good { border-left-color: var(--success); }
+    .callout--good h4 { color: var(--success); }
+    .callout--warn { border-left-color: var(--warning); }
+    .callout--warn h4 { color: var(--warning); }
+    .callout--class { border-left-color: var(--celta-navy); background: #F3F5FA; }
+    .callout--class h4 { color: var(--celta-navy); }
 
     /* =========================================================
-       GRID CARDS
+       GRID CARDS — minimal, no shadows
     ========================================================= */
-    .grid { display: grid; gap: 1.25rem; }
+    .grid { display: grid; gap: 1.5rem; }
     .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-    .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
     .card {
-      background: var(--bg-1);
+      background: var(--bg);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 1.5rem;
+      padding: 2rem 1.75rem;
       transition: all var(--trans);
-      position: relative;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
     .card:hover {
-      border-color: var(--celta-blue-3);
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-lift);
+      border-color: var(--ink);
+      transform: translateY(-2px);
     }
     .card__icon {
-      width: 48px; height: 48px;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--bg-2);
+      width: 44px; height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-soft);
       border-radius: 10px;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .card__title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-0);
-      margin-bottom: .4rem;
+      font-size: 1.3rem;
+      margin-bottom: 1.25rem;
     }
     .card__role {
-      font-size: .7rem; font-weight: 700; letter-spacing: .12em;
-      color: var(--celta-blue);
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      color: var(--red);
       text-transform: uppercase;
-      margin-bottom: .7rem;
+      margin-bottom: .6rem;
     }
-    .card__text { font-size: .92rem; color: var(--text-2); }
+    .card__title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .6rem;
+      letter-spacing: -.01em;
+      line-height: 1.2;
+    }
+    .card__text {
+      font-size: .95rem;
+      color: var(--ink-3);
+      line-height: 1.55;
+    }
 
     /* =========================================================
        ARCHITECTURE DIAGRAM
     ========================================================= */
     .arch {
       margin: 2rem 0;
-      padding: 2rem 1.5rem;
-      background: var(--bg-1);
-      border: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      background: var(--bg-soft);
       border-radius: var(--radius);
-      position: relative;
       overflow-x: auto;
     }
     .arch__grid {
@@ -357,84 +523,129 @@
       min-width: 720px;
     }
     .arch__node {
-      background: var(--bg-2);
+      background: var(--bg);
       border: 1px solid var(--line);
       border-radius: 10px;
-      padding: 1.1rem;
+      padding: 1.3rem 1.1rem;
       text-align: center;
-      position: relative;
       transition: all var(--trans);
     }
-    .arch__node:hover { border-color: var(--celta-blue); background: var(--bg-3); }
-    .arch__node--source { grid-column: 1 / span 3; background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-3) 100%); }
+    .arch__node:hover {
+      border-color: var(--ink);
+    }
+    .arch__node--source {
+      grid-column: 1 / span 3;
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+    .arch__node--source h5 { color: #fff; }
+    .arch__node--source p { color: rgba(255,255,255,.7); }
     .arch__node--mid-left  { grid-column: 1; grid-row: 2; }
     .arch__node--mid-right { grid-column: 3; grid-row: 2; }
     .arch__node--out-left  { grid-column: 1; grid-row: 3; }
     .arch__node--out-right { grid-column: 3; grid-row: 3; }
-    .arch__node--analytics { grid-column: 1 / span 3; grid-row: 4; }
-    .arch__node h5 {
-      font-size: .95rem; color: var(--text-0); font-weight: 700;
-      margin-bottom: .3rem;
+    .arch__node--analytics {
+      grid-column: 1 / span 3; grid-row: 4;
+      background: var(--red);
+      border-color: var(--red);
     }
-    .arch__node p { font-size: .8rem; color: var(--text-3); margin: 0; }
-    .arch__node__emoji { font-size: 1.6rem; display: block; margin-bottom: .5rem; }
-    .arch__legend { font-size: .72rem; color: var(--text-3); text-align: center; margin-top: 1rem; }
+    .arch__node--analytics h5 { color: #fff; }
+    .arch__node--analytics p { color: rgba(255,255,255,.85); }
+    .arch__node h5 {
+      font-size: 1rem;
+      color: var(--ink);
+      font-weight: 700;
+      margin-bottom: .3rem;
+      letter-spacing: -.01em;
+    }
+    .arch__node p {
+      font-size: .82rem;
+      color: var(--ink-4);
+      margin: 0;
+    }
+    .arch__node__emoji {
+      font-size: 1.7rem;
+      display: block;
+      margin-bottom: .55rem;
+    }
+    .arch__legend {
+      font-size: .72rem;
+      color: var(--ink-4);
+      text-align: center;
+      margin-top: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
 
     /* =========================================================
-       TIMELINE (roadmap)
+       TIMELINE
     ========================================================= */
     .timeline {
       position: relative;
-      padding-left: 2.5rem;
+      padding-left: 3rem;
       margin: 2.5rem 0 0;
     }
     .timeline::before {
       content: "";
       position: absolute;
-      left: 1.1rem; top: 0; bottom: 0;
-      width: 2px;
-      background: linear-gradient(180deg, var(--celta-blue) 0%, var(--celta-red) 100%);
-      border-radius: 2px;
+      left: 1.25rem; top: .4rem; bottom: 0;
+      width: 1px;
+      background: var(--line);
     }
     .t-item {
       position: relative;
-      padding-bottom: 2rem;
+      padding-bottom: 2.5rem;
     }
     .t-item:last-child { padding-bottom: 0; }
     .t-dot {
       position: absolute;
-      left: -1.9rem; top: .4rem;
+      left: -2.15rem; top: .15rem;
       width: 28px; height: 28px;
-      background: var(--bg-1);
-      border: 2px solid var(--celta-blue);
+      background: var(--bg);
+      border: 2px solid var(--ink);
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .75rem; font-weight: 800;
-      color: var(--celta-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--ink);
     }
     .t-item__head {
-      display: flex; align-items: center; gap: .65rem;
-      margin-bottom: .4rem;
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      margin-bottom: .5rem;
     }
-    .t-item__head h4 { font-size: 1.1rem; color: var(--text-0); font-weight: 700; }
+    .t-item__head h4 {
+      font-size: 1.25rem;
+      color: var(--ink);
+      font-weight: 700;
+      letter-spacing: -.01em;
+    }
     .t-item__emoji { font-size: 1.25rem; }
-    .t-item__body { color: var(--text-2); font-size: .95rem; padding-left: .1rem; }
+    .t-item__body {
+      color: var(--ink-3);
+      font-size: .98rem;
+      line-height: 1.55;
+    }
     .t-item__out {
       display: inline-block;
-      margin-top: .55rem;
-      padding: .25rem .7rem;
-      background: rgba(63,185,80,.1);
-      border: 1px solid rgba(63,185,80,.3);
-      color: var(--success);
-      font-size: .75rem; font-weight: 600;
+      margin-top: .7rem;
+      padding: .3rem .8rem;
+      background: #DCFCE7;
       border-radius: 999px;
+      color: var(--success);
+      font-size: .75rem;
+      font-weight: 600;
     }
 
     /* =========================================================
-       TABS
+       TABS — IE minimal
     ========================================================= */
     .tabs {
-      background: var(--bg-1);
+      background: var(--bg);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       overflow: hidden;
@@ -442,188 +653,237 @@
     }
     .tabs__triggers {
       display: flex;
-      background: var(--bg-2);
       border-bottom: 1px solid var(--line);
       overflow-x: auto;
+      background: var(--bg-soft);
     }
     .tabs__trigger {
-      padding: 1rem 1.5rem;
+      padding: 1.1rem 1.75rem;
       background: transparent;
       border: none;
-      color: var(--text-2);
-      font: inherit; font-size: .9rem; font-weight: 600;
+      color: var(--ink-4);
+      font: inherit;
+      font-size: .9rem;
+      font-weight: 600;
       cursor: pointer;
       border-bottom: 2px solid transparent;
       transition: all var(--trans);
       white-space: nowrap;
-      display: flex; align-items: center; gap: .5rem;
+      letter-spacing: -.005em;
     }
-    .tabs__trigger:hover { color: var(--text-0); }
+    .tabs__trigger:hover { color: var(--ink); }
     .tabs__trigger.active {
-      color: var(--celta-blue);
-      border-bottom-color: var(--celta-blue);
-      background: var(--bg-1);
+      color: var(--ink);
+      border-bottom-color: var(--red);
+      background: var(--bg);
     }
-    .tabs__panel { display: none; padding: 2rem; }
+    .tabs__panel { display: none; padding: 2.5rem; }
     .tabs__panel.active { display: block; }
     .tabs__panel h4 {
-      color: var(--text-0); font-size: 1rem; margin: 1.25rem 0 .5rem;
+      color: var(--ink);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin: 1.75rem 0 .75rem;
     }
     .tabs__panel h4:first-child { margin-top: 0; }
     .tabs__panel dl {
       display: grid;
       grid-template-columns: max-content 1fr;
-      gap: .5rem 1.25rem;
+      gap: .7rem 1.5rem;
       margin-top: 1rem;
     }
-    .tabs__panel dt { font-weight: 600; color: var(--text-0); }
-    .tabs__panel dd { color: var(--text-2); margin: 0; font-size: .92rem; }
+    .tabs__panel dt { font-weight: 600; color: var(--ink); font-size: .92rem; }
+    .tabs__panel dd { color: var(--ink-3); margin: 0; font-size: .92rem; line-height: 1.55; }
     .breadcrumb {
-      display: inline-flex; align-items: center; gap: .35rem;
-      font-family: "SF Mono", monospace;
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-family: var(--font-mono);
       font-size: .82rem;
-      color: var(--text-1);
-      background: var(--bg-2);
-      padding: .45rem .8rem;
+      color: var(--ink-2);
+      background: var(--bg-soft);
+      padding: .5rem .85rem;
       border-radius: var(--radius-sm);
       border: 1px solid var(--line);
     }
-    .breadcrumb svg { color: var(--text-3); flex-shrink: 0; }
+    .breadcrumb svg { color: var(--ink-5); flex-shrink: 0; }
 
     /* =========================================================
-       TREE (data model)
+       TREE
     ========================================================= */
     .tree {
-      font-family: "SF Mono", monospace;
-      background: var(--bg-1);
-      border: 1px solid var(--line);
+      font-family: var(--font-mono);
+      background: var(--bg-soft);
       border-radius: var(--radius);
-      padding: 1.5rem;
+      padding: 1.75rem;
       font-size: .88rem;
-      line-height: 1.9;
-      color: var(--text-1);
+      line-height: 2;
+      color: var(--ink-2);
       margin: 1.5rem 0;
       overflow-x: auto;
+      border: 1px solid var(--line);
     }
-    .tree__key { color: var(--celta-blue); font-weight: 600; }
-    .tree__annot { color: var(--text-3); font-style: italic; }
+    .tree__key { color: var(--ink); font-weight: 600; }
+    .tree__annot { color: var(--ink-4); font-style: italic; }
 
     /* =========================================================
        ENDPOINT LIST
     ========================================================= */
     .endpoint {
-      display: flex; align-items: center; gap: 1rem;
-      background: var(--bg-1);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--bg);
       border: 1px solid var(--line);
       border-radius: var(--radius-sm);
-      padding: 1rem 1.25rem;
+      padding: 1.1rem 1.25rem;
       margin: .6rem 0;
       transition: all var(--trans);
     }
-    .endpoint:hover { border-color: var(--celta-blue-3); }
+    .endpoint:hover { border-color: var(--ink); }
     .endpoint__method {
-      padding: .25rem .5rem;
+      padding: .3rem .55rem;
       border-radius: 4px;
-      font-family: "SF Mono", monospace; font-size: .7rem; font-weight: 800;
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      font-weight: 800;
       letter-spacing: .05em;
     }
-    .endpoint__method--get  { background: rgba(63,185,80,.15); color: var(--success); }
-    .endpoint__method--post { background: rgba(210,153,34,.15); color: var(--warning); }
+    .endpoint__method--get  { background: #DCFCE7; color: var(--success); }
+    .endpoint__method--post { background: #FEF3C7; color: var(--warning); }
     .endpoint__path {
-      font-family: "SF Mono", monospace;
-      color: var(--text-0);
+      font-family: var(--font-mono);
+      color: var(--ink);
       font-size: .88rem;
       font-weight: 600;
     }
-    .endpoint__purpose { color: var(--text-3); font-size: .85rem; margin-left: auto; }
+    .endpoint__purpose { color: var(--ink-4); font-size: .85rem; margin-left: auto; }
 
     /* =========================================================
        URL BREAKDOWN
     ========================================================= */
     .url-box {
-      font-family: "SF Mono", monospace;
-      background: var(--bg-1);
-      border: 1px solid var(--line);
+      font-family: var(--font-mono);
+      background: var(--ink);
+      color: #E5E5E5;
       border-radius: var(--radius-sm);
-      padding: 1.25rem;
+      padding: 1.5rem;
       font-size: .85rem;
       line-height: 2;
-      color: var(--text-1);
       word-break: break-all;
-      margin: 1.5rem 0 .5rem;
+      margin: 1.5rem 0 .75rem;
       overflow-x: auto;
     }
-    .url-box em { font-style: normal; color: var(--celta-blue); font-weight: 600; }
-    .url-box strong { font-weight: 600; color: var(--celta-red-2); }
+    .url-box em {
+      font-style: normal;
+      color: var(--celta-blue);
+      font-weight: 600;
+    }
+    .url-box strong {
+      font-weight: 600;
+      color: var(--red);
+    }
 
     /* =========================================================
-       FORM FLOW
+       FLOW STEPS
     ========================================================= */
     .flow {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
       margin: 2rem 0;
+      counter-reset: flow-step;
     }
     .flow__step {
-      background: var(--bg-1);
+      background: var(--bg);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 1.25rem;
+      padding: 1.75rem;
       position: relative;
+      transition: all var(--trans);
     }
+    .flow__step:hover { border-color: var(--ink); }
     .flow__num {
-      display: inline-block;
-      width: 28px; height: 28px; line-height: 28px;
-      border-radius: 50%;
-      background: var(--grad-hero);
-      color: #fff; font-weight: 700; text-align: center;
-      font-size: .85rem;
-      margin-bottom: .7rem;
+      display: block;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 2.5rem;
+      font-weight: 400;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 1rem;
     }
-    .flow__step h5 { color: var(--text-0); font-size: .95rem; margin-bottom: .3rem; }
-    .flow__step p { color: var(--text-3); font-size: .85rem; margin: 0; }
+    .flow__step h5 {
+      color: var(--ink);
+      font-size: 1rem;
+      margin-bottom: .4rem;
+      font-weight: 700;
+      letter-spacing: -.01em;
+    }
+    .flow__step p {
+      color: var(--ink-3);
+      font-size: .88rem;
+      margin: 0;
+      line-height: 1.55;
+    }
 
     /* =========================================================
-       COMPARE (merge vs tags)
+       COMPARE
     ========================================================= */
     .compare {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
+      gap: 1.5rem;
       margin: 2rem 0;
     }
     @media (max-width: 700px) { .compare { grid-template-columns: 1fr; } }
     .compare__col {
-      background: var(--bg-1);
+      background: var(--bg);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 1.5rem;
+      padding: 2rem 1.75rem;
     }
     .compare__col h4 {
-      color: var(--text-0); font-size: 1.1rem; margin-bottom: .3rem;
-      display: flex; align-items: center; gap: .5rem;
+      color: var(--ink);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      margin-bottom: .4rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
     }
     .compare__col .tag-vs {
-      font-size: .72rem; font-weight: 700; letter-spacing: .12em;
-      padding: .2rem .55rem; border-radius: 999px;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      padding: .2rem .55rem;
+      border-radius: 999px;
       text-transform: uppercase;
     }
-    .compare__col--merge .tag-vs { background: rgba(210,153,34,.15); color: var(--warning); }
-    .compare__col--tags  .tag-vs { background: rgba(63,185,80,.15); color: var(--success); }
-    .compare__col p  { font-size: .9rem; color: var(--text-2); margin-bottom: .8rem; }
-    .compare__example {
-      font-family: "SF Mono", monospace;
-      background: var(--bg-2);
-      border-radius: var(--radius-sm);
-      padding: .85rem;
-      font-size: .78rem;
-      color: var(--text-1);
-      line-height: 1.8;
-      margin-top: .6rem;
+    .compare__col--merge .tag-vs { background: #FEF3C7; color: var(--warning); }
+    .compare__col--tags  .tag-vs { background: #DCFCE7; color: var(--success); }
+    .compare__col p {
+      font-size: .92rem;
+      color: var(--ink-3);
+      margin-bottom: .8rem;
+      line-height: 1.55;
     }
-    .compare__example .added { color: var(--success); }
-    .compare__example .overwritten { color: var(--warning); }
+    .compare__example {
+      font-family: var(--font-mono);
+      background: var(--bg-soft);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      font-size: .78rem;
+      color: var(--ink-2);
+      line-height: 1.9;
+      margin-top: .8rem;
+      border: 1px solid var(--line);
+    }
+    .compare__example .added { color: var(--success); font-weight: 500; }
+    .compare__example .overwritten { color: var(--warning); font-weight: 500; }
 
     /* =========================================================
        EMAIL MOCKUP
@@ -634,22 +894,41 @@
       background: #fff;
       border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,.4);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      box-shadow: 0 24px 60px rgba(10,10,10,.08), 0 4px 12px rgba(10,10,10,.04);
+      font-family: var(--font-sans);
       color: #0A1A3A;
       line-height: 1.55;
+      border: 1px solid var(--line);
     }
     .email__header {
       background: #7AB1D9;
       padding: 1.25rem 1.75rem;
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       color: #fff;
     }
-    .email__header-brand { font-weight: 800; font-size: 1.05rem; }
-    .email__header-tag { font-size: .65rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+    .email__header-brand { font-weight: 800; font-size: 1.05rem; letter-spacing: -.01em; }
+    .email__header-tag {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
     .email__body { padding: 1.75rem; }
-    .email__h1 { color: #D61034; font-size: 1.35rem; font-weight: 800; margin-bottom: .4rem; line-height: 1.25; }
-    .email__intro { font-size: .92rem; color: #10213f; margin-bottom: 1rem; }
+    .email__h1 {
+      color: #D61034;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: .4rem;
+      line-height: 1.2;
+      letter-spacing: -.015em;
+    }
+    .email__intro {
+      font-size: .92rem;
+      color: #10213f;
+      margin-bottom: 1rem;
+    }
     .email__recap {
       background: #E6EFF8;
       border-radius: 8px;
@@ -658,15 +937,25 @@
     }
     .email__recap-row { margin-bottom: .7rem; }
     .email__recap-row:last-child { margin-bottom: 0; }
-    .email__recap-label { font-size: .65rem; letter-spacing: .14em; color: #5d6c80; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: .15rem; }
+    .email__recap-label {
+      font-size: .65rem;
+      letter-spacing: .14em;
+      color: #5d6c80;
+      font-weight: 700;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: .15rem;
+    }
     .email__recap-value { font-weight: 700; color: #0A1A3A; font-size: .95rem; }
     .email__recap-value--avail { color: #0a8754; }
     .email__cta {
       display: inline-block;
-      background: #D61034; color: #fff !important;
-      padding: .8rem 2rem;
+      background: #D61034;
+      color: #fff !important;
+      padding: .85rem 2rem;
       border-radius: 7px;
-      font-weight: 700; font-size: .88rem;
+      font-weight: 700;
+      font-size: .88rem;
       text-decoration: none;
     }
     .email__cta-wrap { text-align: center; margin: 1rem 0; }
@@ -682,132 +971,170 @@
     /* =========================================================
        N8N PIPELINE
     ========================================================= */
-    .pipeline {
-      margin: 2rem 0;
-    }
+    .pipeline { margin: 2rem 0; }
     .pipeline__list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: .7rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: .75rem;
     }
     .pipe-node {
-      background: var(--bg-1);
+      background: var(--bg);
       border: 1px solid var(--line);
       border-radius: 10px;
-      padding: .85rem 1rem;
-      display: flex; align-items: center; gap: .65rem;
+      padding: 1rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
       transition: all var(--trans);
-      cursor: default;
-      position: relative;
     }
     .pipe-node:hover {
-      border-color: var(--celta-blue-3);
-      background: var(--bg-2);
+      border-color: var(--ink);
+      transform: translateY(-1px);
     }
     .pipe-node__num {
-      font-family: "SF Mono", monospace;
+      font-family: var(--font-mono);
       font-size: .7rem;
-      color: var(--text-3);
+      color: var(--ink-5);
       font-weight: 700;
-      width: 1.2rem; flex-shrink: 0;
+      width: 1.3rem;
+      flex-shrink: 0;
     }
     .pipe-node__emoji { font-size: 1.15rem; flex-shrink: 0; }
     .pipe-node__body { min-width: 0; }
-    .pipe-node__title { color: var(--text-0); font-weight: 600; font-size: .85rem; margin-bottom: .1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .pipe-node__desc { color: var(--text-3); font-size: .72rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pipe-node__title {
+      color: var(--ink);
+      font-weight: 600;
+      font-size: .88rem;
+      margin-bottom: .15rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: -.005em;
+    }
+    .pipe-node__desc {
+      color: var(--ink-4);
+      font-size: .75rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     /* =========================================================
        GA4 MOCK DASHBOARD
     ========================================================= */
     .dash {
-      background: var(--bg-1);
+      background: var(--bg);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 1.75rem;
+      padding: 2rem;
       margin: 2rem 0;
     }
     .dash__title {
-      font-size: .75rem; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--celta-blue); font-weight: 700;
-      margin-bottom: 1rem;
+      font-size: .72rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 1.25rem;
     }
     .dash__grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 1rem;
     }
     .kpi {
-      background: var(--bg-2);
-      border: 1px solid var(--line);
+      background: var(--bg-soft);
       border-radius: 10px;
-      padding: 1rem 1.15rem;
+      padding: 1.25rem 1.35rem;
     }
     .kpi__label {
-      font-size: .7rem; color: var(--text-3);
-      text-transform: uppercase; letter-spacing: .1em;
-      margin-bottom: .4rem;
+      font-size: .7rem;
+      color: var(--ink-4);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-bottom: .5rem;
       display: block;
+      font-weight: 600;
     }
     .kpi__value {
-      font-size: 1.6rem; font-weight: 800; color: var(--text-0);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--ink);
       line-height: 1;
-      margin-bottom: .3rem;
+      margin-bottom: .5rem;
+      letter-spacing: -.02em;
     }
-    .kpi__value--blue { color: var(--celta-blue); }
-    .kpi__value--red  { color: var(--celta-red-2); }
+    .kpi__value--red { color: var(--red); }
     .kpi__bar {
-      height: 6px; border-radius: 3px;
-      background: var(--bg-3);
+      height: 4px;
+      border-radius: 2px;
+      background: var(--line);
       overflow: hidden;
-      margin-top: .4rem;
+      margin-top: .5rem;
     }
-    .kpi__bar-fill { height: 100%; background: var(--grad-hero); }
-    .kpi__bar-fill--accent { background: var(--grad-accent); }
+    .kpi__bar-fill { height: 100%; background: var(--ink); }
+    .kpi__bar-fill--accent { background: var(--red); }
     .kpi__delta {
-      font-size: .75rem; color: var(--text-3);
-      margin-top: .2rem;
+      font-size: .76rem;
+      color: var(--ink-4);
+      margin-top: .3rem;
     }
 
     /* =========================================================
-       LEGAL COMPLIANCE MATRIX
+       LEGAL LAWS
     ========================================================= */
-    .laws { margin: 2rem 0; }
+    .laws { margin: 2rem 0; display: grid; gap: 1.25rem; }
     .law {
-      background: var(--bg-1);
+      background: var(--bg);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 1.5rem;
-      margin-bottom: 1rem;
+      padding: 2rem 1.75rem;
     }
     .law__head {
-      display: flex; align-items: baseline; gap: 1rem;
-      margin-bottom: .7rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: .8rem;
     }
     .law__flag { font-size: 1.5rem; }
-    .law__title { font-size: 1.15rem; font-weight: 800; color: var(--text-0); }
-    .law__code {
-      font-family: "SF Mono", monospace;
-      font-size: .72rem;
-      color: var(--text-3);
+    .law__title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.01em;
     }
-    .law__desc { color: var(--text-2); font-size: .94rem; margin-bottom: .8rem; }
+    .law__code {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--ink-4);
+      margin-top: .15rem;
+    }
+    .law__desc {
+      color: var(--ink-3);
+      font-size: .98rem;
+      margin-bottom: 1rem;
+      line-height: 1.55;
+    }
     .law ul { list-style: none; padding: 0; }
     .law ul li {
       position: relative;
-      padding-left: 1.5rem;
-      margin-bottom: .35rem;
-      font-size: .9rem;
-      color: var(--text-1);
+      padding-left: 1.75rem;
+      margin-bottom: .5rem;
+      font-size: .94rem;
+      color: var(--ink-2);
+      line-height: 1.55;
     }
     .law ul li::before {
       content: "→";
-      position: absolute; left: 0;
-      color: var(--celta-blue);
+      position: absolute;
+      left: 0;
+      color: var(--red);
       font-weight: 700;
+      font-family: var(--font-mono);
     }
 
     .matrix {
-      background: var(--bg-1);
+      background: var(--bg);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       overflow: hidden;
@@ -816,29 +1143,34 @@
     .matrix table { width: 100%; border-collapse: collapse; }
     .matrix th {
       text-align: left;
-      padding: 1rem 1.25rem;
-      background: var(--bg-2);
-      font-size: .72rem; font-weight: 700; letter-spacing: .12em;
-      color: var(--text-3);
+      padding: 1rem 1.5rem;
+      background: var(--bg-soft);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      color: var(--ink-4);
       text-transform: uppercase;
       border-bottom: 1px solid var(--line);
     }
     .matrix td {
-      padding: .85rem 1.25rem;
-      border-bottom: 1px solid var(--bg-2);
-      color: var(--text-1);
-      font-size: .9rem;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink-2);
+      font-size: .94rem;
     }
     .matrix tr:last-child td { border-bottom: none; }
     .status {
-      display: inline-flex; align-items: center; justify-content: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       width: 1.8rem; height: 1.8rem;
       border-radius: 50%;
-      font-size: 1rem; font-weight: 700;
+      font-size: 1rem;
+      font-weight: 700;
     }
-    .status--ok   { background: rgba(63,185,80,.15);  color: var(--success); }
-    .status--warn { background: rgba(210,153,34,.15); color: var(--warning); }
-    .status--err  { background: rgba(248,81,73,.15);  color: var(--error);   }
+    .status--ok   { background: #DCFCE7; color: var(--success); }
+    .status--warn { background: #FEF3C7; color: var(--warning); }
+    .status--err  { background: #FECACA; color: var(--error);   }
 
     /* =========================================================
        VIDEO EMBED
@@ -850,11 +1182,13 @@
       margin: 2rem 0;
       border-radius: var(--radius);
       overflow: hidden;
-      background: var(--bg-2);
-      box-shadow: var(--shadow-lift);
+      background: var(--bg-soft);
+      box-shadow: 0 24px 60px rgba(10,10,10,.1), 0 4px 12px rgba(10,10,10,.06);
+      border: 1px solid var(--line);
     }
     .video-wrap iframe {
-      position: absolute; top: 0; left: 0;
+      position: absolute;
+      top: 0; left: 0;
       width: 100%; height: 100%;
       border: none;
     }
@@ -863,43 +1197,79 @@
        FOOTER
     ========================================================= */
     footer {
-      padding: 4rem 2.5rem 3rem;
-      background: var(--bg-1);
-      border-top: 1px solid var(--line);
+      padding: 5rem 4rem 3rem;
+      background: var(--ink);
+      color: var(--ink-5);
     }
     footer .footer-inner {
-      max-width: 1280px; margin: 0 auto;
+      max-width: 1120px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 2fr 1fr 1fr;
-      gap: 3rem;
+      gap: 4rem;
     }
-    @media (max-width: 800px) { footer .footer-inner { grid-template-columns: 1fr; } }
+    @media (max-width: 800px) { footer .footer-inner { grid-template-columns: 1fr; gap: 2rem; } }
     footer h4 {
-      font-size: .75rem; font-weight: 700; letter-spacing: .14em;
-      color: var(--text-3); text-transform: uppercase;
-      margin-bottom: 1rem;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
     }
-    footer ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
-    footer .footer-brand { color: var(--text-0); font-weight: 700; display: flex; align-items: center; gap: .6rem; margin-bottom: .7rem; }
-    footer .footer-brand img { width: 32px; height: 32px; }
-    footer .footer-text { font-size: .88rem; color: var(--text-2); max-width: 400px; }
+    footer ul { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
+    footer a {
+      color: var(--ink-5);
+      text-decoration: none;
+      font-size: .9rem;
+    }
+    footer a:hover { color: #fff; }
+    footer .footer-brand {
+      color: #fff;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+      letter-spacing: -.01em;
+    }
+    footer .footer-brand img {
+      width: 36px; height: 36px;
+      filter: brightness(1.1);
+    }
+    footer .footer-text {
+      font-size: .9rem;
+      color: var(--ink-5);
+      max-width: 420px;
+      line-height: 1.55;
+    }
+    footer .footer-text strong { color: #fff; font-weight: 600; }
     footer .bottom {
-      max-width: 1280px; margin: 3rem auto 0;
+      max-width: 1120px;
+      margin: 4rem auto 0;
       padding-top: 2rem;
-      border-top: 1px solid var(--line);
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1rem;
-      font-size: .75rem;
-      color: var(--text-3);
+      border-top: 1px solid #262626;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: .78rem;
+      color: #737373;
+    }
+
+    @media (max-width: 980px) {
+      footer { padding: 4rem 1.5rem 2.5rem; }
     }
 
     /* =========================================================
-       SCROLL-TRIGGERED ANIMATION
+       SCROLL-TRIGGERED REVEAL
     ========================================================= */
     [data-reveal] {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .6s ease, transform .6s ease;
+      transform: translateY(16px);
+      transition: opacity .8s var(--ease-out), transform .8s var(--ease-out);
     }
     [data-reveal].is-revealed {
       opacity: 1;
@@ -929,31 +1299,31 @@
   </div>
   <div class="nav__label">Sections</div>
   <ul class="nav__list">
-    <li class="nav__item"><a href="#intro">      <span class="nav__num">01</span>🎯 Introduction</a></li>
-    <li class="nav__item"><a href="#stack">      <span class="nav__num">02</span>🛠️ Stack</a></li>
-    <li class="nav__item"><a href="#roadmap">    <span class="nav__num">03</span>🗺️ Roadmap</a></li>
-    <li class="nav__item"><a href="#credentials"><span class="nav__num">04</span>🔑 Credentials</a></li>
-    <li class="nav__item"><a href="#onebox">     <span class="nav__num">05</span>🎟️ ONEBOX</a></li>
-    <li class="nav__item"><a href="#landing">    <span class="nav__num">06</span>🌐 Landing</a></li>
-    <li class="nav__item"><a href="#mailchimp">  <span class="nav__num">07</span>📬 Mailchimp</a></li>
-    <li class="nav__item"><a href="#mandrill">   <span class="nav__num">08</span>✉️ Mandrill</a></li>
-    <li class="nav__item"><a href="#n8n">        <span class="nav__num">09</span>🤖 n8n</a></li>
-    <li class="nav__item"><a href="#github">     <span class="nav__num">10</span>🐙 GitHub</a></li>
-    <li class="nav__item"><a href="#ga4">        <span class="nav__num">11</span>📊 GA4</a></li>
-    <li class="nav__item"><a href="#legal">      <span class="nav__num">12</span>⚖️ Legal</a></li>
+    <li class="nav__item"><a href="#intro">      <span class="nav__num">01</span>Introduction</a></li>
+    <li class="nav__item"><a href="#stack">      <span class="nav__num">02</span>Stack</a></li>
+    <li class="nav__item"><a href="#roadmap">    <span class="nav__num">03</span>Roadmap</a></li>
+    <li class="nav__item"><a href="#credentials"><span class="nav__num">04</span>Credentials</a></li>
+    <li class="nav__item"><a href="#onebox">     <span class="nav__num">05</span>ONEBOX</a></li>
+    <li class="nav__item"><a href="#landing">    <span class="nav__num">06</span>Landing</a></li>
+    <li class="nav__item"><a href="#mailchimp">  <span class="nav__num">07</span>Mailchimp</a></li>
+    <li class="nav__item"><a href="#mandrill">   <span class="nav__num">08</span>Mandrill</a></li>
+    <li class="nav__item"><a href="#n8n">        <span class="nav__num">09</span>n8n</a></li>
+    <li class="nav__item"><a href="#github">     <span class="nav__num">10</span>GitHub</a></li>
+    <li class="nav__item"><a href="#ga4">        <span class="nav__num">11</span>GA4</a></li>
+    <li class="nav__item"><a href="#legal">      <span class="nav__num">12</span>Legal</a></li>
   </ul>
   <div class="nav__ctas">
     <a class="nav__cta nav__cta--primary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
       Live demo
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
     </a>
     <a class="nav__cta" href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.111.793-.26.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.838 1.237 1.838 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
       Source code
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
     </a>
     <a class="nav__cta" href="https://youtu.be/-FURuRfDk8I" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
       Video (2 min)
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
     </a>
   </div>
 </aside>
@@ -963,44 +1333,39 @@
 
 <!-- ============================== HERO ============================== -->
 <section class="hero" id="hero">
-  <div class="hero__inner">
-    <div class="hero__badge">
-      <span style="width:8px;height:8px;background:var(--celta-red);border-radius:50%;"></span>
-      IE Business School · AI Marketing Lab
+  <div class="hero__eyebrow">IE Business School · AI Marketing Lab</div>
+  <h1 class="hero__title">
+    Recovering<br>
+    lost <span class="accent">demand</span>.
+  </h1>
+  <p class="hero__lead">
+    A case study in turning a ticketing dead-end into a marketing channel — built with tools every team already has.
+  </p>
+  <div class="hero__ctas">
+    <a class="btn btn--primary" href="#intro">
+      Start the walkthrough
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <a class="btn btn--secondary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
+      See the live demo
+    </a>
+  </div>
+  <div class="hero__meta">
+    <div class="hero__metaitem">
+      <span class="hero__metaval">5</span>
+      <span class="hero__metalabel">Tools in the stack</span>
     </div>
-    <h1 class="hero__title">
-      Seat Availability<br><span>Alert Platform</span>
-    </h1>
-    <p class="hero__lead">
-      A demand-recovery platform for RC Celta de Vigo: capture fans who couldn't get a ticket, detect when inventory frees up, and notify them instantly so the sale closes before the match starts.
-    </p>
-    <div class="hero__ctas">
-      <a class="btn btn--primary" href="#intro">
-        Start the walkthrough
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <a class="btn btn--secondary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
-        See the live demo
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
-      </a>
+    <div class="hero__metaitem">
+      <span class="hero__metaval">12</span>
+      <span class="hero__metalabel">Automation nodes</span>
     </div>
-    <div class="hero__meta">
-      <div class="hero__metaitem">
-        <span class="hero__metaval">5</span>
-        <span class="hero__metalabel">Tools in the stack</span>
-      </div>
-      <div class="hero__metaitem">
-        <span class="hero__metaval">12</span>
-        <span class="hero__metalabel">Automation nodes</span>
-      </div>
-      <div class="hero__metaitem">
-        <span class="hero__metaval">3</span>
-        <span class="hero__metalabel">Compliance regulations</span>
-      </div>
-      <div class="hero__metaitem">
-        <span class="hero__metaval">100%</span>
-        <span class="hero__metalabel">Opt-in · GDPR compliant</span>
-      </div>
+    <div class="hero__metaitem">
+      <span class="hero__metaval">3</span>
+      <span class="hero__metalabel">Compliance regulations</span>
+    </div>
+    <div class="hero__metaitem">
+      <span class="hero__metaval">100<span style="font-size:2rem;">%</span></span>
+      <span class="hero__metalabel">Opt-in · GDPR compliant</span>
     </div>
   </div>
 </section>
@@ -1008,20 +1373,23 @@
 <!-- ============================== §1 INTRODUCTION ============================== -->
 <section class="section" id="intro">
   <div class="sec-header" data-reveal>
-    <span class="sec-num">01 · 🎯 Introduction</span>
-    <h2 class="sec-title">The problem, the solution, and why it matters</h2>
-    <p class="sec-lead">A fan wants to see RC Celta play. The section is sold out. Days later a seat frees up — but the ticket office has no record that this fan wanted it. That missing memory is silent revenue lost.</p>
+    <div class="sec-num">01</div>
+    <div class="sec-title-wrap">
+      <span class="sec-eyebrow">Introduction</span>
+      <h2 class="sec-title">The problem, the solution, and why it matters.</h2>
+      <p class="sec-lead">A fan wants to see RC Celta play. The section is sold out. Days later a seat frees up — but the ticket office has no record that this fan wanted it. That missing memory is silent revenue lost.</p>
+    </div>
   </div>
 
   <div class="grid grid-2" data-reveal>
     <div class="card">
-      <div class="card__icon" style="background:rgba(248,81,73,.1); color:var(--error);">❌</div>
+      <div class="card__icon">❌</div>
       <div class="card__role">The problem</div>
       <h3 class="card__title">Invisible lost demand</h3>
       <p class="card__text">A significant share of tickets that free up (refunds, failed payments, released pre-allocations) never reach the fans who wanted them. The sale evaporates because nobody told them.</p>
     </div>
     <div class="card">
-      <div class="card__icon" style="background:rgba(63,185,80,.1); color:var(--success);">✅</div>
+      <div class="card__icon">✅</div>
       <div class="card__role">The solution</div>
       <h3 class="card__title">Automated recovery</h3>
       <p class="card__text">Capture interest while inventory is sold out, continuously watch availability in ONEBOX, and send a personalised email with a purchase deep-link the moment the requested section has seats again.</p>
@@ -1032,12 +1400,12 @@
     <div class="callout__icon">💡</div>
     <div class="callout__body">
       <h4>Key takeaway</h4>
-      <p>Recovering lost demand is a <strong>timing</strong> game. The value isn't in owning the list: it's in reaching the customer <em>the moment</em> the problem that stopped them from buying has been solved.</p>
+      <p>Recovering lost demand is a <strong>timing</strong> game. The value isn't in owning the list — it's in reaching the customer <em>the moment</em> the problem that stopped them from buying has been solved.</p>
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2rem 0 .75rem; font-size:1.2rem;">🎬 Quick demo</h3>
-  <p style="color:var(--text-2);">A 2-minute visual walkthrough of the case.</p>
+  <h3 class="h-sub">Quick demo</h3>
+  <p style="color:var(--ink-3);">A 2-minute visual walkthrough of the case.</p>
   <div class="video-wrap">
     <iframe
       src="https://www.youtube-nocookie.com/embed/-FURuRfDk8I?rel=0&modestbranding=1"
@@ -1047,7 +1415,7 @@
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen></iframe>
   </div>
-  <p style="color:var(--text-3); font-size:.85rem; text-align:center; margin-top:-.5rem;">
+  <p style="color:var(--ink-4); font-size:.85rem; text-align:center; margin-top:-.5rem;">
     Video not loading? Watch it directly on <a href="https://youtu.be/-FURuRfDk8I" target="_blank">YouTube →</a>
   </p>
 </section>
@@ -1055,44 +1423,47 @@
 <!-- ============================== §2 STACK ============================== -->
 <section class="section" id="stack">
   <div class="sec-header" data-reveal>
-    <span class="sec-num">02 · 🛠️ Technology Stack</span>
-    <h2 class="sec-title">Five tools every marketer already knows</h2>
-    <p class="sec-lead">Deliberately few moving parts. Every component is either serverless, free-tier-friendly, or a tool the marketing team already has on its shelf.</p>
+    <div class="sec-num">02</div>
+    <div class="sec-title-wrap">
+      <span class="sec-eyebrow">Technology Stack</span>
+      <h2 class="sec-title">Five tools every marketer already knows.</h2>
+      <p class="sec-lead">Deliberately few moving parts. Every component is either serverless, free-tier-friendly, or a tool the marketing team already has on its shelf.</p>
+    </div>
   </div>
 
   <div class="grid grid-3" data-reveal>
     <div class="card">
-      <div class="card__icon" style="background:rgba(227,6,19,.1);">🎟️</div>
+      <div class="card__icon">🎟️</div>
       <div class="card__role">Data source</div>
       <h3 class="card__title">ONEBOX TDS</h3>
       <p class="card__text">The platform the club uses to sell tickets online. Tells us — in real time — how many seats are still free in each section of each match.</p>
     </div>
     <div class="card">
-      <div class="card__icon" style="background:rgba(122,177,217,.1);">🌐</div>
+      <div class="card__icon">🌐</div>
       <div class="card__role">Entry point</div>
       <h3 class="card__title">Landing page</h3>
-      <p class="card__text">Public static page with the "notify me when tickets open" form. Designed with the Celta look & feel and hosted free on GitHub Pages.</p>
+      <p class="card__text">Public static page with the "notify me when tickets open" form. Designed with the Celta look &amp; feel and hosted free on GitHub Pages.</p>
     </div>
     <div class="card">
-      <div class="card__icon" style="background:rgba(255,255,102,.1);">📬</div>
+      <div class="card__icon">📬</div>
       <div class="card__role">Contact list</div>
       <h3 class="card__title">Mailchimp</h3>
       <p class="card__text">The CRM audience. Every registered fan lives here with merge fields (their data) and tags (by match and section) so the team can segment without writing SQL.</p>
     </div>
     <div class="card">
-      <div class="card__icon" style="background:rgba(210,153,34,.1);">✉️</div>
+      <div class="card__icon">✉️</div>
       <div class="card__role">Transactional channel</div>
       <h3 class="card__title">Mandrill</h3>
       <p class="card__text">The service that sends the one-to-one alert emails. Optimised for latency and individual tracking. Same login as Mailchimp.</p>
     </div>
     <div class="card">
-      <div class="card__icon" style="background:rgba(199,125,255,.1);">🤖</div>
+      <div class="card__icon">🤖</div>
       <div class="card__role">Automation</div>
       <h3 class="card__title">n8n</h3>
       <p class="card__text">The visual glue: polls ONEBOX, cross-references Mailchimp, triggers Mandrill. Free cloud tier or self-hosted. Zero code for the marketer.</p>
     </div>
     <div class="card">
-      <div class="card__icon" style="background:rgba(63,185,80,.1);">📊</div>
+      <div class="card__icon">📊</div>
       <div class="card__role">Measurement</div>
       <h3 class="card__title">Google Analytics 4</h3>
       <p class="card__text">The analytics layer: page views, custom events (<code>generate_lead</code>), UTM attribution, and a full funnel all the way to conversion.</p>
@@ -1107,7 +1478,7 @@
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🔌 How it all connects</h3>
+  <h3 class="h-sub">How it all connects</h3>
   <div class="arch" data-reveal>
     <div class="arch__grid">
       <div class="arch__node arch__node--source">
@@ -1141,16 +1512,19 @@
         <p>End-to-end funnel measurement</p>
       </div>
     </div>
-    <p class="arch__legend">Click any node to jump to its detailed section below.</p>
+    <p class="arch__legend">Navigate sections below for detail</p>
   </div>
 </section>
 
 <!-- ============================== §3 ROADMAP ============================== -->
 <section class="section" id="roadmap">
   <div class="sec-header" data-reveal>
-    <span class="sec-num">03 · 🗺️ Roadmap</span>
-    <h2 class="sec-title">Five incremental phases</h2>
-    <p class="sec-lead">Every phase ships something demo-able. The project was built in discrete commits, not a Big Bang.</p>
+    <div class="sec-num">03</div>
+    <div class="sec-title-wrap">
+      <span class="sec-eyebrow">Roadmap</span>
+      <h2 class="sec-title">Five incremental phases.</h2>
+      <p class="sec-lead">Every phase ships something demo-able. The project was built in discrete commits, not a Big Bang.</p>
+    </div>
   </div>
 
   <div class="timeline" data-reveal>
@@ -1180,7 +1554,7 @@
     </div>
     <div class="t-item">
       <div class="t-dot">05</div>
-      <div class="t-item__head"><span class="t-item__emoji">📊</span><h4>Measure & comply</h4></div>
+      <div class="t-item__head"><span class="t-item__emoji">📊</span><h4>Measure &amp; comply</h4></div>
       <div class="t-item__body">Instrument GA4 with <code>generate_lead</code> events. Audit the legal checklist (GDPR · LOPDGDD · LSSI-CE).</div>
       <span class="t-item__out">✓ Dashboard live · Compliance reviewed</span>
     </div>
@@ -1198,17 +1572,20 @@
 <!-- ============================== §4 CREDENTIALS ============================== -->
 <section class="section" id="credentials">
   <div class="sec-header" data-reveal>
-    <span class="sec-num">04 · 🔑 Credentials</span>
-    <h2 class="sec-title">Four credentials, none of them paid on the starter plan</h2>
-    <p class="sec-lead">This is the minimum setup. Every key either has a generous free tier or is free-forever. Budget 30 minutes to have them all lined up before you start building.</p>
+    <div class="sec-num">04</div>
+    <div class="sec-title-wrap">
+      <span class="sec-eyebrow">Credentials</span>
+      <h2 class="sec-title">Four credentials, none of them paid on the starter plan.</h2>
+      <p class="sec-lead">This is the minimum setup. Every key either has a generous free tier or is free-forever. Budget 30 minutes to have them all lined up before you start building.</p>
+    </div>
   </div>
 
   <div class="tabs" data-reveal>
     <div class="tabs__triggers" role="tablist">
-      <button class="tabs__trigger active" data-tab="onebox">🎟️ ONEBOX</button>
-      <button class="tabs__trigger" data-tab="mailchimp">📬 Mailchimp</button>
-      <button class="tabs__trigger" data-tab="mandrill">✉️ Mandrill</button>
-      <button class="tabs__trigger" data-tab="ga4">📊 GA4</button>
+      <button class="tabs__trigger active" data-tab="onebox">ONEBOX</button>
+      <button class="tabs__trigger" data-tab="mailchimp">Mailchimp</button>
+      <button class="tabs__trigger" data-tab="mandrill">Mandrill</button>
+      <button class="tabs__trigger" data-tab="ga4">GA4</button>
     </div>
     <div class="tabs__panel active" data-panel="onebox">
       <h4>What you need</h4>
@@ -1217,7 +1594,7 @@
         <dt><code>channel_id</code></dt><dd>Integer that identifies the channel inside the organisation (e.g. <code>2287</code>).</dd>
       </dl>
       <h4>Where to get it</h4>
-      <p style="color:var(--text-2); font-size:.92rem;">Provided by ONEBOX's technical team. Ask your account contact.</p>
+      <p style="color:var(--ink-3); font-size:.95rem;">Provided by ONEBOX's technical team. Ask your account contact.</p>
       <div class="callout callout--warn" style="margin-top:1.5rem;">
         <div class="callout__icon">⚠️</div>
         <div class="callout__body">
@@ -1234,8 +1611,8 @@
         <dt>Server prefix</dt><dd>Suffix of the API key (e.g. <code>...-us1</code> → <code>us1</code>). Tells you which datacenter your account lives on.</dd>
       </dl>
       <h4>Where to find it</h4>
-      <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> API key:&nbsp; Profile &nbsp;→&nbsp; Account & billing &nbsp;→&nbsp; Extras &nbsp;→&nbsp; API keys</div><br>
-      <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Audience ID:&nbsp; Audience &nbsp;→&nbsp; Settings &nbsp;→&nbsp; Audience name and defaults</div>
+      <div class="breadcrumb"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> API key:&nbsp; Profile → Account &amp; billing → Extras → API keys</div><br>
+      <div class="breadcrumb" style="margin-top:.5rem;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Audience ID:&nbsp; Audience → Settings → Audience name and defaults</div>
     </div>
     <div class="tabs__panel" data-panel="mandrill">
       <h4>What you need</h4>
@@ -1244,8 +1621,8 @@
         <dt>Verified sending domain</dt><dd>A domain you control with DKIM + SPF records published and verified in Mandrill.</dd>
       </dl>
       <h4>Where to find it</h4>
-      <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> API key:&nbsp; Mandrill &nbsp;→&nbsp; Settings &nbsp;→&nbsp; SMTP & API Info &nbsp;→&nbsp; New API key</div><br>
-      <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Domains:&nbsp; Settings &nbsp;→&nbsp; Sending Domains</div>
+      <div class="breadcrumb"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> API key:&nbsp; Mandrill → Settings → SMTP &amp; API Info → New API key</div><br>
+      <div class="breadcrumb" style="margin-top:.5rem;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Domains:&nbsp; Settings → Sending Domains</div>
       <div class="callout callout--warn" style="margin-top:1.5rem;">
         <div class="callout__icon">⚠️</div>
         <div class="callout__body">
@@ -1260,8 +1637,8 @@
         <dt>Measurement ID</dt><dd>The <code>G-XXXXXXX</code> identifier of the web data stream.</dd>
       </dl>
       <h4>Where to find it</h4>
-      <div class="breadcrumb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> GA4 &nbsp;→&nbsp; Admin &nbsp;→&nbsp; Data streams &nbsp;→&nbsp; Web &nbsp;→&nbsp; your stream</div>
-      <p style="color:var(--text-2); font-size:.92rem; margin-top:1rem;">This one <strong>is</strong> safe to expose in public HTML — it's designed to be visible. GA4 distinguishes sessions via cookies and URL parameters, not by the ID itself.</p>
+      <div class="breadcrumb"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> GA4 → Admin → Data streams → Web → your stream</div>
+      <p style="color:var(--ink-3); font-size:.92rem; margin-top:1rem;">This one <strong>is</strong> safe to expose in public HTML — it's designed to be visible. GA4 distinguishes sessions via cookies and URL parameters, not by the ID itself.</p>
     </div>
   </div>
 </section>
@@ -1269,12 +1646,15 @@
 <!-- ============================== §5 ONEBOX ============================== -->
 <section class="section" id="onebox">
   <div class="sec-header" data-reveal>
-    <span class="sec-num">05 · 🎟️ ONEBOX</span>
-    <h2 class="sec-title">The ticketing API</h2>
-    <p class="sec-lead">ONEBOX TDS is the platform where RC Celta sells tickets online. It exposes a professional REST API that we use exclusively in <strong>read mode</strong> — we never modify data in ONEBOX.</p>
+    <div class="sec-num">05</div>
+    <div class="sec-title-wrap">
+      <span class="sec-eyebrow">ONEBOX</span>
+      <h2 class="sec-title">The ticketing API.</h2>
+      <p class="sec-lead">ONEBOX TDS is the platform where RC Celta sells tickets online. It exposes a professional REST API that we use exclusively in <strong>read mode</strong> — we never modify data in ONEBOX.</p>
+    </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">Data model (with names a marketer understands)</h3>
+  <h3 class="h-sub">Data model (with names a marketer understands)</h3>
   <div class="tree" data-reveal>
 <span class="tree__key">Event</span> <span class="tree__annot">(e.g. «Celta – Athletic · Matchday 29»)</span>
   └── <span class="tree__key">Session</span> <span class="tree__annot">(a specific performance, with date and time)</span>
@@ -1291,7 +1671,7 @@
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2rem 0 .75rem; font-size:1.2rem;">The three endpoints we use</h3>
+  <h3 class="h-sub">The three endpoints we use</h3>
   <div data-reveal>
     <div class="endpoint">
       <span class="endpoint__method endpoint__method--post">POST</span>
@@ -1310,8 +1690,8 @@
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2rem 0 .75rem; font-size:1.2rem;">🔗 The purchase deep-link</h3>
-  <p style="color:var(--text-2);">When we send the alert email, the <strong>Buy ticket</strong> button points at a URL that opens ONEBOX directly on the seat map, with every UTM GA4 needs to attribute the conversion:</p>
+  <h3 class="h-sub">The purchase deep-link</h3>
+  <p style="color:var(--ink-3);">When we send the alert email, the <strong>Buy ticket</strong> button points at a URL that opens ONEBOX directly on the seat map, with every UTM GA4 needs to attribute the conversion:</p>
   <div class="url-box" data-reveal>
 https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
 &nbsp;&nbsp;&nbsp;<strong>viewCode=V_blockmap</strong>
@@ -1320,54 +1700,56 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
 &nbsp;&nbsp;&nbsp;&amp;utm_campaign=recovery-app
 &nbsp;&nbsp;&nbsp;&amp;utm_content=event-<em>{eventId}</em>-grada-<em>{gradaId}</em>
   </div>
-  <p style="color:var(--text-3); font-size:.85rem;">
-    • <code style="color:var(--celta-red-2);">viewCode=V_blockmap</code> is functional — it opens the seat map directly.<br>
-    • The four <code>utm_*</code> parameters let GA4 attribute any resulting purchase to the exact email that drove the click.
+  <p style="color:var(--ink-4); font-size:.88rem;">
+    <code style="color:var(--red);">viewCode=V_blockmap</code> is functional — it opens the seat map directly. The four <code>utm_*</code> parameters let GA4 attribute any resulting purchase to the exact email that drove the click.
   </p>
 </section>
 
 <!-- ============================== §6 LANDING ============================== -->
 <section class="section" id="landing">
   <div class="sec-header" data-reveal>
-    <span class="sec-num">06 · 🌐 Landing Page</span>
-    <h2 class="sec-title">Static, branded, and wired to ONEBOX</h2>
-    <p class="sec-lead">A static HTML page that mirrors RC Celta's official landing look & feel. The match data (image, date, available sections) is baked in at build time by reading ONEBOX directly.</p>
+    <div class="sec-num">06</div>
+    <div class="sec-title-wrap">
+      <span class="sec-eyebrow">Landing Page</span>
+      <h2 class="sec-title">Static, branded, wired to ONEBOX.</h2>
+      <p class="sec-lead">A static HTML page that mirrors RC Celta's official landing look &amp; feel. The match data (image, date, available sections) is baked in at build time by reading ONEBOX directly.</p>
+    </div>
   </div>
 
   <div class="grid grid-2" data-reveal>
     <div class="card">
-      <div class="card__icon" style="background:rgba(122,177,217,.1);">⚡</div>
+      <div class="card__icon">⚡</div>
       <div class="card__role">What it is</div>
       <h3 class="card__title">Static HTML · GitHub Pages</h3>
       <p class="card__text">A page generated at build time from a Node.js template. Served directly from GitHub Pages with automatic HTTPS.</p>
     </div>
     <div class="card">
-      <div class="card__icon" style="background:rgba(255,255,102,.1);">🏗️</div>
+      <div class="card__icon">🏗️</div>
       <div class="card__role">Why static</div>
       <h3 class="card__title">Fewer parts = more stable</h3>
       <p class="card__text">No runtime server, no database in the hot path. Free to host. Trivial to cache on a CDN.</p>
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">Form submission flow</h3>
+  <h3 class="h-sub">Form submission flow</h3>
   <div class="flow" data-reveal>
     <div class="flow__step">
-      <span class="flow__num">1</span>
+      <span class="flow__num">01</span>
       <h5>User fills it in</h5>
       <p>Name, email, section, consents.</p>
     </div>
     <div class="flow__step">
-      <span class="flow__num">2</span>
+      <span class="flow__num">02</span>
       <h5>Browser captures UTMs</h5>
       <p>Source, campaign, locale, user-agent.</p>
     </div>
     <div class="flow__step">
-      <span class="flow__num">3</span>
+      <span class="flow__num">03</span>
       <h5>Sent to automation</h5>
       <p>Validation + upsert to Mailchimp.</p>
     </div>
     <div class="flow__step">
-      <span class="flow__num">4</span>
+      <span class="flow__num">04</span>
       <h5>Thank-you + GA4</h5>
       <p><code>generate_lead</code> event fires.</p>
     </div>
@@ -1384,7 +1766,7 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
   <p style="margin-top:2rem;">
     <a class="btn btn--secondary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
       Try the live landing
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
     </a>
   </p>
 </section>
@@ -1392,25 +1774,28 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
 <!-- ============================== §7 MAILCHIMP ============================== -->
 <section class="section" id="mailchimp">
   <div class="sec-header" data-reveal>
-    <span class="sec-num">07 · 📬 Mailchimp</span>
-    <h2 class="sec-title">The central list, segmentable without SQL</h2>
-    <p class="sec-lead">Every registered fan lives here. Two distinct mechanisms organise their data: <strong>merge fields</strong> (their profile) and <strong>tags</strong> (their interest history). Each has different semantics, and that changes how we use them.</p>
+    <div class="sec-num">07</div>
+    <div class="sec-title-wrap">
+      <span class="sec-eyebrow">Mailchimp</span>
+      <h2 class="sec-title">The central list, segmentable without SQL.</h2>
+      <p class="sec-lead">Every registered fan lives here. Two distinct mechanisms organise their data: <strong>merge fields</strong> (their profile) and <strong>tags</strong> (their interest history). Each has different semantics, and that changes how we use them.</p>
+    </div>
   </div>
 
   <div class="compare" data-reveal>
     <div class="compare__col compare__col--merge">
-      <h4>🗂️ Merge fields <span class="tag-vs">Overwrite</span></h4>
+      <h4>Merge fields <span class="tag-vs">Overwrite</span></h4>
       <p>The contact's "profile". Each field holds <em>one value</em>: the most recent one. Ideal for data that's by its nature unique per contact.</p>
-      <p style="color:var(--text-3); font-size:.85rem; margin-top:1rem;"><strong>Example</strong>: Ana signs up for Pista B1 today. Tomorrow she signs up for Río Alto.</p>
+      <p style="color:var(--ink-4); font-size:.85rem; margin-top:1rem;"><strong>Example</strong>: Ana signs up for Pista B1 today. Tomorrow she signs up for Río Alto.</p>
       <div class="compare__example">
         <span class="overwritten">GRADA_NAME: <del>Pista B1</del> → <strong>Río Alto</strong></span><br>
         <span class="overwritten">GRADA_ID: <del>224549</del> → <strong>224562</strong></span>
       </div>
     </div>
     <div class="compare__col compare__col--tags">
-      <h4>🏷️ Tags <span class="tag-vs">Stack</span></h4>
+      <h4>Tags <span class="tag-vs">Stack</span></h4>
       <p>They preserve <em>the full history</em>. A contact can carry dozens of tags at once. Ideal for segmenting by interests or behaviour.</p>
-      <p style="color:var(--text-3); font-size:.85rem; margin-top:1rem;"><strong>Same case</strong>: Ana signs up for Pista B1 and later for Río Alto.</p>
+      <p style="color:var(--ink-4); font-size:.85rem; margin-top:1rem;"><strong>Same case</strong>: Ana signs up for Pista B1 and later for Río Alto.</p>
       <div class="compare__example">
         <span class="added">grada:224549 (Pista B1)</span><br>
         <span class="added">grada:224562 (Río Alto)</span><br>
@@ -1428,22 +1813,25 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">Typical segment: "Notify when Sector 316 of the Celta–Athletic match opens"</h3>
-  <pre style="background:var(--bg-1); border:1px solid var(--line); border-radius:var(--radius); padding:1.25rem; font-size:.85rem; color:var(--text-1); margin-top:1rem;" data-reveal>tag contains  <strong style="color:var(--celta-blue);">grada:224515</strong>         <span style="color:var(--text-3);">AND</span>
-tag contains  <strong style="color:var(--celta-blue);">event:4587</strong>           <span style="color:var(--text-3);">AND</span>
-tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-grada-224515</strong></pre>
-  <p style="color:var(--text-3); font-size:.85rem;">Marketing builds this segment in Mailchimp's UI. n8n consumes it to send the alert at most once per fan and section.</p>
+  <h3 class="h-sub">Typical segment: "Notify when Sector 316 of the Celta–Athletic match opens"</h3>
+  <pre style="background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius); padding:1.5rem; font-size:.88rem; color:var(--ink-2); margin-top:1rem; font-family:var(--font-mono); line-height:2;" data-reveal>tag contains  <strong style="color:var(--ink);">grada:224515</strong>         <span style="color:var(--ink-4);">AND</span>
+tag contains  <strong style="color:var(--ink);">event:4587</strong>           <span style="color:var(--ink-4);">AND</span>
+tag NOT ∋     <strong style="color:var(--red);">notified:event-4587-grada-224515</strong></pre>
+  <p style="color:var(--ink-4); font-size:.88rem;">Marketing builds this segment in Mailchimp's UI. n8n consumes it to send the alert at most once per fan and section.</p>
 </section>
 
 <!-- ============================== §8 MANDRILL ============================== -->
 <section class="section" id="mandrill">
   <div class="sec-header" data-reveal>
-    <span class="sec-num">08 · ✉️ Mandrill</span>
-    <h2 class="sec-title">Transactional, not bulk</h2>
-    <p class="sec-lead">Mailchimp is for scheduled campaigns to large lists. Mandrill is for immediate, personalised sends with per-message open and click analytics.</p>
+    <div class="sec-num">08</div>
+    <div class="sec-title-wrap">
+      <span class="sec-eyebrow">Mandrill</span>
+      <h2 class="sec-title">Transactional, not bulk.</h2>
+      <p class="sec-lead">Mailchimp is for scheduled campaigns to large lists. Mandrill is for immediate, personalised sends with per-message open and click analytics.</p>
+    </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">🎨 Anatomy of the email</h3>
+  <h3 class="h-sub">Anatomy of the email</h3>
   <div class="email" data-reveal>
     <div class="email__header">
       <span class="email__header-brand">RC Celta · Entradas</span>
@@ -1472,9 +1860,9 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
     </div>
     <div class="email__footer">Te registraste en avisame.rccelta.es · No garantiza reserva</div>
   </div>
-  <p style="color:var(--text-3); font-size:.8rem; text-align:center; margin-top:-1rem;">Email body kept in Spanish — it's the actual output for Spanish-speaking fans.</p>
+  <p style="color:var(--ink-4); font-size:.8rem; text-align:center; margin-top:-1rem;">Email body kept in Spanish — it's the actual output for Spanish-speaking fans.</p>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">📊 What we measure per send</h3>
+  <h3 class="h-sub">What we measure per send</h3>
   <div class="grid grid-2" data-reveal>
     <div class="card">
       <div class="card__role">Tracking enabled</div>
@@ -1500,12 +1888,15 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
 <!-- ============================== §9 N8N ============================== -->
 <section class="section" id="n8n">
   <div class="sec-header" data-reveal>
-    <span class="sec-num">09 · 🤖 n8n</span>
-    <h2 class="sec-title">The brain that connects everything</h2>
-    <p class="sec-lead">n8n is a visual automation tool: drag boxes, connect arrows, run. The open-source equivalent of Zapier, but without execution caps and with full control.</p>
+    <div class="sec-num">09</div>
+    <div class="sec-title-wrap">
+      <span class="sec-eyebrow">n8n</span>
+      <h2 class="sec-title">The brain that connects everything.</h2>
+      <p class="sec-lead">n8n is a visual automation tool: drag boxes, connect arrows, run. The open-source equivalent of Zapier, but without execution caps and with full control.</p>
+    </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">🧩 The pipeline (12 nodes)</h3>
+  <h3 class="h-sub">The pipeline (12 nodes)</h3>
   <div class="pipeline" data-reveal>
     <div class="pipeline__list">
       <div class="pipe-node"><span class="pipe-node__num">01</span><span class="pipe-node__emoji">🎬</span><div class="pipe-node__body"><div class="pipe-node__title">Manual Trigger</div><div class="pipe-node__desc">Entry point</div></div></div>
@@ -1531,7 +1922,7 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🚀 Possible evolutions</h3>
+  <h3 class="h-sub">Possible evolutions</h3>
   <div class="grid grid-3" data-reveal>
     <div class="card">
       <div class="card__role">Avoid duplicates</div>
@@ -1554,44 +1945,47 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
 <!-- ============================== §10 GITHUB ============================== -->
 <section class="section" id="github">
   <div class="sec-header" data-reveal>
-    <span class="sec-num">10 · 🐙 GitHub</span>
-    <h2 class="sec-title">Version control + free hosting</h2>
-    <p class="sec-lead">GitHub plays two roles here at the same time: it keeps the code's change history (version control) and it serves <code>landing.html</code> over HTTPS for free (GitHub Pages).</p>
+    <div class="sec-num">10</div>
+    <div class="sec-title-wrap">
+      <span class="sec-eyebrow">GitHub</span>
+      <h2 class="sec-title">Version control + free hosting.</h2>
+      <p class="sec-lead">GitHub plays two roles here at the same time: it keeps the code's change history (version control) and it serves <code>landing.html</code> over HTTPS for free (GitHub Pages).</p>
+    </div>
   </div>
 
   <div class="grid grid-2" data-reveal>
     <div class="card">
-      <div class="card__icon" style="background:rgba(122,177,217,.1);">📁</div>
+      <div class="card__icon">📁</div>
       <div class="card__role">Repository</div>
       <h3 class="card__title">Public · Single branch</h3>
       <p class="card__text"><a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform" target="_blank">github.com/.../rc-celta-seat-availability-alert-platform</a>. A single <code>main</code> branch — for a small team, that's enough.</p>
     </div>
     <div class="card">
-      <div class="card__icon" style="background:rgba(63,185,80,.1);">🚀</div>
+      <div class="card__icon">🚀</div>
       <div class="card__role">Automatic deploy</div>
       <h3 class="card__title">GitHub Pages</h3>
       <p class="card__text">Every <code>git push</code> triggers a re-deploy. 30–60 seconds later the changes are live with an auto-renewed HTTPS certificate.</p>
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🧹 What's versioned, what isn't</h3>
+  <h3 class="h-sub">What's versioned, what isn't</h3>
   <div class="compare" data-reveal>
     <div class="compare__col" style="border-left:3px solid var(--success);">
-      <h4>✅ In the repo</h4>
-      <ul style="list-style:none; padding:0; font-size:.9rem; color:var(--text-1);">
-        <li style="padding:.3rem 0;">Code (<code>generate-landing.js</code>, build scripts)</li>
-        <li style="padding:.3rem 0;">Final landing (<code>landing.html</code>, <code>index.html</code>)</li>
-        <li style="padding:.3rem 0;">Brand assets (crest, logos)</li>
-        <li style="padding:.3rem 0;">n8n workflow (with secrets stubbed out)</li>
-        <li style="padding:.3rem 0;">Documentation (<code>README.md</code>, <code>manual.html</code>)</li>
+      <h4 style="color:var(--success);">✓ In the repo</h4>
+      <ul style="list-style:none; padding:0; font-size:.92rem; color:var(--ink-2); line-height:2;">
+        <li>Code (<code>generate-landing.js</code>, build scripts)</li>
+        <li>Final landing (<code>landing.html</code>, <code>index.html</code>)</li>
+        <li>Brand assets (crest, logos)</li>
+        <li>n8n workflow (with secrets stubbed out)</li>
+        <li>Documentation (<code>README.md</code>, <code>manual.html</code>)</li>
       </ul>
     </div>
     <div class="compare__col" style="border-left:3px solid var(--error);">
-      <h4>🚫 Gitignored</h4>
-      <ul style="list-style:none; padding:0; font-size:.9rem; color:var(--text-1);">
-        <li style="padding:.3rem 0;"><code>.env</code> with real credentials</li>
-        <li style="padding:.3rem 0;">Heavy regenerable artifacts</li>
-        <li style="padding:.3rem 0;">Local IDE / tooling config</li>
+      <h4 style="color:var(--error);">✗ Gitignored</h4>
+      <ul style="list-style:none; padding:0; font-size:.92rem; color:var(--ink-2); line-height:2;">
+        <li><code>.env</code> with real credentials</li>
+        <li>Heavy regenerable artifacts</li>
+        <li>Local IDE / tooling config</li>
       </ul>
     </div>
   </div>
@@ -1608,18 +2002,21 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
 <!-- ============================== §11 GA4 ============================== -->
 <section class="section" id="ga4">
   <div class="sec-header" data-reveal>
-    <span class="sec-num">11 · 📊 Google Analytics 4</span>
-    <h2 class="sec-title">Measuring what matters</h2>
-    <p class="sec-lead">The <code>measurement_id</code> is embedded in the landing. GA4 captures traffic and events automatically; we add a custom <code>generate_lead</code> event when the form submits successfully.</p>
+    <div class="sec-num">11</div>
+    <div class="sec-title-wrap">
+      <span class="sec-eyebrow">Google Analytics 4</span>
+      <h2 class="sec-title">Measuring what matters.</h2>
+      <p class="sec-lead">The <code>measurement_id</code> is embedded in the landing. GA4 captures traffic and events automatically; we add a custom <code>generate_lead</code> event when the form submits successfully.</p>
+    </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:1rem 0 .75rem; font-size:1.2rem;">📈 Recovery dashboard — illustrative numbers</h3>
+  <h3 class="h-sub">Recovery dashboard — illustrative numbers</h3>
   <div class="dash" data-reveal>
     <div class="dash__title">Ticket availability alerts · Last 30 days</div>
     <div class="dash__grid">
       <div class="kpi">
         <span class="kpi__label">Signup rate</span>
-        <div class="kpi__value kpi__value--blue">24.3%</div>
+        <div class="kpi__value">24.3%</div>
         <div class="kpi__bar"><div class="kpi__bar-fill" style="width:24%;"></div></div>
         <div class="kpi__delta">page_view → generate_lead</div>
       </div>
@@ -1644,7 +2041,7 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🎛️ Custom parameters on <code>generate_lead</code></h3>
+  <h3 class="h-sub">Custom parameters on <code>generate_lead</code></h3>
   <div class="matrix" data-reveal>
     <table>
       <thead><tr><th style="width:40%;">Parameter</th><th>Example</th><th style="width:15%; text-align:center;">Custom dim</th></tr></thead>
@@ -1672,9 +2069,12 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
 <!-- ============================== §12 LEGAL ============================== -->
 <section class="section" id="legal">
   <div class="sec-header" data-reveal>
-    <span class="sec-num">12 · ⚖️ Legal &amp; Privacy</span>
-    <h2 class="sec-title">GDPR · LOPDGDD · LSSI-CE</h2>
-    <p class="sec-lead">Three regulations overlap in this project. All are mandatory if you operate in Spain. They're not "nice to have" — without compliance, the platform cannot go to production.</p>
+    <div class="sec-num">12</div>
+    <div class="sec-title-wrap">
+      <span class="sec-eyebrow">Legal &amp; Privacy</span>
+      <h2 class="sec-title">GDPR · LOPDGDD · LSSI-CE.</h2>
+      <p class="sec-lead">Three regulations overlap in this project. All are mandatory if you operate in Spain. They're not "nice to have" — without compliance, the platform cannot go to production.</p>
+    </div>
   </div>
 
   <div class="laws" data-reveal>
@@ -1682,7 +2082,7 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
       <div class="law__head">
         <span class="law__flag">🇪🇺</span>
         <div>
-          <span class="law__title">GDPR (RGPD)</span>
+          <div class="law__title">GDPR (RGPD)</div>
           <div class="law__code">General Data Protection Regulation · EU 2016/679</div>
         </div>
       </div>
@@ -1700,7 +2100,7 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
       <div class="law__head">
         <span class="law__flag">🇪🇸</span>
         <div>
-          <span class="law__title">LOPDGDD</span>
+          <div class="law__title">LOPDGDD</div>
           <div class="law__code">Spanish Organic Law 3/2018</div>
         </div>
       </div>
@@ -1717,7 +2117,7 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
       <div class="law__head">
         <span class="law__flag">📧</span>
         <div>
-          <span class="law__title">LSSI-CE</span>
+          <div class="law__title">LSSI-CE</div>
           <div class="law__code">Spanish Law 34/2002 · Information Society Services</div>
         </div>
       </div>
@@ -1732,7 +2132,7 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
     </div>
   </div>
 
-  <h3 style="color:var(--text-0); margin:2.5rem 0 .75rem; font-size:1.2rem;">🔍 Where the platform stands today</h3>
+  <h3 class="h-sub">Where the platform stands today</h3>
   <div class="matrix" data-reveal>
     <table>
       <thead><tr><th>Requirement</th><th style="text-align:center; width:80px;">Status</th></tr></thead>
@@ -1795,7 +2195,7 @@ tag NOT ∋     <strong style="color:var(--celta-red-2);">notified:event-4587-gr
   </div>
   <div class="bottom">
     <span>© 2026 · IE Business School · AI Marketing Lab</span>
-    <span>Built with ❤️ using tools you already knew</span>
+    <span>Built with tools you already knew.</span>
   </div>
 </footer>
 
