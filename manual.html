@@ -2601,23 +2601,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
     <div class="callout__icon">💡</div>
     <div class="callout__body">
       <h4>Free alternative — same tutorial, different provider</h4>
-      <p>If you don't want to pay for Mandrill, substitute any free transactional-email service: <strong>Resend</strong> (3 000/month), <strong>SendGrid</strong> (100/day), <strong>Postmark</strong> (trial), or <strong>Mailgun</strong> (trial). Sign up, verify your domain, grab an API key, and add it to <code>.env</code> as <code>RESEND_API_KEY</code> (or the equivalent). When you run the Claude Code prompt below, just say <em>"use Resend instead of Mandrill"</em> — the HTML template and logic stay identical.</p>
-    </div>
-  </div>
-
-  <h3 class="h-sub">Build the alert sender · 1 prompt</h3>
-  <p style="color:var(--ink-3); max-width:720px;">Your Mandrill account is ready to send. One prompt turns the email mockup you saw above into a working function you can trigger whenever seats free up.</p>
-
-  <div class="prompt" data-reveal>
-    <div class="prompt__badge">01</div>
-    <div class="prompt__body">
-      <div class="prompt__head">
-        <span class="prompt__title">Build the availability-alert sender</span>
-        <span class="prompt__artefact">→ send-alert.js</span>
-      </div>
-      <div class="prompt__quote">Build a function that sends an alert email through <strong>Mandrill</strong>. It takes the fan's <strong>first name</strong>, <strong>email</strong>, the <strong>match name</strong>, the <strong>grada name</strong>, and the number of <strong>seats available</strong>. Send them a branded HTML email — sky-blue header with <em>"RC Celta · Entradas"</em>, a big red <em>"¡Hay entradas!"</em> title, a card with the match / grada / availability recap, and a red <em>"Comprar entrada"</em> button linking to the ONEBOX seat-map URL (<code>https://tickets.oneboxtds.com/rccelta/select/{sessionId}?viewCode=V_blockmap</code>) with UTMs: <code>utm_source=avisame</code>, <code>utm_medium=email</code>, <code>utm_campaign=recovery-app</code>. Also tag each send with <code>avisame</code>, <code>event-{id}</code>, <code>grada-{id}</code> so we can filter in Mandrill Analytics. My Mandrill API key is in the <strong>.env</strong> file. Save the function as <strong>send-alert.js</strong> and test it once by sending to my own email.</div>
-      <p class="prompt__result"><strong>What Claude will do:</strong> write the HTML email template matching the mockup above, build <code>send-alert.js</code> that wraps Mandrill's send API, and run a single test send to the address in your <code>.env</code>.</p>
-      <p class="prompt__result"><strong>How to verify:</strong> check your inbox within a minute — the branded email arrives with a working "Comprar entrada" button. Then open Mandrill → <strong>Outbound Activity</strong>; your send appears with delivery / open / click tracking already enabled.</p>
+      <p>If you don't want to pay for Mandrill, substitute any free transactional-email service: <strong>Resend</strong> (3 000/month), <strong>SendGrid</strong> (100/day), <strong>Postmark</strong> (trial), or <strong>Mailgun</strong> (trial). Sign up, verify your domain, grab an API key, and add it to <code>.env</code> as <code>RESEND_API_KEY</code> (or the equivalent). In §10 you'll swap the n8n Mandrill node for the matching one (Resend / SendGrid / SMTP) — the HTML body and tags stay identical.</p>
     </div>
   </div>
 
@@ -2625,7 +2609,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
     <div class="callout__icon">✅</div>
     <div class="callout__body">
       <h4>What's next</h4>
-      <p>You can now send one alert email on demand. Section 10 introduces <strong>n8n</strong> — the automation that watches ONEBOX continuously, reads Mailchimp for the right subscribers, and fires this <code>send-alert.js</code> at exactly the fans who asked to be notified.</p>
+      <p>Mandrill is verified and ready to send. Section 10 introduces <strong>n8n</strong> — the automation that watches ONEBOX continuously, reads Mailchimp for the right subscribers, and calls Mandrill directly (via its native n8n node) to alert exactly the fans who asked to be notified.</p>
     </div>
   </div>
 </section>
