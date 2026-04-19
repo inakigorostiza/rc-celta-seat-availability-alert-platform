@@ -10,14 +10,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <style>
     /* =========================================================
-       DESIGN SYSTEM — IE Business School inspired
+       DESIGN SYSTEM — IE Business School
+       Blue-dominant palette, UPPERCASE bold, editorial
     ========================================================= */
     :root {
       /* Surfaces */
       --bg:          #FFFFFF;
-      --bg-soft:     #F7F7F7;
+      --bg-soft:     #F5F5F5;
       --bg-elev:     #FAFAFA;
-      --surface-hi:  #0A0A0A;    /* inverse surface for contrast blocks */
 
       /* Text */
       --ink:         #0A0A0A;
@@ -26,22 +26,27 @@
       --ink-4:       #737373;
       --ink-5:       #A3A3A3;
 
-      /* Accents */
-      --red:         #E4002B;    /* IE Red — the signature */
-      --red-dark:    #B8001F;
-      --red-soft:    #FBE6EB;
+      /* IE brand — blue-first, red as tiny accent */
+      --ie-blue:     #0030A8;   /* deep cobalt — IE's dominant color */
+      --ie-blue-2:   #0044D1;   /* hover/bright variant */
+      --ie-blue-dark:#001F6E;   /* deeper blue for gradients */
+      --ie-blue-soft:#E6EBF5;   /* pale backdrop */
+      --ie-red:      #E4002B;   /* reserved for logo mark + tiny accents */
+
+      /* Legacy (still used inside Celta-specific email mockup) */
       --celta-blue:  #7AB1D9;
       --celta-navy:  #0A1A3A;
 
       /* Lines & utility */
       --line:        #E5E5E5;
       --line-hi:     #D4D4D4;
-      --success:     #0A8754;
+      --success:     #15803D;
       --warning:     #B45309;
       --error:       #DC2626;
 
-      --radius:      14px;
-      --radius-sm:   6px;
+      --radius:      6px;
+      --radius-sm:   4px;
+      --radius-lg:   14px;
       --trans:       .2s cubic-bezier(.4, 0, .2, 1);
       --ease-out:    cubic-bezier(.16, 1, .3, 1);
 
@@ -64,10 +69,10 @@
       overflow-x: hidden;
       font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
     }
-    ::selection { background: var(--red); color: #fff; }
-    a { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color var(--trans); }
-    a:hover { color: var(--red); }
-    code { font-family: var(--font-mono); font-size: .88em; background: var(--bg-soft); padding: .1em .35em; border-radius: 4px; color: var(--ink); font-weight: 500; }
+    ::selection { background: var(--ie-blue); color: #fff; }
+    a { color: var(--ie-blue); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color var(--trans); }
+    a:hover { color: var(--ie-blue-2); }
+    code { font-family: var(--font-mono); font-size: .88em; background: var(--bg-soft); padding: .12em .42em; border-radius: 3px; color: var(--ink); font-weight: 500; }
     pre { font-family: var(--font-mono); overflow-x: auto; }
 
     /* =========================================================
@@ -88,37 +93,52 @@
       z-index: 50;
     }
     .nav__brand {
-      display: flex; align-items: center; gap: .9rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
       padding-bottom: 1.5rem;
       margin-bottom: 1.75rem;
       border-bottom: 1px solid var(--line);
     }
-    .nav__crest {
-      width: 36px; height: 36px; flex-shrink: 0;
+    .ie-logo {
+      flex-shrink: 0;
+      width: 44px; height: 28px;
+      background: var(--ie-red);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: var(--font-sans);
+      font-weight: 900;
+      font-size: 1rem;
+      letter-spacing: -.03em;
+      line-height: 1;
     }
     .nav__brand-text {
       display: block;
-      font-family: var(--font-sans);
       line-height: 1.2;
     }
     .nav__brand-title {
-      font-size: .95rem;
+      font-size: .85rem;
       font-weight: 700;
       color: var(--ink);
-      letter-spacing: -.01em;
+      letter-spacing: .02em;
+      text-transform: uppercase;
       display: block;
     }
     .nav__brand-sub {
-      font-size: .7rem;
+      font-size: .65rem;
       color: var(--ink-4);
       text-transform: uppercase;
-      letter-spacing: .14em;
+      letter-spacing: .16em;
       margin-top: .2rem;
+      font-weight: 600;
     }
     .nav__label {
-      font-size: .68rem;
+      font-size: .65rem;
       font-weight: 700;
-      letter-spacing: .18em;
+      letter-spacing: .2em;
       color: var(--ink-5);
       text-transform: uppercase;
       margin: 1.75rem 0 .75rem;
@@ -132,11 +152,13 @@
     .nav__item a {
       display: flex;
       align-items: baseline;
-      gap: .75rem;
+      gap: .85rem;
       padding: .5rem .6rem;
       color: var(--ink-3);
-      font-size: .9rem;
-      font-weight: 500;
+      font-size: .82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .03em;
       text-decoration: none;
       border-radius: var(--radius-sm);
       transition: all var(--trans);
@@ -147,9 +169,9 @@
       background: var(--bg-soft);
     }
     .nav__item a.active {
-      color: var(--ink);
-      background: var(--red-soft);
-      font-weight: 600;
+      color: var(--ie-blue);
+      background: var(--ie-blue-soft);
+      font-weight: 700;
     }
     .nav__item a.active::before {
       content: "";
@@ -158,17 +180,18 @@
       top: 50%;
       transform: translateY(-50%);
       width: 3px; height: 18px;
-      background: var(--red);
+      background: var(--ie-blue);
       border-radius: 0 3px 3px 0;
     }
     .nav__num {
       font-family: var(--font-mono);
-      font-size: .72rem;
+      font-size: .7rem;
       color: var(--ink-5);
       min-width: 1.6rem;
       font-variant-numeric: tabular-nums;
+      font-weight: 600;
     }
-    .nav__item a.active .nav__num { color: var(--red); font-weight: 700; }
+    .nav__item a.active .nav__num { color: var(--ie-blue); }
 
     .nav__ctas {
       margin-top: 2.25rem;
@@ -180,29 +203,30 @@
       display: inline-flex;
       align-items: center;
       justify-content: space-between;
-      padding: .7rem .9rem;
-      border-radius: var(--radius-sm);
-      font-size: .82rem;
-      font-weight: 500;
-      border: 1px solid var(--line);
+      padding: .75rem .95rem;
+      border-radius: 0;
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      border: 1px solid var(--ink);
       color: var(--ink);
       background: var(--bg);
       text-decoration: none;
       transition: all var(--trans);
     }
     .nav__cta:hover {
-      border-color: var(--ink);
-      color: var(--ink);
-    }
-    .nav__cta--primary {
       background: var(--ink);
       color: #fff;
-      border-color: var(--ink);
+    }
+    .nav__cta--primary {
+      background: var(--ie-blue);
+      color: #fff;
+      border-color: var(--ie-blue);
     }
     .nav__cta--primary:hover {
-      background: var(--red);
-      border-color: var(--red);
-      color: #fff;
+      background: var(--ie-blue-dark);
+      border-color: var(--ie-blue-dark);
     }
 
     main { padding: 0; }
@@ -213,6 +237,16 @@
       border-top: 1px solid var(--line);
     }
     .section:first-of-type { border-top: none; }
+    .section--wide {
+      max-width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .section--wide .section__inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
 
     /* Mobile */
     .nav__toggle { display: none; }
@@ -230,92 +264,94 @@
         align-items: center; justify-content: center;
         position: fixed; top: 1rem; right: 1rem; z-index: 100;
         width: 44px; height: 44px;
-        background: var(--ink); border: none; color: #fff;
-        border-radius: 8px; cursor: pointer;
+        background: var(--ie-blue); border: none; color: #fff;
+        border-radius: 4px; cursor: pointer;
       }
-      .section { padding: 4.5rem 1.5rem; }
+      .section, .section--wide .section__inner { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .section { padding-top: 4.5rem; padding-bottom: 4.5rem; }
       .hero { padding: 6rem 1.5rem 4rem !important; }
-      .hero__title { font-size: 3rem !important; }
-      .hero__meta { gap: 1.5rem !important; }
+      .hero__title { font-size: 2.5rem !important; }
     }
 
     /* =========================================================
-       HERO — editorial, typography-led
+       HERO — photography-overlay inspired, bold UPPERCASE
     ========================================================= */
     .hero {
-      padding: 9rem 4rem 6rem;
+      padding: 7rem 4rem 5rem;
       max-width: 1120px;
       margin: 0 auto;
-      position: relative;
     }
     .hero__eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: .7rem;
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .14em;
+      gap: .8rem;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--ink);
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
     }
     .hero__eyebrow::before {
       content: "";
-      width: 40px; height: 2px;
-      background: var(--red);
+      width: 44px; height: 2px;
+      background: var(--ie-red);
     }
     .hero__title {
       font-family: var(--font-sans);
-      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-size: clamp(2.75rem, 6.5vw, 5.75rem);
       font-weight: 900;
       color: var(--ink);
-      line-height: .95;
+      line-height: 1;
       letter-spacing: -.035em;
+      text-transform: uppercase;
       margin-bottom: 2rem;
     }
     .hero__title .accent {
-      color: var(--red);
+      color: var(--ie-blue);
       font-style: italic;
       font-family: var(--font-serif);
       font-weight: 400;
+      text-transform: none;
       letter-spacing: -.01em;
     }
     .hero__lead {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: var(--ink-3);
-      max-width: 660px;
+      max-width: 680px;
       line-height: 1.55;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
       font-weight: 400;
     }
     .hero__ctas {
       display: flex;
       gap: .75rem;
       flex-wrap: wrap;
-      margin-bottom: 5rem;
+      margin-bottom: 4rem;
     }
     .btn {
       display: inline-flex;
       align-items: center;
       gap: .6rem;
-      padding: 1rem 1.75rem;
-      border-radius: 999px;
+      padding: .95rem 1.75rem;
+      border-radius: 0;
       font-family: inherit;
-      font-size: .92rem;
-      font-weight: 600;
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
       transition: all var(--trans);
       cursor: pointer;
       border: 1px solid transparent;
       text-decoration: none;
     }
     .btn--primary {
-      background: var(--ink);
+      background: var(--ie-blue);
       color: #fff;
     }
     .btn--primary:hover {
-      background: var(--red);
+      background: var(--ie-blue-dark);
       color: #fff;
-      transform: translateY(-1px);
     }
     .btn--secondary {
       background: transparent;
@@ -327,37 +363,55 @@
       color: #fff;
     }
 
-    .hero__meta {
+    /* IE-style ranking block — big numbers on blue */
+    .ranking {
+      background: var(--ie-blue);
+      color: #fff;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 2.5rem;
-      padding-top: 3rem;
-      border-top: 1px solid var(--line);
+      overflow: hidden;
     }
-    @media (max-width: 700px) { .hero__meta { grid-template-columns: repeat(2, 1fr); } }
-    .hero__metaitem {
-      font-size: .85rem;
-      color: var(--ink-4);
+    @media (max-width: 700px) { .ranking { grid-template-columns: repeat(2, 1fr); } }
+    .ranking__cell {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid rgba(255,255,255,.15);
+      border-bottom: 1px solid rgba(255,255,255,.15);
     }
-    .hero__metaval {
+    .ranking__cell:last-child,
+    .ranking__cell:nth-child(4n) { border-right: none; }
+    @media (max-width: 700px) {
+      .ranking__cell:nth-child(2n) { border-right: none; }
+      .ranking__cell { border-right: 1px solid rgba(255,255,255,.15) !important; }
+      .ranking__cell:nth-child(2n) { border-right: none !important; }
+    }
+    .ranking__num {
       display: block;
       font-family: var(--font-sans);
-      font-size: 3rem;
-      font-weight: 800;
-      color: var(--ink);
+      font-size: 4rem;
+      font-weight: 900;
       line-height: 1;
-      letter-spacing: -.02em;
-      margin-bottom: .5rem;
+      letter-spacing: -.04em;
+      margin-bottom: .4rem;
+      color: #fff;
     }
-    .hero__metalabel {
+    .ranking__num sup {
+      font-size: 1.25rem;
+      font-weight: 700;
+      vertical-align: super;
+      margin-left: .15rem;
+      letter-spacing: 0;
+    }
+    .ranking__label {
       font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .14em;
       text-transform: uppercase;
-      letter-spacing: .12em;
-      color: var(--ink-4);
+      color: rgba(255,255,255,.85);
+      line-height: 1.3;
     }
 
     /* =========================================================
-       SECTION HEADER
+       SECTION HEADER — IE editorial: big italic number + UPPERCASE title
     ========================================================= */
     .sec-header {
       display: grid;
@@ -371,51 +425,55 @@
     }
     .sec-num {
       font-family: var(--font-serif);
-      font-size: 2.5rem;
-      color: var(--red);
+      font-size: 2.75rem;
+      color: var(--ie-blue);
       line-height: 1;
       font-weight: 400;
       font-style: italic;
-      padding-top: .3rem;
+      padding-top: .35rem;
       letter-spacing: -.02em;
     }
     .sec-title-wrap { }
     .sec-eyebrow {
       display: inline-block;
-      font-size: .72rem;
+      font-size: .68rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: .18em;
-      color: var(--red);
-      margin-bottom: 1rem;
+      letter-spacing: .22em;
+      color: var(--ie-blue);
+      margin-bottom: 1.25rem;
     }
     .sec-title {
-      font-size: clamp(2rem, 4vw, 3.25rem);
-      font-weight: 800;
+      font-size: clamp(1.9rem, 3.8vw, 3rem);
+      font-weight: 900;
       color: var(--ink);
       line-height: 1.05;
       letter-spacing: -.025em;
       margin-bottom: 1.25rem;
+      text-transform: uppercase;
     }
     .sec-lead {
       color: var(--ink-3);
-      font-size: 1.12rem;
+      font-size: 1.1rem;
       line-height: 1.6;
       max-width: 720px;
       font-weight: 400;
     }
 
-    h3.h-sub, .h-sub {
-      font-size: 1.5rem;
+    .h-sub {
+      font-size: .78rem;
       font-weight: 700;
       color: var(--ink);
-      letter-spacing: -.01em;
+      letter-spacing: .2em;
+      text-transform: uppercase;
       margin: 3rem 0 1.25rem;
       line-height: 1.2;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
     }
 
     /* =========================================================
-       CALLOUT BOXES — IE style: minimal with top accent
+       CALLOUT BOXES
     ========================================================= */
     .callout {
       display: grid;
@@ -423,7 +481,7 @@
       gap: 1rem;
       padding: 1.5rem 1.75rem;
       background: var(--bg-soft);
-      border-radius: var(--radius-sm);
+      border-radius: 0;
       margin: 2rem 0;
       border-left: 3px solid var(--ink);
     }
@@ -432,9 +490,9 @@
       line-height: 1.4;
     }
     .callout__body h4 {
-      font-size: .72rem;
+      font-size: .7rem;
       font-weight: 800;
-      letter-spacing: .14em;
+      letter-spacing: .18em;
       text-transform: uppercase;
       margin-bottom: .5rem;
       color: var(--ink);
@@ -445,33 +503,37 @@
       font-size: .98rem;
       line-height: 1.6;
     }
-    .callout--tip  { border-left-color: var(--red); }
-    .callout--tip h4  { color: var(--red); }
+    .callout--tip  { border-left-color: var(--ie-blue); }
+    .callout--tip h4  { color: var(--ie-blue); }
     .callout--good { border-left-color: var(--success); }
     .callout--good h4 { color: var(--success); }
     .callout--warn { border-left-color: var(--warning); }
     .callout--warn h4 { color: var(--warning); }
-    .callout--class { border-left-color: var(--celta-navy); background: #F3F5FA; }
-    .callout--class h4 { color: var(--celta-navy); }
+    .callout--class { border-left-color: var(--ie-red); background: #FDEEF0; }
+    .callout--class h4 { color: var(--ie-red); }
 
     /* =========================================================
-       GRID CARDS — minimal, no shadows
+       BLUE CARDS — IE signature treatment (solid blue, white text)
     ========================================================= */
-    .grid { display: grid; gap: 1.5rem; }
+    .grid { display: grid; gap: 1.25rem; }
     .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
     .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
     .card {
-      background: var(--bg);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
+      background: var(--ie-blue);
+      color: #fff;
+      border: 1px solid var(--ie-blue);
+      border-radius: 0;
       padding: 2rem 1.75rem;
       transition: all var(--trans);
       display: flex;
       flex-direction: column;
+      min-height: 220px;
+      position: relative;
+      overflow: hidden;
     }
     .card:hover {
-      border-color: var(--ink);
+      background: var(--ie-blue-dark);
       transform: translateY(-2px);
     }
     .card__icon {
@@ -479,32 +541,54 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--bg-soft);
-      border-radius: 10px;
+      background: rgba(255,255,255,.12);
+      border-radius: 4px;
       font-size: 1.3rem;
       margin-bottom: 1.25rem;
     }
     .card__role {
-      font-size: .68rem;
+      font-size: .62rem;
       font-weight: 700;
-      letter-spacing: .16em;
-      color: var(--red);
+      letter-spacing: .22em;
+      color: rgba(255,255,255,.7);
       text-transform: uppercase;
-      margin-bottom: .6rem;
+      margin-bottom: .7rem;
     }
     .card__title {
       font-size: 1.2rem;
       font-weight: 700;
-      color: var(--ink);
-      margin-bottom: .6rem;
+      color: #fff;
+      margin-bottom: .7rem;
       letter-spacing: -.01em;
       line-height: 1.2;
     }
     .card__text {
-      font-size: .95rem;
-      color: var(--ink-3);
+      font-size: .92rem;
+      color: rgba(255,255,255,.85);
       line-height: 1.55;
     }
+    .card code {
+      background: rgba(255,255,255,.15);
+      color: #fff;
+    }
+
+    /* Alt card — white, for sections where blue would be overwhelming */
+    .card--light {
+      background: var(--bg);
+      color: var(--ink-2);
+      border: 1px solid var(--line);
+    }
+    .card--light:hover {
+      background: var(--bg);
+      border-color: var(--ink);
+    }
+    .card--light .card__icon {
+      background: var(--bg-soft);
+    }
+    .card--light .card__role { color: var(--ie-blue); }
+    .card--light .card__title { color: var(--ink); }
+    .card--light .card__text { color: var(--ink-3); }
+    .card--light code { background: var(--bg-soft); color: var(--ink); }
 
     /* =========================================================
        ARCHITECTURE DIAGRAM
@@ -513,25 +597,24 @@
       margin: 2rem 0;
       padding: 2.5rem 2rem;
       background: var(--bg-soft);
-      border-radius: var(--radius);
+      border: 1px solid var(--line);
       overflow-x: auto;
     }
     .arch__grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
+      gap: 1rem;
       min-width: 720px;
     }
     .arch__node {
       background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: 10px;
       padding: 1.3rem 1.1rem;
       text-align: center;
       transition: all var(--trans);
     }
     .arch__node:hover {
-      border-color: var(--ink);
+      border-color: var(--ie-blue);
     }
     .arch__node--source {
       grid-column: 1 / span 3;
@@ -546,20 +629,21 @@
     .arch__node--out-right { grid-column: 3; grid-row: 3; }
     .arch__node--analytics {
       grid-column: 1 / span 3; grid-row: 4;
-      background: var(--red);
-      border-color: var(--red);
+      background: var(--ie-blue);
+      border-color: var(--ie-blue);
     }
     .arch__node--analytics h5 { color: #fff; }
     .arch__node--analytics p { color: rgba(255,255,255,.85); }
     .arch__node h5 {
-      font-size: 1rem;
+      font-size: .85rem;
       color: var(--ink);
       font-weight: 700;
       margin-bottom: .3rem;
-      letter-spacing: -.01em;
+      letter-spacing: .05em;
+      text-transform: uppercase;
     }
     .arch__node p {
-      font-size: .82rem;
+      font-size: .78rem;
       color: var(--ink-4);
       margin: 0;
     }
@@ -569,12 +653,13 @@
       margin-bottom: .55rem;
     }
     .arch__legend {
-      font-size: .72rem;
+      font-size: .7rem;
       color: var(--ink-4);
       text-align: center;
       margin-top: 1.25rem;
       text-transform: uppercase;
-      letter-spacing: .12em;
+      letter-spacing: .16em;
+      font-weight: 600;
     }
 
     /* =========================================================
@@ -601,54 +686,53 @@
       position: absolute;
       left: -2.15rem; top: .15rem;
       width: 28px; height: 28px;
-      background: var(--bg);
-      border: 2px solid var(--ink);
-      border-radius: 50%;
+      background: var(--ie-blue);
+      border: none;
+      border-radius: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--font-mono);
-      font-size: .68rem;
+      font-size: .7rem;
       font-weight: 700;
-      color: var(--ink);
+      color: #fff;
     }
     .t-item__head {
       display: flex;
       align-items: center;
-      gap: .65rem;
+      gap: .7rem;
       margin-bottom: .5rem;
     }
     .t-item__head h4 {
-      font-size: 1.25rem;
+      font-size: 1rem;
       color: var(--ink);
-      font-weight: 700;
-      letter-spacing: -.01em;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .02em;
     }
-    .t-item__emoji { font-size: 1.25rem; }
+    .t-item__emoji { font-size: 1.1rem; }
     .t-item__body {
       color: var(--ink-3);
-      font-size: .98rem;
-      line-height: 1.55;
+      font-size: .95rem;
+      line-height: 1.6;
     }
     .t-item__out {
       display: inline-block;
       margin-top: .7rem;
       padding: .3rem .8rem;
       background: #DCFCE7;
-      border-radius: 999px;
       color: var(--success);
-      font-size: .75rem;
-      font-weight: 600;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
     }
 
     /* =========================================================
-       TABS — IE minimal
+       TABS
     ========================================================= */
     .tabs {
-      background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
       margin-top: 2rem;
     }
     .tabs__triggers {
@@ -663,27 +747,28 @@
       border: none;
       color: var(--ink-4);
       font: inherit;
-      font-size: .9rem;
-      font-weight: 600;
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
       cursor: pointer;
       border-bottom: 2px solid transparent;
       transition: all var(--trans);
       white-space: nowrap;
-      letter-spacing: -.005em;
     }
     .tabs__trigger:hover { color: var(--ink); }
     .tabs__trigger.active {
-      color: var(--ink);
-      border-bottom-color: var(--red);
+      color: var(--ie-blue);
+      border-bottom-color: var(--ie-blue);
       background: var(--bg);
     }
     .tabs__panel { display: none; padding: 2.5rem; }
     .tabs__panel.active { display: block; }
     .tabs__panel h4 {
       color: var(--ink);
-      font-size: .8rem;
+      font-size: .72rem;
       font-weight: 700;
-      letter-spacing: .14em;
+      letter-spacing: .18em;
       text-transform: uppercase;
       margin: 1.75rem 0 .75rem;
     }
@@ -694,18 +779,17 @@
       gap: .7rem 1.5rem;
       margin-top: 1rem;
     }
-    .tabs__panel dt { font-weight: 600; color: var(--ink); font-size: .92rem; }
-    .tabs__panel dd { color: var(--ink-3); margin: 0; font-size: .92rem; line-height: 1.55; }
+    .tabs__panel dt { font-weight: 600; color: var(--ink); font-size: .9rem; }
+    .tabs__panel dd { color: var(--ink-3); margin: 0; font-size: .9rem; line-height: 1.55; }
     .breadcrumb {
       display: inline-flex;
       align-items: center;
-      gap: .35rem;
+      gap: .4rem;
       font-family: var(--font-mono);
-      font-size: .82rem;
+      font-size: .8rem;
       color: var(--ink-2);
       background: var(--bg-soft);
       padding: .5rem .85rem;
-      border-radius: var(--radius-sm);
       border: 1px solid var(--line);
     }
     .breadcrumb svg { color: var(--ink-5); flex-shrink: 0; }
@@ -716,16 +800,15 @@
     .tree {
       font-family: var(--font-mono);
       background: var(--bg-soft);
-      border-radius: var(--radius);
       padding: 1.75rem;
-      font-size: .88rem;
+      font-size: .86rem;
       line-height: 2;
       color: var(--ink-2);
       margin: 1.5rem 0;
       overflow-x: auto;
       border: 1px solid var(--line);
     }
-    .tree__key { color: var(--ink); font-weight: 600; }
+    .tree__key { color: var(--ie-blue); font-weight: 600; }
     .tree__annot { color: var(--ink-4); font-style: italic; }
 
     /* =========================================================
@@ -737,26 +820,25 @@
       gap: 1rem;
       background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
       padding: 1.1rem 1.25rem;
       margin: .6rem 0;
       transition: all var(--trans);
     }
-    .endpoint:hover { border-color: var(--ink); }
+    .endpoint:hover { border-color: var(--ie-blue); }
     .endpoint__method {
       padding: .3rem .55rem;
-      border-radius: 4px;
+      border-radius: 0;
       font-family: var(--font-mono);
-      font-size: .7rem;
+      font-size: .68rem;
       font-weight: 800;
-      letter-spacing: .05em;
+      letter-spacing: .08em;
     }
-    .endpoint__method--get  { background: #DCFCE7; color: var(--success); }
-    .endpoint__method--post { background: #FEF3C7; color: var(--warning); }
+    .endpoint__method--get  { background: var(--ie-blue); color: #fff; }
+    .endpoint__method--post { background: var(--ie-red); color: #fff; }
     .endpoint__path {
       font-family: var(--font-mono);
       color: var(--ink);
-      font-size: .88rem;
+      font-size: .86rem;
       font-weight: 600;
     }
     .endpoint__purpose { color: var(--ink-4); font-size: .85rem; margin-left: auto; }
@@ -768,7 +850,6 @@
       font-family: var(--font-mono);
       background: var(--ink);
       color: #E5E5E5;
-      border-radius: var(--radius-sm);
       padding: 1.5rem;
       font-size: .85rem;
       line-height: 2;
@@ -783,7 +864,7 @@
     }
     .url-box strong {
       font-weight: 600;
-      color: var(--red);
+      color: var(--ie-red);
     }
 
     /* =========================================================
@@ -792,35 +873,33 @@
     .flow {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin: 2rem 0;
-      counter-reset: flow-step;
     }
     .flow__step {
       background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
       padding: 1.75rem;
-      position: relative;
       transition: all var(--trans);
     }
-    .flow__step:hover { border-color: var(--ink); }
+    .flow__step:hover { border-color: var(--ie-blue); }
     .flow__num {
       display: block;
       font-family: var(--font-serif);
       font-style: italic;
       font-size: 2.5rem;
       font-weight: 400;
-      color: var(--red);
+      color: var(--ie-blue);
       line-height: 1;
       margin-bottom: 1rem;
     }
     .flow__step h5 {
       color: var(--ink);
-      font-size: 1rem;
+      font-size: .85rem;
       margin-bottom: .4rem;
-      font-weight: 700;
-      letter-spacing: -.01em;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
     }
     .flow__step p {
       color: var(--ink-3);
@@ -835,36 +914,36 @@
     .compare {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin: 2rem 0;
     }
     @media (max-width: 700px) { .compare { grid-template-columns: 1fr; } }
     .compare__col {
       background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
       padding: 2rem 1.75rem;
     }
     .compare__col h4 {
       color: var(--ink);
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: -.01em;
+      font-size: 1.1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .02em;
       margin-bottom: .4rem;
       display: flex;
       align-items: center;
-      gap: .6rem;
+      gap: .7rem;
+      flex-wrap: wrap;
     }
     .compare__col .tag-vs {
-      font-size: .65rem;
+      font-size: .62rem;
       font-weight: 700;
-      letter-spacing: .16em;
-      padding: .2rem .55rem;
-      border-radius: 999px;
+      letter-spacing: .2em;
+      padding: .25rem .6rem;
       text-transform: uppercase;
     }
-    .compare__col--merge .tag-vs { background: #FEF3C7; color: var(--warning); }
-    .compare__col--tags  .tag-vs { background: #DCFCE7; color: var(--success); }
+    .compare__col--merge .tag-vs { background: var(--warning); color: #fff; }
+    .compare__col--tags  .tag-vs { background: var(--success); color: #fff; }
     .compare__col p {
       font-size: .92rem;
       color: var(--ink-3);
@@ -874,7 +953,6 @@
     .compare__example {
       font-family: var(--font-mono);
       background: var(--bg-soft);
-      border-radius: var(--radius-sm);
       padding: 1rem;
       font-size: .78rem;
       color: var(--ink-2);
@@ -892,7 +970,7 @@
       max-width: 560px;
       margin: 2rem auto;
       background: #fff;
-      border-radius: var(--radius);
+      border-radius: 0;
       overflow: hidden;
       box-shadow: 0 24px 60px rgba(10,10,10,.08), 0 4px 12px rgba(10,10,10,.04);
       font-family: var(--font-sans);
@@ -975,12 +1053,11 @@
     .pipeline__list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: .75rem;
+      gap: .7rem;
     }
     .pipe-node {
       background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: 10px;
       padding: 1rem 1.1rem;
       display: flex;
       align-items: center;
@@ -988,130 +1065,135 @@
       transition: all var(--trans);
     }
     .pipe-node:hover {
-      border-color: var(--ink);
+      border-color: var(--ie-blue);
       transform: translateY(-1px);
     }
     .pipe-node__num {
       font-family: var(--font-mono);
-      font-size: .7rem;
-      color: var(--ink-5);
+      font-size: .68rem;
+      color: var(--ie-blue);
       font-weight: 700;
-      width: 1.3rem;
+      width: 1.4rem;
       flex-shrink: 0;
     }
     .pipe-node__emoji { font-size: 1.15rem; flex-shrink: 0; }
     .pipe-node__body { min-width: 0; }
     .pipe-node__title {
       color: var(--ink);
-      font-weight: 600;
-      font-size: .88rem;
-      margin-bottom: .15rem;
+      font-weight: 700;
+      font-size: .8rem;
+      margin-bottom: .1rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      letter-spacing: -.005em;
+      text-transform: uppercase;
+      letter-spacing: .03em;
     }
     .pipe-node__desc {
       color: var(--ink-4);
-      font-size: .75rem;
+      font-size: .74rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     /* =========================================================
-       GA4 MOCK DASHBOARD
+       GA4 MOCK DASHBOARD — IE blue-themed
     ========================================================= */
     .dash {
-      background: var(--bg);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 2rem;
+      background: var(--ie-blue);
+      color: #fff;
+      padding: 2.5rem 2rem;
       margin: 2rem 0;
     }
     .dash__title {
-      font-size: .72rem;
-      letter-spacing: .16em;
+      font-size: .7rem;
+      letter-spacing: .2em;
       text-transform: uppercase;
-      color: var(--red);
+      color: rgba(255,255,255,.7);
       font-weight: 700;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
     .dash__grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 1rem;
+      gap: 0;
     }
     .kpi {
-      background: var(--bg-soft);
-      border-radius: 10px;
-      padding: 1.25rem 1.35rem;
+      padding: 1.5rem 1.5rem 1.5rem 0;
+      border-right: 1px solid rgba(255,255,255,.15);
+    }
+    .kpi:last-child { border-right: none; }
+    @media (max-width: 700px) {
+      .kpi { border-right: none; border-bottom: 1px solid rgba(255,255,255,.15); padding-right: 0; padding-bottom: 1.25rem; }
+      .kpi:last-child { border-bottom: none; }
     }
     .kpi__label {
-      font-size: .7rem;
-      color: var(--ink-4);
+      font-size: .68rem;
+      color: rgba(255,255,255,.75);
       text-transform: uppercase;
-      letter-spacing: .12em;
-      margin-bottom: .5rem;
+      letter-spacing: .14em;
+      margin-bottom: .6rem;
       display: block;
       font-weight: 600;
     }
     .kpi__value {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--ink);
+      font-size: 3rem;
+      font-weight: 900;
+      color: #fff;
       line-height: 1;
-      margin-bottom: .5rem;
-      letter-spacing: -.02em;
+      margin-bottom: .6rem;
+      letter-spacing: -.03em;
     }
-    .kpi__value--red { color: var(--red); }
     .kpi__bar {
-      height: 4px;
-      border-radius: 2px;
-      background: var(--line);
+      height: 3px;
+      background: rgba(255,255,255,.2);
       overflow: hidden;
-      margin-top: .5rem;
+      margin-top: .6rem;
+      max-width: 180px;
     }
-    .kpi__bar-fill { height: 100%; background: var(--ink); }
-    .kpi__bar-fill--accent { background: var(--red); }
+    .kpi__bar-fill { height: 100%; background: #fff; }
+    .kpi__bar-fill--accent { background: var(--ie-red); }
     .kpi__delta {
-      font-size: .76rem;
-      color: var(--ink-4);
-      margin-top: .3rem;
+      font-size: .72rem;
+      color: rgba(255,255,255,.65);
+      margin-top: .35rem;
     }
 
     /* =========================================================
        LEGAL LAWS
     ========================================================= */
-    .laws { margin: 2rem 0; display: grid; gap: 1.25rem; }
+    .laws { margin: 2rem 0; display: grid; gap: 0; }
     .law {
       background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-bottom: none;
       padding: 2rem 1.75rem;
     }
+    .law:last-child { border-bottom: 1px solid var(--line); }
     .law__head {
       display: flex;
       align-items: baseline;
       gap: 1rem;
       margin-bottom: .8rem;
     }
-    .law__flag { font-size: 1.5rem; }
+    .law__flag { font-size: 1.4rem; }
     .law__title {
-      font-size: 1.35rem;
-      font-weight: 700;
+      font-size: 1.15rem;
+      font-weight: 800;
       color: var(--ink);
-      letter-spacing: -.01em;
+      text-transform: uppercase;
+      letter-spacing: .02em;
     }
     .law__code {
       font-family: var(--font-mono);
-      font-size: .72rem;
+      font-size: .7rem;
       color: var(--ink-4);
       margin-top: .15rem;
     }
     .law__desc {
       color: var(--ink-3);
-      font-size: .98rem;
+      font-size: .96rem;
       margin-bottom: 1rem;
       line-height: 1.55;
     }
@@ -1120,7 +1202,7 @@
       position: relative;
       padding-left: 1.75rem;
       margin-bottom: .5rem;
-      font-size: .94rem;
+      font-size: .92rem;
       color: var(--ink-2);
       line-height: 1.55;
     }
@@ -1128,35 +1210,31 @@
       content: "→";
       position: absolute;
       left: 0;
-      color: var(--red);
+      color: var(--ie-blue);
       font-weight: 700;
       font-family: var(--font-mono);
     }
 
     .matrix {
-      background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
       margin-top: 2rem;
     }
     .matrix table { width: 100%; border-collapse: collapse; }
     .matrix th {
       text-align: left;
       padding: 1rem 1.5rem;
-      background: var(--bg-soft);
+      background: var(--ink);
+      color: #fff;
       font-size: .7rem;
       font-weight: 700;
-      letter-spacing: .14em;
-      color: var(--ink-4);
+      letter-spacing: .18em;
       text-transform: uppercase;
-      border-bottom: 1px solid var(--line);
     }
     .matrix td {
       padding: 1rem 1.5rem;
       border-bottom: 1px solid var(--line);
       color: var(--ink-2);
-      font-size: .94rem;
+      font-size: .93rem;
     }
     .matrix tr:last-child td { border-bottom: none; }
     .status {
@@ -1180,10 +1258,9 @@
       padding-bottom: 56.25%;
       height: 0;
       margin: 2rem 0;
-      border-radius: var(--radius);
+      border-radius: 0;
       overflow: hidden;
       background: var(--bg-soft);
-      box-shadow: 0 24px 60px rgba(10,10,10,.1), 0 4px 12px rgba(10,10,10,.06);
       border: 1px solid var(--line);
     }
     .video-wrap iframe {
@@ -1194,12 +1271,12 @@
     }
 
     /* =========================================================
-       FOOTER
+       FOOTER — IE signature blue
     ========================================================= */
     footer {
       padding: 5rem 4rem 3rem;
-      background: var(--ink);
-      color: var(--ink-5);
+      background: var(--ie-blue);
+      color: rgba(255,255,255,.85);
     }
     footer .footer-inner {
       max-width: 1120px;
@@ -1210,53 +1287,57 @@
     }
     @media (max-width: 800px) { footer .footer-inner { grid-template-columns: 1fr; gap: 2rem; } }
     footer h4 {
-      font-size: .72rem;
+      font-size: .7rem;
       font-weight: 700;
-      letter-spacing: .16em;
+      letter-spacing: .2em;
       color: #fff;
       text-transform: uppercase;
       margin-bottom: 1.25rem;
     }
     footer ul { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
     footer a {
-      color: var(--ink-5);
+      color: rgba(255,255,255,.85);
       text-decoration: none;
-      font-size: .9rem;
+      font-size: .85rem;
+      transition: color var(--trans);
     }
     footer a:hover { color: #fff; }
     footer .footer-brand {
-      color: #fff;
-      font-weight: 700;
       display: flex;
       align-items: center;
       gap: .75rem;
-      margin-bottom: 1rem;
-      font-size: 1.05rem;
-      letter-spacing: -.01em;
+      margin-bottom: 1.25rem;
     }
-    footer .footer-brand img {
-      width: 36px; height: 36px;
-      filter: brightness(1.1);
+    footer .footer-brand .ie-logo {
+      background: var(--ie-red);
+    }
+    footer .footer-brand-text {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -.01em;
     }
     footer .footer-text {
       font-size: .9rem;
-      color: var(--ink-5);
+      color: rgba(255,255,255,.8);
       max-width: 420px;
       line-height: 1.55;
     }
-    footer .footer-text strong { color: #fff; font-weight: 600; }
+    footer .footer-text strong { color: #fff; font-weight: 700; }
     footer .bottom {
       max-width: 1120px;
       margin: 4rem auto 0;
       padding-top: 2rem;
-      border-top: 1px solid #262626;
+      border-top: 1px solid rgba(255,255,255,.2);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 1rem;
-      font-size: .78rem;
-      color: #737373;
+      font-size: .75rem;
+      color: rgba(255,255,255,.6);
+      text-transform: uppercase;
+      letter-spacing: .1em;
     }
 
     @media (max-width: 980px) {
@@ -1291,10 +1372,10 @@
 <!-- ============================== SIDEBAR ============================== -->
 <aside class="nav">
   <div class="nav__brand">
-    <img src="assets/celta-crest.svg" alt="RC Celta" class="nav__crest">
+    <span class="ie-logo">ie</span>
     <div class="nav__brand-text">
       <span class="nav__brand-title">RC Celta</span>
-      <span class="nav__brand-sub">Alert Platform</span>
+      <span class="nav__brand-sub">Case Study</span>
     </div>
   </div>
   <div class="nav__label">Sections</div>
@@ -1315,15 +1396,15 @@
   <div class="nav__ctas">
     <a class="nav__cta nav__cta--primary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
       Live demo
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
     </a>
     <a class="nav__cta" href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform" target="_blank">
       Source code
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
     </a>
     <a class="nav__cta" href="https://youtu.be/-FURuRfDk8I" target="_blank">
       Video (2 min)
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
     </a>
   </div>
 </aside>
@@ -1344,28 +1425,32 @@
   <div class="hero__ctas">
     <a class="btn btn--primary" href="#intro">
       Start the walkthrough
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
     <a class="btn btn--secondary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
       See the live demo
     </a>
   </div>
-  <div class="hero__meta">
-    <div class="hero__metaitem">
-      <span class="hero__metaval">5</span>
-      <span class="hero__metalabel">Tools in the stack</span>
+</section>
+
+<!-- IE-style ranking panel — full bleed -->
+<section style="background:var(--ie-blue);">
+  <div class="ranking" style="max-width:1120px; margin:0 auto;">
+    <div class="ranking__cell">
+      <span class="ranking__num">5</span>
+      <span class="ranking__label">Tools in the<br>stack</span>
     </div>
-    <div class="hero__metaitem">
-      <span class="hero__metaval">12</span>
-      <span class="hero__metalabel">Automation nodes</span>
+    <div class="ranking__cell">
+      <span class="ranking__num">12</span>
+      <span class="ranking__label">Automation<br>nodes</span>
     </div>
-    <div class="hero__metaitem">
-      <span class="hero__metaval">3</span>
-      <span class="hero__metalabel">Compliance regulations</span>
+    <div class="ranking__cell">
+      <span class="ranking__num">3</span>
+      <span class="ranking__label">Compliance<br>regulations</span>
     </div>
-    <div class="hero__metaitem">
-      <span class="hero__metaval">100<span style="font-size:2rem;">%</span></span>
-      <span class="hero__metalabel">Opt-in · GDPR compliant</span>
+    <div class="ranking__cell">
+      <span class="ranking__num">100<sup>%</sup></span>
+      <span class="ranking__label">Opt-in · GDPR<br>compliant</span>
     </div>
   </div>
 </section>
@@ -1415,8 +1500,8 @@
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen></iframe>
   </div>
-  <p style="color:var(--ink-4); font-size:.85rem; text-align:center; margin-top:-.5rem;">
-    Video not loading? Watch it directly on <a href="https://youtu.be/-FURuRfDk8I" target="_blank">YouTube →</a>
+  <p style="color:var(--ink-4); font-size:.82rem; text-align:center; margin-top:-.5rem; text-transform:uppercase; letter-spacing:.1em;">
+    Video not loading? <a href="https://youtu.be/-FURuRfDk8I" target="_blank" style="font-weight:600;">Watch on YouTube →</a>
   </p>
 </section>
 
@@ -1575,7 +1660,7 @@
     <div class="sec-num">04</div>
     <div class="sec-title-wrap">
       <span class="sec-eyebrow">Credentials</span>
-      <h2 class="sec-title">Four credentials, none of them paid on the starter plan.</h2>
+      <h2 class="sec-title">Four credentials, none paid on the starter plan.</h2>
       <p class="sec-lead">This is the minimum setup. Every key either has a generous free tier or is free-forever. Budget 30 minutes to have them all lined up before you start building.</p>
     </div>
   </div>
@@ -1611,8 +1696,8 @@
         <dt>Server prefix</dt><dd>Suffix of the API key (e.g. <code>...-us1</code> → <code>us1</code>). Tells you which datacenter your account lives on.</dd>
       </dl>
       <h4>Where to find it</h4>
-      <div class="breadcrumb"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> API key:&nbsp; Profile → Account &amp; billing → Extras → API keys</div><br>
-      <div class="breadcrumb" style="margin-top:.5rem;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Audience ID:&nbsp; Audience → Settings → Audience name and defaults</div>
+      <div class="breadcrumb"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> API key: Profile → Account &amp; billing → Extras → API keys</div><br>
+      <div class="breadcrumb" style="margin-top:.5rem;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Audience ID: Audience → Settings → Audience name and defaults</div>
     </div>
     <div class="tabs__panel" data-panel="mandrill">
       <h4>What you need</h4>
@@ -1621,8 +1706,8 @@
         <dt>Verified sending domain</dt><dd>A domain you control with DKIM + SPF records published and verified in Mandrill.</dd>
       </dl>
       <h4>Where to find it</h4>
-      <div class="breadcrumb"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> API key:&nbsp; Mandrill → Settings → SMTP &amp; API Info → New API key</div><br>
-      <div class="breadcrumb" style="margin-top:.5rem;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Domains:&nbsp; Settings → Sending Domains</div>
+      <div class="breadcrumb"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> API key: Mandrill → Settings → SMTP &amp; API Info → New API key</div><br>
+      <div class="breadcrumb" style="margin-top:.5rem;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Domains: Settings → Sending Domains</div>
       <div class="callout callout--warn" style="margin-top:1.5rem;">
         <div class="callout__icon">⚠️</div>
         <div class="callout__body">
@@ -1701,7 +1786,7 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
 &nbsp;&nbsp;&nbsp;&amp;utm_content=event-<em>{eventId}</em>-grada-<em>{gradaId}</em>
   </div>
   <p style="color:var(--ink-4); font-size:.88rem;">
-    <code style="color:var(--red);">viewCode=V_blockmap</code> is functional — it opens the seat map directly. The four <code>utm_*</code> parameters let GA4 attribute any resulting purchase to the exact email that drove the click.
+    <code style="color:var(--ie-red);">viewCode=V_blockmap</code> is functional — it opens the seat map directly. The four <code>utm_*</code> parameters let GA4 attribute any resulting purchase to the exact email that drove the click.
   </p>
 </section>
 
@@ -1717,13 +1802,13 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
   </div>
 
   <div class="grid grid-2" data-reveal>
-    <div class="card">
+    <div class="card card--light">
       <div class="card__icon">⚡</div>
       <div class="card__role">What it is</div>
       <h3 class="card__title">Static HTML · GitHub Pages</h3>
       <p class="card__text">A page generated at build time from a Node.js template. Served directly from GitHub Pages with automatic HTTPS.</p>
     </div>
-    <div class="card">
+    <div class="card card--light">
       <div class="card__icon">🏗️</div>
       <div class="card__role">Why static</div>
       <h3 class="card__title">Fewer parts = more stable</h3>
@@ -1766,7 +1851,7 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
   <p style="margin-top:2rem;">
     <a class="btn btn--secondary" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/" target="_blank">
       Try the live landing
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
     </a>
   </p>
 </section>
@@ -1813,10 +1898,10 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
     </div>
   </div>
 
-  <h3 class="h-sub">Typical segment: "Notify when Sector 316 of the Celta–Athletic match opens"</h3>
-  <pre style="background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius); padding:1.5rem; font-size:.88rem; color:var(--ink-2); margin-top:1rem; font-family:var(--font-mono); line-height:2;" data-reveal>tag contains  <strong style="color:var(--ink);">grada:224515</strong>         <span style="color:var(--ink-4);">AND</span>
-tag contains  <strong style="color:var(--ink);">event:4587</strong>           <span style="color:var(--ink-4);">AND</span>
-tag NOT ∋     <strong style="color:var(--red);">notified:event-4587-grada-224515</strong></pre>
+  <h3 class="h-sub">Typical segment: Sector 316 of Celta–Athletic opens</h3>
+  <pre style="background:var(--bg-soft); border:1px solid var(--line); padding:1.5rem; font-size:.86rem; color:var(--ink-2); margin-top:1rem; font-family:var(--font-mono); line-height:2;" data-reveal>tag contains  <strong style="color:var(--ie-blue);">grada:224515</strong>         <span style="color:var(--ink-4);">AND</span>
+tag contains  <strong style="color:var(--ie-blue);">event:4587</strong>           <span style="color:var(--ink-4);">AND</span>
+tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-224515</strong></pre>
   <p style="color:var(--ink-4); font-size:.88rem;">Marketing builds this segment in Mailchimp's UI. n8n consumes it to send the alert at most once per fan and section.</p>
 </section>
 
@@ -1860,16 +1945,16 @@ tag NOT ∋     <strong style="color:var(--red);">notified:event-4587-grada-2245
     </div>
     <div class="email__footer">Te registraste en avisame.rccelta.es · No garantiza reserva</div>
   </div>
-  <p style="color:var(--ink-4); font-size:.8rem; text-align:center; margin-top:-1rem;">Email body kept in Spanish — it's the actual output for Spanish-speaking fans.</p>
+  <p style="color:var(--ink-4); font-size:.78rem; text-align:center; margin-top:-1rem; text-transform:uppercase; letter-spacing:.1em;">Email body kept in Spanish — it's the actual output for Spanish-speaking fans.</p>
 
   <h3 class="h-sub">What we measure per send</h3>
   <div class="grid grid-2" data-reveal>
-    <div class="card">
+    <div class="card card--light">
       <div class="card__role">Tracking enabled</div>
       <h3 class="card__title">Open rate · CTR</h3>
       <p class="card__text">Mandrill open pixel + redirect-wrapping for clicks. Visible in its own dashboard and in GA4 via UTMs.</p>
     </div>
-    <div class="card">
+    <div class="card card--light">
       <div class="card__role">Filters in the panel</div>
       <h3 class="card__title">Tags per match + section</h3>
       <p class="card__text">Every send carries <code>avisame</code>, <code>event-{id}</code>, <code>grada-{id}</code>. Cross-views available in Mandrill Analytics.</p>
@@ -1896,7 +1981,7 @@ tag NOT ∋     <strong style="color:var(--red);">notified:event-4587-grada-2245
     </div>
   </div>
 
-  <h3 class="h-sub">The pipeline (12 nodes)</h3>
+  <h3 class="h-sub">The pipeline — 12 nodes</h3>
   <div class="pipeline" data-reveal>
     <div class="pipeline__list">
       <div class="pipe-node"><span class="pipe-node__num">01</span><span class="pipe-node__emoji">🎬</span><div class="pipe-node__body"><div class="pipe-node__title">Manual Trigger</div><div class="pipe-node__desc">Entry point</div></div></div>
@@ -1924,17 +2009,17 @@ tag NOT ∋     <strong style="color:var(--red);">notified:event-4587-grada-2245
 
   <h3 class="h-sub">Possible evolutions</h3>
   <div class="grid grid-3" data-reveal>
-    <div class="card">
+    <div class="card card--light">
       <div class="card__role">Avoid duplicates</div>
       <h3 class="card__title">Mark as notified</h3>
       <p class="card__text">Add a <code>notified:event-X-grada-Y</code> tag after sending so the same fan isn't alerted twice for the same section.</p>
     </div>
-    <div class="card">
+    <div class="card card--light">
       <div class="card__role">Full automation</div>
       <h3 class="card__title">Scheduler</h3>
       <p class="card__text">Replace the manual trigger with a Schedule node running every 10 min during peak demand windows.</p>
     </div>
-    <div class="card">
+    <div class="card card--light">
       <div class="card__role">Internal alerts</div>
       <h3 class="card__title">Slack channel</h3>
       <p class="card__text">A second output that notifies the internal team in real time when top sections open up.</p>
@@ -1954,13 +2039,13 @@ tag NOT ∋     <strong style="color:var(--red);">notified:event-4587-grada-2245
   </div>
 
   <div class="grid grid-2" data-reveal>
-    <div class="card">
+    <div class="card card--light">
       <div class="card__icon">📁</div>
       <div class="card__role">Repository</div>
       <h3 class="card__title">Public · Single branch</h3>
       <p class="card__text"><a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform" target="_blank">github.com/.../rc-celta-seat-availability-alert-platform</a>. A single <code>main</code> branch — for a small team, that's enough.</p>
     </div>
-    <div class="card">
+    <div class="card card--light">
       <div class="card__icon">🚀</div>
       <div class="card__role">Automatic deploy</div>
       <h3 class="card__title">GitHub Pages</h3>
@@ -1970,7 +2055,7 @@ tag NOT ∋     <strong style="color:var(--red);">notified:event-4587-grada-2245
 
   <h3 class="h-sub">What's versioned, what isn't</h3>
   <div class="compare" data-reveal>
-    <div class="compare__col" style="border-left:3px solid var(--success);">
+    <div class="compare__col" style="border-top:3px solid var(--success);">
       <h4 style="color:var(--success);">✓ In the repo</h4>
       <ul style="list-style:none; padding:0; font-size:.92rem; color:var(--ink-2); line-height:2;">
         <li>Code (<code>generate-landing.js</code>, build scripts)</li>
@@ -1980,7 +2065,7 @@ tag NOT ∋     <strong style="color:var(--red);">notified:event-4587-grada-2245
         <li>Documentation (<code>README.md</code>, <code>manual.html</code>)</li>
       </ul>
     </div>
-    <div class="compare__col" style="border-left:3px solid var(--error);">
+    <div class="compare__col" style="border-top:3px solid var(--error);">
       <h4 style="color:var(--error);">✗ Gitignored</h4>
       <ul style="list-style:none; padding:0; font-size:.92rem; color:var(--ink-2); line-height:2;">
         <li><code>.env</code> with real credentials</li>
@@ -2034,7 +2119,7 @@ tag NOT ∋     <strong style="color:var(--red);">notified:event-4587-grada-2245
       </div>
       <div class="kpi">
         <span class="kpi__label">Recovery rate</span>
-        <div class="kpi__value kpi__value--red">12.8%</div>
+        <div class="kpi__value">12.8%</div>
         <div class="kpi__bar"><div class="kpi__bar-fill kpi__bar-fill--accent" style="width:12%;"></div></div>
         <div class="kpi__delta">alert → purchase</div>
       </div>
@@ -2168,8 +2253,8 @@ tag NOT ∋     <strong style="color:var(--red);">notified:event-4587-grada-2245
   <div class="footer-inner">
     <div>
       <div class="footer-brand">
-        <img src="assets/celta-crest.svg" alt="RC Celta">
-        <span>Seat Availability Alert Platform</span>
+        <span class="ie-logo">ie</span>
+        <span class="footer-brand-text">Seat Availability Alert Platform</span>
       </div>
       <p class="footer-text">Case study for the <strong>AI Marketing Lab</strong> · IE Business School. A demand-recovery platform for RC Celta de Vigo, built with tools any marketing team already has on its shelf.</p>
     </div>
@@ -2200,10 +2285,9 @@ tag NOT ∋     <strong style="color:var(--red);">notified:event-4587-grada-2245
 </footer>
 
 <script>
-  // -------------- ACTIVE NAV LINK (on scroll) --------------
+  // -------------- ACTIVE NAV LINK --------------
   const navLinks = document.querySelectorAll('.nav__item a');
   const sections = Array.from(document.querySelectorAll('section[id]'));
-
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -2214,10 +2298,9 @@ tag NOT ∋     <strong style="color:var(--red);">notified:event-4587-grada-2245
       }
     });
   }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
-
   sections.forEach(s => obs.observe(s));
 
-  // -------------- REVEAL ON SCROLL --------------
+  // -------------- REVEAL --------------
   const revealObs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -2226,10 +2309,9 @@ tag NOT ∋     <strong style="color:var(--red);">notified:event-4587-grada-2245
       }
     });
   }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
-
   document.querySelectorAll('[data-reveal]').forEach(el => revealObs.observe(el));
 
-  // -------------- MOBILE NAV TOGGLE --------------
+  // -------------- MOBILE NAV --------------
   const nav = document.querySelector('.nav');
   const toggle = document.querySelector('.nav__toggle');
   toggle.addEventListener('click', () => nav.classList.toggle('is-open'));
