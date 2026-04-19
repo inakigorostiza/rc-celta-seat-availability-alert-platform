@@ -1506,6 +1506,26 @@
       padding-top: .1rem;
     }
     .prompt__result strong { color: var(--ink); }
+    .prompt__preview {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      margin-top: .9rem;
+      padding: .5rem .9rem;
+      border: 1px solid var(--ie-blue);
+      color: var(--ie-blue);
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      text-decoration: none;
+      transition: all var(--trans);
+    }
+    .prompt__preview:hover {
+      background: var(--ie-blue);
+      color: #fff;
+    }
+    .prompt__preview svg { flex-shrink: 0; }
     @media (max-width: 600px) {
       .prompt { grid-template-columns: 1fr; gap: .75rem; }
       .prompt__badge { width: 36px; height: 36px; font-size: .82rem; }
@@ -2101,14 +2121,18 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
     <code style="color:var(--ie-red);">viewCode=V_blockmap</code> is functional — it opens the seat map directly. The four <code>utm_*</code> parameters let GA4 attribute any resulting purchase to the exact email that drove the click.
   </p>
 
-  <h3 class="h-sub">Try it yourself · Test ONEBOX in a webpage</h3>
-  <p style="color:var(--ink-3); max-width:720px;">Use Claude Code (see §05) to go from zero to a working API test harness in under an hour. These are the exact five prompts that produced the four live webpages shipping with this case study — copy them into your Claude Code panel one by one.</p>
+  <h3 class="h-sub">Try it yourself — build this in an afternoon</h3>
+  <p style="color:var(--ink-3); max-width:720px;">Five prompts, copied one after the other into Claude Code (see §05), take you from two API keys to a branded live-data landing page. No coding knowledge required — just copy, paste, run, and watch Claude build each piece while explaining what it's doing.</p>
 
   <div class="callout callout--warn" data-reveal>
     <div class="callout__icon">⚙️</div>
     <div class="callout__body">
       <h4>Before you start</h4>
-      <p>You need: ONEBOX PRE credentials (<code>client_secret</code> + <code>channel_id</code>), Node.js 18+, VS Code with the Claude Code extension, and an empty folder opened as a workspace. Create a <code>.env</code> file in the folder with your two ONEBOX values.</p>
+      <p>You need three things:<br>
+      ① Your ONEBOX keys from the club (two values: <code>client_secret</code> and <code>channel_id</code>).<br>
+      ② VS Code with Claude Code installed (see §05).<br>
+      ③ A new empty folder, opened in VS Code.<br>
+      Don't worry about Node.js, setup, or anything technical — Claude Code handles all of that for you as you go. Just paste the prompts below one at a time and follow along.</p>
     </div>
   </div>
 
@@ -2116,11 +2140,11 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
     <div class="prompt__badge">01</div>
     <div class="prompt__body">
       <div class="prompt__head">
-        <span class="prompt__title">Authenticate against ONEBOX</span>
-        <span class="prompt__artefact">→ test-onebox.js</span>
+        <span class="prompt__title">Check that your ONEBOX keys work</span>
+        <span class="prompt__artefact">→ a small test script</span>
       </div>
-      <div class="prompt__quote">Create a Node.js script called <strong>test-onebox.js</strong> that authenticates against the ONEBOX PRE environment at <strong>https://api.oneboxtds.net/oauth/token</strong> using the seller-channel-client OAuth2 flow. Read ONEBOX_CLIENT_SECRET and ONEBOX_CHANNEL_ID from a .env file. Use native Node.js fetch (no npm install). On success, print the token expiry and granted scopes. On failure, print the HTTP status and response body and exit 1.</div>
-      <p class="prompt__result"><strong>What you should see:</strong> Claude creates the script, runs it, and prints <code>✔ token acquired, expires_in=43200s, scope=api-catalog-all api-distribution-all…</code>. If it fails, Claude will read the error and ask you to double-check the credentials.</p>
+      <div class="prompt__quote">I have two ONEBOX API keys — a <strong>client_secret</strong> and a <strong>channel_id</strong>. Save them in a <strong>.env</strong> file and build me a small script that calls ONEBOX, tells me if the keys are valid, and shows what the API replies.</div>
+      <p class="prompt__result"><strong>What you'll see:</strong> Claude creates a <code>.env</code> file for your keys, writes the script, and runs it. If everything works, the terminal prints something like <code>✔ token acquired · expires in 12 hours</code>. If it fails, Claude reads the error message and helps you figure out what's wrong.</p>
     </div>
   </div>
 
@@ -2128,11 +2152,11 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
     <div class="prompt__badge">02</div>
     <div class="prompt__body">
       <div class="prompt__head">
-        <span class="prompt__title">Make your first real API call</span>
-        <span class="prompt__artefact">→ extends test-onebox.js</span>
+        <span class="prompt__title">Ask ONEBOX what matches are on sale</span>
+        <span class="prompt__artefact">→ extends the same script</span>
       </div>
-      <div class="prompt__quote">Extend test-onebox.js so that after authentication it also GETs <strong>/catalog-api/v1/sessions</strong> with the bearer token. Print how many sessions came back (metadata.total), plus the first session's name and event name.</div>
-      <p class="prompt__result"><strong>What you should see:</strong> <code>✔ 21 sessions · first: NUMERADO in * API NUMBERED EVENT</code>. This proves authentication + catalog read end-to-end.</p>
+      <div class="prompt__quote">Great, it works. Now use those keys to ask ONEBOX for the full list of matches available on our channel. Print how many came back, and show me the name of the first one.</div>
+      <p class="prompt__result"><strong>What you'll see:</strong> Something like <code>21 sessions returned · first: NUMERADO</code>. This proves Claude can not just authenticate but also read real catalog data — the foundation for every webpage we'll build next.</p>
     </div>
   </div>
 
@@ -2140,11 +2164,15 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
     <div class="prompt__badge">03</div>
     <div class="prompt__body">
       <div class="prompt__head">
-        <span class="prompt__title">Render a live documentation page</span>
-        <span class="prompt__artefact">→ generate-examples.js · onebox-api-test.html</span>
+        <span class="prompt__title">Turn the API into a documentation webpage</span>
+        <span class="prompt__artefact">→ onebox-api-test.html</span>
       </div>
-      <div class="prompt__quote">Create generate-examples.js that runs live calls to (1) /oauth/token, (2) /catalog-api/v1/sessions, and (3) /catalog-api/v1/sessions/{id}/availability for the first session. Render the results into a static onebox-api-test.html page with three labelled sections — one per call — showing the request method/URL/headers and the JSON response. Use a dark theme with monospace code blocks. Redact the access_token and refresh_token in the output.</div>
-      <p class="prompt__result"><strong>What you should see:</strong> <code>open onebox-api-test.html</code> shows a clean three-section doc of live request/response examples. Safe to share with teammates — secrets are hidden.</p>
+      <div class="prompt__quote">I'd like a webpage that documents the three ONEBOX calls we'll use in this project: authentication, the list of matches, and the available seats for one match. For each, show the request and the response side by side, styled like professional API documentation with a dark theme. Hide the real secret tokens in the output so the page is safe to share. Save it as <strong>onebox-api-test.html</strong>.</div>
+      <p class="prompt__result"><strong>What you'll see:</strong> Open the file in your browser — it looks like developer docs built from your own live data. Three neat sections with the real API request / response for each call. You can send this link to a teammate without leaking any secrets.</p>
+      <a class="prompt__preview" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/onebox-api-test.html" target="_blank">
+        See the live result
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
     </div>
   </div>
 
@@ -2152,11 +2180,15 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
     <div class="prompt__badge">04</div>
     <div class="prompt__body">
       <div class="prompt__head">
-        <span class="prompt__title">Visualise the catalog as a card grid</span>
-        <span class="prompt__artefact">→ generate-sessions.js · onebox-sessions-cards.html</span>
+        <span class="prompt__title">Visualise every match as a card</span>
+        <span class="prompt__artefact">→ onebox-sessions-cards.html</span>
       </div>
-      <div class="prompt__quote">Create generate-sessions.js that fetches every session and its availability, then produces onebox-sessions-cards.html — a responsive card grid. Each card shows the event image, event name, venue + city, start date in the venue timezone, price range, availability bar (green > 50%, amber > 15%, red below), price-type breakdown using ui_settings.color for each, sectors in a collapsible, and a Raw JSON toggle. Add a live-filter input at the top that matches by event or venue name.</div>
-      <p class="prompt__result"><strong>What you should see:</strong> <code>open onebox-sessions-cards.html</code> shows all 21 sessions as branded cards. Hover a card, expand a sector, type a venue name in the filter — all data is live from ONEBOX.</p>
+      <div class="prompt__quote">Now build a visual webpage showing every match as a card: event image, date, venue, price range, and how many seats are still free — colour-coded green / amber / red depending on how full it is. Add a search bar at the top to filter by match or venue name. Save it as <strong>onebox-sessions-cards.html</strong>.</div>
+      <p class="prompt__result"><strong>What you'll see:</strong> Your entire catalog, rendered as a branded grid of cards. Instantly spot which matches are selling fast (red bars), which still have room (green), and filter to a specific venue with the search box.</p>
+      <a class="prompt__preview" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/onebox-sessions-cards.html" target="_blank">
+        See the live result
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
     </div>
   </div>
 
@@ -2164,11 +2196,15 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
     <div class="prompt__badge">05</div>
     <div class="prompt__body">
       <div class="prompt__head">
-        <span class="prompt__title">Build the branded signup landing</span>
-        <span class="prompt__artefact">→ generate-landing.js · landing.html</span>
+        <span class="prompt__title">Build the «¡Avísame!» signup page</span>
+        <span class="prompt__artefact">→ landing.html</span>
       </div>
-      <div class="prompt__quote">Create generate-landing.js that builds landing.html for a single ONEBOX session (hardcode the session_id at the top of the file). The landing should mirror avisame-celta.netlify.app visually: sky-blue hero with RC Celta crest, big white "¡Avísame!" title, white card with Nombre / Apellidos / Email fields and a Grada dropdown populated from that session's sectors. On submit, validate the form and log the payload to the console for now.</div>
-      <p class="prompt__result"><strong>What you should see:</strong> <code>open landing.html</code> shows a production-looking fan-facing form. Fill it in, submit, open DevTools console — the payload is there, ready to wire to Mailchimp in §08.</p>
+      <div class="prompt__quote">Finally, build a landing page for one specific match. It should look like the RC Celta «¡Avísame!» page: sky-blue hero with the Celta crest, big white title, and a simple form asking for <strong>name</strong>, <strong>surname</strong>, <strong>email</strong>, and a dropdown to pick which <strong>grada</strong> the fan wants. The grada options should be the real ones from that match's seat map in ONEBOX. When someone submits, log the data to the browser console for now. Save it as <strong>landing.html</strong>.</div>
+      <p class="prompt__result"><strong>What you'll see:</strong> A production-quality, club-branded landing page that actually works — backed by real ONEBOX data. Submit the form, open DevTools → Console, and you'll see the fan's choice ready to forward to Mailchimp. That's the hand-off to §08.</p>
+      <a class="prompt__preview" href="https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/landing.html" target="_blank">
+        See the live result
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
     </div>
   </div>
 
@@ -2176,7 +2212,7 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
     <div class="callout__icon">✅</div>
     <div class="callout__body">
       <h4>What's next</h4>
-      <p>You now have a working ONEBOX test harness plus a branded landing. The next sections show how we sent every form submission to Mailchimp (§08), how we detected availability and fired email alerts with Mandrill (§09), and how the whole thing was orchestrated with n8n (§10).</p>
+      <p>In an afternoon, you've gone from two API keys to a branded signup form wired to real catalog data. The upcoming sections show how we connect each submission to Mailchimp (§08), detect availability and fire alert emails with Mandrill (§09), and orchestrate the whole thing through n8n (§10). You'll use exactly the same prompt-by-prompt approach.</p>
     </div>
   </div>
 </section>
