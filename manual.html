@@ -100,20 +100,11 @@
       margin-bottom: 1.75rem;
       border-bottom: 1px solid var(--line);
     }
-    .ie-logo {
+    .brand-crest {
       flex-shrink: 0;
-      width: 44px; height: 28px;
-      background: var(--ie-red);
-      border-radius: 3px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-family: var(--font-sans);
-      font-weight: 900;
-      font-size: 1rem;
-      letter-spacing: -.03em;
-      line-height: 1;
+      width: 44px; height: 44px;
+      display: block;
+      object-fit: contain;
     }
     .nav__brand-text {
       display: block;
@@ -1308,8 +1299,10 @@
       gap: .75rem;
       margin-bottom: 1.25rem;
     }
-    footer .footer-brand .ie-logo {
-      background: var(--ie-red);
+    footer .footer-brand .brand-crest {
+      width: 40px; height: 40px;
+      filter: brightness(0) invert(1);
+      opacity: .95;
     }
     footer .footer-brand-text {
       color: #fff;
@@ -1372,7 +1365,7 @@
 <!-- ============================== SIDEBAR ============================== -->
 <aside class="nav">
   <div class="nav__brand">
-    <span class="ie-logo">ie</span>
+    <img src="assets/celta-crest.svg" alt="RC Celta de Vigo" class="brand-crest">
     <div class="nav__brand-text">
       <span class="nav__brand-title">RC Celta</span>
       <span class="nav__brand-sub">Case Study</span>
@@ -2253,7 +2246,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
   <div class="footer-inner">
     <div>
       <div class="footer-brand">
-        <span class="ie-logo">ie</span>
+        <img src="assets/celta-crest.svg" alt="RC Celta de Vigo" class="brand-crest">
         <span class="footer-brand-text">Seat Availability Alert Platform</span>
       </div>
       <p class="footer-text">Case study for the <strong>AI Marketing Lab</strong> · IE Business School. A demand-recovery platform for RC Celta de Vigo, built with tools any marketing team already has on its shelf.</p>
