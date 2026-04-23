@@ -1656,6 +1656,196 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* =========================================================
+       SYLLABUS — 6-week course timeline
+    ========================================================= */
+    .syllabus {
+      margin-top: 4rem;
+    }
+    .syllabus__phases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      margin-bottom: 2.5rem;
+    }
+    .syllabus__phase {
+      background: var(--bg);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+    }
+    .syllabus__phase-weeks {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--ie-blue);
+    }
+    .syllabus__phase-name {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -.01em;
+      text-transform: uppercase;
+    }
+    .syllabus__phase-sub {
+      font-size: .82rem;
+      color: var(--ink-3);
+      line-height: 1.4;
+    }
+    @media (max-width: 900px) {
+      .syllabus__phases { grid-template-columns: 1fr; }
+    }
+
+    .syllabus__grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0;
+    }
+    .syllabus__rail {
+      position: absolute;
+      top: 44px;
+      left: 8%;
+      right: 8%;
+      height: 2px;
+      background: var(--line);
+      z-index: 0;
+      overflow: hidden;
+    }
+    .syllabus__rail::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--ie-blue), var(--ie-blue-2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 2.4s var(--ease-out);
+    }
+    .syllabus__grid.is-revealed .syllabus__rail::after {
+      transform: scaleX(1);
+    }
+    .syllabus__week {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 .5rem;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+    }
+    .syllabus__grid.is-revealed .syllabus__week { opacity: 1; transform: translateY(0); }
+    .syllabus__grid.is-revealed .syllabus__week:nth-child(2) { transition-delay: .10s; }
+    .syllabus__grid.is-revealed .syllabus__week:nth-child(3) { transition-delay: .22s; }
+    .syllabus__grid.is-revealed .syllabus__week:nth-child(4) { transition-delay: .36s; }
+    .syllabus__grid.is-revealed .syllabus__week:nth-child(5) { transition-delay: .52s; }
+    .syllabus__grid.is-revealed .syllabus__week:nth-child(6) { transition-delay: .70s; }
+    .syllabus__grid.is-revealed .syllabus__week:nth-child(7) { transition-delay: .90s; }
+    .syllabus__node {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--ie-blue);
+      color: var(--ie-blue);
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      font-style: italic;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      margin-bottom: 1.25rem;
+      transition: all .25s var(--ease-out);
+      box-shadow: 0 0 0 6px var(--bg);
+    }
+    .syllabus__week:hover .syllabus__node {
+      background: var(--ie-blue);
+      color: #fff;
+      transform: scale(1.06);
+    }
+    .syllabus__week--final .syllabus__node {
+      background: var(--ie-blue);
+      color: #fff;
+      border-color: var(--ie-blue);
+    }
+    .syllabus__week--final:hover .syllabus__node {
+      background: var(--ie-red);
+      border-color: var(--ie-red);
+    }
+    .syllabus__emoji {
+      font-size: 1.2rem;
+      margin-bottom: .6rem;
+      filter: grayscale(.1);
+    }
+    .syllabus__label {
+      font-size: .62rem;
+      font-weight: 800;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ie-blue);
+      margin-bottom: .45rem;
+    }
+    .syllabus__title {
+      font-size: .92rem;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.25;
+      letter-spacing: -.005em;
+      margin-bottom: .4rem;
+      text-transform: uppercase;
+    }
+    .syllabus__desc {
+      font-size: .8rem;
+      color: var(--ink-3);
+      line-height: 1.45;
+      max-width: 160px;
+    }
+    .syllabus__desc strong { color: var(--ink-2); font-weight: 600; }
+
+    @media (max-width: 900px) {
+      .syllabus__grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding-left: 2.5rem;
+      }
+      .syllabus__rail {
+        top: 0; bottom: 0; left: 35px;
+        right: auto;
+        width: 2px; height: auto;
+      }
+      .syllabus__rail::after {
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 2.4s var(--ease-out);
+        background: linear-gradient(180deg, var(--ie-blue), var(--ie-blue-2));
+      }
+      .syllabus__grid.is-revealed .syllabus__rail::after { transform: scaleY(1); }
+      .syllabus__week {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        gap: 1.25rem;
+        padding: 0;
+      }
+      .syllabus__node {
+        width: 56px; height: 56px;
+        font-size: 1.4rem;
+        margin-bottom: 0;
+        flex-shrink: 0;
+        margin-left: -2.5rem;
+      }
+      .syllabus__emoji { display: none; }
+      .syllabus__desc { max-width: none; }
+    }
   </style>
 </head>
 <body>
@@ -1947,54 +2137,91 @@
 </section>
 
 <!-- ============================== §3 ROADMAP ============================== -->
-<section class="section" id="roadmap">
+<section class="section syllabus" id="roadmap">
   <div class="sec-header" data-reveal>
     <div class="sec-num">03</div>
     <div class="sec-title-wrap">
-      <span class="sec-eyebrow">Roadmap</span>
-      <h2 class="sec-title">Five incremental phases.</h2>
-      <p class="sec-lead">Every phase ships something demo-able. The project was built in discrete commits, not a Big Bang.</p>
+      <span class="sec-eyebrow">Roadmap · 6 weeks</span>
+      <h2 class="sec-title">From brief to presentation, week by week.</h2>
+      <p class="sec-lead">The case study mapped to the AI Marketing Lab's six-week calendar — what you do, what you ship, and where "done" lives at the end of each week.</p>
     </div>
   </div>
 
-  <div class="timeline" data-reveal>
-    <div class="t-item">
-      <div class="t-dot">01</div>
-      <div class="t-item__head"><span class="t-item__emoji">🔐</span><h4>Connect to ONEBOX</h4></div>
-      <div class="t-item__body">Obtain seller-channel-client credentials, authenticate against the PRE environment, and map the catalog (events, sessions, sections).</div>
-      <span class="t-item__out">✓ Token acquired · 21 sessions listed</span>
+  <div class="syllabus__phases" data-reveal>
+    <div class="syllabus__phase">
+      <span class="syllabus__phase-weeks">Phase 01 · Weeks 1–2</span>
+      <span class="syllabus__phase-name">Foundation</span>
+      <span class="syllabus__phase-sub">Understand the brief, set up tools, talk to the API.</span>
     </div>
-    <div class="t-item">
-      <div class="t-dot">02</div>
-      <div class="t-item__head"><span class="t-item__emoji">🌐</span><h4>Landing + first lead</h4></div>
-      <div class="t-item__body">Design the landing with Celta branding. Wire up the form. Capture the first real lead with consents and UTM attribution.</div>
-      <span class="t-item__out">✓ Form live · First contact in Mailchimp</span>
+    <div class="syllabus__phase">
+      <span class="syllabus__phase-weeks">Phase 02 · Weeks 3–4</span>
+      <span class="syllabus__phase-name">Build &amp; validate</span>
+      <span class="syllabus__phase-sub">Wire every piece together and prove it works end-to-end.</span>
     </div>
-    <div class="t-item">
-      <div class="t-dot">03</div>
-      <div class="t-item__head"><span class="t-item__emoji">🤖</span><h4>Automated detection</h4></div>
-      <div class="t-item__body">Build the n8n workflow that polls ONEBOX, flattens sections with availability, and cross-references with Mailchimp tags.</div>
-      <span class="t-item__out">✓ Workflow ready · Match OK</span>
+    <div class="syllabus__phase">
+      <span class="syllabus__phase-weeks">Phase 03 · Weeks 5–6</span>
+      <span class="syllabus__phase-name">Ship &amp; defend</span>
+      <span class="syllabus__phase-sub">Propose next steps and present to the room.</span>
     </div>
-    <div class="t-item">
-      <div class="t-dot">04</div>
-      <div class="t-item__head"><span class="t-item__emoji">✉️</span><h4>Personalised alert</h4></div>
-      <div class="t-item__body">HTML template with Celta branding, match + section recap, and a CTA with UTMs pointing to the ONEBOX seat selector.</div>
-      <span class="t-item__out">✓ Inbox receives the email with a working button</span>
+  </div>
+
+  <div class="syllabus__grid" data-reveal>
+    <div class="syllabus__rail"></div>
+
+    <div class="syllabus__week">
+      <div class="syllabus__node">01</div>
+      <div class="syllabus__emoji">📋</div>
+      <div class="syllabus__label">Week 1</div>
+      <h4 class="syllabus__title">Briefing &amp; setup</h4>
+      <p class="syllabus__desc"><strong>Read the brief</strong>, surface doubts, install the stack and verify every tool opens cleanly.</p>
     </div>
-    <div class="t-item">
-      <div class="t-dot">05</div>
-      <div class="t-item__head"><span class="t-item__emoji">📊</span><h4>Measure &amp; comply</h4></div>
-      <div class="t-item__body">Instrument GA4 with <code>generate_lead</code> events. Audit the legal checklist (GDPR · LOPDGDD · LSSI-CE).</div>
-      <span class="t-item__out">✓ Dashboard live · Compliance reviewed</span>
+
+    <div class="syllabus__week">
+      <div class="syllabus__node">02</div>
+      <div class="syllabus__emoji">🌐</div>
+      <div class="syllabus__label">Week 2</div>
+      <h4 class="syllabus__title">API &amp; landing</h4>
+      <p class="syllabus__desc">Understand the <strong>ONEBOX API</strong>. Design and integrate the branded landing page with a working form.</p>
+    </div>
+
+    <div class="syllabus__week">
+      <div class="syllabus__node">03</div>
+      <div class="syllabus__emoji">🔌</div>
+      <div class="syllabus__label">Week 3</div>
+      <h4 class="syllabus__title">Mailchimp &amp; n8n</h4>
+      <p class="syllabus__desc">Integrate <strong>Mailchimp</strong>. Design the <strong>n8n workflow</strong> that links availability to contacts.</p>
+    </div>
+
+    <div class="syllabus__week">
+      <div class="syllabus__node">04</div>
+      <div class="syllabus__emoji">🧪</div>
+      <div class="syllabus__label">Week 4</div>
+      <h4 class="syllabus__title">MVP testing</h4>
+      <p class="syllabus__desc">End-to-end <strong>dry runs</strong>. Submit, trigger, deliver. Fix what breaks in the real flow.</p>
+    </div>
+
+    <div class="syllabus__week">
+      <div class="syllabus__node">05</div>
+      <div class="syllabus__emoji">🚀</div>
+      <div class="syllabus__label">Week 5</div>
+      <h4 class="syllabus__title">Next-steps proposal</h4>
+      <p class="syllabus__desc">Draft a <strong>growth roadmap</strong>: what scales, what hardens, what monetises from here.</p>
+    </div>
+
+    <div class="syllabus__week syllabus__week--final">
+      <div class="syllabus__node">06</div>
+      <div class="syllabus__emoji">🎤</div>
+      <div class="syllabus__label">Week 6</div>
+      <h4 class="syllabus__title">Presentation</h4>
+      <p class="syllabus__desc">Walk the room through the <strong>problem, the solution and the business case</strong>. Ship.</p>
     </div>
   </div>
 
   <div class="callout callout--class" data-reveal>
-    <div class="callout__icon">🧪</div>
+    <div class="callout__icon">📅</div>
     <div class="callout__body">
-      <h4>In class</h4>
-      <p>Every phase maps to a separate commit in the repository. Open the history at <a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform/commits/main" target="_blank">github.com/.../commits/main</a> and you'll see the project grow step by step.</p>
+      <h4>How to use this calendar</h4>
+      <p>Treat each week as a checkpoint, not a deadline. If Week 2 slips, compress Week 4's MVP testing rather than sliding everything right — the Week 6 presentation is fixed. When you're stuck, the fastest way back on pace is to look one phase ahead and ask: <em>what would unblock that?</em></p>
     </div>
   </div>
 </section>
