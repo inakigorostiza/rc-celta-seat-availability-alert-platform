@@ -543,46 +543,149 @@
         <div class="sec-num">A</div>
         <div>
           <span class="sec-eyebrow">Introduction</span>
-          <h2 class="sec-title">What are Agent Teams?</h2>
-          <p class="sec-lead">Agent Teams let you spawn multiple Claude instances to work on the same project in parallel. Unlike subagents, teammates can talk directly to each other.</p>
+          <h2 class="sec-title">Orchestrate Teams of Claude Code Sessions</h2>
+          <p class="sec-lead">Coordinate multiple Claude Code instances working together as a team, with shared tasks, inter-agent messaging, and centralized management.</p>
         </div>
       </div>
 
-      <p style="margin-bottom: 1.5rem; color: var(--ink-3); line-height: 1.6;">One session takes on the role of <strong>team lead</strong>: it coordinates work, assigns tasks to specialists, and synthesizes findings. The other sessions are <strong>teammates</strong>: independent Claude instances that pick up tasks, communicate directly with each other, and report back through a shared task list.</p>
+      <h3 class="h-sub">What are Agent Teams?</h3>
+      <p style="margin-bottom: 1.5rem; color: var(--ink-3); line-height: 1.6;">Agent Teams let you coordinate multiple Claude Code instances working together. One session acts as the <strong>team lead</strong>, coordinating work, assigning tasks, and synthesizing results. Teammates work independently, each in its own context window, and communicate directly with each other.</p>
 
-      <div class="callout callout--tip">
-        <div class="callout__icon">🤝</div>
+      <p style="color: var(--ink-3); margin-bottom: 1.5rem; line-height: 1.6;">Unlike subagents, which run within a single session and can only report back to the main agent, you can also interact with individual teammates directly without going through the lead.</p>
+
+      <div class="callout callout--warn">
+        <div class="callout__icon">⚠️</div>
         <div class="callout__body">
-          <h4>Why Agent Teams for marketing?</h4>
-          <p>Your campaign needs a strategist thinking about positioning, a copywriter crafting the message, and a researcher checking the competition. These specialists need to talk to each other. Agent Teams let them work in parallel while staying coordinated.</p>
+          <h4>Experimental feature — enable before use</h4>
+          <p>Agent teams are experimental and disabled by default. Enable them by adding <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code> to your settings.json or environment. Agent teams have known limitations around session resumption, task coordination, and shutdown behavior.</p>
+          <p style="margin-top: 0.5rem;"><strong>Requirements:</strong> Claude Code v2.1.32 or later. Check your version with <code>claude --version</code></p>
         </div>
       </div>
 
       <h3 class="h-sub">When to use Agent Teams</h3>
-      <p style="margin: 1rem 0; color: var(--ink-3);">Agent Teams shine when work can be genuinely parallelized:</p>
+      <p style="margin: 1rem 0; color: var(--ink-3);">Agent teams are most effective for tasks where parallel exploration adds real value. The strongest use cases are:</p>
+
       <div class="stepline">
-        <div class="stepline__num">✓</div>
+        <div class="stepline__num">1</div>
         <div>
-          <div class="stepline__title">Campaign brainstorming</div>
-          <div class="stepline__text">Different teammates explore different angles, audiences, or channels</div>
-        </div>
-      </div>
-      <div class="stepline">
-        <div class="stepline__num">✓</div>
-        <div>
-          <div class="stepline__title">Competitive analysis</div>
-          <div class="stepline__text">Each teammate investigates a different competitor, then compares notes</div>
-        </div>
-      </div>
-      <div class="stepline">
-        <div class="stepline__num">✓</div>
-        <div>
-          <div class="stepline__title">Content production</div>
-          <div class="stepline__text">One writes long-form, another writes social posts, another drafts email copy</div>
+          <div class="stepline__title">Research and review</div>
+          <div class="stepline__text">Multiple teammates investigate different aspects simultaneously, then share and challenge each other's findings</div>
         </div>
       </div>
 
-      <p style="margin-top: 2rem; color: var(--ink-3); border-top: 1px solid var(--line); padding-top: 1.5rem;"><strong>They're not a good fit for:</strong> Sequential tasks (draft → edit → polish), or when teammates need to edit the same file simultaneously.</p>
+      <div class="stepline">
+        <div class="stepline__num">2</div>
+        <div>
+          <div class="stepline__title">New modules or features</div>
+          <div class="stepline__text">Teammates each own a separate piece without stepping on each other</div>
+        </div>
+      </div>
+
+      <div class="stepline">
+        <div class="stepline__num">3</div>
+        <div>
+          <div class="stepline__title">Debugging with competing hypotheses</div>
+          <div class="stepline__text">Teammates test different theories in parallel and converge on the answer faster</div>
+        </div>
+      </div>
+
+      <div class="stepline">
+        <div class="stepline__num">4</div>
+        <div>
+          <div class="stepline__title">Cross-layer coordination</div>
+          <div class="stepline__text">Changes spanning frontend, backend, and tests, each owned by a different teammate</div>
+        </div>
+      </div>
+
+      <div class="callout callout--tip">
+        <div class="callout__icon">📢</div>
+        <div class="callout__body">
+          <h4>For marketing: parallel campaign development</h4>
+          <p>Teammates can investigate different competitors simultaneously, develop positioning in parallel with content creation, or explore different audience angles at once. The strategist's findings directly inform the copywriter's tone. The researcher's gaps shape the strategist's positioning. This feedback loop is where Agent Teams excel.</p>
+        </div>
+      </div>
+
+      <h3 class="h-sub">Agent Teams vs Subagents</h3>
+      <p style="margin: 1rem 0 1.5rem; color: var(--ink-3);">Both let you parallelize work, but they operate differently. Choose based on whether your workers need to communicate:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Subagents</th>
+            <th>Agent Teams</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Context</strong></td>
+            <td>Own window; results return to caller</td>
+            <td>Own window; fully independent</td>
+          </tr>
+          <tr>
+            <td><strong>Communication</strong></td>
+            <td>Report back to main agent only</td>
+            <td>Message each other directly</td>
+          </tr>
+          <tr>
+            <td><strong>Coordination</strong></td>
+            <td>Main agent manages all work</td>
+            <td>Shared task list with self-coordination</td>
+          </tr>
+          <tr>
+            <td><strong>Best for</strong></td>
+            <td>Focused tasks (result matters)</td>
+            <td>Complex work (discussion matters)</td>
+          </tr>
+          <tr>
+            <td><strong>Token cost</strong></td>
+            <td>Lower: results summarized back</td>
+            <td>Higher: each teammate is separate instance</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin-top: 1.5rem; color: var(--ink-3); border-top: 1px solid var(--line); padding-top: 1.5rem;"><strong>Use subagents</strong> when you need quick, focused workers that report back. <strong>Use Agent Teams</strong> when teammates need to share findings, challenge each other, and coordinate on their own.</p>
+
+      <div class="callout callout--good">
+        <div class="callout__icon">✓</div>
+        <div class="callout__body">
+          <h4>Why Agent Teams for this exercise</h4>
+          <p>Your campaign strategist, copywriter, and researcher need to talk to each other. The strategist's positioning informs the copywriter's tone. The researcher's competitive findings shape the strategist's recommendations. The copywriter asks clarifying questions about positioning. This back-and-forth collaboration is exactly what Agent Teams enable.</p>
+          <p style="margin-top: 0.5rem;">If you only needed three independent first-draft taglines with no interdependence, subagents would be cheaper and faster. But this exercise requires <strong>real coordination</strong>.</p>
+        </div>
+      </div>
+
+      <h3 class="h-sub">What you'll learn in this lab</h3>
+      <p style="margin: 1rem 0 1.5rem; color: var(--ink-3);">By the end, you'll understand:</p>
+      <div class="stepline">
+        <div class="stepline__num">✓</div>
+        <div>
+          <div class="stepline__title">How to structure a marketing brief</div>
+          <div class="stepline__text">Specificity in audience, constraints, and deliverables directly improves output quality</div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">✓</div>
+        <div>
+          <div class="stepline__title">How to define specialist roles</div>
+          <div class="stepline__text">Vivid role definitions (not generic tasks) produce sharper, less generic work</div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">✓</div>
+        <div>
+          <div class="stepline__title">How to watch AI specialists coordinate</div>
+          <div class="stepline__text">See positioning inform copywriting, research findings shape strategy, and teammates challenge each other's ideas</div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">✓</div>
+        <div>
+          <div class="stepline__title">How to critique AI-generated marketing</div>
+          <div class="stepline__text">Develop judgment to spot generic phrases, missed audience nuances, and unsupported claims</div>
+        </div>
+      </div>
     </section>
 
     <!-- PART 1: PREREQUISITES -->
