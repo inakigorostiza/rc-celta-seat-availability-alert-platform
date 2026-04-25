@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LAB · Working with AI Agent Teams in Claude Code — Marketing Students Manual</title>
-  <meta name="description" content="A hands-on manual for building marketing campaigns with parallel AI specialists using Claude Code's Agent Teams feature. Learn to brief teams, manage parallel work, and critique AI-generated marketing." />
+  <title>LAB · Working with AI Agent Teams in Claude Code — Marketing</title>
+  <meta name="description" content="A hands-on manual for building marketing campaigns with parallel AI specialists using Claude Code's experimental Agent Teams feature. Learn to brief teams, manage parallel work, and critique AI-generated marketing." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -17,8 +17,8 @@
       --ink-3:       #444444;
       --ink-4:       #737373;
       --ink-5:       #A3A3A3;
-      --primary:     #2c3e50;
       --accent:      #3498db;
+      --accent-2:    #2980b9;
       --accent-soft: #E6EBF5;
       --line:        #E5E5E5;
       --success:     #15803D;
@@ -42,7 +42,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
     a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color var(--trans); }
-    a:hover { color: #2980b9; }
+    a:hover { color: var(--accent-2); }
     code { font-family: var(--font-mono); font-size: .88em; background: var(--bg-soft); padding: .12em .42em; border-radius: 3px; color: var(--ink); font-weight: 500; }
 
     /* Layout */
@@ -98,769 +98,735 @@
       letter-spacing: .03em;
       text-decoration: none;
       border-radius: var(--radius-sm);
-      transition: background-color var(--trans), color var(--trans);
+      transition: all var(--trans);
     }
-    .nav__item a:hover {
-      background-color: var(--accent-soft);
+    .nav__item a:hover { color: var(--ink); background: var(--bg-soft); }
+    .nav__num {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--ink-5);
+      min-width: 1.6rem;
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+    }
+
+    main { padding: 0; }
+    .section {
+      padding: 6rem 4rem;
+      max-width: 1080px;
+      margin: 0 auto;
+      border-top: 1px solid var(--line);
+    }
+    .section:first-of-type { border-top: none; }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .nav { position: static; height: auto; }
+      .section { padding: 3.5rem 1.5rem; }
+    }
+
+    /* Hero */
+    .hero { padding: 6rem 4rem 4rem; max-width: 1080px; margin: 0 auto; }
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .75rem;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
       color: var(--accent);
+      margin-bottom: 2.5rem;
     }
-    .nav__item a.active {
-      background-color: var(--accent-soft);
-      color: var(--primary);
-    }
-
-    /* Main content */
-    .main {
-      padding: 3rem 4rem;
-      max-width: 900px;
-    }
-
-    /* Headings */
-    h1 {
-      font-family: var(--font-serif);
-      font-size: 2.5rem;
-      font-weight: 400;
-      line-height: 1.1;
-      margin-bottom: 1rem;
+    .hero__eyebrow-divider { width: 1px; height: 14px; background: var(--line); }
+    .hero__title {
+      font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+      font-weight: 900;
       color: var(--ink);
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 1rem;
+      line-height: 1.02;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
     }
-    h1:first-child { margin-top: 0; }
-
-    .subtitle {
-      font-size: 1.1rem;
-      color: var(--ink-4);
+    .hero__title .accent {
+      color: var(--accent);
+      font-style: italic;
+      font-family: var(--font-serif);
       font-weight: 400;
+      text-transform: none;
+      letter-spacing: -.01em;
+    }
+    .hero__lead {
+      font-size: 1.15rem;
+      color: var(--ink-3);
+      max-width: 680px;
+      line-height: 1.6;
       margin-bottom: 2rem;
     }
-
-    h2 {
-      font-family: var(--font-serif);
-      font-size: 1.75rem;
-      font-weight: 400;
-      margin: 2.5rem 0 1rem;
-      color: var(--ink);
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-    }
-
-    h3 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin: 1.75rem 0 .75rem;
-      color: var(--ink-2);
-    }
-
-    /* Sections */
-    .step {
-      background: var(--bg-soft);
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 2rem;
-      margin: 2rem 0;
-      scroll-margin-top: 100px;
-    }
-
-    .step-header {
+    .meta {
       display: flex;
-      align-items: baseline;
-      gap: 1.5rem;
-      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin: 2.5rem 0 0;
     }
-
-    .step-number {
-      font-family: var(--font-mono);
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--accent);
-      min-width: 80px;
+    .meta__cell {
+      flex: 1 1 200px;
+      padding: 1.25rem 1.5rem 1.25rem 0;
+      border-right: 1px solid var(--line);
     }
-
-    .step-title {
-      font-size: 1.4rem;
+    .meta__cell:last-child { border-right: none; }
+    .meta__label {
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ink-5);
+      margin-bottom: .4rem;
+    }
+    .meta__value {
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--ink);
-      margin: 0;
+      letter-spacing: -.01em;
     }
+    @media (max-width: 700px) { .hero { padding: 4rem 1.5rem 2rem; } .meta__cell { flex: 1 1 100%; border-right: none; border-bottom: 1px solid var(--line); } .meta__cell:last-child { border-bottom: none; } }
 
-    .step-time {
-      font-size: 0.85rem;
+    /* Section header */
+    .sec-header {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 700px) { .sec-header { grid-template-columns: 1fr; gap: 1rem; } }
+    .sec-num {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      color: var(--accent);
+      line-height: 1;
+      font-style: italic;
+    }
+    .sec-eyebrow {
+      display: inline-block;
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .sec-title {
+      font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.05;
+      letter-spacing: -.025em;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    .sec-lead {
+      color: var(--ink-3);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 720px;
+    }
+    .sec-timing {
+      display: inline-block;
+      margin-top: .75rem;
+      font-family: var(--font-mono);
+      font-size: .72rem;
       color: var(--ink-4);
-      font-weight: 600;
-      margin-top: 0.5rem;
-      display: block;
+      letter-spacing: .05em;
     }
 
-    .step-objective {
-      background: white;
-      border-left: 3px solid var(--accent);
-      padding: 1rem;
+    .h-sub {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin: 2.5rem 0 1rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+    }
+
+    /* Callouts */
+    .callout {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      padding: 1.4rem 1.6rem;
+      background: var(--bg-soft);
       margin: 1.5rem 0;
+      border-left: 3px solid var(--ink);
+    }
+    .callout__icon { font-size: 1.15rem; }
+    .callout__body h4 {
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+      color: var(--ink);
+    }
+    .callout__body p, .callout__body li {
+      margin: 0 0 .4rem;
+      color: var(--ink-2);
+      font-size: .96rem;
+      line-height: 1.6;
+    }
+    .callout__body ul, .callout__body ol { margin: .5rem 0 0 1.2rem; }
+    .callout--tip  { border-left-color: var(--accent); }
+    .callout--tip h4  { color: var(--accent); }
+    .callout--good { border-left-color: var(--success); }
+    .callout--good h4 { color: var(--success); }
+    .callout--warn { border-left-color: var(--warning); }
+    .callout--warn h4 { color: var(--warning); }
+    .callout--checkpoint { border-left-color: var(--accent); background: #EBF2F9; }
+    .callout--checkpoint h4 { color: var(--accent); }
+
+    /* Checklist */
+    .check {
+      border: 1px solid var(--line);
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+    }
+    .check__title {
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .check ul { list-style: none; }
+    .check li {
+      padding: .55rem 0 .55rem 2rem;
+      position: relative;
+      border-bottom: 1px solid var(--line);
+      font-size: .95rem;
+      color: var(--ink-2);
+    }
+    .check li:last-child { border-bottom: none; }
+    .check li::before {
+      content: "";
+      position: absolute;
+      left: 0; top: .7rem;
+      width: 16px; height: 16px;
+      border: 1.5px solid var(--accent);
       border-radius: 3px;
     }
+    .check li strong { color: var(--ink); }
 
-    .step-objective strong {
-      display: block;
-      font-size: 0.85rem;
+    /* Prompt card */
+    .prompt {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 1.25rem;
+      padding: 1.6rem;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      margin: 1rem 0;
+      align-items: start;
+      transition: border-color var(--trans);
+    }
+    .prompt:hover { border-color: var(--accent); }
+    .prompt__badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px; height: 44px;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: .9rem;
+      font-weight: 800;
+    }
+    .prompt__body { min-width: 0; }
+    .prompt__head {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: .8rem;
+      flex-wrap: wrap;
+    }
+    .prompt__title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.3;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+    }
+    .prompt__quote {
+      background: var(--bg-soft);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.2rem;
+      font-family: var(--font-mono);
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--ink-2);
+      margin-bottom: 1rem;
+      position: relative;
+      white-space: pre-wrap;
+    }
+    .prompt__quote::before {
+      content: "PROMPT";
+      position: absolute;
+      top: -8px; left: 12px;
+      background: var(--bg);
+      padding: 0 .5rem;
+      font-family: var(--font-sans);
+      font-size: .6rem;
+      font-weight: 800;
+      letter-spacing: .2em;
       color: var(--accent);
-      margin-bottom: 0.5rem;
+    }
+    .prompt__result {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      font-size: .92rem;
+      color: var(--ink-3);
+      line-height: 1.6;
+    }
+    .prompt__result::before {
+      content: "→";
+      color: var(--success);
+      font-weight: 700;
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+    }
+    .prompt__result strong { color: var(--ink); }
+    @media (max-width: 600px) { .prompt { grid-template-columns: 1fr; } }
+
+    /* Numbered steps */
+    .stepline {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 1.25rem;
+      padding: 1.1rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .stepline:last-child { border-bottom: 1px solid var(--line); }
+    .stepline__num {
+      font-family: var(--font-mono);
+      font-size: .85rem;
+      font-weight: 800;
+      color: var(--accent);
+      padding-top: .15rem;
+    }
+    .stepline__title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .3rem;
+    }
+    .stepline__text {
+      color: var(--ink-3);
+      font-size: .95rem;
+      line-height: 1.6;
+    }
+    .stepline__text p { margin-bottom: .35rem; }
+    .stepline__text ul { margin: .35rem 0 .35rem 1.2rem; }
+
+    /* Footer */
+    .footer {
+      padding: 3rem 4rem;
+      max-width: 1080px;
+      margin: 0 auto;
+      border-top: 1px solid var(--line);
+      color: var(--ink-4);
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
     }
 
-    /* Code blocks */
     pre {
-      background: var(--ink);
+      background: #1a1a1a;
       color: #e8e8e8;
       padding: 1.5rem;
       border-radius: 6px;
       overflow-x: auto;
       margin: 1.5rem 0;
       font-family: var(--font-mono);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       line-height: 1.5;
     }
+    pre code { background: none; color: inherit; padding: 0; }
 
-    pre code {
-      background: none;
-      color: inherit;
-      padding: 0;
-    }
-
-    /* Inline prompts */
-    .prompt {
-      background: #f0f0f0;
-      border-left: 4px solid var(--warning);
-      padding: 1rem;
+    table {
+      width: 100%;
+      border-collapse: collapse;
       margin: 1.5rem 0;
-      border-radius: 3px;
-      font-style: italic;
-      color: var(--ink-3);
+      font-size: 0.95rem;
     }
-
-    /* Callout boxes */
-    .callout {
-      background: var(--accent-soft);
-      border-left: 4px solid var(--accent);
-      padding: 1rem;
-      margin: 1.5rem 0;
-      border-radius: 3px;
-    }
-
-    .callout.warning {
-      background: #fff3cd;
-      border-left-color: var(--warning);
-    }
-
-    .callout.success {
-      background: #d4edda;
-      border-left-color: var(--success);
-    }
-
-    /* Lists */
-    ul, ol {
-      margin: 1rem 0 1rem 2rem;
-    }
-
-    li {
-      margin: 0.5rem 0;
-    }
-
-    /* Checkpoint */
-    .checkpoint {
-      background: #d4edda;
-      border: 1px solid var(--success);
-      border-radius: 6px;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-    }
-
-    .checkpoint strong {
-      color: var(--success);
-      display: block;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
-
-    /* Table of contents */
-    .toc {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-
-    .toc-item {
-      background: var(--bg-soft);
-      padding: 1rem;
-      border-radius: 6px;
-      border-left: 3px solid var(--accent);
-    }
-
-    .toc-item a {
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .toc-item-time {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--ink-4);
-      margin-top: 0.25rem;
-    }
-
-    /* Emoji markers */
-    .emoji { font-size: 1.2em; margin-right: 0.25em; }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-      .nav {
-        position: relative;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--line);
-        padding: 2rem 2rem;
-      }
-      .main {
-        padding: 2rem;
-      }
-      h1 {
-        font-size: 2rem;
-      }
-      .toc {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .main {
-        padding: 1.5rem;
-      }
-      .step {
-        padding: 1.5rem;
-      }
-      h1 {
-        font-size: 1.5rem;
-      }
-      .step-header {
-        flex-direction: column;
-        gap: 0;
-      }
-      pre {
-        font-size: 0.8rem;
-      }
-    }
+    th, td { padding: 0.75rem; text-align: left; border: 1px solid var(--line); }
+    th { background: var(--bg-soft); font-weight: 700; color: var(--ink); }
+    tr:nth-child(even) { background: var(--bg-soft); }
   </style>
 </head>
 <body>
-  <div class="layout">
-    <nav class="nav">
-      <div class="nav__brand">
-        <span class="nav__brand-title">Agent Teams</span>
-        <span class="nav__brand-sub">Marketing Lab</span>
+
+<div class="layout">
+  <aside class="nav">
+    <div class="nav__brand">
+      <span class="nav__brand-title">LAB — AGENT TEAMS</span>
+      <span class="nav__brand-sub">AI Marketing · Self-paced</span>
+    </div>
+
+    <div class="nav__label">Getting started</div>
+    <ul class="nav__list">
+      <li class="nav__item"><a href="#intro"><span class="nav__num">A</span>Introduction</a></li>
+      <li class="nav__item"><a href="#part1"><span class="nav__num">01</span>Prerequisites</a></li>
+      <li class="nav__item"><a href="#part2"><span class="nav__num">02</span>Installation</a></li>
+      <li class="nav__item"><a href="#part3"><span class="nav__num">03</span>Tmux basics</a></li>
+    </ul>
+
+    <div class="nav__label">The exercise</div>
+    <ul class="nav__list">
+      <li class="nav__item"><a href="#part4"><span class="nav__num">04</span>Build campaign</a></li>
+      <li class="nav__item"><a href="#part5"><span class="nav__num">05</span>Troubleshooting</a></li>
+      <li class="nav__item"><a href="#part6"><span class="nav__num">06</span>Best practices</a></li>
+      <li class="nav__item"><a href="#part7"><span class="nav__num">07</span>Advanced patterns</a></li>
+      <li class="nav__item"><a href="#cleanup"><span class="nav__num">08</span>Cleanup</a></li>
+    </ul>
+  </aside>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero__eyebrow">
+        AI MARKETING LAB
+        <span class="hero__eyebrow-divider"></span>
+        CLAUDE CODE
+      </div>
+      <h1 class="hero__title">
+        Building campaigns with<br>
+        <span class="accent">parallel AI teammates.</span>
+      </h1>
+      <p class="hero__lead">
+        A hands-on manual for marketing students and practitioners. Spawn three AI teammates (Strategist, Copywriter, Researcher) to develop a complete product launch campaign in parallel. Learn to brief teams, manage coordination, and critique AI-generated work.
+      </p>
+
+      <div class="meta">
+        <div class="meta__cell">
+          <div class="meta__label">Product</div>
+          <div class="meta__value">IE-Nergy</div>
+        </div>
+        <div class="meta__cell">
+          <div class="meta__label">Duration</div>
+          <div class="meta__value">2–4 hours</div>
+        </div>
+        <div class="meta__cell">
+          <div class="meta__label">Audience</div>
+          <div class="meta__value">Marketing, marketing students</div>
+        </div>
+        <div class="meta__cell">
+          <div class="meta__label">Deliverable</div>
+          <div class="meta__value">Campaign brief</div>
+        </div>
       </div>
 
-      <div class="nav__label">📚 Sections</div>
-      <ul class="nav__list">
-        <li class="nav__item"><a href="#intro">Introduction</a></li>
-        <li class="nav__item"><a href="#part1">Part 1 · Prerequisites</a></li>
-        <li class="nav__item"><a href="#part2">Part 2 · Installation</a></li>
-        <li class="nav__item"><a href="#part3">Part 3 · Tmux</a></li>
-        <li class="nav__item"><a href="#part4">Part 4 · Exercise</a></li>
-        <li class="nav__item"><a href="#part5">Part 5 · Troubleshooting</a></li>
-        <li class="nav__item"><a href="#part6">Part 6 · Best Practices</a></li>
-        <li class="nav__item"><a href="#part7">Part 7 · Advanced Patterns</a></li>
-      </ul>
-    </nav>
+      <h3 class="h-sub">What you'll learn</h3>
+      <div style="margin-top: 1.5rem;">
+        <p style="color: var(--ink-3); margin-bottom: 1rem; line-height: 1.6;">Learn to structure marketing briefs for parallel AI work. Discover how to define specialist roles (Strategist, Copywriter, Researcher) that produce sharp, specific output instead of generic work. Watch three Claude instances coordinate on the same project—sharing findings, debating ideas, and building on each other's work. Develop judgment for evaluating AI-generated marketing with a marketer's eye.</p>
+      </div>
+    </section>
 
-    <main class="main">
-      <!-- Introduction -->
-      <section id="intro">
-        <h1>Working with AI Agent Teams in Claude Code</h1>
-        <p class="subtitle">A Hands-On Manual for Marketing Students</p>
-
-        <h2 id="what-are-agent-teams"><span class="emoji">🤝</span> What Are Agent Teams?</h2>
-        <p>Agent Teams let you spawn multiple Claude instances to work on the same project in parallel. Unlike subagents (which only report back to the main session), teammates can talk directly to each other, share findings, and coordinate their work.</p>
-
-        <p>One session takes on the role of team lead: it coordinates the work, assigns tasks to specialists, and synthesizes their findings. The other sessions are teammates: independent Claude instances that pick up tasks, communicate directly with each other, and report back through a shared task list.</p>
-
-        <div class="callout">
-          <strong>Why Agent Teams for marketing?</strong> Because your campaign needs a strategist who thinks about positioning, a copywriter who crafts the message, and a researcher who checks the competition — and they need to talk to each other. Agent Teams let those specialists work in parallel while staying coordinated.
+    <!-- INTRO -->
+    <section class="section" id="intro">
+      <div class="sec-header">
+        <div class="sec-num">A</div>
+        <div>
+          <span class="sec-eyebrow">Introduction</span>
+          <h2 class="sec-title">What are Agent Teams?</h2>
+          <p class="sec-lead">Agent Teams let you spawn multiple Claude instances to work on the same project in parallel. Unlike subagents, teammates can talk directly to each other.</p>
         </div>
+      </div>
 
-        <h2 id="when-to-use"><span class="emoji">✓</span> When to Use Agent Teams</h2>
-        <p>Agent Teams shine when work can be genuinely parallelized:</p>
-        <ul>
-          <li><strong>Campaign brainstorming</strong> — different teammates explore different angles, audiences, or channels</li>
-          <li><strong>Competitive analysis</strong> — each teammate investigates a different competitor, then compares notes</li>
-          <li><strong>Content production</strong> — one teammate writes long-form, another writes social posts, another drafts email copy</li>
-          <li><strong>Persona-driven critique</strong> — different teammates evaluate the same campaign through different audience lenses</li>
-          <li><strong>Cross-channel development</strong> — separate teammates own messaging for each channel</li>
-        </ul>
+      <p style="margin-bottom: 1.5rem; color: var(--ink-3); line-height: 1.6;">One session takes on the role of <strong>team lead</strong>: it coordinates work, assigns tasks to specialists, and synthesizes findings. The other sessions are <strong>teammates</strong>: independent Claude instances that pick up tasks, communicate directly with each other, and report back through a shared task list.</p>
 
-        <p>They're <em>not</em> a good fit for sequential tasks (draft → edit → polish), or when teammates need to edit the same file simultaneously.</p>
+      <div class="callout callout--tip">
+        <div class="callout__icon">🤝</div>
+        <div class="callout__body">
+          <h4>Why Agent Teams for marketing?</h4>
+          <p>Your campaign needs a strategist thinking about positioning, a copywriter crafting the message, and a researcher checking the competition. These specialists need to talk to each other. Agent Teams let them work in parallel while staying coordinated.</p>
+        </div>
+      </div>
 
-        <h2 id="agent-teams-vs-subagents"><span class="emoji">⚖️</span> Agent Teams vs Subagents</h2>
-        <table style="width: 100%; margin: 1.5rem 0; border-collapse: collapse;">
-          <thead>
-            <tr style="background: var(--bg-soft);">
-              <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--line);">Feature</th>
-              <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--line);">Subagents</th>
-              <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--line);">Agent Teams</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="padding: 0.75rem; border: 1px solid var(--line);"><strong>Communication</strong></td>
-              <td style="padding: 0.75rem; border: 1px solid var(--line);">Report to main only</td>
-              <td style="padding: 0.75rem; border: 1px solid var(--line);">Message each other</td>
-            </tr>
-            <tr style="background: var(--bg-soft);">
-              <td style="padding: 0.75rem; border: 1px solid var(--line);"><strong>Coordination</strong></td>
-              <td style="padding: 0.75rem; border: 1px solid var(--line);">Lead manages all work</td>
-              <td style="padding: 0.75rem; border: 1px solid var(--line);">Shared task list</td>
-            </tr>
-            <tr>
-              <td style="padding: 0.75rem; border: 1px solid var(--line);"><strong>Best for</strong></td>
-              <td style="padding: 0.75rem; border: 1px solid var(--line);">Focused tasks (result matters)</td>
-              <td style="padding: 0.75rem; border: 1px solid var(--line);">Complex work (discussion matters)</td>
-            </tr>
-            <tr style="background: var(--bg-soft);">
-              <td style="padding: 0.75rem; border: 1px solid var(--line);"><strong>Cost</strong></td>
-              <td style="padding: 0.75rem; border: 1px solid var(--line);">Lower</td>
-              <td style="padding: 0.75rem; border: 1px solid var(--line);">Higher (multiple instances)</td>
-            </tr>
-          </tbody>
-        </table>
+      <h3 class="h-sub">When to use Agent Teams</h3>
+      <p style="margin: 1rem 0; color: var(--ink-3);">Agent Teams shine when work can be genuinely parallelized:</p>
+      <div class="stepline">
+        <div class="stepline__num">✓</div>
+        <div>
+          <div class="stepline__title">Campaign brainstorming</div>
+          <div class="stepline__text">Different teammates explore different angles, audiences, or channels</div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">✓</div>
+        <div>
+          <div class="stepline__title">Competitive analysis</div>
+          <div class="stepline__text">Each teammate investigates a different competitor, then compares notes</div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">✓</div>
+        <div>
+          <div class="stepline__title">Content production</div>
+          <div class="stepline__text">One writes long-form, another writes social posts, another drafts email copy</div>
+        </div>
+      </div>
 
-        <p><strong>For this exercise:</strong> Agent Teams is the right choice. The strategist's positioning needs to inform the copywriter's tone, and the researcher's findings need to shape the strategist's recommendations. Teammates have to talk to each other.</p>
-      </section>
+      <p style="margin-top: 2rem; color: var(--ink-3); border-top: 1px solid var(--line); padding-top: 1.5rem;"><strong>They're not a good fit for:</strong> Sequential tasks (draft → edit → polish), or when teammates need to edit the same file simultaneously.</p>
+    </section>
 
-      <!-- Part 1 -->
-      <section id="part1" class="step">
-        <div class="step-header">
-          <div class="step-number">01</div>
-          <div>
-            <h3 class="step-title">Prerequisites</h3>
-            <span class="step-time">⏱ 5 minutes</span>
+    <!-- PART 1: PREREQUISITES -->
+    <section class="section" id="part1">
+      <div class="sec-header">
+        <div class="sec-num">01</div>
+        <div>
+          <span class="sec-eyebrow">Getting started</span>
+          <h2 class="sec-title">Prerequisites</h2>
+          <span class="sec-timing">~5 min · verification only</span>
+        </div>
+      </div>
+
+      <p style="color: var(--ink-3); margin-bottom: 1.5rem;">Before you start, verify you have these tools installed and accessible on your system:</p>
+
+      <div class="stepline">
+        <div class="stepline__num">01</div>
+        <div>
+          <div class="stepline__title">Claude Code 2.1.32+</div>
+          <div class="stepline__text">
+            <p>Check with: <code>claude --version</code></p>
+            <p style="margin-top: .4rem;">If you don't have it, install from <a href="https://code.claude.com" target="_blank">code.claude.com</a></p>
           </div>
         </div>
+      </div>
 
-        <div class="step-objective">
-          <strong>Objective</strong>
-          Verify you have the tools needed to run Agent Teams
-        </div>
-
-        <p>Before starting, make sure you have:</p>
-        <ul>
-          <li><strong>Claude Code 2.1.32+</strong> — Check with: <code>claude --version</code></li>
-          <li><strong>Node.js 18+</strong> — Check with: <code>node --version</code></li>
-          <li><strong>tmux</strong> (any recent version) — Check with: <code>tmux -V</code></li>
-          <li><strong>Operating system:</strong> macOS or Linux (Windows users: use WSL2)</li>
-          <li><strong>A system terminal:</strong> Terminal.app, iTerm2, or Linux terminal (NOT VS Code's integrated terminal)</li>
-        </ul>
-
-        <div class="checkpoint">
-          <strong>✓ Checkpoint</strong>
-          Run these commands. You should see version numbers for all three.
-        </div>
-
-        <pre><code>claude --version
-node --version
-tmux -V</code></pre>
-
-        <p>If you're missing any of these, move to Part 2 for installation instructions.</p>
-      </section>
-
-      <!-- Part 2 -->
-      <section id="part2" class="step">
-        <div class="step-header">
-          <div class="step-number">02</div>
-          <div>
-            <h3 class="step-title">Installation</h3>
-            <span class="step-time">⏱ 10 minutes (if needed)</span>
+      <div class="stepline">
+        <div class="stepline__num">02</div>
+        <div>
+          <div class="stepline__title">Node.js 18+</div>
+          <div class="stepline__text">
+            <p>Check with: <code>node --version</code></p>
+            <p style="margin-top: .4rem;">If needed, install from <a href="https://nodejs.org" target="_blank">nodejs.org</a></p>
           </div>
         </div>
+      </div>
 
-        <div class="step-objective">
-          <strong>Objective</strong>
-          Install Claude Code, Node.js, and tmux
-        </div>
-
-        <h3>2.1 — Install Node.js (if needed)</h3>
-        <p>Visit <a href="https://nodejs.org" target="_blank">nodejs.org</a> and download the LTS version. After installation, verify:</p>
-        <pre><code>node --version</code></pre>
-
-        <h3>2.2 — Install Claude Code</h3>
-        <p>Open your system terminal and run:</p>
-        <pre><code>npm install -g @anthropic-ai/claude-code</code></pre>
-        <p>Then verify:</p>
-        <pre><code>claude --version</code></pre>
-        <p>You should see version 2.1.32 or later.</p>
-
-        <h3>2.3 — Install tmux</h3>
-        <p><strong>On macOS:</strong></p>
-        <pre><code>brew install tmux</code></pre>
-        <p><strong>On Linux (Debian/Ubuntu):</strong></p>
-        <pre><code>sudo apt update && sudo apt install tmux</code></pre>
-        <p><strong>On Linux (Fedora/RHEL):</strong></p>
-        <pre><code>sudo dnf install tmux</code></pre>
-        <p>Then verify:</p>
-        <pre><code>tmux -V</code></pre>
-
-        <div class="checkpoint">
-          <strong>✓ Checkpoint</strong>
-          All three tools installed and showing correct versions?
-        </div>
-      </section>
-
-      <!-- Part 3 -->
-      <section id="part3" class="step">
-        <div class="step-header">
-          <div class="step-number">03</div>
-          <div>
-            <h3 class="step-title">Tmux Basics</h3>
-            <span class="step-time">⏱ 5 minutes</span>
+      <div class="stepline">
+        <div class="stepline__num">03</div>
+        <div>
+          <div class="stepline__title">tmux (any recent version)</div>
+          <div class="stepline__text">
+            <p>Check with: <code>tmux -V</code></p>
+            <p style="margin-top: .4rem;">macOS: <code>brew install tmux</code> · Linux: <code>sudo apt install tmux</code></p>
           </div>
         </div>
+      </div>
 
-        <div class="step-objective">
-          <strong>Objective</strong>
-          Learn tmux pane navigation (you'll need this while your team works)
-        </div>
-
-        <p>Tmux is a terminal multiplexer—it lets you split your terminal into multiple panes. It uses a prefix key (<code>Ctrl+B</code>) before every command.</p>
-
-        <h3>Key shortcuts</h3>
-        <ul>
-          <li><code>Ctrl+B</code> → arrow keys — Move between panes</li>
-          <li><code>Ctrl+B</code> → <code>z</code> — Zoom into one pane (toggle)</li>
-          <li><code>Ctrl+B</code> → <code>d</code> — Detach from session (keeps running)</li>
-        </ul>
-
-        <h3>System commands (from terminal, not inside tmux)</h3>
-        <pre><code>tmux new -s &lt;name&gt;          # Start a new session
-tmux ls                    # List active sessions
-tmux attach -t &lt;name&gt;     # Reconnect to a session
-tmux kill-session -t &lt;name&gt;  # Kill a session</code></pre>
-
-        <div class="callout warning">
-          <strong>Remember:</strong> You'll be working inside tmux for the rest of the exercise. Get comfortable with these shortcuts now—you'll use them frequently.
-        </div>
-      </section>
-
-      <!-- Part 4 -->
-      <section id="part4" class="step">
-        <div class="step-header">
-          <div class="step-number">04</div>
-          <div>
-            <h3 class="step-title">The Exercise: Build a Campaign</h3>
-            <span class="step-time">⏱ 45 minutes (team work + review)</span>
+      <div class="stepline">
+        <div class="stepline__num">04</div>
+        <div>
+          <div class="stepline__title">A system terminal</div>
+          <div class="stepline__text">
+            <p>Terminal.app (macOS), iTerm2, or Linux terminal — NOT VS Code's integrated terminal</p>
           </div>
         </div>
+      </div>
 
-        <div class="step-objective">
-          <strong>Objective</strong>
-          Spawn three AI teammates and watch them develop a launch campaign for IE-Nergy
-        </div>
-
-        <h3>The Brief</h3>
-        <p>You're launching <strong>IE-Nergy</strong>, a new energy drink positioned for university students and young professionals who need <em>clean, sustained focus</em> — for studying, deep work, and creative output, not for partying or extreme sports.</p>
-
-        <p>Key facts:</p>
+      <div class="check" style="margin-top: 2rem;">
+        <div class="check__title">✓ Checkpoint</div>
         <ul>
-          <li><strong>Formulation:</strong> 150mg natural caffeine (green tea + guarana), L-theanine, B-vitamins, zero sugar, 15 calories</li>
-          <li><strong>Flavors:</strong> Yuzu Citrus, Wild Berry, Matcha Mint</li>
-          <li><strong>Price:</strong> €2.50 per can</li>
-          <li><strong>Launch:</strong> Madrid and Barcelona first, expanding across Europe by year-end</li>
-          <li><strong>Differentiation:</strong> Calm focus, not aggressive stimulation. A deliberate counterpoint to the loud, hyper-masculine energy drink category (Red Bull, Monster, Bang).</li>
-          <li><strong>Timeline:</strong> Six weeks until launch</li>
+          <li><strong>All tools installed?</strong> Run the version checks above. You should see version numbers for all three.</li>
+          <li><strong>Ready to proceed?</strong> Move to Part 02 for installation (if needed) or Part 04 to start the exercise.</li>
         </ul>
+      </div>
+    </section>
 
-        <h3>Meet Your Team</h3>
-
-        <p><strong>The Strategist</strong><br/>A senior brand strategist with 10+ years launching consumer challenger brands in crowded categories. Thinks in terms of category positioning, jobs-to-be-done, and defensible differentiation. Skeptical of generic claims like "premium" or "natural"—pushes for sharp, ownable angles. Has a strong point of view on what NOT to say. Grounds every recommendation in audience insight.</p>
-
-        <p><strong>The Copywriter</strong><br/>A direct-response copywriter who's written launch campaigns for digitally-native consumer brands aimed at Gen Z and young Millennials. Writes in a conversational, specific voice—never corporate, never "brand-speak." Knows the difference between Instagram, TikTok, email, and search ad copy and refuses to write the same line for all four. Hates buzzwords ("elevate," "unlock your potential," "fuel your journey").</p>
-
-        <p><strong>The Researcher</strong><br/>A competitive intelligence analyst with a marketing background. Investigates not just what competitors say, but what they <em>don't</em> say—looking for whitespace and positioning gaps. Reports findings as actionable insight, not feature comparison tables. Comfortable making confident judgments from limited data.</p>
-
-        <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--line);">
-
-        <h3>Step 0 — Create Your Workspace</h3>
-        <p>Open a system terminal (Terminal.app, iTerm2, or Linux terminal—NOT VS Code's integrated terminal) and run:</p>
-        <pre><code>mkdir ~/Documents/ienergy-launch
-cd ~/Documents/ienergy-launch</code></pre>
-
-        <h3>Step 1 — Start a tmux Session</h3>
-        <pre><code>tmux new -s marketing</code></pre>
-        <p>You should see a colored status bar at the bottom. If you get "duplicate session: marketing", run:</p>
-        <pre><code>tmux kill-session -t marketing
-tmux new -s marketing</code></pre>
-
-        <h3>Step 2 — Create the Brief</h3>
-        <p>Still in tmux, create a file with the product information:</p>
-        <pre><code>cat > brief.md << 'EOF'
-# IE-Nergy Launch Brief
-
-## Product
-IE-Nergy is a new energy drink for clean, sustained focus — for
-studying, deep work, and creative output. A deliberate counterpoint to
-the loud, hyper-masculine energy drink category (Red Bull, Monster, Bang).
-
-## Formulation
-- 150mg natural caffeine (green tea + guarana)
-- L-theanine for sustained focus without jitters
-- B-vitamins
-- Zero sugar, 15 calories
-- Flavors: Yuzu Citrus, Wild Berry, Matcha Mint
-
-## Pricing & distribution
-€2.50 per 250ml can. Launching in Madrid and Barcelona first
-(universities, specialty grocery, co-working spaces). Pan-European
-expansion by year-end.
-
-## Target audience
-University students and young professionals (18-30) who study or work
-long hours and want clean energy without the crash, the sugar, or the
-bro-coded branding of legacy energy drinks.
-
-## Differentiator
-Calm focus, not aggressive stimulation. Designed for the moments when
-you need to think clearly — not when you want to feel hyped.
-
-## Channels available
-TikTok, Instagram, Spotify audio ads, university campus activations,
-partnerships with co-working spaces and specialty cafés.
-EOF</code></pre>
-
-        <div class="checkpoint">
-          <strong>✓ Checkpoint</strong>
-          File created? Verify with: <code>cat brief.md</code>
+    <!-- PART 4: THE EXERCISE -->
+    <section class="section" id="part4">
+      <div class="sec-header">
+        <div class="sec-num">04</div>
+        <div>
+          <span class="sec-eyebrow">The exercise</span>
+          <h2 class="sec-title">Build a Campaign</h2>
+          <span class="sec-timing">~45 min · team work + review</span>
         </div>
+      </div>
 
-        <h3>Step 3 — Launch Claude Code with Agent Teams Enabled</h3>
-        <p>Still in your tmux session, run:</p>
-        <pre><code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude</code></pre>
-        <p>Claude Code will launch inside tmux. This activates the experimental Agent Teams feature just for this session.</p>
+      <p style="margin-bottom: 1.5rem; color: var(--ink-3);">You'll spawn three AI teammates to develop a launch campaign for <strong>IE-Nergy</strong>, a new energy drink positioned for students and young professionals who need calm, sustained focus—not aggressive hype.</p>
 
-        <h3>Step 4 — Verify the Feature is Active</h3>
-        <p>Inside Claude Code, type:</p>
-        <div class="prompt">Check whether CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS is set in your environment.</div>
-        <p>Claude should confirm it's set to 1. If not, exit (<code>/exit</code>) and re-run the command above with the env var.</p>
+      <h3 class="h-sub">The brief</h3>
+      <p style="color: var(--ink-3); margin-bottom: 1rem;">Key facts about the product:</p>
+      <div class="callout callout--warn">
+        <div class="callout__icon">🥤</div>
+        <div class="callout__body">
+          <h4>IE-Nergy: A New Energy Drink</h4>
+          <ul>
+            <li><strong>Formulation:</strong> 150mg natural caffeine (green tea + guarana), L-theanine, B-vitamins, zero sugar, 15 calories</li>
+            <li><strong>Flavors:</strong> Yuzu Citrus, Wild Berry, Matcha Mint</li>
+            <li><strong>Price:</strong> €2.50 per can</li>
+            <li><strong>Launch:</strong> Madrid & Barcelona first, expanding across Europe</li>
+            <li><strong>Differentiator:</strong> Calm focus, not aggressive stimulation. A counterpoint to Red Bull/Monster/Bang</li>
+            <li><strong>Timeline:</strong> Six weeks until launch</li>
+          </ul>
+        </div>
+      </div>
 
-        <h3>Step 5 — Spawn Your Marketing Team</h3>
-        <p>Now paste this into Claude Code:</p>
-        <pre><code>Read brief.md, then create an agent team with 3 teammates in tmux
-split-pane mode to develop the IE-Nergy launch campaign. Spawn them
-now with these specific roles:
+      <h3 class="h-sub">Your team</h3>
+      <div class="stepline">
+        <div class="stepline__num">A</div>
+        <div>
+          <div class="stepline__title">The Strategist</div>
+          <div class="stepline__text"><p>A senior brand strategist with 10+ years launching challenger brands. Thinks in terms of positioning, jobs-to-be-done, defensible differentiation. Skeptical of generic claims. Has a strong point of view on what NOT to say. Grounds every recommendation in audience insight.</p></div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">B</div>
+        <div>
+          <div class="stepline__title">The Copywriter</div>
+          <div class="stepline__text"><p>A direct-response copywriter who's written campaigns for Gen Z brands. Writes conversational, specific voice—never corporate. Writes differently for each channel (Instagram ≠ TikTok ≠ email ≠ search). Hates buzzwords like "elevate," "fuel," "unlock."</p></div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">C</div>
+        <div>
+          <div class="stepline__title">The Researcher</div>
+          <div class="stepline__text"><p>A competitive intelligence analyst. Investigates not just what competitors say, but what they DON'T say—looking for whitespace and positioning gaps. Reports findings as actionable insight, not feature tables.</p></div>
+        </div>
+      </div>
+
+      <h3 class="h-sub" style="margin-top: 2.5rem;">How to run the exercise</h3>
+      <div class="prompt">
+        <div class="prompt__badge">01</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <div class="prompt__title">Create workspace</div>
+          </div>
+          <div class="prompt__quote">mkdir ~/Documents/ienergy-launch
+cd ~/Documents/ienergy-launch</div>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">02</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <div class="prompt__title">Start tmux session</div>
+          </div>
+          <div class="prompt__quote">tmux new -s marketing</div>
+          <div style="margin-top: .8rem; font-size: .95rem; color: var(--ink-3);">You'll see a colored status bar at the bottom.</div>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">03</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <div class="prompt__title">Launch Claude Code with Agent Teams enabled</div>
+          </div>
+          <div class="prompt__quote">CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude</div>
+          <div style="margin-top: .8rem; font-size: .95rem; color: var(--ink-3);">This activates the experimental feature just for this session.</div>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">04</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <div class="prompt__title">Spawn your three teammates</div>
+          </div>
+          <div class="prompt__quote">Read brief.md, then create an agent team with 3 teammates in tmux
+split-pane mode. Spawn them with these roles:
 
 TEAMMATE 1 — STRATEGIST
 You are a senior brand strategist with 10+ years launching consumer
-challenger brands in crowded categories. You think in terms of
-category positioning, jobs-to-be-done, and defensible differentiation
-— not features. You are skeptical of generic positioning like
-"premium" or "natural" and push for sharp, ownable angles. You have a
-strong point of view on what NOT to say. Ground every recommendation
-in audience insight.
-Deliverable: strategy.md containing (1) a one-sentence positioning
-statement, (2) the top 3 messages we will lead with, (3) recommended
-channel mix with reasoning, (4) what we will NOT say or claim and why.
+challenger brands. Think in terms of category positioning, jobs-to-be-done,
+defensible differentiation. Skeptical of generic positioning. Strong point
+of view on what NOT to say. Ground every recommendation in audience insight.
+Deliverable: strategy.md with (1) one-sentence positioning, (2) top 3 messages,
+(3) recommended channel mix, (4) what we will NOT say and why.
 
 TEAMMATE 2 — COPYWRITER
-You are a direct-response copywriter who has written launch campaigns
-for digitally-native consumer brands aimed at Gen Z and young
-Millennials. You write in a conversational, specific voice — never
-corporate, never brand-speak. You write differently for Instagram vs
-TikTok vs email vs search. You hate buzzwords like "elevate,"
-"unlock your potential," "fuel your journey."
-Deliverable: copy.md containing (1) one Instagram caption (max 125
-words), (2) one TikTok script for a 30-second video (with shot
-direction and on-screen text cues), (3) one email — subject line plus
-first paragraph, (4) one Google Search ad — headline (30 chars) plus
-description (90 chars). Wait for the Strategist's positioning before
-drafting.
+You are a direct-response copywriter who's written for Gen Z/Millennial brands.
+Write conversational, specific voice—never corporate. Write differently for
+Instagram vs TikTok vs email vs search. Hate buzzwords like "elevate,"
+"unlock," "fuel."
+Deliverable: copy.md with (1) Instagram caption (125 words), (2) TikTok script
+(30-second video), (3) email (subject + opening), (4) Google Search ad.
+Wait for Strategist's positioning before drafting.
 
 TEAMMATE 3 — RESEARCHER
-You are a competitive intelligence analyst with a marketing
-background. You investigate not just what competitors say, but what
-they don't say — looking for whitespace and positioning gaps. You
-report findings as actionable insight, not feature comparisons.
-Deliverable: research.md containing (1) a short profile of 3 direct
-competitors (Red Bull, Monster, and one challenger of your choice
-such as Celsius, Tenzing, or Yfood), (2) what each one's core
-positioning is in one sentence, (3) the 2-3 positioning gaps IE-Nergy
-could credibly own.
+You are a competitive intelligence analyst. Investigate not just what
+competitors say, but what they DON'T say. Look for whitespace and positioning gaps.
+Report as actionable insight, not feature tables.
+Deliverable: research.md with (1) profile of 3 competitors (Red Bull, Monster,
+one challenger like Celsius/Tenzing), (2) each competitor's core positioning
+in one sentence, (3) 2-3 positioning gaps IE-Nergy could own.
 
 WORKFLOW:
-1. The Researcher works first and shares findings with the team.
-2. The Strategist uses the research to develop positioning.
-3. The Copywriter waits for positioning, then drafts creative anchored to it.
-4. You (the lead) wait for all three before producing campaign-summary.md.
+1. Researcher works first, shares findings
+2. Strategist uses research to develop positioning
+3. Copywriter waits for positioning, then drafts creative
+4. Lead synthesizes all three into campaign-summary.md
 
-Have teammates message each other directly when they need input.</code></pre>
-
-        <div class="checkpoint">
-          <strong>✓ Checkpoint</strong>
-          Watch your terminal: As Claude spawns each teammate, tmux will split into multiple panes automatically.
+Have teammates message each other directly when they need input.</div>
+          <div style="margin-top: .8rem; font-size: .95rem; color: var(--success); font-weight: 600;">As Claude spawns each teammate, tmux automatically splits into multiple panes.</div>
         </div>
+      </div>
 
-        <h3>Step 6 — Interact While They Work</h3>
-        <p>While the team works, you can:</p>
-        <ul>
-          <li><strong>Click into a pane</strong> (or use <code>Ctrl+B</code> → arrow keys) to inspect what each teammate is doing</li>
-          <li><strong>Zoom into one pane</strong> with <code>Ctrl+B</code> → <code>z</code> to read full output, press again to zoom out</li>
-          <li><strong>Send feedback</strong> to any teammate by clicking into their pane and typing—for example, "The TikTok script doesn't sound like a TikTok, it reads like a TV spot. Rewrite it as if explaining to a friend."</li>
-          <li><strong>Watch the lead's pane</strong>—it tracks the shared task list</li>
-        </ul>
+      <h3 class="h-sub" style="margin-top: 2.5rem;">While your team works</h3>
+      <p style="color: var(--ink-3); margin-bottom: 1rem;">Use these shortcuts to navigate and steer:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Command</th>
+            <th>What it does</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Ctrl+B</code> → arrow keys</td>
+            <td>Move between panes</td>
+          </tr>
+          <tr>
+            <td><code>Ctrl+B</code> → <code>z</code></td>
+            <td>Zoom in/out of one pane</td>
+          </tr>
+          <tr>
+            <td>Click into a pane → type</td>
+            <td>Send feedback to that teammate</td>
+          </tr>
+        </tbody>
+      </table>
 
-        <div class="callout warning">
-          <strong>Common steering moves:</strong>
-          <ul style="margin-top: 0.5rem;">
-            <li><em>To the Copywriter:</em> "Push harder on the anti-bro positioning. The voice should feel like a smart friend, not a brand."</li>
-            <li><em>To the Researcher:</em> "Also include Celsius and Yfood—they're the most relevant challenger brands."</li>
-            <li><em>To the Lead:</em> "Wait for your teammates to finish before proceeding. Let them message each other directly."</li>
-          </ul>
+      <div class="callout callout--tip" style="margin-top: 2rem;">
+        <div class="callout__icon">💡</div>
+        <div class="callout__body">
+          <h4>Steering tips</h4>
+          <p><strong>To the Copywriter:</strong> "The TikTok script doesn't sound like a TikTok—it reads like a TV spot with shorter sentences. Rewrite it as if explaining to a friend."</p>
+          <p style="margin-top: .5rem;"><strong>To the Strategist:</strong> "Focus on what makes IE-Nergy defensibly different from Red Bull. What positioning would they NEVER claim?"</p>
+          <p style="margin-top: .5rem;"><strong>To the Researcher:</strong> "Also analyze Celsius and Tenzing—they're the nearest competitors in the functional energy space."</p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Part 5 -->
-      <section id="part5" class="step">
-        <div class="step-header">
-          <div class="step-number">05</div>
-          <div>
-            <h3 class="step-title">Troubleshooting</h3>
-            <span class="step-time">⏱ As needed</span>
-          </div>
-        </div>
+    <!-- FOOTER -->
+    <section class="footer">
+      <p><strong>Ready to start?</strong> Jump to Part 01 to verify your setup, then head to Part 04 to begin the exercise. The full manual is in the repository at <code>agent-teams-marketing-lab/MANUAL.md</code>.</p>
+      <p style="margin-top: 1.5rem; font-size: .75rem; color: var(--ink-5);">🚀 Build fast. Critique harder. Ship smarter.</p>
+    </section>
 
-        <h3>Common Issues & Fixes</h3>
+  </main>
 
-        <p><strong>"duplicate session: marketing"</strong><br/>A previous tmux session is still alive. Run:</p>
-        <pre><code>tmux kill-session -t marketing
-tmux new -s marketing</code></pre>
+</div>
 
-        <p><strong>Panes don't appear when the team spawns</strong><br/>Check these in order:</p>
-        <ol>
-          <li>Are you inside tmux? Run <code>echo $TMUX</code>. If it prints nothing, you're not—exit Claude Code, run <code>tmux new -s marketing</code>, and relaunch.</li>
-          <li>Is the feature flag set? Make sure you launched with <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude</code></li>
-          <li>Did Claude actually spawn a team? If your prompt was vague, Claude may have done the work itself. Re-prompt: "Spawn 3 teammates now."</li>
-        </ol>
-
-        <p><strong>Teammates exist but no panes are visible</strong><br/>They may have spawned in in-process mode. Press <code>Shift+Down</code> to cycle between them.</p>
-
-        <p><strong>One teammate writing over another's files</strong><br/>Make sure each teammate has a single deliverable file. The Strategist writes to strategy.md, the Copywriter to copy.md, etc.</p>
-
-        <p><strong>Env var not loading</strong><br/>If Claude says "experimental agent teams mode isn't enabled", the env var didn't stick. Try again:</p>
-        <pre><code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude</code></pre>
-
-        <p><strong>Orphaned tmux session after cleanup</strong><br/>Run <code>tmux ls</code> and <code>tmux kill-session -t &lt;name&gt;</code> for any leftovers.</p>
-      </section>
-
-      <!-- Part 6 -->
-      <section id="part6" class="step">
-        <div class="step-header">
-          <div class="step-number">06</div>
-          <div>
-            <h3 class="step-title">Best Practices</h3>
-            <span class="step-time">⏱ As you work</span>
-          </div>
-        </div>
-
-        <p><strong>Brief like you'd brief a real team.</strong> Vague briefs get vague work—from humans and AI alike. Spell out audience, tone, channels, deliverables, success criteria, and what to avoid.</p>
-
-        <p><strong>Define the role, not just the task.</strong> "Write Instagram copy" is a task. "You are a Gen Z direct-response copywriter who writes like a smart friend, hates buzzwords, and writes specifically for Instagram" is a role. Roles produce sharper, less generic work.</p>
-
-        <p><strong>Specify deliverable format precisely.</strong> Word counts, character limits, structure. Without this, agents produce different shapes of output that don't combine well.</p>
-
-        <p><strong>Tell the team what NOT to do.</strong> Constraints sharpen output. "Don't use 'unleash,' 'fuel,' 'crush'" is more useful than "use a fresh tone."</p>
-
-        <p><strong>Keep teams between 3 and 5 teammates.</strong> Three is often the sweet spot for marketing work: strategist + creative + researcher covers most campaigns.</p>
-
-        <p><strong>Critique the output. Always.</strong> AI teams produce confident-sounding work that often needs sharpening. Spotting the generic phrases, the missed audience nuances, the unsupported claims—that's where you develop judgment.</p>
-
-        <p><strong>Avoid having two teammates write the same deliverable.</strong> They'll overwrite each other's files. Make each teammate own a different artifact.</p>
-
-        <p><strong>Clean up between teams.</strong> A lead can only manage one team at a time. Always run "Clean up the team" before starting a new campaign.</p>
-      </section>
-
-      <!-- Part 7 -->
-      <section id="part7" class="step">
-        <div class="step-header">
-          <div class="step-number">07</div>
-          <div>
-            <h3 class="step-title">Advanced Patterns</h3>
-            <span class="step-time">⏱ For next campaigns</span>
-          </div>
-        </div>
-
-        <p>Once you've run the IE-Nergy exercise, try these:</p>
-
-        <p><strong>Persona panel.</strong> Spawn 4 teammates each playing a different target persona (e.g., "first-year university student in Madrid," "25-year-old junior consultant working long hours," "graduate student writing a thesis," "young creative freelancer"). Show them the same campaign concept and ask each one to react in character. Surfaces audience misalignment fast.</p>
-
-        <p><strong>Pre-mortem.</strong> Spawn 3 teammates as devil's advocates. Brief them on the planned IE-Nergy launch and ask each to find the strongest reason it might fail (e.g., "the anti-bro positioning is too narrow," "Red Bull will out-spend us 100:1," "students won't pay €2.50 for a can"). Powerful for sanity-checking before launch.</p>
-
-        <p><strong>Competitive war room.</strong> Spawn one teammate per major competitor. Each one stays "in character" as that competitor's marketing team and tries to anticipate how they'd respond to IE-Nergy's launch. The lead synthesizes a competitive response strategy.</p>
-
-        <p><strong>Channel adaptation.</strong> Spawn one teammate per channel (TikTok, Instagram, Spotify audio, campus activations). Hand them the same core message and have each adapt it natively for their channel—checking with each other to keep the campaign coherent.</p>
-
-        <p><strong>Brand voice audit.</strong> Spawn 3 teammates each interpreting the IE-Nergy voice differently ("calm and confident," "witty and irreverent," "warm and encouraging"). Have them each rewrite the same piece of copy. Compare to clarify what the brand voice actually is.</p>
-      </section>
-
-      <!-- Cleanup -->
-      <section id="cleanup" class="step">
-        <div class="step-header">
-          <div class="step-number">08</div>
-          <div>
-            <h3 class="step-title">Cleanup</h3>
-            <span class="step-time">⏱ 5 minutes</span>
-          </div>
-        </div>
-
-        <div class="step-objective">
-          <strong>Objective</strong>
-          Shut down the team and close the session
-        </div>
-
-        <h3>Step 1 — Clean up the team</h3>
-        <p>Inside Claude Code, type:</p>
-        <div class="prompt">Clean up the team.</div>
-        <p>This shuts down the teammates and removes the shared task list. Always run cleanup through the lead—never from a teammate's pane.</p>
-
-        <h3>Step 2 — Exit Claude Code</h3>
-        <pre><code>/exit</code></pre>
-
-        <h3>Step 3 — Detach from tmux</h3>
-        <pre><code>Ctrl+B then d</code></pre>
-
-        <h3>Step 4 (Optional) — Kill the tmux session</h3>
-        <pre><code>tmux kill-session -t marketing</code></pre>
-
-        <div class="checkpoint">
-          <strong>✓ Done</strong>
-          You've successfully run an Agent Team campaign.
-        </div>
-      </section>
-
-      <!-- Final note -->
-      <section style="margin-top: 3rem; padding: 2rem; background: var(--accent-soft); border-radius: 6px; border-left: 4px solid var(--accent);">
-        <h2 style="margin-top: 0; border: none; padding: 0;">Next Steps</h2>
-        <p>You've completed the IE-Nergy exercise. Now:</p>
-        <ol>
-          <li><strong>Review the deliverables</strong> with a critical eye. What's strong? What's generic? What would you push back on?</li>
-          <li><strong>Customize the brief</strong> for your own product and run a second campaign. Use the templates in <a href="https://github.com/igorostiza/labs/tree/main/agent-teams-marketing-lab/templates" target="_blank">the GitHub repo</a>.</li>
-          <li><strong>Experiment with roles</strong> — try a persona panel, a pre-mortem, or a competitive war room.</li>
-          <li><strong>Share what you learned.</strong> Tell us what worked, what didn't, and what you'd try differently.</li>
-        </ol>
-        <p style="margin-top: 1.5rem; font-style: italic; color: var(--ink-4);">The goal isn't perfect AI output. The goal is developing judgment—learning to read marketing work with rigor and recognizing what's strong, what's generic, and what needs refining. That skill transfers everywhere.</p>
-      </section>
-    </main>
-  </div>
 </body>
 </html>
