@@ -608,6 +608,139 @@
       <h3 class="h-sub">Agent Teams vs Subagents</h3>
       <p style="margin: 1rem 0 1.5rem; color: var(--ink-3);">Both let you parallelize work, but they operate differently. Choose based on whether your workers need to communicate:</p>
 
+      <svg viewBox="0 0 1000 450" style="width: 100%; max-width: 1000px; margin: 2rem 0; display: block;" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <style>
+            .diagram-title { font-size: 24px; font-weight: 700; font-family: var(--font-sans); }
+            .diagram-label { font-size: 13px; font-weight: 600; font-family: var(--font-sans); }
+            .diagram-text { font-size: 12px; font-weight: 500; font-family: var(--font-sans); }
+            .main-box { fill: #F5D5D5; stroke: #333; stroke-width: 2; }
+            .agent-box { fill: #FFE5B4; stroke: #333; stroke-width: 2; }
+            .teammate-box { fill: #D4C5F9; stroke: #333; stroke-width: 2; }
+            .task-box { fill: none; stroke: #3498db; stroke-width: 2; stroke-dasharray: 5,5; }
+            .arrow { stroke: #333; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+            .arrow-dashed { stroke: #666; stroke-width: 2; fill: none; stroke-dasharray: 3,3; marker-end: url(#arrowhead-dashed); }
+            .arrow-bi { stroke: #3498db; stroke-width: 2; fill: none; }
+            .result-circle { fill: none; stroke: #666; stroke-width: 2; stroke-dasharray: 4,4; }
+          </style>
+          <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#333"/>
+          </marker>
+          <marker id="arrowhead-dashed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+          </marker>
+        </defs>
+
+        <!-- LEFT SIDE: SUBAGENTS -->
+        <text x="150" y="35" class="diagram-title">Subagents</text>
+
+        <!-- Main Agent -->
+        <rect x="50" y="60" width="200" height="60" class="main-box" rx="8"/>
+        <text x="150" y="95" class="diagram-text" text-anchor="middle" font-weight="700">Main Agent</text>
+
+        <!-- Spawn arrows -->
+        <path d="M 100 120 L 100 150" class="arrow"/>
+        <path d="M 150 120 L 150 150" class="arrow"/>
+        <path d="M 200 120 L 200 150" class="arrow"/>
+
+        <text x="100" y="138" class="diagram-label" text-anchor="middle">Spawn</text>
+        <text x="150" y="138" class="diagram-label" text-anchor="middle">Spawn</text>
+        <text x="200" y="138" class="diagram-label" text-anchor="middle">Spawn</text>
+
+        <!-- Subagent boxes -->
+        <rect x="50" y="150" width="100" height="50" class="agent-box" rx="6"/>
+        <text x="100" y="180" class="diagram-text" text-anchor="middle" font-weight="600">Subagent</text>
+
+        <rect x="100" y="150" width="100" height="50" class="agent-box" rx="6"/>
+        <text x="150" y="180" class="diagram-text" text-anchor="middle" font-weight="600">Subagent</text>
+
+        <rect x="150" y="150" width="100" height="50" class="agent-box" rx="6"/>
+        <text x="200" y="180" class="diagram-text" text-anchor="middle" font-weight="600">Subagent</text>
+
+        <!-- Work arrows -->
+        <path d="M 100 200 L 100 240" class="arrow-dashed"/>
+        <path d="M 150 200 L 150 240" class="arrow-dashed"/>
+        <path d="M 200 200 L 200 240" class="arrow-dashed"/>
+
+        <text x="100" y="225" class="diagram-text" text-anchor="middle" font-size="11">Work</text>
+        <text x="150" y="225" class="diagram-text" text-anchor="middle" font-size="11">Work</text>
+        <text x="200" y="225" class="diagram-text" text-anchor="middle" font-size="11">Work</text>
+
+        <!-- Result circles -->
+        <circle cx="100" cy="280" r="35" class="result-circle"/>
+        <text x="100" y="285" class="diagram-text" text-anchor="middle">Result</text>
+
+        <circle cx="150" cy="280" r="35" class="result-circle"/>
+        <text x="150" y="285" class="diagram-text" text-anchor="middle">Result</text>
+
+        <circle cx="200" cy="280" r="35" class="result-circle"/>
+        <text x="200" y="285" class="diagram-text" text-anchor="middle">Result</text>
+
+        <!-- Report arrows back up -->
+        <path d="M 100 315 Q 100 350 100 90" class="arrow-dashed" stroke-width="1.5"/>
+        <path d="M 150 315 Q 150 360 150 90" class="arrow-dashed" stroke-width="1.5"/>
+        <path d="M 200 315 Q 200 350 200 90" class="arrow-dashed" stroke-width="1.5"/>
+
+        <text x="75" y="360" class="diagram-text" text-anchor="middle" font-size="10" font-style="italic">Report</text>
+
+        <!-- RIGHT SIDE: AGENT TEAMS -->
+        <text x="700" y="35" class="diagram-title">Agent Teams</text>
+
+        <!-- Main Agent (Team Lead) -->
+        <rect x="600" y="60" width="200" height="60" class="main-box" rx="8"/>
+        <text x="700" y="85" class="diagram-text" text-anchor="middle" font-weight="700">Main Agent</text>
+        <text x="700" y="105" class="diagram-text" text-anchor="middle" font-size="11">(Team Lead)</text>
+
+        <!-- Spawn & Assign arrow -->
+        <path d="M 700 120 L 700 150" class="arrow"/>
+        <text x="750" y="138" class="diagram-label">Spawn Team &amp;</text>
+        <text x="750" y="152" class="diagram-label">Assign Tasks</text>
+
+        <!-- Shared Task List -->
+        <rect x="600" y="150" width="200" height="50" class="task-box" rx="6"/>
+        <text x="700" y="182" class="diagram-text" text-anchor="middle" font-weight="600">Shared Task List</text>
+
+        <!-- Communication arrows from task list -->
+        <path d="M 650 200 L 650 240" class="arrow" stroke="#3498db"/>
+        <path d="M 700 200 L 700 240" class="arrow" stroke="#3498db"/>
+        <path d="M 750 200 L 750 240" class="arrow" stroke="#3498db"/>
+
+        <text x="620" y="225" class="diagram-text" font-size="10">Communicate</text>
+        <text x="670" y="225" class="diagram-text" font-size="10">Communicate</text>
+        <text x="730" y="225" class="diagram-text" font-size="10">Communicate</text>
+
+        <!-- Teammate boxes -->
+        <rect x="600" y="240" width="100" height="50" class="teammate-box" rx="6"/>
+        <text x="650" y="270" class="diagram-text" text-anchor="middle" font-weight="600">Teammate</text>
+
+        <rect x="650" y="240" width="100" height="50" class="teammate-box" rx="6"/>
+        <text x="700" y="270" class="diagram-text" text-anchor="middle" font-weight="600">Teammate</text>
+
+        <rect x="700" y="240" width="100" height="50" class="teammate-box" rx="6"/>
+        <text x="750" y="270" class="diagram-text" text-anchor="middle" font-weight="600">Teammate</text>
+
+        <!-- Bidirectional communication between teammates -->
+        <path d="M 700 240 L 700 230 L 675 230 L 675 240" class="arrow-bi" marker-end="url(#arrowhead)"/>
+        <path d="M 700 240 L 700 230 L 725 230 L 725 240" class="arrow-bi" marker-end="url(#arrowhead)"/>
+        <path d="M 660 265 L 640 265" class="arrow-bi" marker-end="url(#arrowhead)"/>
+        <path d="M 640 265 L 660 265" class="arrow-bi" marker-end="url(#arrowhead)"/>
+        <path d="M 760 265 L 780 265" class="arrow-bi" marker-end="url(#arrowhead)"/>
+        <path d="M 780 265 L 760 265" class="arrow-bi" marker-end="url(#arrowhead)"/>
+
+        <text x="675" y="220" class="diagram-text" font-size="10" text-anchor="middle">Communicate</text>
+        <text x="725" y="220" class="diagram-text" font-size="10" text-anchor="middle">Communicate</text>
+
+        <!-- Work arrows -->
+        <path d="M 650 290 L 650 330" class="arrow-dashed"/>
+        <path d="M 700 290 L 700 330" class="arrow-dashed"/>
+        <path d="M 750 290 L 750 330" class="arrow-dashed"/>
+
+        <text x="650" y="315" class="diagram-text" text-anchor="middle" font-size="11">Work</text>
+        <text x="700" y="315" class="diagram-text" text-anchor="middle" font-size="11">Work</text>
+        <text x="750" y="315" class="diagram-text" text-anchor="middle" font-size="11">Work</text>
+      </svg>
+
+      <h3 class="h-sub" style="margin-top: 2rem;">Comparison table</h3>
       <table>
         <thead>
           <tr>
