@@ -28,7 +28,13 @@ This is a **multi-lab platform** hosted by Inaki Gorostiza. Each lab is an indep
 - **Tech**: HTML, Markdown, Claude Code, Agent Teams
 - **Status**: Ready for deployment
 
-**2. N8N Workflows Lab** (Planned)
+**2. Subagents & Agent Teams Concepts** (NEW)
+- **URL**: `https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/subagents-agent-teams-concepts.html`
+- **Purpose**: Class reading introducing the concepts, use cases, and decision framework for choosing between subagents and agent teams in Claude Code
+- **Tech**: HTML, Responsive design
+- **Status**: Complete and live
+
+**3. N8N Workflows Lab** (Planned)
 - **URL**: `https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/n8n-workflows/`
 - **Purpose**: Automation tutorials with n8n
 - **Status**: Research phase
