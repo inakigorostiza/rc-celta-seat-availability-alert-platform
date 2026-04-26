@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LAB · Working with AI Agent Teams in Claude Code — Marketing</title>
+  <meta name="description" content="A hands-on manual for building marketing campaigns with parallel AI specialists using Claude Code's experimental Agent Teams feature. Learn to brief teams, manage parallel work, and critique AI-generated marketing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:          #FFFFFF;
+      --bg-soft:     #F5F5F5;
+      --ink:         #0A0A0A;
+      --ink-2:       #1F1F1F;
+      --ink-3:       #444444;
+      --ink-4:       #737373;
+      --ink-5:       #A3A3A3;
+      --accent:      #3498db;
+      --accent-2:    #2980b9;
+      --accent-soft: #E6EBF5;
+      --line:        #E5E5E5;
+      --success:     #15803D;
+      --warning:     #B45309;
+      --radius-sm:   4px;
+      --trans:       .2s cubic-bezier(.4, 0, .2, 1);
+      --font-sans:   "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-serif:  "Instrument Serif", Georgia, "Times New Roman", serif;
+      --font-mono:   "SF Mono", Menlo, Monaco, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--ink-2);
+      line-height: 1.55;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color var(--trans); }
+    a:hover { color: var(--accent-2); }
+    code { font-family: var(--font-mono); font-size: .88em; background: var(--bg-soft); padding: .12em .42em; border-radius: 3px; color: var(--ink); font-weight: 500; }
+
+    /* Layout */
+    .layout { display: grid; grid-template-columns: 300px 1fr; min-height: 100vh; }
+    .nav {
+      position: sticky; top: 0;
+      height: 100vh;
+      background: var(--bg);
+      border-right: 1px solid var(--line);
+      padding: 2.5rem 1.75rem;
+      overflow-y: auto;
+      z-index: 50;
+    }
+    .nav__brand {
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .nav__brand-title {
+      font-size: .85rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      display: block;
+    }
+    .nav__brand-sub {
+      font-size: .65rem;
+      color: var(--ink-4);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      margin-top: .3rem;
+      font-weight: 600;
+    }
+    .nav__label {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      color: var(--ink-5);
+      text-transform: uppercase;
+      margin: 1.75rem 0 .75rem;
+    }
+    .nav__list { list-style: none; display: flex; flex-direction: column; gap: .05rem; }
+    .nav__item a {
+      display: flex;
+      align-items: baseline;
+      gap: .85rem;
+      padding: .5rem .6rem;
+      color: var(--ink-3);
+      font-size: .82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      transition: all var(--trans);
+    }
+    .nav__item a:hover { color: var(--ink); background: var(--bg-soft); }
+    .nav__num {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--ink-5);
+      min-width: 1.6rem;
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+    }
+
+    main { padding: 0; }
+    .section {
+      padding: 6rem 4rem;
+      max-width: 1080px;
+      margin: 0 auto;
+      border-top: 1px solid var(--line);
+    }
+    .section:first-of-type { border-top: none; }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .nav { position: static; height: auto; }
+      .section { padding: 3.5rem 1.5rem; }
+    }
+
+    /* Hero */
+    .hero { padding: 6rem 4rem 4rem; max-width: 1080px; margin: 0 auto; }
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .75rem;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+    }
+    .hero__eyebrow-divider { width: 1px; height: 14px; background: var(--line); }
+    .hero__title {
+      font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.02;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+    }
+    .hero__title .accent {
+      color: var(--accent);
+      font-style: italic;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: -.01em;
+    }
+    .hero__lead {
+      font-size: 1.15rem;
+      color: var(--ink-3);
+      max-width: 680px;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin: 2.5rem 0 0;
+    }
+    .meta__cell {
+      flex: 1 1 200px;
+      padding: 1.25rem 1.5rem 1.25rem 0;
+      border-right: 1px solid var(--line);
+    }
+    .meta__cell:last-child { border-right: none; }
+    .meta__label {
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ink-5);
+      margin-bottom: .4rem;
+    }
+    .meta__value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.01em;
+    }
+    @media (max-width: 700px) { .hero { padding: 4rem 1.5rem 2rem; } .meta__cell { flex: 1 1 100%; border-right: none; border-bottom: 1px solid var(--line); } .meta__cell:last-child { border-bottom: none; } }
+
+    /* Section header */
+    .sec-header {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 700px) { .sec-header { grid-template-columns: 1fr; gap: 1rem; } }
+    .sec-num {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      color: var(--accent);
+      line-height: 1;
+      font-style: italic;
+    }
+    .sec-eyebrow {
+      display: inline-block;
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .sec-title {
+      font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.05;
+      letter-spacing: -.025em;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    .sec-lead {
+      color: var(--ink-3);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 720px;
+    }
+    .sec-timing {
+      display: inline-block;
+      margin-top: .75rem;
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--ink-4);
+      letter-spacing: .05em;
+    }
+
+    .h-sub {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin: 2.5rem 0 1rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+    }
+
+    /* Callouts */
+    .callout {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      padding: 1.4rem 1.6rem;
+      background: var(--bg-soft);
+      margin: 1.5rem 0;
+      border-left: 3px solid var(--ink);
+    }
+    .callout__icon { font-size: 1.15rem; }
+    .callout__body h4 {
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+      color: var(--ink);
+    }
+    .callout__body p, .callout__body li {
+      margin: 0 0 .4rem;
+      color: var(--ink-2);
+      font-size: .96rem;
+      line-height: 1.6;
+    }
+    .callout__body ul, .callout__body ol { margin: .5rem 0 0 1.2rem; }
+    .callout--tip  { border-left-color: var(--accent); }
+    .callout--tip h4  { color: var(--accent); }
+    .callout--good { border-left-color: var(--success); }
+    .callout--good h4 { color: var(--success); }
+    .callout--warn { border-left-color: var(--warning); }
+    .callout--warn h4 { color: var(--warning); }
+    .callout--checkpoint { border-left-color: var(--accent); background: #EBF2F9; }
+    .callout--checkpoint h4 { color: var(--accent); }
+
+    /* Checklist */
+    .check {
+      border: 1px solid var(--line);
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+    }
+    .check__title {
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .check ul { list-style: none; }
+    .check li {
+      padding: .55rem 0 .55rem 2rem;
+      position: relative;
+      border-bottom: 1px solid var(--line);
+      font-size: .95rem;
+      color: var(--ink-2);
+    }
+    .check li:last-child { border-bottom: none; }
+    .check li::before {
+      content: "";
+      position: absolute;
+      left: 0; top: .7rem;
+      width: 16px; height: 16px;
+      border: 1.5px solid var(--accent);
+      border-radius: 3px;
+    }
+    .check li strong { color: var(--ink); }
+
+    /* Prompt card */
+    .prompt {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 1.25rem;
+      padding: 1.6rem;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      margin: 1rem 0;
+      align-items: start;
+      transition: border-color var(--trans);
+    }
+    .prompt:hover { border-color: var(--accent); }
+    .prompt__badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px; height: 44px;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: .9rem;
+      font-weight: 800;
+    }
+    .prompt__body { min-width: 0; }
+    .prompt__head {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: .8rem;
+      flex-wrap: wrap;
+    }
+    .prompt__title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+    .prompt__quote {
+      background: var(--bg-soft);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.2rem;
+      font-family: var(--font-mono);
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--ink-2);
+      margin-bottom: 1rem;
+      position: relative;
+      white-space: pre-wrap;
+    }
+    .prompt__quote::before {
+      content: "PROMPT";
+      position: absolute;
+      top: -8px; left: 12px;
+      background: var(--bg);
+      padding: 0 .5rem;
+      font-family: var(--font-sans);
+      font-size: .6rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      color: var(--accent);
+    }
+    .prompt__result {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      font-size: .92rem;
+      color: var(--ink-3);
+      line-height: 1.6;
+    }
+    .prompt__result::before {
+      content: "→";
+      color: var(--success);
+      font-weight: 700;
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+    }
+    .prompt__result strong { color: var(--ink); }
+    @media (max-width: 600px) { .prompt { grid-template-columns: 1fr; } }
+
+    /* Numbered steps */
+    .stepline {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 1.25rem;
+      padding: 1.1rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .stepline:last-child { border-bottom: 1px solid var(--line); }
+    .stepline__num {
+      font-family: var(--font-mono);
+      font-size: .85rem;
+      font-weight: 800;
+      color: var(--accent);
+      padding-top: .15rem;
+    }
+    .stepline__title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .3rem;
+    }
+    .stepline__text {
+      color: var(--ink-3);
+      font-size: .95rem;
+      line-height: 1.6;
+    }
+    .stepline__text p { margin-bottom: .35rem; }
+    .stepline__text ul { margin: .35rem 0 .35rem 1.2rem; }
+
+    /* Footer */
+    .footer {
+      padding: 3rem 4rem;
+      max-width: 1080px;
+      margin: 0 auto;
+      border-top: 1px solid var(--line);
+      color: var(--ink-4);
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    pre {
+      background: #1a1a1a;
+      color: #e8e8e8;
+      padding: 1.5rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    pre code { background: none; color: inherit; padding: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+    th, td { padding: 0.75rem; text-align: left; border: 1px solid var(--line); }
+    th { background: var(--bg-soft); font-weight: 700; color: var(--ink); }
+    tr:nth-child(even) { background: var(--bg-soft); }
+  </style>
+</head>
+<body>
+
+<div class="layout">
+  <aside class="nav">
+    <div class="nav__brand">
+      <span class="nav__brand-title">LAB — AGENT TEAMS</span>
+      <span class="nav__brand-sub">AI Marketing · Self-paced</span>
+    </div>
+
+    <div class="nav__label">Getting started</div>
+    <ul class="nav__list">
+      <li class="nav__item"><a href="#intro"><span class="nav__num">A</span>Introduction</a></li>
+      <li class="nav__item"><a href="#part1"><span class="nav__num">01</span>Prerequisites</a></li>
+      <li class="nav__item"><a href="#part2"><span class="nav__num">02</span>Installation</a></li>
+      <li class="nav__item"><a href="#part3"><span class="nav__num">03</span>Tmux basics</a></li>
+    </ul>
+
+    <div class="nav__label">The exercise</div>
+    <ul class="nav__list">
+      <li class="nav__item"><a href="#part4"><span class="nav__num">04</span>Build campaign</a></li>
+      <li class="nav__item"><a href="#part5"><span class="nav__num">05</span>Troubleshooting</a></li>
+      <li class="nav__item"><a href="#part6"><span class="nav__num">06</span>Best practices</a></li>
+      <li class="nav__item"><a href="#part7"><span class="nav__num">07</span>Advanced patterns</a></li>
+      <li class="nav__item"><a href="#cleanup"><span class="nav__num">08</span>Cleanup</a></li>
+    </ul>
+  </aside>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero__eyebrow">
+        AI MARKETING LAB
+        <span class="hero__eyebrow-divider"></span>
+        CLAUDE CODE
+      </div>
+      <h1 class="hero__title">
+        Building campaigns with<br>
+        <span class="accent">parallel AI teammates.</span>
+      </h1>
+      <p class="hero__lead">
+        A hands-on manual for marketing students and practitioners. Spawn three AI teammates (Strategist, Copywriter, Researcher) to develop a complete product launch campaign in parallel. Learn to brief teams, manage coordination, and critique AI-generated work.
+      </p>
+
+      <div class="meta">
+        <div class="meta__cell">
+          <div class="meta__label">Product</div>
+          <div class="meta__value">IE-Nergy</div>
+        </div>
+        <div class="meta__cell">
+          <div class="meta__label">Duration</div>
+          <div class="meta__value">2–4 hours</div>
+        </div>
+        <div class="meta__cell">
+          <div class="meta__label">Audience</div>
+          <div class="meta__value">Marketing, marketing students</div>
+        </div>
+        <div class="meta__cell">
+          <div class="meta__label">Deliverable</div>
+          <div class="meta__value">Campaign brief</div>
+        </div>
+      </div>
+
+      <h3 class="h-sub">What you'll learn</h3>
+      <div style="margin-top: 1.5rem;">
+        <p style="color: var(--ink-3); margin-bottom: 1rem; line-height: 1.6;">Learn to structure marketing briefs for parallel AI work. Discover how to define specialist roles (Strategist, Copywriter, Researcher) that produce sharp, specific output instead of generic work. Watch three Claude instances coordinate on the same project—sharing findings, debating ideas, and building on each other's work. Develop judgment for evaluating AI-generated marketing with a marketer's eye.</p>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="section" id="intro">
+      <div class="sec-header">
+        <div class="sec-num">A</div>
+        <div>
+          <span class="sec-eyebrow">Introduction</span>
+          <h2 class="sec-title">Orchestrate Teams of Claude Code Sessions</h2>
+          <p class="sec-lead">Coordinate multiple Claude Code instances working together as a team, with shared tasks, inter-agent messaging, and centralized management.</p>
+        </div>
+      </div>
+
+      <h3 class="h-sub">What are Agent Teams?</h3>
+      <p style="margin-bottom: 1.5rem; color: var(--ink-3); line-height: 1.6;">Agent Teams let you coordinate multiple Claude Code instances working together. One session acts as the <strong>team lead</strong>, coordinating work, assigning tasks, and synthesizing results. Teammates work independently, each in its own context window, and communicate directly with each other.</p>
+
+      <p style="color: var(--ink-3); margin-bottom: 1.5rem; line-height: 1.6;">Unlike subagents, which run within a single session and can only report back to the main agent, you can also interact with individual teammates directly without going through the lead.</p>
+
+      <div class="callout callout--warn">
+        <div class="callout__icon">⚠️</div>
+        <div class="callout__body">
+          <h4>Experimental feature — enable before use</h4>
+          <p>Agent teams are experimental and disabled by default. Enable them by adding <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code> to your settings.json or environment. Agent teams have known limitations around session resumption, task coordination, and shutdown behavior.</p>
+          <p style="margin-top: 0.5rem;"><strong>Requirements:</strong> Claude Code v2.1.32 or later. Check your version with <code>claude --version</code></p>
+        </div>
+      </div>
+
+      <h3 class="h-sub">When to use Agent Teams</h3>
+      <p style="margin: 1rem 0; color: var(--ink-3);">Agent teams are most effective for tasks where parallel exploration adds real value. The strongest use cases are:</p>
+
+      <div class="stepline">
+        <div class="stepline__num">1</div>
+        <div>
+          <div class="stepline__title">Research and review</div>
+          <div class="stepline__text">Multiple teammates investigate different aspects simultaneously, then share and challenge each other's findings</div>
+        </div>
+      </div>
+
+      <div class="stepline">
+        <div class="stepline__num">2</div>
+        <div>
+          <div class="stepline__title">New modules or features</div>
+          <div class="stepline__text">Teammates each own a separate piece without stepping on each other</div>
+        </div>
+      </div>
+
+      <div class="stepline">
+        <div class="stepline__num">3</div>
+        <div>
+          <div class="stepline__title">Debugging with competing hypotheses</div>
+          <div class="stepline__text">Teammates test different theories in parallel and converge on the answer faster</div>
+        </div>
+      </div>
+
+      <div class="stepline">
+        <div class="stepline__num">4</div>
+        <div>
+          <div class="stepline__title">Cross-layer coordination</div>
+          <div class="stepline__text">Changes spanning frontend, backend, and tests, each owned by a different teammate</div>
+        </div>
+      </div>
+
+      <div class="callout callout--tip">
+        <div class="callout__icon">📢</div>
+        <div class="callout__body">
+          <h4>For marketing: parallel campaign development</h4>
+          <p>Teammates can investigate different competitors simultaneously, develop positioning in parallel with content creation, or explore different audience angles at once. The strategist's findings directly inform the copywriter's tone. The researcher's gaps shape the strategist's positioning. This feedback loop is where Agent Teams excel.</p>
+        </div>
+      </div>
+
+      <h3 class="h-sub">Agent Teams vs Subagents</h3>
+      <p style="margin: 1rem 0 1.5rem; color: var(--ink-3);">Both let you parallelize work, but they operate differently. Choose based on whether your workers need to communicate:</p>
+
+      <img src="/assets/subagents.png" alt="Subagents vs Agent Teams comparison diagram" style="width: 100%; max-width: 100%; height: auto; margin: 2rem 0; display: block; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" />
+
+      <h3 class="h-sub" style="margin-top: 2rem;">Comparison table</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Subagents</th>
+            <th>Agent Teams</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Context</strong></td>
+            <td>Own window; results return to caller</td>
+            <td>Own window; fully independent</td>
+          </tr>
+          <tr>
+            <td><strong>Communication</strong></td>
+            <td>Report back to main agent only</td>
+            <td>Message each other directly</td>
+          </tr>
+          <tr>
+            <td><strong>Coordination</strong></td>
+            <td>Main agent manages all work</td>
+            <td>Shared task list with self-coordination</td>
+          </tr>
+          <tr>
+            <td><strong>Best for</strong></td>
+            <td>Focused tasks (result matters)</td>
+            <td>Complex work (discussion matters)</td>
+          </tr>
+          <tr>
+            <td><strong>Token cost</strong></td>
+            <td>Lower: results summarized back</td>
+            <td>Higher: each teammate is separate instance</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin-top: 1.5rem; color: var(--ink-3); border-top: 1px solid var(--line); padding-top: 1.5rem;"><strong>Use subagents</strong> when you need quick, focused workers that report back. <strong>Use Agent Teams</strong> when teammates need to share findings, challenge each other, and coordinate on their own.</p>
+
+      <div class="callout callout--good">
+        <div class="callout__icon">✓</div>
+        <div class="callout__body">
+          <h4>Why Agent Teams for this exercise</h4>
+          <p>Your campaign strategist, copywriter, and researcher need to talk to each other. The strategist's positioning informs the copywriter's tone. The researcher's competitive findings shape the strategist's recommendations. The copywriter asks clarifying questions about positioning. This back-and-forth collaboration is exactly what Agent Teams enable.</p>
+          <p style="margin-top: 0.5rem;">If you only needed three independent first-draft taglines with no interdependence, subagents would be cheaper and faster. But this exercise requires <strong>real coordination</strong>.</p>
+        </div>
+      </div>
+
+      <h3 class="h-sub">What you'll learn in this lab</h3>
+      <p style="margin: 1rem 0 1.5rem; color: var(--ink-3);">By the end, you'll understand:</p>
+      <div class="stepline">
+        <div class="stepline__num">✓</div>
+        <div>
+          <div class="stepline__title">How to structure a marketing brief</div>
+          <div class="stepline__text">Specificity in audience, constraints, and deliverables directly improves output quality</div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">✓</div>
+        <div>
+          <div class="stepline__title">How to define specialist roles</div>
+          <div class="stepline__text">Vivid role definitions (not generic tasks) produce sharper, less generic work</div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">✓</div>
+        <div>
+          <div class="stepline__title">How to watch AI specialists coordinate</div>
+          <div class="stepline__text">See positioning inform copywriting, research findings shape strategy, and teammates challenge each other's ideas</div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">✓</div>
+        <div>
+          <div class="stepline__title">How to critique AI-generated marketing</div>
+          <div class="stepline__text">Develop judgment to spot generic phrases, missed audience nuances, and unsupported claims</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 1: PREREQUISITES -->
+    <section class="section" id="part1">
+      <div class="sec-header">
+        <div class="sec-num">01</div>
+        <div>
+          <span class="sec-eyebrow">Getting started</span>
+          <h2 class="sec-title">Prerequisites</h2>
+          <span class="sec-timing">~5 min · verification only</span>
+        </div>
+      </div>
+
+      <p style="color: var(--ink-3); margin-bottom: 1.5rem;">Before you start, verify you have these tools installed and accessible on your system:</p>
+
+      <div class="stepline">
+        <div class="stepline__num">01</div>
+        <div>
+          <div class="stepline__title">Claude Code 2.1.32+</div>
+          <div class="stepline__text">
+            <p>Check with: <code>claude --version</code></p>
+            <p style="margin-top: .4rem;">If you don't have it, install from <a href="https://code.claude.com" target="_blank">code.claude.com</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stepline">
+        <div class="stepline__num">02</div>
+        <div>
+          <div class="stepline__title">Node.js 18+</div>
+          <div class="stepline__text">
+            <p>Check with: <code>node --version</code></p>
+            <p style="margin-top: .4rem;">If needed, install from <a href="https://nodejs.org" target="_blank">nodejs.org</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stepline">
+        <div class="stepline__num">03</div>
+        <div>
+          <div class="stepline__title">tmux (any recent version)</div>
+          <div class="stepline__text">
+            <p>Check with: <code>tmux -V</code></p>
+            <p style="margin-top: .4rem;">macOS: <code>brew install tmux</code> · Linux: <code>sudo apt install tmux</code></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stepline">
+        <div class="stepline__num">04</div>
+        <div>
+          <div class="stepline__title">A system terminal</div>
+          <div class="stepline__text">
+            <p>Terminal.app (macOS), iTerm2, or Linux terminal — NOT VS Code's integrated terminal</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="check" style="margin-top: 2rem;">
+        <div class="check__title">✓ Checkpoint</div>
+        <ul>
+          <li><strong>All tools installed?</strong> Run the version checks above. You should see version numbers for all three.</li>
+          <li><strong>Ready to proceed?</strong> Move to Part 02 for installation (if needed) or Part 04 to start the exercise.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PART 4: THE EXERCISE -->
+    <section class="section" id="part4">
+      <div class="sec-header">
+        <div class="sec-num">04</div>
+        <div>
+          <span class="sec-eyebrow">The exercise</span>
+          <h2 class="sec-title">Build a Campaign</h2>
+          <span class="sec-timing">~45 min · team work + review</span>
+        </div>
+      </div>
+
+      <p style="margin-bottom: 1.5rem; color: var(--ink-3);">You'll spawn three AI teammates to develop a launch campaign for <strong>IE-Nergy</strong>, a new energy drink positioned for students and young professionals who need calm, sustained focus—not aggressive hype.</p>
+
+      <h3 class="h-sub">The brief</h3>
+      <p style="color: var(--ink-3); margin-bottom: 1rem;">Key facts about the product:</p>
+      <div class="callout callout--warn">
+        <div class="callout__icon">🥤</div>
+        <div class="callout__body">
+          <h4>IE-Nergy: A New Energy Drink</h4>
+          <ul>
+            <li><strong>Formulation:</strong> 150mg natural caffeine (green tea + guarana), L-theanine, B-vitamins, zero sugar, 15 calories</li>
+            <li><strong>Flavors:</strong> Yuzu Citrus, Wild Berry, Matcha Mint</li>
+            <li><strong>Price:</strong> €2.50 per can</li>
+            <li><strong>Launch:</strong> Madrid & Barcelona first, expanding across Europe</li>
+            <li><strong>Differentiator:</strong> Calm focus, not aggressive stimulation. A counterpoint to Red Bull/Monster/Bang</li>
+            <li><strong>Timeline:</strong> Six weeks until launch</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="h-sub">Your team</h3>
+      <div class="stepline">
+        <div class="stepline__num">A</div>
+        <div>
+          <div class="stepline__title">The Strategist</div>
+          <div class="stepline__text"><p>A senior brand strategist with 10+ years launching challenger brands. Thinks in terms of positioning, jobs-to-be-done, defensible differentiation. Skeptical of generic claims. Has a strong point of view on what NOT to say. Grounds every recommendation in audience insight.</p></div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">B</div>
+        <div>
+          <div class="stepline__title">The Copywriter</div>
+          <div class="stepline__text"><p>A direct-response copywriter who's written campaigns for Gen Z brands. Writes conversational, specific voice—never corporate. Writes differently for each channel (Instagram ≠ TikTok ≠ email ≠ search). Hates buzzwords like "elevate," "fuel," "unlock."</p></div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">C</div>
+        <div>
+          <div class="stepline__title">The Researcher</div>
+          <div class="stepline__text"><p>A competitive intelligence analyst. Investigates not just what competitors say, but what they DON'T say—looking for whitespace and positioning gaps. Reports findings as actionable insight, not feature tables.</p></div>
+        </div>
+      </div>
+
+      <h3 class="h-sub" style="margin-top: 2.5rem;">How to run the exercise</h3>
+      <div class="prompt">
+        <div class="prompt__badge">01</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <div class="prompt__title">Create workspace</div>
+          </div>
+          <div class="prompt__quote">mkdir ~/Documents/ienergy-launch
+cd ~/Documents/ienergy-launch</div>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">02</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <div class="prompt__title">Start tmux session</div>
+          </div>
+          <div class="prompt__quote">tmux new -s marketing</div>
+          <div style="margin-top: .8rem; font-size: .95rem; color: var(--ink-3);">You'll see a colored status bar at the bottom.</div>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">03</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <div class="prompt__title">Launch Claude Code with Agent Teams enabled</div>
+          </div>
+          <div class="prompt__quote">CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude</div>
+          <div style="margin-top: .8rem; font-size: .95rem; color: var(--ink-3);">This activates the experimental feature just for this session.</div>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">04</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <div class="prompt__title">Spawn your three teammates</div>
+          </div>
+          <div class="prompt__quote">Read brief.md, then create an agent team with 3 teammates in tmux
+split-pane mode. Spawn them with these roles:
+
+TEAMMATE 1 — STRATEGIST
+You are a senior brand strategist with 10+ years launching consumer
+challenger brands. Think in terms of category positioning, jobs-to-be-done,
+defensible differentiation. Skeptical of generic positioning. Strong point
+of view on what NOT to say. Ground every recommendation in audience insight.
+Deliverable: strategy.md with (1) one-sentence positioning, (2) top 3 messages,
+(3) recommended channel mix, (4) what we will NOT say and why.
+
+TEAMMATE 2 — COPYWRITER
+You are a direct-response copywriter who's written for Gen Z/Millennial brands.
+Write conversational, specific voice—never corporate. Write differently for
+Instagram vs TikTok vs email vs search. Hate buzzwords like "elevate,"
+"unlock," "fuel."
+Deliverable: copy.md with (1) Instagram caption (125 words), (2) TikTok script
+(30-second video), (3) email (subject + opening), (4) Google Search ad.
+Wait for Strategist's positioning before drafting.
+
+TEAMMATE 3 — RESEARCHER
+You are a competitive intelligence analyst. Investigate not just what
+competitors say, but what they DON'T say. Look for whitespace and positioning gaps.
+Report as actionable insight, not feature tables.
+Deliverable: research.md with (1) profile of 3 competitors (Red Bull, Monster,
+one challenger like Celsius/Tenzing), (2) each competitor's core positioning
+in one sentence, (3) 2-3 positioning gaps IE-Nergy could own.
+
+WORKFLOW:
+1. Researcher works first, shares findings
+2. Strategist uses research to develop positioning
+3. Copywriter waits for positioning, then drafts creative
+4. Lead synthesizes all three into campaign-summary.md
+
+Have teammates message each other directly when they need input.</div>
+          <div style="margin-top: .8rem; font-size: .95rem; color: var(--success); font-weight: 600;">As Claude spawns each teammate, tmux automatically splits into multiple panes.</div>
+        </div>
+      </div>
+
+      <h3 class="h-sub" style="margin-top: 2.5rem;">While your team works</h3>
+      <p style="color: var(--ink-3); margin-bottom: 1rem;">Use these shortcuts to navigate and steer:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Command</th>
+            <th>What it does</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Ctrl+B</code> → arrow keys</td>
+            <td>Move between panes</td>
+          </tr>
+          <tr>
+            <td><code>Ctrl+B</code> → <code>z</code></td>
+            <td>Zoom in/out of one pane</td>
+          </tr>
+          <tr>
+            <td>Click into a pane → type</td>
+            <td>Send feedback to that teammate</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout--tip" style="margin-top: 2rem;">
+        <div class="callout__icon">💡</div>
+        <div class="callout__body">
+          <h4>Steering tips</h4>
+          <p><strong>To the Copywriter:</strong> "The TikTok script doesn't sound like a TikTok—it reads like a TV spot with shorter sentences. Rewrite it as if explaining to a friend."</p>
+          <p style="margin-top: .5rem;"><strong>To the Strategist:</strong> "Focus on what makes IE-Nergy defensibly different from Red Bull. What positioning would they NEVER claim?"</p>
+          <p style="margin-top: .5rem;"><strong>To the Researcher:</strong> "Also analyze Celsius and Tenzing—they're the nearest competitors in the functional energy space."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <section class="footer">
+      <p><strong>Ready to start?</strong> Jump to Part 01 to verify your setup, then head to Part 04 to begin the exercise. The full manual is in the repository at <code>agent-teams-marketing-lab/MANUAL.md</code>.</p>
+      <p style="margin-top: 1.5rem; font-size: .75rem; color: var(--ink-5);">🚀 Build fast. Critique harder. Ship smarter.</p>
+    </section>
+
+  </main>
+
+</div>
+
+</body>
+</html>

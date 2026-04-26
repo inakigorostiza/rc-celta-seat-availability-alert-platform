@@ -2,72 +2,86 @@
 
 ## Overview
 
-This is a **multi-lab platform** hosted by Inaki Gorostiza. Each lab is an independent, educational resource for learning specific skills or technologies. Labs are stored as separate GitHub repositories and deployed to GitHub Pages.
+This is a **multi-lab education platform** hosted in a single GitHub repository. Each lab is an independent, self-contained folder with its own documentation, assets, and interactive guides. All labs are deployed to GitHub Pages from the same repo root.
 
 ## Platform Philosophy
 
-- **Centralized**: Multiple labs are hosted in the same GitHub repo for unified management
-- **Consistency**: All labs follow the same URL pattern and GitHub Pages structure for easy discovery
-- **Education First**: Labs are designed for hands-on learning, not production systems
-- **Open**: All labs are public and MIT-licensed (or similar)
+- **Unified Repository**: All labs in one GitHub repo for easier maintenance
+- **Independent Folders**: Each lab is completely self-contained within its own folder
+- **Consistency**: All labs follow the same design system and URL pattern
+- **Education First**: Labs are designed for hands-on learning, not production
+- **Open**: All labs are public and MIT-licensed
 
 ## Existing Labs
 
-### Primary Project Repo: RC Celta de Vigo
+## GitHub Repository
+
 **GitHub Repo**: `https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform`  
-**Purpose**: Full-stack application for monitoring and alerting seat availability at RC Celta de Vigo stadium  
-**Tech Stack**: Node.js, Supabase, GitHub Actions, HTML/CSS/JS  
+**Purpose**: Education labs platform — hosts multiple independent labs in one repository  
 **GitHub Pages**: `https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/`  
-**Status**: Active - primary project only (no labs in this repo)
+**Status**: Active — all labs served from this single repo
 
 ---
 
-## Independent Lab Repositories
+## Labs in This Repository
 
-Each lab is a completely separate GitHub repository with its own codebase, documentation, and GitHub Pages deployment.
+All labs are independent folders within the same GitHub repository, each with its own documentation and assets.
 
 ### 1. Agent Teams Marketing Lab
-**GitHub Repo**: `https://github.com/inakigorostiza/agent-teams-marketing-lab`  
-**Purpose**: A comprehensive manual for building marketing campaigns with parallel AI specialists using Claude Code's experimental Agent Teams feature  
+**Folder**: `/agent-teams-marketing-lab/`  
+**URL**: `https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/agent-teams-marketing-lab/`  
+**Purpose**: Comprehensive manual for building marketing campaigns with parallel AI specialists using Claude Code's experimental Agent Teams feature  
 **Tech Stack**: HTML, CSS, Claude Code, Agent Teams  
-**GitHub Pages**: `https://inakigorostiza.github.io/agent-teams-marketing-lab/`  
-**Status**: Ready for deployment (separate repo)
+**Status**: Complete and live
 
 ### 2. Subagents & Agent Teams Concepts Lab
-**GitHub Repo**: `https://github.com/inakigorostiza/subagents-agent-teams-concepts-lab`  
+**Folder**: `/subagents-agent-teams-concepts-lab/`  
+**URL**: `https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/subagents-agent-teams-concepts-lab/`  
 **Purpose**: Class reading introducing concepts, use cases, and decision framework for choosing between subagents and agent teams  
 **Tech Stack**: HTML, CSS, Responsive design  
-**GitHub Pages**: `https://inakigorostiza.github.io/subagents-agent-teams-concepts-lab/`  
-**Status**: Ready for deployment (separate repo)
+**Status**: Complete and live
 
 ### 3. IE-Nergy Lab
-**GitHub Repo**: `https://github.com/inakigorostiza/ie-nergy-lab`  
-**Purpose**: A 60-minute hands-on lab for marketing students. Build a spring campaign landing page using Claude Code, Mailchimp API, and GitHub MCP.  
+**Folder**: `/ie-nergy-lab/`  
+**URL**: `https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/ie-nergy-lab/`  
+**Purpose**: 60-minute hands-on lab for marketing students. Build a spring campaign landing page using Claude Code, Mailchimp API, and GitHub MCP  
 **Tech Stack**: HTML, CSS, JavaScript, Claude Code, Mailchimp API, GitHub MCP  
-**GitHub Pages**: `https://inakigorostiza.github.io/ie-nergy-lab/`  
-**Status**: Complete and live (separate repo)
+**Status**: Complete and live
 
 ## Repository Structure
 
-Each lab repo follows this pattern:
+The main repository contains independent lab folders:
 
 ```
-agent-teams-marketing-lab/
-├── .git/                          # Git repository
-├── .gitignore                     # Git ignore rules
-├── README.md                      # Lab overview
-├── [lab-name].html                # Main interactive guide
-├── templates/                     # Reusable templates
-│   ├── README.md
-│   ├── [template-1].md
-│   ├── [template-2].md
-│   └── ...
-├── docs/                          # Jekyll documentation (optional)
-│   ├── _config.yml
-│   ├── index.md
-│   └── ...
-└── [supporting-files]/            # Starter kits, examples, etc.
+rc-celta-seat-availability-alert-platform/
+├── README.md                           # Main index & overview
+├── CLAUDE.md                           # This file (project context)
+├── 
+├── agent-teams-marketing-lab/
+│   ├── index.html                     # Main interactive guide
+│   ├── README.md                      # Lab overview
+│   ├── assets/                        # Images, diagrams, supporting files
+│   │   ├── subagents.png
+│   │   └── ...
+│   └── templates/                     # Reusable templates (optional)
+│
+├── subagents-agent-teams-concepts-lab/
+│   ├── index.html                     # Main interactive guide
+│   ├── README.md                      # Lab overview
+│   └── assets/
+│
+├── ie-nergy-lab/
+│   ├── index.html                     # Main interactive guide
+│   ├── README.md                      # Lab overview
+│   └── assets/
+│
+└── [future-labs]/                     # Additional labs follow same pattern
 ```
+
+Each lab folder is **completely independent** — it has its own:
+- HTML guide file (`index.html`)
+- Documentation (`README.md`)
+- Assets folder for images and supporting files
 
 ## GitHub Pages Setup
 
@@ -95,48 +109,64 @@ Examples:
 
 ## Creating a New Lab
 
-Each lab is created as a **completely separate GitHub repository**:
+All labs are created as **independent folders within the main repository**:
 
-1. **Create new folder locally**: `/Users/igorostiza/[lab-name]-lab/`
-2. **Initialize git**: `cd [lab-name]-lab && git init`
-3. **Create structure**:
-   - `README.md` — Lab overview
-   - `index.html` — Main interactive guide (matching style system)
-   - `/assets/` — Images, diagrams, supporting files
-   - `/templates/` — Reusable templates (optional)
-4. **Push to GitHub**:
-   - Create new repo: `github.com/inakigorostiza/[lab-name]-lab`
-   - Add remote: `git remote add origin https://github.com/inakigorostiza/[lab-name]-lab.git`
-   - Push: `git push -u origin main`
-5. **Enable GitHub Pages**:
-   - Settings → Pages
-   - Source: Deploy from `main` branch, `/root` folder
-   - URL: `https://inakigorostiza.github.io/[lab-name]-lab/`
-6. **Update CLAUDE.md** with new lab entry
-7. **Test**: Verify GitHub Pages URL is live within 1-2 minutes
+1. **Create new lab folder**: `/Users/igorostiza/labs/[lab-name]-lab/`
+2. **Create lab structure**:
+   ```
+   [lab-name]-lab/
+   ├── index.html          # Main interactive guide (use existing style system)
+   ├── README.md           # Lab overview and quick start
+   ├── assets/             # Images, diagrams, supporting files
+   │   ├── logo.png
+   │   └── diagram.svg
+   └── templates/          # Reusable templates (optional)
+   ```
+3. **Match the design system**:
+   - Use the same CSS variables and typography as existing labs
+   - Reference `agent-teams-marketing-lab/index.html` for HTML structure
+   - Ensure responsive design (works on mobile, tablet, desktop)
+4. **Commit to main repo**:
+   ```bash
+   git add [lab-name]-lab/
+   git commit -m "feat: Add [Lab Name] lab"
+   git push origin main
+   ```
+5. **Update CLAUDE.md**:
+   - Add lab entry to "Labs in This Repository" section
+   - Include folder path, URL, purpose, tech stack, status
+6. **Test**: Verify GitHub Pages URL is live within 1-2 minutes
+   - URL pattern: `https://inakigorostiza.github.io/rc-celta-seat-availability-alert-platform/[lab-name]-lab/`
 
-## RC Celta Repository (This Repo)
+## Main Repository Structure
 
 **GitHub Repo**: `https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform`  
-**Purpose**: Primary project for Celta stadium seat availability application  
-**Key files**:
+**Purpose**: Education labs platform — centralized repository for all labs  
+**Key files in repo root**:
 - `CLAUDE.md` — Project context (this file)
-- `manual.html` — Platform documentation
-- `index.html` — Landing page
-- `README.md` — Project overview
+- `README.md` — Labs index and overview
+- `manual.html` — Platform documentation (optional)
 
-**Important**: This repo contains ONLY the Celta project. All educational labs are **completely separate repositories** with their own GitHub pages, codebases, and deployment pipelines.
+**Lab folders**:
+- `/agent-teams-marketing-lab/` — Agent Teams workshop
+- `/subagents-agent-teams-concepts-lab/` — Concepts & decision framework
+- `/ie-nergy-lab/` — Hands-on marketing lab
+- `[future-labs]/` — Additional labs follow same pattern
+
+**Important**: All labs are independent folders within this single repository. Each lab has its own `index.html`, `README.md`, and `assets/` folder. Labs do not affect each other — you can work on any lab independently.
 
 ## Key Files & Locations
 
-| File | Purpose |
+| Path | Purpose |
 |------|---------|
 | `/Users/igorostiza/labs/CLAUDE.md` | Project context (this file) |
-| `/Users/igorostiza/labs/manual.html` | Platform manual & navigation |
-| `/Users/igorostiza/labs/README.md` | Project overview |
-| `/Users/igorostiza/agent-teams-marketing-lab/` | Agent Teams Marketing Lab repo |
-| `/Users/igorostiza/subagents-agent-teams-concepts-lab/` | Subagents & Agent Teams Concepts Lab repo |
-| `/Users/igorostiza/ie-nergy-lab/` | IE-Nergy Lab repo |
+| `/Users/igorostiza/labs/README.md` | Labs index & overview |
+| `/Users/igorostiza/labs/agent-teams-marketing-lab/` | Agent Teams Marketing Lab folder |
+| `/Users/igorostiza/labs/agent-teams-marketing-lab/index.html` | Agent Teams lab main guide |
+| `/Users/igorostiza/labs/subagents-agent-teams-concepts-lab/` | Concepts Lab folder |
+| `/Users/igorostiza/labs/subagents-agent-teams-concepts-lab/index.html` | Concepts lab main guide |
+| `/Users/igorostiza/labs/ie-nergy-lab/` | IE-Nergy Lab folder |
+| `/Users/igorostiza/labs/ie-nergy-lab/index.html` | IE-Nergy lab main guide |
 
 ## Development Notes
 
