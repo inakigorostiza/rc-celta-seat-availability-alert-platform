@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LAB · Vibe Coding a Spring Campaign Landing Page — IE-nergy</title>
+  <meta name="description" content="A 60-minute hands-on lab for IE Business School marketing students. Build, style, wire, and deploy a spring campaign landing page for IE-nergy using Claude Code, the Mailchimp Marketing API, and the GitHub MCP. No coding knowledge required." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:          #FFFFFF;
+      --bg-soft:     #F5F5F5;
+      --ink:         #0A0A0A;
+      --ink-2:       #1F1F1F;
+      --ink-3:       #444444;
+      --ink-4:       #737373;
+      --ink-5:       #A3A3A3;
+      --ie-blue:     #0030A8;
+      --ie-blue-2:   #0044D1;
+      --ie-blue-dark:#001F6E;
+      --ie-blue-soft:#E6EBF5;
+      --ie-red:      #E4002B;
+      --line:        #E5E5E5;
+      --success:     #15803D;
+      --warning:     #B45309;
+      --radius-sm:   4px;
+      --trans:       .2s cubic-bezier(.4, 0, .2, 1);
+      --font-sans:   "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-serif:  "Instrument Serif", Georgia, "Times New Roman", serif;
+      --font-mono:   "SF Mono", Menlo, Monaco, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--ink-2);
+      line-height: 1.55;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--ie-blue); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color var(--trans); }
+    a:hover { color: var(--ie-blue-2); }
+    code { font-family: var(--font-mono); font-size: .88em; background: var(--bg-soft); padding: .12em .42em; border-radius: 3px; color: var(--ink); font-weight: 500; }
+
+    /* Layout */
+    .layout { display: grid; grid-template-columns: 300px 1fr; min-height: 100vh; }
+    .nav {
+      position: sticky; top: 0;
+      height: 100vh;
+      background: var(--bg);
+      border-right: 1px solid var(--line);
+      padding: 2.5rem 1.75rem;
+      overflow-y: auto;
+      z-index: 50;
+    }
+    .nav__brand {
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .nav__brand-title {
+      font-size: .85rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      display: block;
+    }
+    .nav__brand-sub {
+      font-size: .65rem;
+      color: var(--ink-4);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      margin-top: .3rem;
+      font-weight: 600;
+    }
+    .nav__label {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      color: var(--ink-5);
+      text-transform: uppercase;
+      margin: 1.75rem 0 .75rem;
+    }
+    .nav__list { list-style: none; display: flex; flex-direction: column; gap: .05rem; }
+    .nav__item a {
+      display: flex;
+      align-items: baseline;
+      gap: .85rem;
+      padding: .5rem .6rem;
+      color: var(--ink-3);
+      font-size: .82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      transition: all var(--trans);
+    }
+    .nav__item a:hover { color: var(--ink); background: var(--bg-soft); }
+    .nav__num {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--ink-5);
+      min-width: 1.6rem;
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+    }
+
+    main { padding: 0; }
+    .section {
+      padding: 6rem 4rem;
+      max-width: 1080px;
+      margin: 0 auto;
+      border-top: 1px solid var(--line);
+    }
+    .section:first-of-type { border-top: none; }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .nav { position: static; height: auto; }
+      .section { padding: 3.5rem 1.5rem; }
+    }
+
+    /* Hero */
+    .hero { padding: 6rem 4rem 4rem; max-width: 1080px; margin: 0 auto; }
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .75rem;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ie-blue);
+      margin-bottom: 2.5rem;
+    }
+    .hero__eyebrow-divider { width: 1px; height: 14px; background: var(--line); }
+    .hero__title {
+      font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.02;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+    }
+    .hero__title .accent {
+      color: var(--ie-blue);
+      font-style: italic;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: -.01em;
+    }
+    .hero__lead {
+      font-size: 1.15rem;
+      color: var(--ink-3);
+      max-width: 680px;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin: 2.5rem 0 0;
+    }
+    .meta__cell {
+      flex: 1 1 200px;
+      padding: 1.25rem 1.5rem 1.25rem 0;
+      border-right: 1px solid var(--line);
+    }
+    .meta__cell:last-child { border-right: none; }
+    .meta__label {
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ink-5);
+      margin-bottom: .4rem;
+    }
+    .meta__value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.01em;
+    }
+    @media (max-width: 700px) { .hero { padding: 4rem 1.5rem 2rem; } .meta__cell { flex: 1 1 100%; border-right: none; border-bottom: 1px solid var(--line); } .meta__cell:last-child { border-bottom: none; } }
+
+    /* Section header */
+    .sec-header {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 700px) { .sec-header { grid-template-columns: 1fr; gap: 1rem; } }
+    .sec-num {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      color: var(--ie-blue);
+      line-height: 1;
+      font-style: italic;
+    }
+    .sec-eyebrow {
+      display: inline-block;
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      color: var(--ie-blue);
+      margin-bottom: 1rem;
+    }
+    .sec-title {
+      font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.05;
+      letter-spacing: -.025em;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    .sec-lead {
+      color: var(--ink-3);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 720px;
+    }
+    .sec-timing {
+      display: inline-block;
+      margin-top: .75rem;
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--ink-4);
+      letter-spacing: .05em;
+    }
+
+    .h-sub {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin: 2.5rem 0 1rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+    }
+
+    /* Callouts */
+    .callout {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      padding: 1.4rem 1.6rem;
+      background: var(--bg-soft);
+      margin: 1.5rem 0;
+      border-left: 3px solid var(--ink);
+    }
+    .callout__icon { font-size: 1.15rem; }
+    .callout__body h4 {
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+      color: var(--ink);
+    }
+    .callout__body p, .callout__body li {
+      margin: 0 0 .4rem;
+      color: var(--ink-2);
+      font-size: .96rem;
+      line-height: 1.6;
+    }
+    .callout__body ul, .callout__body ol { margin: .5rem 0 0 1.2rem; }
+    .callout--tip  { border-left-color: var(--ie-blue); }
+    .callout--tip h4  { color: var(--ie-blue); }
+    .callout--good { border-left-color: var(--success); }
+    .callout--good h4 { color: var(--success); }
+    .callout--warn { border-left-color: var(--warning); }
+    .callout--warn h4 { color: var(--warning); }
+    .callout--checkpoint { border-left-color: var(--ie-red); background: #FDEEF0; }
+    .callout--checkpoint h4 { color: var(--ie-red); }
+
+    /* Checklist */
+    .check {
+      border: 1px solid var(--line);
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+    }
+    .check__title {
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .check ul { list-style: none; }
+    .check li {
+      padding: .55rem 0 .55rem 2rem;
+      position: relative;
+      border-bottom: 1px solid var(--line);
+      font-size: .95rem;
+      color: var(--ink-2);
+    }
+    .check li:last-child { border-bottom: none; }
+    .check li::before {
+      content: "";
+      position: absolute;
+      left: 0; top: .7rem;
+      width: 16px; height: 16px;
+      border: 1.5px solid var(--ie-blue);
+      border-radius: 3px;
+    }
+    .check li strong { color: var(--ink); }
+
+    /* Prompt card */
+    .prompt {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 1.25rem;
+      padding: 1.6rem;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      margin: 1rem 0;
+      align-items: start;
+      transition: border-color var(--trans);
+    }
+    .prompt:hover { border-color: var(--ie-blue); }
+    .prompt__badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px; height: 44px;
+      background: var(--ie-blue);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: .9rem;
+      font-weight: 800;
+    }
+    .prompt__body { min-width: 0; }
+    .prompt__head {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: .8rem;
+      flex-wrap: wrap;
+    }
+    .prompt__title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+    .prompt__artefact {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--ink-4);
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: .2rem .5rem;
+    }
+    .prompt__quote {
+      background: var(--bg-soft);
+      border-left: 3px solid var(--ie-blue);
+      padding: 1rem 1.2rem;
+      font-family: var(--font-mono);
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--ink-2);
+      margin-bottom: 1rem;
+      position: relative;
+      white-space: pre-wrap;
+    }
+    .prompt__quote::before {
+      content: "PROMPT";
+      position: absolute;
+      top: -8px; left: 12px;
+      background: var(--bg);
+      padding: 0 .5rem;
+      font-family: var(--font-sans);
+      font-size: .6rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      color: var(--ie-blue);
+    }
+    .prompt__result {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      font-size: .92rem;
+      color: var(--ink-3);
+      line-height: 1.6;
+    }
+    .prompt__result::before {
+      content: "→";
+      color: var(--success);
+      font-weight: 700;
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+    }
+    .prompt__result strong { color: var(--ink); }
+    @media (max-width: 600px) { .prompt { grid-template-columns: 1fr; } }
+
+    /* Numbered steps */
+    .stepline {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 1.25rem;
+      padding: 1.1rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .stepline:last-child { border-bottom: 1px solid var(--line); }
+    .stepline__num {
+      font-family: var(--font-mono);
+      font-size: .85rem;
+      font-weight: 800;
+      color: var(--ie-blue);
+      padding-top: .15rem;
+    }
+    .stepline__title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .3rem;
+    }
+    .stepline__text {
+      color: var(--ink-3);
+      font-size: .95rem;
+      line-height: 1.6;
+    }
+    .stepline__text p { margin-bottom: .35rem; }
+    .stepline__text ul { margin: .35rem 0 .35rem 1.2rem; }
+
+    /* Inline objective list */
+    .objectives {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .obj {
+      padding: 1.1rem 1.2rem;
+      border: 1px solid var(--line);
+      background: var(--bg);
+    }
+    .obj__num {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      font-weight: 800;
+      color: var(--ie-blue);
+      letter-spacing: .1em;
+      margin-bottom: .4rem;
+    }
+    .obj__text {
+      font-size: .92rem;
+      color: var(--ink-2);
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 3rem 4rem;
+      max-width: 1080px;
+      margin: 0 auto;
+      border-top: 1px solid var(--line);
+      color: var(--ink-4);
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+<div class="layout">
+  <aside class="nav">
+    <div class="nav__brand">
+      <span class="nav__brand-title">LAB — IE-NERGY</span>
+      <span class="nav__brand-sub">Vibe Coding · 60 min</span>
+    </div>
+
+    <div class="nav__label">Before class</div>
+    <ul class="nav__list">
+      <li class="nav__item"><a href="#prelab"><span class="nav__num">A</span>Pre-lab setup</a></li>
+    </ul>
+
+    <div class="nav__label">In class</div>
+    <ul class="nav__list">
+      <li class="nav__item"><a href="#step-0"><span class="nav__num">00</span>Scaffold</a></li>
+      <li class="nav__item"><a href="#step-1"><span class="nav__num">01</span>Build the form</a></li>
+      <li class="nav__item"><a href="#step-2"><span class="nav__num">02</span>Descriptive styling</a></li>
+      <li class="nav__item"><a href="#step-3"><span class="nav__num">03</span>Mimic a website</a></li>
+      <li class="nav__item"><a href="#step-4"><span class="nav__num">04</span>Mailchimp via MCP</a></li>
+      <li class="nav__item"><a href="#step-5"><span class="nav__num">05</span>Deploy via GitHub MCP</a></li>
+      <li class="nav__item"><a href="#done"><span class="nav__num">06</span>Wrap-up</a></li>
+    </ul>
+  </aside>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero__eyebrow">
+        IE BUSINESS SCHOOL
+        <span class="hero__eyebrow-divider"></span>
+        AI MARKETING LAB
+      </div>
+      <h1 class="hero__title">
+        Vibe coding a<br>
+        <span class="accent">spring campaign</span><br>
+        landing page.
+      </h1>
+      <p class="hero__lead">
+        A 60-minute hands-on lab. You will scaffold, style, wire, and ship a real signup page for <strong>IE-nergy</strong> — a fictional energy drink — using Claude, the Mailchimp MCP, and the GitHub MCP. No coding experience required. You type, Claude builds.
+      </p>
+
+      <div class="meta">
+        <div class="meta__cell">
+          <div class="meta__label">Product</div>
+          <div class="meta__value">IE-nergy</div>
+        </div>
+        <div class="meta__cell">
+          <div class="meta__label">Duration</div>
+          <div class="meta__value">60 minutes</div>
+        </div>
+        <div class="meta__cell">
+          <div class="meta__label">Audience</div>
+          <div class="meta__value">Marketing, non-technical</div>
+        </div>
+        <div class="meta__cell">
+          <div class="meta__label">Deliverable</div>
+          <div class="meta__value">Live signup URL</div>
+        </div>
+      </div>
+
+      <h3 class="h-sub">Learning objectives</h3>
+      <div class="objectives">
+        <div class="obj">
+          <div class="obj__num">01</div>
+          <div class="obj__text">Scaffold a project with documentation-first discipline (<code>CLAUDE.md</code>, <code>PRD.md</code>, <code>README.md</code>).</div>
+        </div>
+        <div class="obj">
+          <div class="obj__num">02</div>
+          <div class="obj__text">Apply two styling mental models: <strong>descriptive</strong> (mood + reference asset) and <strong>reference-based</strong> (mimic a live site).</div>
+        </div>
+        <div class="obj">
+          <div class="obj__num">03</div>
+          <div class="obj__text">Orchestrate Mailchimp conversationally — audiences, custom fields, double opt-in, GDPR — through its Marketing API, driven by Claude Code.</div>
+        </div>
+        <div class="obj">
+          <div class="obj__num">04</div>
+          <div class="obj__text">Deploy to GitHub Pages conversationally via the GitHub MCP. No terminal.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PRE-LAB ========== -->
+    <section class="section" id="prelab">
+      <div class="sec-header">
+        <div class="sec-num">A</div>
+        <div>
+          <span class="sec-eyebrow">Before class</span>
+          <h2 class="sec-title">Pre-lab setup</h2>
+          <p class="sec-lead">Do this 48 hours before the lab. It takes about 30 minutes and is <strong>non-negotiable</strong> — anything missing here cannot be fixed in class without sacrificing the lab.</p>
+          <span class="sec-timing">~30 min · at home</span>
+        </div>
+      </div>
+
+      <div class="callout callout--warn">
+        <div class="callout__icon">⚙️</div>
+        <div class="callout__body">
+          <h4>What you need on your laptop</h4>
+          <ul>
+            <li>A modern browser (Chrome, Safari, Edge, Firefox).</li>
+            <li>An email you can access during class.</li>
+            <li><strong>Visual Studio Code</strong> — free download at <a href="https://code.visualstudio.com" target="_blank" rel="noopener">code.visualstudio.com</a>.</li>
+            <li><strong>The Claude Code extension for VS Code</strong> — install it from the VS Code Marketplace (search "Claude Code"). After install, sign in with your Claude account.</li>
+            <li>~500 MB free disk space for the starter bundle + screenshots.</li>
+          </ul>
+          <p style="margin-top:.5rem;">We'll add Mailchimp and GitHub to Claude Code through <strong>MCP (Model Context Protocol)</strong> servers — two short commands in the VS Code terminal. You won't need to know any terminal commands beyond the two in this guide.</p>
+        </div>
+      </div>
+
+      <h3 class="h-sub">A.1 · Install Claude Code in VS Code</h3>
+      <div class="stepline">
+        <div class="stepline__num">01</div>
+        <div>
+          <div class="stepline__title">Create a Claude account</div>
+          <div class="stepline__text">
+            <p>Go to <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> and create an account using your IE email. Any tier works (free is fine for this lab).</p>
+          </div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">02</div>
+        <div>
+          <div class="stepline__title">Install VS Code, then the Claude Code extension</div>
+          <div class="stepline__text">
+            <p>Install <a href="https://code.visualstudio.com" target="_blank" rel="noopener">Visual Studio Code</a>. Open it, click the <strong>Extensions</strong> icon in the left sidebar (the squares icon), search for <strong>"Claude Code"</strong>, and click <strong>Install</strong> on the official Anthropic extension.</p>
+          </div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">03</div>
+        <div>
+          <div class="stepline__title">Sign in and test</div>
+          <div class="stepline__text">
+            <p>After install, click the Claude Code icon in VS Code's left sidebar. A sign-in button appears — click it, approve in the browser popup, and you'll land back in VS Code with a chat panel. Type <em>"Hello Claude, are you there?"</em> — if you get a reply, you're good.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="h-sub">A.2 · Create a GitHub account + Personal Access Token</h3>
+      <div class="stepline">
+        <div class="stepline__num">01</div>
+        <div>
+          <div class="stepline__title">Sign up at github.com</div>
+          <div class="stepline__text">
+            <p>Create a free account at <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a>. Pick a professional username — this will appear in your live URL.</p>
+          </div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">02</div>
+        <div>
+          <div class="stepline__title">Generate a Personal Access Token (PAT)</div>
+          <div class="stepline__text">
+            <p>Go to <a href="https://github.com/settings/tokens/new" target="_blank" rel="noopener">Settings → Developer settings → Personal access tokens → Tokens (classic)</a>, then click <strong>"Generate new token (classic)"</strong>.</p>
+            <ul>
+              <li><strong>Note:</strong> <code>claude-code-mcp</code></li>
+              <li><strong>Expiration:</strong> 30 days</li>
+              <li><strong>Scopes to tick:</strong> <code>repo</code> (the top checkbox — this covers push, Pages, and admin) and <code>read:org</code>.</li>
+            </ul>
+            <p>Click <strong>Generate token</strong> and <strong>copy the value immediately</strong> — it starts with <code>ghp_</code> and GitHub will never show it again. Paste it into a note file you can find later.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout--warn">
+        <div class="callout__icon">🔒</div>
+        <div class="callout__body">
+          <h4>Treat this token like a password</h4>
+          <p>It gives Claude write access to your GitHub. Don't paste it into Slack, don't commit it to a repo, don't share it. If you ever expose it by accident, revoke it in the same settings page and generate a new one.</p>
+        </div>
+      </div>
+
+      <h3 class="h-sub">A.3 · Connect the GitHub MCP to Claude Code</h3>
+      <div class="stepline">
+        <div class="stepline__num">01</div>
+        <div>
+          <div class="stepline__title">Open the integrated terminal in VS Code</div>
+          <div class="stepline__text">
+            <p>In VS Code: menu <strong>Terminal → New Terminal</strong> (or press <code>⌃`</code> on Mac / <code>Ctrl+`</code> on Windows). A terminal panel opens at the bottom of the window. This is the only time you'll touch it — two one-off commands.</p>
+          </div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">02</div>
+        <div>
+          <div class="stepline__title">Register GitHub's remote MCP server</div>
+          <div class="stepline__text">
+            <p>Copy the command below, <strong>replace <code>ghp_YOUR_TOKEN</code></strong> with the token from A.2, then paste it into the terminal and press Enter:</p>
+            <div class="prompt">
+              <div class="prompt__badge">▸</div>
+              <div class="prompt__body">
+                <div class="prompt__artefact">terminal command</div>
+                <div class="prompt__quote">claude mcp add --transport http github https://api.githubcopilot.com/mcp/ --header "Authorization: Bearer ghp_YOUR_TOKEN"</div>
+              </div>
+            </div>
+            <p>Claude Code registers GitHub's official remote MCP server. You should see a one-line "Added MCP server: github" confirmation.</p>
+          </div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">03</div>
+        <div>
+          <div class="stepline__title">Verify from the Claude chat panel</div>
+          <div class="stepline__text">
+            <p>Open the Claude Code chat panel (left sidebar), type <code>/mcp</code>, and press Enter. You should see <strong>github</strong> listed as <strong>connected</strong>. Then run this sanity-check prompt:</p>
+            <div class="prompt">
+              <div class="prompt__badge">▸</div>
+              <div class="prompt__body">
+                <div class="prompt__quote">List my GitHub repositories using the github MCP server.</div>
+              </div>
+            </div>
+            <p>If Claude replies with your repos (or "you have none yet, but I'm connected"), the server is live.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="h-sub">A.4 · Create a Mailchimp free account</h3>
+      <div class="stepline">
+        <div class="stepline__num">01</div>
+        <div>
+          <div class="stepline__title">Sign up at mailchimp.com</div>
+          <div class="stepline__text">
+            <p>Go to <a href="https://mailchimp.com/signup/" target="_blank" rel="noopener">mailchimp.com/signup</a>. Choose the <strong>Free</strong> plan. Use your IE email. Confirm the verification link.</p>
+          </div>
+        </div>
+      </div>
+      <div class="stepline">
+        <div class="stepline__num">02</div>
+        <div>
+          <div class="stepline__title">Skip the onboarding quickly</div>
+          <div class="stepline__text">
+            <p>Mailchimp will ask you about your company and how you got your contacts. Pick any reasonable answer — you can always edit it later. Just reach the main dashboard.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="h-sub">A.5 · Get a Mailchimp API key</h3>
+      <div class="callout callout--tip">
+        <div class="callout__icon">ℹ️</div>
+        <div class="callout__body">
+          <h4>Why an API key, not an MCP?</h4>
+          <p>Mailchimp doesn't publish a ready-made MCP server for its Marketing API. Instead, Claude Code will talk to Mailchimp directly using its public REST API. You generate one API key, paste it into a <code>.env</code> file in your project, and Claude writes / runs the scripts that call the API for you. Same end result — audience, custom fields, double opt-in, GDPR — just a different transport.</p>
+        </div>
+      </div>
+
+      <div class="stepline">
+        <div class="stepline__num">01</div>
+        <div>
+          <div class="stepline__title">Generate the key in Mailchimp</div>
+          <div class="stepline__text">
+            <p>In Mailchimp: click your avatar (top-right) → <strong>Profile</strong> → <strong>Extras</strong> menu → <strong>API keys</strong>. Scroll to <em>Your API keys</em> and click <strong>Create a key</strong>. Give it the label <code>claude-code-lab</code> and copy the generated value — it looks like <code>a1b2c3d4e5f6g7h8i9j0-us14</code>.</p>
+          </div>
+        </div>
+      </div>
+      <div class="callout callout--warn">
+        <div class="callout__icon">🔒</div>
+        <div class="callout__body">
+          <h4>Treat this key like a password</h4>
+          <p>Anyone with it can read and modify your whole Mailchimp account. Do <strong>not</strong> paste it into a GitHub repo, Slack, or the live landing page. It will live in a <code>.env</code> file which Claude will add to <code>.gitignore</code> so it never gets pushed.</p>
+        </div>
+      </div>
+
+      <h3 class="h-sub">A.6 · Download the starter bundle</h3>
+      <div class="stepline">
+        <div class="stepline__num">01</div>
+        <div>
+          <div class="stepline__title">Grab <code>ie-nergy-starter.zip</code></div>
+          <div class="stepline__text">
+            <p>Your instructor will share the link on the course portal. Download, unzip, and place the folder somewhere you can find again (Desktop is fine). Inside you'll find:</p>
+            <ul>
+              <li><code>CLAUDE.md</code> — project conventions you'll edit in Step 0</li>
+              <li><code>PRD.md</code> — product requirements doc, also edited in Step 0</li>
+              <li><code>README.md</code> — public description + implementation status</li>
+              <li><code>assets/ie-nergy-can.png</code> — the hero can image, already cropped and optimized</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="check">
+        <div class="check__title">Pre-lab checklist</div>
+        <ul>
+          <li><strong>VS Code:</strong> installed and opens cleanly.</li>
+          <li><strong>Claude Code extension:</strong> installed, signed in, "hello" test passed from the VS Code chat panel.</li>
+          <li><strong>GitHub account:</strong> created, username noted.</li>
+          <li><strong>GitHub PAT:</strong> classic token with <code>repo</code> + <code>read:org</code> scopes, copied somewhere safe.</li>
+          <li><strong>GitHub MCP:</strong> <code>github</code> shows <em>connected</em> under <code>/mcp</code>; "List my repos" test passed.</li>
+          <li><strong>Mailchimp account:</strong> free plan, onboarding finished, dashboard reachable.</li>
+          <li><strong>Mailchimp API key:</strong> generated and copied somewhere safe (ends in something like <code>…-us14</code>).</li>
+          <li><strong>Starter bundle:</strong> unzipped on your laptop, all four files present.</li>
+        </ul>
+      </div>
+
+      <div class="callout callout--tip">
+        <div class="callout__icon">💡</div>
+        <div class="callout__body">
+          <h4>If you get stuck</h4>
+          <p>Post the exact error message in the course channel 24h before class. Don't wait for the morning-of — the MCP authorization flow sometimes needs a reset, and instructors can walk you through it in 5 minutes over chat.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== STEP 0 ========== -->
+    <section class="section" id="step-0">
+      <div class="sec-header">
+        <div class="sec-num">00</div>
+        <div>
+          <span class="sec-eyebrow">In class · Step 0</span>
+          <h2 class="sec-title">Scaffold the project</h2>
+          <p class="sec-lead">Before any code, we set the rules. You'll fill in three short docs so Claude knows what kind of page to build and what success looks like.</p>
+          <span class="sec-timing">~8 min</span>
+        </div>
+      </div>
+
+      <h3 class="h-sub">Open the starter folder in VS Code</h3>
+      <p style="color:var(--ink-3); max-width:720px;">In VS Code: <strong>File → Open Folder…</strong> and pick the unzipped <code>ie-nergy-starter</code> folder. You'll see <code>CLAUDE.md</code>, <code>PRD.md</code>, <code>README.md</code>, and <code>assets/</code> in the Explorer on the left. Open the Claude Code chat panel from the sidebar and send this opening message — Claude Code already has access to every file in the folder, so there's nothing to drag or attach.</p>
+
+      <div class="prompt">
+        <div class="prompt__badge">00</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">Ground Claude in the project</span>
+            <span class="prompt__artefact">→ confirmation + questions</span>
+          </div>
+          <div class="prompt__quote">I'm starting a new landing page project for a fictional energy drink called IE-nergy. I've attached four files: CLAUDE.md (conventions), PRD.md (requirements), README.md (public description) and assets/ie-nergy-can.png (hero image). Read all of them, then tell me: (1) what conventions are declared, (2) what the product is for, (3) what's missing or unclear. Don't write any code yet.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> Claude summarizes the three docs and flags blanks it needs you to fill in — usually brand palette, form fields, and acceptance criteria. That's exactly what the next three prompts are for.</p>
+        </div>
+      </div>
+
+      <h3 class="h-sub">Fill in the three docs</h3>
+
+      <div class="prompt">
+        <div class="prompt__badge">01</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">CLAUDE.md — conventions</span>
+            <span class="prompt__artefact">→ updates CLAUDE.md</span>
+          </div>
+          <div class="prompt__quote">Update CLAUDE.md with these conventions for this project:
+- Stack: vanilla HTML / CSS / JavaScript only. No React, no build step, no frameworks.
+- Deployment target: GitHub Pages (static hosting).
+- Brand palette: arctic blues derived from the hero can in assets/ie-nergy-can.png — cold, premium, high-energy.
+- Tone: confident, youthful, Madrid-urban. Short copy, strong verbs.
+- Always reference assets/ie-nergy-can.png as the hero visual.
+Show me the full updated file so I can confirm.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> Claude rewrites CLAUDE.md and shows it back for approval. Skim it — does it match the conventions above? If yes, say "looks good".</p>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">02</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">PRD.md — form + acceptance criteria</span>
+            <span class="prompt__artefact">→ updates PRD.md</span>
+          </div>
+          <div class="prompt__quote">Update PRD.md for the IE-nergy Spring Campaign landing page. Specify:
+- Form fields: name, email, campus (dropdown: Madrid, Segovia, online), preferred flavor (dropdown: Arctic Mint, Citrus Storm, Berry Voltage).
+- Behaviour on submit: push to Mailchimp with double opt-in; show a thank-you state in place of the form.
+- Acceptance criteria (explicit): GDPR consent checkbox is required, unchecked by default, blocks submission until ticked; Mailchimp double opt-in is enabled; all four form fields are required.
+- Edge cases: invalid email format, consent refused, Mailchimp API error.
+Show me the full updated file.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> A crisp PRD with the GDPR + double opt-in requirements written in black and white. This is what Claude will check its own work against later.</p>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">03</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">README.md — public description</span>
+            <span class="prompt__artefact">→ updates README.md</span>
+          </div>
+          <div class="prompt__quote">Update README.md with: (1) a one-paragraph description of the IE-nergy Spring Campaign landing page that someone outside the class could understand, and (2) an empty "Implementation status" section with checkboxes for: form built, styled, Mailchimp wired, GDPR consent enforced, deployed to GitHub Pages. Leave all checkboxes unchecked for now.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> A short README that you'll keep updating as you tick off each step.</p>
+        </div>
+      </div>
+
+      <div class="callout callout--checkpoint">
+        <div class="callout__icon">✓</div>
+        <div class="callout__body">
+          <h4>Checkpoint — Step 0</h4>
+          <p>PRD.md explicitly lists <strong>GDPR consent</strong> and <strong>Mailchimp double opt-in</strong> as acceptance criteria. CLAUDE.md references <code>assets/ie-nergy-can.png</code> as the hero image. Move on when both are true.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== STEP 1 ========== -->
+    <section class="section" id="step-1">
+      <div class="sec-header">
+        <div class="sec-num">01</div>
+        <div>
+          <span class="sec-eyebrow">In class · Step 1</span>
+          <h2 class="sec-title">Build the form</h2>
+          <p class="sec-lead">Two prompts. The first gets a working form from your PRD. The second uses a competitor's signup form as a reference to find fields you forgot.</p>
+          <span class="sec-timing">~10 min</span>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">01</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">Basic HTML form from the PRD</span>
+            <span class="prompt__artefact">→ index.html</span>
+          </div>
+          <div class="prompt__quote">Using the field list in my PRD.md, generate a basic HTML form inside an index.html file. Plain HTML only — no CSS, no JavaScript yet. Include a submit button and a visible GDPR consent checkbox. Leave the form action empty for now.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> An unstyled, ugly-but-functional form with all four PRD fields + a consent checkbox. Open <code>index.html</code> locally to confirm it renders.</p>
+        </div>
+      </div>
+
+      <div class="callout callout--tip">
+        <div class="callout__icon">🔎</div>
+        <div class="callout__body">
+          <h4>Pick a reference signup screenshot</h4>
+          <p>Before the next prompt, open a competitor's signup form in your browser — Red Bull, Monster, Celsius, Liquid Death — and take a screenshot of the form. Save it into the <code>assets/</code> folder of your project as <code>reference-signup.png</code> so Claude Code can read it from the workspace.</p>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">02</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">Extend from a reference image</span>
+            <span class="prompt__artefact">→ updates index.html + PRD.md</span>
+          </div>
+          <div class="prompt__quote">Look at assets/reference-signup.png — that's a screenshot of a competitor's signup form. Compare it to my current index.html. Which fields does it have that mine is missing? Add any that make sense for a student-facing energy drink campaign — skip anything irrelevant (like shipping addresses). Then update PRD.md to reflect the new field list so the docs stay in sync.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> Claude lists the differences, adds 1–2 fields (maybe "birth year" or "how did you hear about us"), updates both files, and explains why it skipped any fields.</p>
+        </div>
+      </div>
+
+      <div class="callout callout--checkpoint">
+        <div class="callout__icon">✓</div>
+        <div class="callout__body">
+          <h4>Checkpoint — Step 1</h4>
+          <p>Opening <code>index.html</code> in your browser shows a form with all PRD fields plus the additions from the image. PRD.md was updated in the same turn.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== STEP 2 ========== -->
+    <section class="section" id="step-2">
+      <div class="sec-header">
+        <div class="sec-num">02</div>
+        <div>
+          <span class="sec-eyebrow">In class · Step 2</span>
+          <h2 class="sec-title">Descriptive styling</h2>
+          <p class="sec-lead">The first of two styling mental models. You describe the mood, hand over the hero image, and let Claude propose looks. You're the art director.</p>
+          <span class="sec-timing">~12 min</span>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">01</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">Generate 2–3 visual variations</span>
+            <span class="prompt__artefact">→ index.html (styled)</span>
+          </div>
+          <div class="prompt__quote">Look at assets/ie-nergy-can.png in this workspace. That's our product hero image. Style the landing page to match this visual world — arctic blue palette, icy / premium feel, high-energy. Hero section with the can on the left, form on the right. Give me 2–3 distinct visual variations in the same index.html, separated by HTML comments like &lt;!-- VARIATION 1 --&gt; so I can skim them side by side. Use CSS only, no images beyond the can.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> A single file with 2–3 fully-styled hero+form blocks stacked vertically. Each has different type, spacing, and colour emphasis — all arctic-blue, all premium-feeling.</p>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">02</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">Pick one, keep it, delete the rest</span>
+            <span class="prompt__artefact">→ index.html (single variation)</span>
+          </div>
+          <div class="prompt__quote">I'll go with variation [N]. Remove the other variations from index.html so we have one clean version. Keep all the form fields and the consent checkbox exactly as they were.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> A clean single-variation file. The form still works, the can is still in the hero.</p>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">03</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">Critique for accessibility and conversion</span>
+            <span class="prompt__artefact">→ inline tweaks</span>
+          </div>
+          <div class="prompt__quote">Now critique the current version of index.html for two things: (1) accessibility — colour contrast, focus states, label wiring; (2) conversion — is the CTA obvious, is the consent checkbox not burying the submit button, does the form feel trustworthy. List the issues first, then apply the fixes. Show me what changed.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> A list of 4–6 fixes (contrast bumps, a bigger CTA, better focus rings) and an updated file.</p>
+        </div>
+      </div>
+
+      <div class="callout callout--checkpoint">
+        <div class="callout__icon">✓</div>
+        <div class="callout__body">
+          <h4>Checkpoint — Step 2</h4>
+          <p>The landing page has a hero with the can image + a styled form. You can explain, in one sentence, why you picked your variation over the others. Accessibility critique has been applied.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== STEP 3 ========== -->
+    <section class="section" id="step-3">
+      <div class="sec-header">
+        <div class="sec-num">03</div>
+        <div>
+          <span class="sec-eyebrow">In class · Step 3</span>
+          <h2 class="sec-title">Mimic a reference website</h2>
+          <p class="sec-lead">The second styling model. Instead of describing the mood, you point Claude at a live brand site and ask it to extract the design language — then apply that language to IE-nergy.</p>
+          <span class="sec-timing">~12 min</span>
+        </div>
+      </div>
+
+      <div class="callout callout--tip">
+        <div class="callout__icon">🎯</div>
+        <div class="callout__body">
+          <h4>Good reference sites to pick from</h4>
+          <ul>
+            <li><a href="https://liquiddeath.com" target="_blank" rel="noopener">liquiddeath.com</a> — irreverent, heavy metal energy</li>
+            <li><a href="https://takearecess.com" target="_blank" rel="noopener">takearecess.com</a> — calm, pastel, minimal</li>
+            <li><a href="https://celsius.com" target="_blank" rel="noopener">celsius.com</a> — fitness-forward, bold typography</li>
+            <li><a href="https://redbull.com" target="_blank" rel="noopener">redbull.com</a> — dramatic, black + primary colour</li>
+            <li>A Madrid lifestyle brand of your choice</li>
+          </ul>
+          <p style="margin-top:.5rem;">Pick <strong>one</strong>. Copy its URL.</p>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">01</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">Analyze + adapt the design language</span>
+            <span class="prompt__artefact">→ index.html (re-styled)</span>
+          </div>
+          <div class="prompt__quote">Here's a reference site I want to borrow from: [paste URL].
+
+Step 1 — analyze its visual language: palette, typography, spacing, hero composition, CTA style, any distinctive design moves (textures, animations, copy tone).
+
+Step 2 — apply that language to our IE-nergy landing page (index.html), but keep the arctic blue palette from CLAUDE.md and keep the hero can image in place. Adapt, don't copy. I want their design DNA with our brand identity.
+
+Show me the updated file.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> A short written analysis of the reference site, then a re-styled <code>index.html</code>. It should still be recognisably IE-nergy (blue, the can) but feel like a cousin of the reference site.</p>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">02</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">Explain what was borrowed, what was preserved</span>
+            <span class="prompt__artefact">→ explanation only</span>
+          </div>
+          <div class="prompt__quote">Now explain, in a short table: three specific design decisions you inherited from the reference (e.g. "oversized serif headline"), and three things you deliberately preserved from IE-nergy's own identity (e.g. "arctic blue #... as primary"). This is what I'll pitch back to the class.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> A 3+3 table. Save this — you'll need it for the checkpoint and, if you want, to defend your design choices.</p>
+        </div>
+      </div>
+
+      <div class="callout callout--checkpoint">
+        <div class="callout__icon">✓</div>
+        <div class="callout__body">
+          <h4>Checkpoint — Step 3</h4>
+          <p>The landing page reflects the reference's aesthetic while still reading as IE-nergy. You can articulate <strong>three specific design decisions</strong> you inherited from the reference site.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== STEP 4 ========== -->
+    <section class="section" id="step-4">
+      <div class="sec-header">
+        <div class="sec-num">04</div>
+        <div>
+          <span class="sec-eyebrow">In class · Step 4</span>
+          <h2 class="sec-title">Mailchimp via the API</h2>
+          <p class="sec-lead">Claude Code talks directly to Mailchimp's Marketing API using your key. You'll paste the key once, ask Claude to provision everything, then wire the form to Mailchimp's public embedded endpoint so the live site never exposes the key.</p>
+          <span class="sec-timing">~12 min</span>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">01</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">Put the API key into a <code>.env</code> file</span>
+            <span class="prompt__artefact">→ .env + .gitignore</span>
+          </div>
+          <div class="prompt__quote">Create a .env file at the root of this project with one variable: MAILCHIMP_API_KEY. I'll paste my own value. Also make sure .env is listed in .gitignore so it never gets pushed to GitHub. Don't print my key back to me after I paste it.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> Claude creates <code>.env</code> (empty placeholder), updates <code>.gitignore</code>, and asks you to paste your key into the file yourself. Open <code>.env</code> in VS Code and paste the key from pre-lab step A.5. Save.</p>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">02</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">Provision the audience via the Marketing API</span>
+            <span class="prompt__artefact">→ mailchimp-setup.js + live audience</span>
+          </div>
+          <div class="prompt__quote">Using the MAILCHIMP_API_KEY in .env, write a one-off Node.js script called mailchimp-setup.js that calls Mailchimp's Marketing API. Derive the server prefix from the last part of the key (the bit after the dash, e.g. "us14") so I don't have to store it separately. The script should:
+1. Create an audience called "IE-nergy Spring Campaign" with my Mailchimp account email as the "from" address and "IE-nergy Campus Team" as the from name.
+2. Enable double opt-in on that audience.
+3. Add two custom merge fields matching my PRD: CAMPUS (dropdown: Madrid, Segovia, online) and FLAVOR (dropdown: Arctic Mint, Citrus Storm, Berry Voltage).
+4. Add one GDPR marketing permission labelled "Marketing emails from IE-nergy".
+Then run the script. When it finishes, print the audience ID and the embedded-form POST URL (the action URL from Mailchimp's hosted form) so I can use it in the landing page. If any API call fails, print the error body from Mailchimp — don't swallow it.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> Claude writes the script, runs it, and prints something like <code>audience_id: a1b2c3d4e5</code> and <code>action: https://your-username.usNN.list-manage.com/subscribe/post?u=…&id=…</code>. Copy both values — they're the output of this step.</p>
+        </div>
+      </div>
+
+      <div class="stepline">
+        <div class="stepline__num">→</div>
+        <div>
+          <div class="stepline__title">Verify in the Mailchimp browser tab</div>
+          <div class="stepline__text">
+            <p>Open <a href="https://admin.mailchimp.com" target="_blank" rel="noopener">admin.mailchimp.com</a> → Audience → switch to <strong>IE-nergy Spring Campaign</strong>. Check: Settings → Audience name and defaults shows double opt-in ON and a GDPR permission configured; Settings → Audience fields and *|MERGE|* tags shows <code>CAMPUS</code> and <code>FLAVOR</code>. If any of those are missing, tell Claude what's wrong and it'll patch the script.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">03</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">Wire the landing page to the public form endpoint</span>
+            <span class="prompt__artefact">→ index.html (wired)</span>
+          </div>
+          <div class="prompt__quote">Wire the form in index.html to POST directly to Mailchimp's embedded-form endpoint (the "action" URL printed by mailchimp-setup.js). Do NOT use the API key in the browser — the embedded form endpoint is public and doesn't need one; that's why we use it for the live site.
+
+Requirements:
+- Keep ALL my current styling — don't replace the design with Mailchimp's default form.
+- Use the merge-tag field names: EMAIL, FNAME, CAMPUS, FLAVOR (match what you set up in step 2).
+- Include the GDPR permission field Mailchimp expects (usually a hidden input named "gdpr[...]" plus the user-visible consent checkbox).
+- My required, unchecked-by-default GDPR consent checkbox MUST block submission until ticked.
+- Add a minimal cookie banner at the bottom of the page: one line of text + "Accept" + "Reject" buttons, storing the choice in localStorage.
+- Redirect to a simple thank-you state on success.
+Show me the diff.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> Your styled form now posts straight to Mailchimp's public endpoint on submit. No secret in the HTML. Cookie banner appears on first load. Consent checkbox still blocks submission if empty.</p>
+        </div>
+      </div>
+
+      <div class="stepline">
+        <div class="stepline__num">→</div>
+        <div>
+          <div class="stepline__title">Test it end-to-end</div>
+          <div class="stepline__text">
+            <p>Open <code>index.html</code> in your browser. Fill in the form with your own email, tick the consent box, and submit. Then:</p>
+            <ul>
+              <li>Check your inbox — a Mailchimp double opt-in email should arrive within a minute. Click the confirm link.</li>
+              <li>Back in the Mailchimp tab, refresh the audience contacts. Your entry should appear with <strong>campus</strong> and <strong>preferred flavor</strong> populated.</li>
+              <li>Try a second submit with the consent checkbox <em>unticked</em> — the form must refuse to submit.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout--checkpoint">
+        <div class="callout__icon">✓</div>
+        <div class="callout__body">
+          <h4>Checkpoint — Step 4</h4>
+          <p>Audience exists with the correct schema. A test submission is visible in Mailchimp with both custom fields populated. Double opt-in email was received and confirmed. Consent checkbox blocks submission when unticked.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== STEP 5 ========== -->
+    <section class="section" id="step-5">
+      <div class="sec-header">
+        <div class="sec-num">05</div>
+        <div>
+          <span class="sec-eyebrow">In class · Step 5</span>
+          <h2 class="sec-title">Deploy via the GitHub MCP</h2>
+          <p class="sec-lead">One prompt takes you from a folder on your laptop to a public URL anyone can open. No terminal, no git commands — Claude does all of it through the connector.</p>
+          <span class="sec-timing">~6 min</span>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">01</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">Create repo, push, enable Pages</span>
+            <span class="prompt__artefact">→ live public URL</span>
+          </div>
+          <div class="prompt__quote">Using the github MCP server, do all of the following in one pass:
+1. Create a new PUBLIC repository called "ie-nergy-landing" under my account.
+2. Push these files and only these files to the main branch: index.html, CLAUDE.md, PRD.md, README.md, .gitignore, mailchimp-setup.js, and the entire assets/ folder. DO NOT push .env under any circumstances — it contains my Mailchimp API key. Double-check before pushing.
+3. Enable GitHub Pages on the repo, served from the main branch root.
+4. Return the public Pages URL when everything is live.
+If any step fails, stop and tell me exactly what went wrong.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> Claude walks through each step, confirms success, and returns a URL like <code>https://[your-username].github.io/ie-nergy-landing/</code>. Pages takes 30–60 seconds to go live after enabling.</p>
+        </div>
+      </div>
+
+      <div class="stepline">
+        <div class="stepline__num">→</div>
+        <div>
+          <div class="stepline__title">Verify the live site</div>
+          <div class="stepline__text">
+            <p>Open the URL Claude returned. The landing page should load with your styling and the can image. Submit the form one more time from the live domain — confirm the entry appears in Mailchimp and that the double opt-in email lands. This proves the whole chain works in production, not just on your laptop.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt__badge">02</div>
+        <div class="prompt__body">
+          <div class="prompt__head">
+            <span class="prompt__title">Mark the project as shipped</span>
+            <span class="prompt__artefact">→ updates README.md on GitHub</span>
+          </div>
+          <div class="prompt__quote">Update README.md: tick every box in the Implementation status section, and add the live URL at the top under the one-paragraph description. Then push the updated README to the main branch using the github MCP server.</div>
+          <p class="prompt__result"><strong>What you'll see:</strong> Your repo's README — visible on github.com — now reflects the final state, with the live URL at the top.</p>
+        </div>
+      </div>
+
+      <div class="callout callout--checkpoint">
+        <div class="callout__icon">✓</div>
+        <div class="callout__body">
+          <h4>Checkpoint — Step 5</h4>
+          <p>Live URL shared with the instructor. Submitting the form on the live domain lands a contact in Mailchimp with double opt-in triggered. README on GitHub reflects the final state with all boxes ticked.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== DONE ========== -->
+    <section class="section" id="done">
+      <div class="sec-header">
+        <div class="sec-num">06</div>
+        <div>
+          <span class="sec-eyebrow">Wrap-up</span>
+          <h2 class="sec-title">What you just shipped</h2>
+          <p class="sec-lead">In 60 minutes, without writing a single line of code by hand, you built and deployed a production-grade signup page for a spring marketing campaign. Here's what's behind the URL you can now share.</p>
+        </div>
+      </div>
+
+      <div class="objectives">
+        <div class="obj">
+          <div class="obj__num">→ SCAFFOLD</div>
+          <div class="obj__text">A documented project with <code>CLAUDE.md</code>, <code>PRD.md</code>, <code>README.md</code> that any teammate can read before touching the code.</div>
+        </div>
+        <div class="obj">
+          <div class="obj__num">→ DESIGN</div>
+          <div class="obj__text">Two styling mental models you can reuse for every future brief: descriptive (mood + reference asset) and reference-based (mimic + adapt).</div>
+        </div>
+        <div class="obj">
+          <div class="obj__num">→ CRM</div>
+          <div class="obj__text">A real Mailchimp audience with custom fields, double opt-in, and GDPR permissions — provisioned conversationally, never from the UI.</div>
+        </div>
+        <div class="obj">
+          <div class="obj__num">→ DEPLOY</div>
+          <div class="obj__text">A public GitHub Pages URL, served with HTTPS, pushed from Claude without touching a terminal.</div>
+        </div>
+      </div>
+
+      <div class="callout callout--good">
+        <div class="callout__icon">🚀</div>
+        <div class="callout__body">
+          <h4>Take-homes</h4>
+          <ul>
+            <li><strong>Docs first, code second.</strong> The PRD you wrote in Step 0 was the contract Claude checked its own work against in Step 4.</li>
+            <li><strong>Conversation replaces dashboards.</strong> Whether it's an MCP (GitHub) or a REST API with a key in <code>.env</code> (Mailchimp), once Claude Code has credentials it executes the clicks for you — create an audience, deploy a site, push a commit.</li>
+            <li><strong>Verify, don't trust.</strong> Every step has a browser check. MCPs can claim success and be wrong. You watch Mailchimp and the live URL confirm it for real.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      LAB · IE-NERGY · IE BUSINESS SCHOOL AI MARKETING LAB
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>
