@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subagents and Agent Teams — Concepts & Decision Framework</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --text-color: #333;
+            --border-color: #ddd;
+            --bg-light: #f9f9f9;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: white;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        nav {
+            width: 260px;
+            background: var(--primary-color);
+            padding: 2rem 1.5rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 3px solid var(--accent-color);
+        }
+
+        nav h2 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.75rem;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            margin: 0.5rem 0;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            border-radius: 3px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: var(--accent-color);
+            color: white;
+            padding-left: 1.25rem;
+        }
+
+        /* Main content */
+        main {
+            margin-left: 260px;
+            padding: 3rem 3rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            border: none;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        /* Headers */
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 0.75rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        h1:first-of-type {
+            display: none;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.75rem;
+            font-size: 1.4rem;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        /* Paragraphs and text */
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Code blocks */
+        code {
+            background: var(--bg-light);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Menlo', 'Monaco', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+            color: #c7254e;
+        }
+
+        pre {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Tables */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5rem 0;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            text-align: left;
+        }
+
+        th {
+            background: var(--bg-light);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        /* Callouts */
+        .note {
+            background: #e8f4f8;
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 3px;
+        }
+
+        .note strong {
+            color: var(--accent-color);
+        }
+
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 3px;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0 1rem 2rem;
+            line-height: 1.8;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        /* Links */
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Feature boxes */
+        .feature-box {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 3px;
+        }
+
+        .feature-box h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: #666;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                width: 220px;
+                padding: 1.5rem 1rem;
+            }
+
+            main {
+                margin-left: 220px;
+                padding: 2rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            nav {
+                width: 100%;
+                height: auto;
+                position: static;
+                padding: 1.5rem;
+                border-right: none;
+                border-bottom: 3px solid var(--accent-color);
+            }
+
+            nav h2 {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            nav li {
+                margin: 0;
+            }
+
+            nav a {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            main {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+
+            .hero {
+                padding: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h2>Contents</h2>
+            <ul>
+                <li><a href="#why-this-matters">Why This Matters</a></li>
+                <li><a href="#part-1-subagents">Part 1: Subagents</a></li>
+                <li><a href="#part-2-agent-teams">Part 2: Agent Teams</a></li>
+                <li><a href="#part-3-comparison">Part 3: Comparison</a></li>
+                <li><a href="#part-4-framework">Part 4: Decision Framework</a></li>
+                <li><a href="#part-5-tradeoffs">Part 5: Tradeoffs</a></li>
+                <li><a href="#further-reading">Further Reading</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <div class="hero">
+                <h1>Introduction to Subagents and Agent Teams in Claude Code</h1>
+                <p>Class Reading — Concepts & When to Use Each</p>
+            </div>
+
+            <section id="why-this-matters">
+                <h2>Why this matters</h2>
+                <p>When you ask Claude Code to do a complex task — say, develop a launch campaign, run a competitive analysis, or review a long brief — you can do it all in one conversation. But that has limits. The conversation gets cluttered with research findings, draft iterations, and tool outputs. Context fills up. Different aspects of the work compete for the same "headspace."</p>
+
+                <p>Claude Code offers two ways to split that work across multiple specialized workers running in parallel: <strong>subagents</strong> and <strong>agent teams</strong>. Both let you delegate. Both run their own context windows. But they're built for different kinds of problems, and choosing the right one matters more than most people think.</p>
+
+                <p>This document explains what each one is, how they're built, and how to decide between them — with marketing examples throughout.</p>
+            </section>
+
+            <section id="part-1-subagents">
+                <h2>Part 1 — Subagents</h2>
+                <p>A subagent is a specialized Claude assistant that handles a specific type of task. You give it a clear job description, a focused system prompt, and a limited set of tools. When Claude Code encounters work matching that subagent's description, it delegates the work, and the subagent returns just the summary or deliverable. The verbose middle — the searching, the drafting iterations, the tool calls — stays in the subagent's own context, not yours.</p>
+
+                <p>Think of a subagent as a freelancer you keep on retainer. You've briefed them once, very precisely. From then on, whenever you have work that fits, you just say "send it to the copywriter" and trust them to come back with what you need.</p>
+
+                <h3>What subagents are good at</h3>
+                <ul>
+                    <li><strong>Isolating high-volume work.</strong> A researcher subagent can pull and process hundreds of lines of competitive data and return a five-bullet summary. The bulk stays out of your main conversation.</li>
+                    <li><strong>Enforcing a specific role consistently.</strong> A copywriter subagent that you've defined with strict voice rules ("never use 'elevate,' 'unleash,' or 'curated'") will apply those rules every time you call it.</li>
+                    <li><strong>Reusing specialists across projects.</strong> Save a subagent definition once and you can call it on any campaign you work on.</li>
+                    <li><strong>Controlling cost.</strong> Routing simple lookups to a Haiku-powered subagent is faster and cheaper than running them through your main session.</li>
+                </ul>
+
+                <h3>How they're structured</h3>
+                <p>Every subagent is a markdown file with two parts: a YAML frontmatter block (the configuration — name, description, tools allowed, model, etc.) and a markdown body (the system prompt that defines its role). You save it either to the project (<code>.claude/agents/</code>) or to your personal collection (<code>~/.claude/agents/</code>).</p>
+
+                <p>A simple example for marketing work:</p>
+
+                <pre><code>---
+name: copywriter
+description: Direct-response copywriter for Gen Z consumer brands.
+              Use when drafting Instagram, TikTok, email, or search ad copy.
+tools: Read, Write
+model: sonnet
+---
+
+You are a direct-response copywriter for digitally-native brands.
+You write in a conversational, specific voice — never corporate.
+You hate buzzwords like "elevate," "unleash," and "fuel your journey."
+You write differently for each channel: TikTok scripts include shot
+direction, Instagram captions stay under 125 words, search ads obey
+character limits.</code></pre>
+
+                <p>That's it. Once saved, you can invoke it with: <em>"Use the copywriter subagent to draft a TikTok script for IE-Nergy."</em></p>
+
+                <h3>What's important to know</h3>
+                <ul>
+                    <li>Each subagent runs in its <strong>own context window</strong>. The verbose work stays there.</li>
+                    <li>A subagent only <strong>reports results back to the main conversation</strong>. It can't talk to other subagents.</li>
+                    <li>Subagents <strong>can't spawn other subagents</strong>. If you need nested delegation, you have to chain them from the main conversation.</li>
+                    <li>They work <strong>inside one Claude Code session</strong> — so they run perfectly inside VS Code's integrated terminal.</li>
+                </ul>
+            </section>
+
+            <section id="part-2-agent-teams">
+                <h2>Part 2 — Agent Teams</h2>
+                <p>An agent team is something different. Instead of one Claude session calling specialized helpers, you spin up multiple full Claude Code sessions that work together as peers. One session takes the role of <strong>team lead</strong> — it coordinates, assigns tasks, synthesizes findings. The others are <strong>teammates</strong> — independent Claude Code instances that pick up tasks from a shared task list and <strong>talk directly to each other</strong> through an internal mailbox.</p>
+
+                <p>Where a subagent is a freelancer reporting back to you, an agent team is a working group: a strategist, a copywriter, a researcher, all sitting around the same metaphorical table, each with their own notebook, all able to compare notes mid-stream.</p>
+
+                <h3>What agent teams are good at</h3>
+                <ul>
+                    <li><strong>Genuinely collaborative work.</strong> When the strategist's positioning needs to inform the copywriter's tone, and the researcher's findings need to shape the strategist's recommendations — that flow of mutual influence is what agent teams enable.</li>
+                    <li><strong>Parallel exploration with debate.</strong> Spawn teammates with competing hypotheses (different positioning angles, different audience interpretations) and have them argue. The position that survives the debate is sharper than what any single agent would have produced.</li>
+                    <li><strong>Cross-channel campaign work.</strong> A teammate per channel — Instagram, TikTok, email, paid search — each adapting the same core message natively, while staying coordinated.</li>
+                    <li><strong>Tasks too big for one context.</strong> A complex launch with research, strategy, four channels of creative, and a paid media plan would overflow a single session. Splitting it across teammates gives each one breathing room.</li>
+                </ul>
+
+                <h3>How they're structured</h3>
+                <p>An agent team has four components:</p>
+                <ul>
+                    <li><strong>The lead</strong> — the main Claude Code session. It creates the team, spawns teammates, and synthesizes results.</li>
+                    <li><strong>Teammates</strong> — independent Claude Code instances, each with its own context window, model, and tools. They can be defined ad-hoc in the spawn prompt, or based on existing subagent definitions.</li>
+                    <li><strong>The shared task list</strong> — a coordination layer where the lead creates tasks, teammates claim them, and dependencies between tasks are tracked automatically.</li>
+                    <li><strong>The mailbox</strong> — the messaging system. Teammates can message each other one-to-one or broadcast to the whole team.</li>
+                </ul>
+
+                <p>Agent teams are <strong>experimental and disabled by default</strong>. Enabling them requires setting an environment variable: <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code>.</p>
+
+                <h3>What's important to know</h3>
+                <ul>
+                    <li>Each teammate is a <strong>full Claude Code session</strong>, so token costs scale roughly linearly with team size. Three to five teammates is the sweet spot.</li>
+                    <li>Teammates <strong>don't inherit the lead's conversation history</strong>. You have to give them context in the spawn prompt.</li>
+                    <li>Agent teams have <strong>two display modes</strong>: in-process (everyone in one terminal, cycle with Shift+Down) and split-pane (each teammate in its own visual pane). Split-pane requires tmux or iTerm2 — and <strong>does not work inside VS Code's integrated terminal</strong>.</li>
+                    <li>The lead can only manage <strong>one team at a time</strong>. Clean up before starting a new one.</li>
+                </ul>
+            </section>
+
+            <section id="part-3-comparison">
+                <h2>Part 3 — How they compare</h2>
+                <p>Here's the same information at a glance:</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Subagents</th>
+                            <th>Agent Teams</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Architecture</strong></td>
+                            <td>Helpers within one session</td>
+                            <td>Multiple full sessions working together</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Context</strong></td>
+                            <td>Own context window; results return to caller</td>
+                            <td>Own context window; fully independent</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Communication</strong></td>
+                            <td>Report back to the main agent only</td>
+                            <td>Teammates message each other directly</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Coordination</strong></td>
+                            <td>Main agent manages all work</td>
+                            <td>Shared task list with self-coordination</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Best for</strong></td>
+                            <td>Focused tasks where only the result matters</td>
+                            <td>Complex work requiring discussion and collaboration</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Token cost</strong></td>
+                            <td>Lower — results summarized back</td>
+                            <td>Higher — each teammate is a separate Claude</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Setup needed</strong></td>
+                            <td>None beyond the markdown file</td>
+                            <td>Experimental flag; tmux for split panes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Works in VS Code terminal</strong></td>
+                            <td>Yes</td>
+                            <td>In-process mode yes; split-pane no</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="part-4-framework">
+                <h2>Part 4 — A marketing decision framework</h2>
+                <p>For your work, the choice usually comes down to two questions.</p>
+
+                <div class="feature-box">
+                    <h3>Question 1: Do the workers need to talk to each other?</h3>
+                    <p>If the answer is no — you just want a specialist to come back with a clean deliverable — use a subagent. A copywriter that takes a brief and returns four ad variations doesn't need to consult anyone.</p>
+                    <p>If the answer is yes — the strategist's positioning needs to shape what the copywriter writes, the researcher's findings need to influence the strategist — use an agent team. Independent voices that can compare notes are exactly what teams are built for.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>Question 2: Will I reuse this specialist again?</h3>
+                    <p>If yes — you'll keep needing a brand-voice copywriter, a competitive researcher, a persona critic — define it as a subagent. It becomes a reusable asset.</p>
+                    <p>If no — this is a one-time campaign that needs four people for two days and then they go their separate ways — agent team is fine. The team lives only as long as your session.</p>
+                </div>
+
+                <h3>Examples mapped to each</h3>
+
+                <h4>Use subagents when:</h4>
+                <ul>
+                    <li>"Draft three TikTok scripts in our brand voice" → call the copywriter subagent</li>
+                    <li>"Summarize what these five competitor sites say" → call the researcher subagent</li>
+                    <li>"Critique this ad as our target persona would" → call the persona-critic subagent</li>
+                </ul>
+
+                <h4>Use agent teams when:</h4>
+                <ul>
+                    <li>"Develop a full launch campaign — research, strategy, creative — and have the parts inform each other"</li>
+                    <li>"Spawn four teammates each playing a different target persona, show them the same ad, and have them debate which one resonates"</li>
+                    <li>"Run a pre-mortem: three teammates each find the strongest reason this campaign might fail"</li>
+                </ul>
+            </section>
+
+            <section id="part-5-tradeoffs">
+                <h2>Part 5 — A note on tradeoffs</h2>
+                <p>Agent teams sound more powerful, but power isn't always what you need. They cost more in tokens, take more time to set up (tmux, environment variables, version requirements), and add coordination overhead. For most day-to-day marketing work, well-designed subagents do more, faster, and cheaper.</p>
+
+                <p>The teams pattern is genuinely worth reaching for when the work is <strong>collaborative by nature</strong> — when the magic happens because specialists are pushing on each other's thinking, not just delivering parallel artifacts. Use them then. For everything else, a sharp subagent in your library will outwork a five-person team.</p>
+
+                <p>The deepest skill in either pattern isn't the technical setup — it's the brief. A vague brief produces vague work, whether you're briefing a single subagent or coordinating a five-person team. Specificity in the role definition, deliverable format, and constraints is what turns AI agents from generic helpers into useful specialists.</p>
+            </section>
+
+            <section id="further-reading">
+                <h2>Further reading</h2>
+                <ul>
+                    <li><strong>Subagents — full reference:</strong> <a href="https://code.claude.com/docs/en/sub-agents" target="_blank">https://code.claude.com/docs/en/sub-agents</a></li>
+                    <li><strong>Agent teams — full reference:</strong> <a href="https://code.claude.com/docs/en/agent-teams" target="_blank">https://code.claude.com/docs/en/agent-teams</a></li>
+                </ul>
+            </section>
+
+            <footer>
+                <p>Created for the Labs Platform • <a href="https://github.com/inakigorostiza/rc-celta-seat-availability-alert-platform" target="_blank">GitHub</a></p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Highlight current section in nav
+        function highlightCurrentSection() {
+            const navLinks = document.querySelectorAll('nav a');
+            const sections = document.querySelectorAll('main > section');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').slice(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', highlightCurrentSection);
+    </script>
+</body>
+</html>
