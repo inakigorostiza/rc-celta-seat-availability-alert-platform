@@ -2596,20 +2596,6 @@ Fan alert system: ONEBOX → signup form → Mailchimp → n8n workflow → Mand
     </div>
   </div>
 
-  <h3 class="h-sub">How we use the API: The purchase deep-link</h3>
-  <p style="color:var(--ink-3); margin-bottom:1rem;">When we send the alert email, the <strong>Buy ticket</strong> button opens ONEBOX directly on the seat map with UTM parameters so GA4 can attribute the purchase back to the exact email:</p>
-  <div class="url-box" data-reveal>
-https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
-&nbsp;&nbsp;&nbsp;<strong>viewCode=V_blockmap</strong>
-&nbsp;&nbsp;&nbsp;&amp;utm_source=avisame
-&nbsp;&nbsp;&nbsp;&amp;utm_medium=email
-&nbsp;&nbsp;&nbsp;&amp;utm_campaign=recovery-app
-&nbsp;&nbsp;&nbsp;&amp;utm_content=event-<em>{eventId}</em>-grada-<em>{gradaId}</em>
-  </div>
-  <p style="color:var(--ink-4); font-size:.88rem; margin-top:1rem;">
-    <code style="color:var(--ie-red);">viewCode=V_blockmap</code> opens the seat map directly. The four <code>utm_*</code> parameters let GA4 attribute any resulting purchase to the exact email that drove the click.
-  </p>
-
   <h3 class="h-sub">Try it yourself — build this in an afternoon</h3>
   <p style="color:var(--ink-3); max-width:720px;">Five prompts, copied one after the other into Claude Code (see §05), take you from API keys to a branded live-data landing page. No coding knowledge required — just copy, paste, run, and watch Claude explain what it's doing.</p>
 
