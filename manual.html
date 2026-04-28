@@ -2248,15 +2248,27 @@
       <h4>What you need</h4>
       <dl>
         <dt><code>client_secret</code></dt><dd>32-character string that identifies your channel in ONEBOX.</dd>
-        <dt><code>channel_id</code></dt><dd>Integer that identifies the channel inside the organisation (e.g. <code>2287</code>).</dd>
+        <dt><code>channel_id</code></dt><dd>Integer that identifies the channel inside the organisation.</dd>
       </dl>
-      <h4>Where to get it</h4>
-      <p style="color:var(--ink-3); font-size:.95rem;">Provided by ONEBOX's technical team. Ask your account contact.</p>
-      <div class="callout callout--warn" style="margin-top:1.5rem;">
+
+      <h4>Stage credentials for this course</h4>
+      <p style="color:var(--ink-3); font-size:.95rem; margin-bottom:.75rem;">Pre-provisioned by ONEBOX for the AI Marketing Lab. Paste these into your local <code>.env</code> file when Claude Code asks for them — no need to request your own keys.</p>
+      <pre style="background: var(--bg-soft); border: 1px solid var(--line); padding: 1rem 1.2rem; font-family: var(--font-mono); font-size: .82rem; line-height: 1.7; color: var(--ink); overflow-x: auto;"><code>ONEBOX_CLIENT_SECRET=163242167d78a369efc5272b39958803
+ONEBOX_CHANNEL_ID=2287</code></pre>
+
+      <div class="callout callout--good" style="margin-top:1.5rem;">
+        <div class="callout__icon">✅</div>
+        <div class="callout__body">
+          <h4>Safe to share — stage only</h4>
+          <p>These credentials point at ONEBOX's <strong>stage</strong> (pre-production) environment. They're intentionally public for course use. Any real money, real tickets, and real fans live behind a different pair of keys the club never hands out.</p>
+        </div>
+      </div>
+
+      <div class="callout callout--warn" style="margin-top:1rem;">
         <div class="callout__icon">⚠️</div>
         <div class="callout__body">
-          <h4>Watch out</h4>
-          <p>The <code>client_secret</code> grants access to the whole channel catalog. <strong>Never</strong> embed it in the frontend or commit it to a public repo. Keep it in your platform's secret manager.</p>
+          <h4>For production, rules change</h4>
+          <p>A production <code>client_secret</code> grants access to the club's full catalog and live inventory. <strong>Never</strong> embed a production key in the frontend or commit it to a public repo. Keep it in your platform's secret manager.</p>
         </div>
       </div>
     </div>
@@ -3179,29 +3191,115 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
     </div>
   </div>
 
-  <h3 class="h-sub">Set up GitHub &amp; Pages · 10 minutes</h3>
-  <p style="color:var(--ink-3); max-width:720px;">Think of GitHub as Google Drive for code — with two superpowers on top: it remembers every change forever, and it can publish any HTML file in your folder as a real HTTPS website, free. You only need to click around a website; Claude Code handles the technical parts of uploading.</p>
+  <h3 class="h-sub">Complete Guide · 15 minutes</h3>
+  <p style="color:var(--ink-3); max-width:720px;">Create a landing page, save it on GitHub, and publish it on the internet—all in 15 minutes. GitHub is like Google Drive for code — with two superpowers: it remembers every change forever, and it can publish any HTML file in your folder as a real HTTPS website for free.</p>
+
+  <h4 style="margin-top:2.5rem; margin-bottom:1rem; font-size:1.1rem; font-weight:600; color:var(--ink-2);">Phase 1: Prepare Your GitHub Account</h4>
 
   <div class="flow" data-reveal>
     <div class="flow__step">
       <span class="flow__num">01</span>
-      <h5>Create a free GitHub account</h5>
-      <p>Go to <a href="https://github.com/signup" target="_blank">github.com/signup</a>. Pick a username you're comfortable being public — it shows up in your repo URL. The free plan gives you unlimited public repositories forever.</p>
+      <h5>Create a GitHub Account</h5>
+      <p>GitHub is a website where you store code and automatically publish websites. You need a free account.</p>
+      <ol style="margin-top:1rem; color:var(--ink-3); line-height:1.8;">
+        <li>Go to <a href="https://github.com" target="_blank">github.com</a></li>
+        <li>Click <strong>"Sign up"</strong></li>
+        <li>Enter your email, create a password, and choose a username (e.g., <code>yourname-web</code>)</li>
+        <li>Check your email and click the verification link</li>
+      </ol>
+      <p style="margin-top:1rem; font-size:.92rem; color:var(--ink-4); font-style:italic;">⏸ Once you've created your account, tell me you're ready to continue.</p>
     </div>
     <div class="flow__step">
       <span class="flow__num">02</span>
-      <h5>Create an empty repository</h5>
-      <p>Click the <strong>+</strong> in the top-right → <strong>New repository</strong>. Name it (e.g. <code>avisame-celta</code>), keep it <strong>Public</strong>, and leave every other box unchecked. Hit <strong>Create</strong>. You'll land on a page with instructions — ignore them, Claude Code will handle this.</p>
+      <h5>Create a Security Token</h5>
+      <p>GitHub needs a special "key" to trust commands from your computer. It's like a secure password.</p>
+      <ol style="margin-top:1rem; color:var(--ink-3); line-height:1.8;">
+        <li>Log into GitHub (<a href="https://github.com" target="_blank">github.com</a>)</li>
+        <li>Click your profile picture (top right) → <strong>Settings</strong></li>
+        <li>In the left menu, click <strong>Developer settings</strong> → <strong>Personal access tokens</strong> → <strong>Tokens (classic)</strong></li>
+        <li>Click <strong>"Generate new token (classic)"</strong></li>
+        <li>Fill in:
+          <ul style="margin-top:.5rem; margin-left:1.5rem; color:var(--ink-3);">
+            <li><strong>Note:</strong> <code>Claude Code</code></li>
+            <li><strong>Expiration:</strong> <code>30 days</code></li>
+          </ul>
+        </li>
+        <li>Check these 3 boxes:
+          <ul style="margin-top:.5rem; margin-left:1.5rem; color:var(--ink-3);">
+            <li>☑️ <code>repo</code></li>
+            <li>☑️ <code>workflow</code></li>
+            <li>☑️ <code>admin:repo_hook</code></li>
+          </ul>
+        </li>
+        <li>Scroll down and click <strong>"Generate token"</strong> (green button)</li>
+        <li><strong>Copy the token</strong> (the long code starting with <code>ghp_</code>) — you'll only see it once!</li>
+      </ol>
+      <p style="margin-top:1rem; font-size:.92rem; color:var(--ink-4); font-style:italic;">⏸ Paste your token here when you're ready.</p>
     </div>
-    <div class="flow__step">
-      <span class="flow__num">03</span>
-      <h5>Let Claude Code push your files</h5>
-      <p>Copy the repo URL from your browser's address bar. Go back to Claude Code in VS Code and run the prompt below — it'll commit your local project and push it to GitHub in one step.</p>
+  </div>
+
+  <h4 style="margin-top:2.5rem; margin-bottom:1rem; font-size:1.1rem; font-weight:600; color:var(--ink-2);">Phase 2: Connect to GitHub</h4>
+  <p style="color:var(--ink-3); max-width:720px;">I'll now connect your computer to GitHub using your token. This is automatic.</p>
+  <p style="color:var(--ink-4); font-style:italic;">⏳ Connecting...</p>
+
+  <h4 style="margin-top:2.5rem; margin-bottom:1rem; font-size:1.1rem; font-weight:600; color:var(--ink-2);">Phase 3: Save Your Code to GitHub</h4>
+  <p style="color:var(--ink-3); max-width:720px;">I'll now:</p>
+  <ol style="color:var(--ink-3); max-width:720px; margin-left:1.5rem;">
+    <li>Create a "save point" of your landing page</li>
+    <li>Upload it to GitHub</li>
+    <li>Create a repository (a folder on GitHub for your project)</li>
+  </ol>
+  <p style="margin-top:1rem; color:var(--ink-4); font-style:italic;">⏳ Uploading to GitHub...</p>
+
+  <h4 style="margin-top:2.5rem; margin-bottom:1rem; font-size:1.1rem; font-weight:600; color:var(--ink-2);">Phase 4: Make It Live on the Internet</h4>
+  <p style="color:var(--ink-3); max-width:720px;">GitHub can automatically publish your landing page on the internet for free. I'm enabling that now.</p>
+  <p style="color:var(--ink-4); font-style:italic;">⏳ Publishing to the internet...</p>
+
+  <div class="callout callout--good" data-reveal style="margin-top:2rem;">
+    <div class="callout__icon">✅</div>
+    <div class="callout__body">
+      <h4>Your Website is Live!</h4>
+      <p style="font-size:1rem;"><strong>🎉 Congratulations!</strong></p>
+      <p style="margin-top:.75rem;">Your landing page is now live at:</p>
+      <p style="margin-top:.75rem; font-family:var(--font-mono); font-size:.9rem; color:var(--ie-blue); word-break:break-all;"><strong>👉 https://[your-github-username].github.io/rc-celta-landing/landing.html</strong></p>
+      <p style="margin-top:1rem; font-weight:500;">What just happened:</p>
+      <ul style="margin-top:.5rem; margin-left:1.5rem; color:var(--ink-3);">
+        <li>Your landing page is now on the internet</li>
+        <li>It's backed up safely on GitHub</li>
+        <li>Every time you make changes, it updates automatically</li>
+        <li>It's completely free</li>
+      </ul>
     </div>
-    <div class="flow__step">
-      <span class="flow__num">04</span>
-      <h5>Turn on GitHub Pages</h5>
-      <p>On your repository page: <strong>Settings → Pages</strong>. Under <em>Source</em> pick <strong>Deploy from a branch</strong>, branch <strong>main</strong>, folder <strong>/ (root)</strong> → <strong>Save</strong>. After ~60 seconds the same page shows your live URL (<code>&lt;user&gt;.github.io/&lt;repo&gt;</code>).</p>
+  </div>
+
+  <h3 class="h-sub">Future: Making Changes</h3>
+  <p style="color:var(--ink-3); max-width:720px;">Whenever you want to update your landing page:</p>
+  <ol style="color:var(--ink-3); max-width:720px; margin-left:1.5rem;">
+    <li>Edit <code>landing.html</code> on your computer</li>
+    <li>Save it</li>
+    <li>Tell me: <strong>"Push my changes"</strong></li>
+  </ol>
+  <p style="margin-top:1rem; color:var(--ink-3); max-width:720px;">I'll automatically update your live website. No need to remember all these steps!</p>
+
+  <h3 class="h-sub">Troubleshooting</h3>
+  <div style="color:var(--ink-3); max-width:720px;">
+    <p style="margin-bottom:1.5rem;"><strong>Q: My website doesn't show up</strong><br/>A: Wait 1-2 minutes and refresh your browser. GitHub needs time to publish.</p>
+    <p style="margin-bottom:1.5rem;"><strong>Q: I want to change the form fields</strong><br/>A: Edit <code>landing.html</code>, save it, and tell me to push the changes.</p>
+    <p style="margin-bottom:1.5rem;"><strong>Q: What if I forgot my token?</strong><br/>A: No problem—create a new one following Step 2 above.</p>
+    <p><strong>Q: Can I share this link with others?</strong><br/>A: Yes! Anyone can visit your website. It's public.</p>
+  </div>
+
+  <div class="callout callout--good" data-reveal style="margin-top:2rem;">
+    <div class="callout__icon">✅</div>
+    <div class="callout__body">
+      <h4>What You Now Have</h4>
+      <ul style="list-style:none; padding:0; font-size:.95rem; color:var(--ink-2); line-height:2;">
+        <li>✅ A live website on the internet</li>
+        <li>✅ Automatic backups on GitHub</li>
+        <li>✅ A skill most people don't have</li>
+        <li>✅ Free hosting forever</li>
+      </ul>
+      <p style="margin-top:1rem;">Next steps? Customize your landing page, add more content, or share the link with friends!</p>
     </div>
   </div>
 
@@ -3209,61 +3307,7 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
     <div class="callout__icon">⚠️</div>
     <div class="callout__body">
       <h4>Watch out — never commit <code>.env</code></h4>
-      <p>Your <strong>.env</strong> file has real ONEBOX / Mailchimp / Mandrill keys. Anyone who copies it can send emails on your behalf. The project's <code>.gitignore</code> already excludes it — but before the first push, tell Claude Code: <em>"make sure my .env file is in .gitignore and not staged for the commit"</em>. Two seconds of paranoia prevents a leaked-key incident.</p>
-    </div>
-  </div>
-
-  <h3 class="h-sub">Publish the project · 1 prompt</h3>
-  <p style="color:var(--ink-3); max-width:720px;">Once you've created the empty repo on github.com, this one prompt packages up your local folder, confirms no secrets are leaking, and pushes everything live.</p>
-
-  <div class="prompt" data-reveal>
-    <div class="prompt__badge">01</div>
-    <div class="prompt__body">
-      <div class="prompt__head">
-        <span class="prompt__title">Publish the project to GitHub and turn on Pages</span>
-        <span class="prompt__artefact">→ live site</span>
-      </div>
-      <div class="prompt__quote">Publish this project to GitHub. The empty repository is at <strong>https://github.com/&lt;your-username&gt;/avisame-celta</strong>. Before anything gets uploaded: check my <strong>.gitignore</strong> excludes <code>.env</code>, <code>node_modules</code>, and anything else with secrets, and grep every file for things that look like API keys or passwords — if you find any, stop and tell me. Then initialise git if needed, commit everything with the message <em>"Initial commit — RC Celta avisame platform"</em>, set <code>main</code> as the default branch, add the remote, and push. When the push is done, make <strong>landing.html</strong> also accessible as <strong>index.html</strong> (copy or symlink) so GitHub Pages serves it at the root URL. Finally, print the URL I'll see once Pages finishes deploying.</div>
-      <p class="prompt__result"><strong>What Claude will do:</strong> check <code>.gitignore</code>, scan for leaked secrets, run <code>git init</code> / <code>add</code> / <code>commit</code> / <code>remote add origin</code> / <code>push -u origin main</code>, duplicate <code>landing.html → index.html</code>, and return your future Pages URL.</p>
-      <p class="prompt__result"><strong>How to verify:</strong> refresh your repository page on github.com — you see your files. Wait 60 seconds, then open the URL Claude printed. You'll see the branded "¡Avísame!" form live over HTTPS.</p>
-    </div>
-  </div>
-
-  <h3 class="h-sub">What's versioned, what isn't</h3>
-  <div class="compare" data-reveal>
-    <div class="compare__col" style="border-top:3px solid var(--success);">
-      <h4 style="color:var(--success);">✓ In the repo</h4>
-      <ul style="list-style:none; padding:0; font-size:.92rem; color:var(--ink-2); line-height:2;">
-        <li>Code (<code>generate-landing.js</code>, build scripts)</li>
-        <li>Final landing (<code>landing.html</code>, <code>index.html</code>)</li>
-        <li>Brand assets (crest, logos)</li>
-        <li>n8n workflow (with secrets stubbed out)</li>
-        <li>Documentation (<code>README.md</code>, <code>manual.html</code>)</li>
-      </ul>
-    </div>
-    <div class="compare__col" style="border-top:3px solid var(--error);">
-      <h4 style="color:var(--error);">✗ Gitignored</h4>
-      <ul style="list-style:none; padding:0; font-size:.92rem; color:var(--ink-2); line-height:2;">
-        <li><code>.env</code> with real credentials</li>
-        <li>Heavy regenerable artifacts</li>
-        <li>Local IDE / tooling config</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="callout callout--good" data-reveal>
-    <div class="callout__icon">✅</div>
-    <div class="callout__body">
-      <h4>Best practice</h4>
-      <p>Before the first <code>git push</code> to a public repo, run a <strong>security grep</strong>: scan every staged file for API keys, passwords, tokens. It's a two-second habit that prevents leaks.</p>
-    </div>
-  </div>
-
-  <div class="callout callout--good" data-reveal>
-    <div class="callout__icon">✅</div>
-    <div class="callout__body">
-      <h4>What's next</h4>
-      <p>Your landing is live on the internet. Section 12 adds <strong>Google Analytics 4</strong> — the dashboard that tells you how many people saw the form, how many signed up, and (eventually) how many bought a ticket after an <em>¡Avísame!</em> email.</p>
+      <p>Your <strong>.env</strong> file has real API keys. Anyone who copies it can use your services. The project's <code>.gitignore</code> already excludes it — but before the first push, tell Claude Code: <em>"make sure my .env file is in .gitignore and not staged for the commit"</em>. Two seconds of paranoia prevents a leaked-key incident.</p>
     </div>
   </div>
 </section>
