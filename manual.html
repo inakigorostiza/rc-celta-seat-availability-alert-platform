@@ -2619,15 +2619,67 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
   <p style="color:var(--ink-3); max-width:720px;">With your ONEBOX credentials from §06 already in the <code>.env</code> file, two prompts take you from an empty folder to a live, branded signup form with the real stadium sections in the dropdown. We split it on purpose — first the look, then the data — so each step is easy to verify.</p>
 
   <div class="prompt" data-reveal>
-    <div class="prompt__badge">01</div>
+    <div class="prompt__badge">01a</div>
     <div class="prompt__body">
       <div class="prompt__head">
-        <span class="prompt__title">Build the UI — branded page + form</span>
+        <span class="prompt__title">Create the HTML structure</span>
         <span class="prompt__artefact">→ landing.html</span>
       </div>
-      <div class="prompt__quote">Build a landing page for the RC Celta «¡Avísame!» alert signup. Sky-blue hero, the Celta crest (SVG already at <code>assets/celta-crest.svg</code>), a big white «¡Avísame!» title, one short intro line in Spanish, and a form asking for: <strong>name</strong>, <strong>surname</strong>, <strong>email</strong>, a <strong>grada</strong> (stadium section) dropdown with three placeholder options for now (<em>"Pista Alta"</em>, <em>"Río Alto"</em>, <em>"Marcador"</em>), and a consent checkbox for the privacy policy. The submit button should be red with white text. When the form is submitted, just log the data to the browser console — we'll wire the backend later. Save it as <strong>landing.html</strong>.</div>
-      <p class="prompt__result"><strong>What Claude will do:</strong> create <code>landing.html</code> with embedded CSS and a tiny submit handler. No data layer yet — the dropdown is hardcoded.</p>
-      <p class="prompt__result"><strong>How to verify:</strong> open <code>landing.html</code> in your browser. Form looks on-brand, the three placeholder gradas appear in the dropdown, submitting logs an object like <code>{name, email, grada}</code> to the DevTools console.</p>
+      <div class="prompt__quote">Create a basic HTML landing page for RC Celta «¡Avísame!» signup. No styling yet — just clean semantic HTML. Include: a hero section with an image placeholder for the Celta crest, a title «¡Avísame!», a short Spanish intro line, and a form with fields for <strong>name</strong>, <strong>surname</strong>, <strong>email</strong>, a <strong>grada</strong> dropdown with three placeholder options (<em>"Pista Alta"</em>, <em>"Río Alto"</em>, <em>"Marcador"</em>), and a privacy policy checkbox. Add a submit button. When submitted, log the form data to the browser console. No CSS yet — just plain HTML with semantic structure. Save it as <strong>landing.html</strong>.</div>
+      <p class="prompt__result"><strong>What Claude will do:</strong> create <code>landing.html</code> with proper semantic HTML structure (header, form elements, button). No styling, just clean markup.</p>
+      <p class="prompt__result"><strong>How to verify:</strong> open <code>landing.html</code> in your browser. The page is plain and unstyled, but all text, inputs, and the button are visible. Form submits and logs data to DevTools console.</p>
+    </div>
+  </div>
+
+  <div class="prompt" data-reveal>
+    <div class="prompt__badge">01b</div>
+    <div class="prompt__body">
+      <div class="prompt__head">
+        <span class="prompt__title">Add RC Celta brand colors &amp; layout</span>
+        <span class="prompt__artefact">→ landing.html (CSS)</span>
+      </div>
+      <div class="prompt__quote">Now add CSS styling to <strong>landing.html</strong>. Use RC Celta's sky blue (<code>#7AB1D9</code>) as the hero background, white text for the title «¡Avísame!», and dark navy text for the form. Make the page responsive and centered. The submit button should use red (<code>#E4002B</code>) with white text. Add basic padding and spacing to make it readable, but don't worry about fine details yet. Keep it simple and focused on the brand colors.</div>
+      <p class="prompt__result"><strong>What Claude will do:</strong> add embedded <code>&lt;style&gt;</code> CSS to the HTML with the Celta color palette, hero background, form styling, and button colors.</p>
+      <p class="prompt__result"><strong>How to verify:</strong> refresh <code>landing.html</code>. The page now has the sky-blue hero background, white title, and red button. The form is laid out nicely with proper spacing.</p>
+    </div>
+  </div>
+
+  <div class="prompt" data-reveal>
+    <div class="prompt__badge">01c</div>
+    <div class="prompt__body">
+      <div class="prompt__head">
+        <span class="prompt__title">Add the Celta crest image</span>
+        <span class="prompt__artefact">→ landing.html</span>
+      </div>
+      <div class="prompt__quote">Replace the image placeholder in the hero with the actual Celta crest SVG from <code>assets/celta-crest.svg</code>. Make the crest about 120px wide, centered in the hero section, and add some margin below it before the title. The SVG should scale responsively on smaller screens. Keep the rest of the styling intact.</div>
+      <p class="prompt__result"><strong>What Claude will do:</strong> embed the SVG crest in the hero section with appropriate sizing and responsive scaling.</p>
+      <p class="prompt__result"><strong>How to verify:</strong> refresh <code>landing.html</code>. The Celta crest now appears in the hero section above the «¡Avísame!» title. It looks good on desktop and mobile.</p>
+    </div>
+  </div>
+
+  <div class="prompt" data-reveal>
+    <div class="prompt__badge">01d</div>
+    <div class="prompt__body">
+      <div class="prompt__head">
+        <span class="prompt__title">Refine the form styling</span>
+        <span class="prompt__artefact">→ landing.html (CSS)</span>
+      </div>
+      <div class="prompt__quote">Improve the form styling in <code>landing.html</code>. Make input fields have a light border, subtle focus states, and consistent padding. Style the dropdown to match the other inputs. Add hover effects to the submit button. Make the privacy checkbox label clear and clickable. Ensure the form fields stack nicely on mobile. All changes should be CSS-only — no HTML changes.</div>
+      <p class="prompt__result"><strong>What Claude will do:</strong> update the <code>&lt;style&gt;</code> block with better input styling, focus states, and hover effects.</p>
+      <p class="prompt__result"><strong>How to verify:</strong> refresh <code>landing.html</code>. Click into the input fields — they should have clear focus states. Hover over the button — it should have a darker red. The form looks polished and professional.</p>
+    </div>
+  </div>
+
+  <div class="prompt" data-reveal>
+    <div class="prompt__badge">01e</div>
+    <div class="prompt__body">
+      <div class="prompt__head">
+        <span class="prompt__title">Add form validation &amp; feedback</span>
+        <span class="prompt__artefact">→ landing.html (JavaScript)</span>
+      </div>
+      <div class="prompt__quote">Enhance the form submission in <code>landing.html</code> with client-side validation. Check that all fields are filled before submitting. If validation passes, show a success message and log the data to the console. If it fails, show a helpful error message. Keep this simple — just basic HTML5 validation plus a custom message.</div>
+      <p class="prompt__result"><strong>What Claude will do:</strong> add JavaScript validation logic to check required fields and show success/error feedback.</p>
+      <p class="prompt__result"><strong>How to verify:</strong> try submitting the form with empty fields — you should see an error. Fill all fields and submit — you should see a success message and data in the console.</p>
     </div>
   </div>
 
