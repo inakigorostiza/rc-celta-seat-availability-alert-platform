@@ -2407,6 +2407,65 @@ ONEBOX_CHANNEL_ID=2287</code></pre>
     </div>
   </div>
 
+  <h3 class="h-sub">Use CLAUDE.md to give Claude Code project context</h3>
+  <p style="color:var(--ink-3); max-width:720px;"><strong>CLAUDE.md</strong> is a special file you commit to your project that tells Claude Code (and future team members) how your project is organized, what conventions you follow, and what decisions you've made. It's like leaving instructions for yourself and for AI — so when you come back to the project weeks later, Claude knows your patterns without you explaining them again.</p>
+
+  <h4 style="margin-top:1.5rem; margin-bottom:1rem; font-size:1rem; font-weight:600; color:var(--ink-2);">Why it matters</h4>
+  <div style="color:var(--ink-3); max-width:720px; line-height:1.7;">
+    <p><strong>Consistency:</strong> Without it, you explain your conventions every conversation. With it, Claude knows them.</p>
+    <p style="margin-top:.75rem;"><strong>Onboarding:</strong> New team members (human or AI) read CLAUDE.md and understand your decisions immediately.</p>
+    <p style="margin-top:.75rem;"><strong>Faster iterations:</strong> Claude doesn't ask clarifying questions about architecture — it already knows.</p>
+    <p style="margin-top:.75rem;"><strong>Accountability:</strong> You've documented <em>why</em> things are the way they are — useful for your own memory.</p>
+  </div>
+
+  <h4 style="margin-top:1.5rem; margin-bottom:1rem; font-size:1rem; font-weight:600; color:var(--ink-2);">Example: RC Celta CLAUDE.md</h4>
+  <p style="color:var(--ink-3); max-width:720px; margin-bottom:1rem;">Here's what your RC Celta project's CLAUDE.md might include:</p>
+  <pre style="background:var(--bg-soft); border:1px solid var(--line); padding:1.5rem; font-size:.8rem; color:var(--ink-2); font-family:var(--font-mono); line-height:1.6; overflow-x:auto;" data-reveal># RC Celta Avisame Platform
+
+## Project Goal
+Build a fan notification system that alerts season ticket holders when tickets become available in their preferred stadium sections.
+
+## Architecture
+- **Frontend:** Static HTML + JavaScript (no build step)
+- **Form handling:** Mailchimp API (merge fields + tags)
+- **Workflow:** n8n (listens to ONEBOX availability, sends alerts via Mandrill)
+- **Hosting:** GitHub Pages (landing.html) + Mandrill for transactional email
+- **Data source:** ONEBOX TDS REST API (read-only)
+
+## Key Files
+- `landing.html` — The signup form (generated from generate-landing.js)
+- `generate-landing.js` — Builds landing.html with real gradA data from ONEBOX
+- `n8n/avisame-workflow.json` — The full n8n workflow (import via n8n UI)
+- `.env` — Credentials (gitignored: ONEBOX, Mailchimp, Mandrill keys)
+- `manual.html` — This case study guide
+
+## Conventions
+- Colors: sky blue (#7AB1D9), dark navy (#0A1A3A), red (#E4002B)
+- Spanish always for fan-facing copy (titles, form labels, emails)
+- English for technical documentation
+- All API credentials go in .env, never in source code
+- Secrets never committed to Git
+
+## Before You Start
+- Read the manual.html manual — understand the full flow first
+- Never commit .env to GitHub
+- Test form submissions locally before deploying
+- Run `node generate-landing.js` anytime ONEBOX sectors change
+
+## When Building Features
+- Keep the landing static (no JavaScript build)
+- Use n8n for workflows, not custom code
+- Tag all segments with event_id so reporting is clear
+- Always test with sample ONEBOX data first</pre>
+
+  <div class="callout callout--good" data-reveal>
+    <div class="callout__icon">✅</div>
+    <div class="callout__body">
+      <h4>Pro tip</h4>
+      <p>After building your first feature, ask Claude Code: <em>"Write a CLAUDE.md file documenting this project's structure, conventions, and the decisions we've made so far."</em> It will create one in ~30 seconds. Then refine it as your project grows.</p>
+    </div>
+  </div>
+
   <div class="callout callout--warn" data-reveal>
     <div class="callout__icon">⚠️</div>
     <div class="callout__body">
