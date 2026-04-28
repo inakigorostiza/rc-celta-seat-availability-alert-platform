@@ -2471,7 +2471,9 @@ Fan alert system: ONEBOX → signup form → Mailchimp → n8n workflow → Mand
     </div>
   </div>
 
-  <h3 class="h-sub">Data model (with names a marketer understands)</h3>
+  <h3 class="h-sub">Understanding the data model</h3>
+  <p style="color:var(--ink-3); max-width:720px; margin-bottom:1rem;">ONEBOX organizes ticketing data hierarchically. To the fan we speak in marketing language; internally, IDs power the machine.</p>
+
   <div class="tree" data-reveal>
 <span class="tree__key">Event</span> <span class="tree__annot">(e.g. «Celta – Athletic · Matchday 29»)</span>
   └── <span class="tree__key">Session</span> <span class="tree__annot">(a specific performance, with date and time)</span>
@@ -2488,51 +2490,17 @@ Fan alert system: ONEBOX → signup form → Mailchimp → n8n workflow → Mand
     </div>
   </div>
 
-  <h3 class="h-sub">The three endpoints we use</h3>
-  <div data-reveal>
-    <div class="endpoint">
-      <span class="endpoint__method endpoint__method--post">POST</span>
-      <span class="endpoint__path">/oauth/token</span>
-      <span class="endpoint__purpose">Request an access token (valid 12 hours)</span>
-    </div>
-    <div class="endpoint">
-      <span class="endpoint__method endpoint__method--get">GET</span>
-      <span class="endpoint__path">/catalog-api/v1/sessions</span>
-      <span class="endpoint__purpose">List every match in the channel</span>
-    </div>
-    <div class="endpoint">
-      <span class="endpoint__method endpoint__method--get">GET</span>
-      <span class="endpoint__path">/catalog-api/v1/sessions/{id}/availability</span>
-      <span class="endpoint__purpose">Per-section availability for a match</span>
-    </div>
-  </div>
-
-  <h3 class="h-sub">The purchase deep-link</h3>
-  <p style="color:var(--ink-3);">When we send the alert email, the <strong>Buy ticket</strong> button points at a URL that opens ONEBOX directly on the seat map, with every UTM GA4 needs to attribute the conversion:</p>
-  <div class="url-box" data-reveal>
-https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
-&nbsp;&nbsp;&nbsp;<strong>viewCode=V_blockmap</strong>
-&nbsp;&nbsp;&nbsp;&amp;utm_source=avisame
-&nbsp;&nbsp;&nbsp;&amp;utm_medium=email
-&nbsp;&nbsp;&nbsp;&amp;utm_campaign=recovery-app
-&nbsp;&nbsp;&nbsp;&amp;utm_content=event-<em>{eventId}</em>-grada-<em>{gradaId}</em>
-  </div>
-  <p style="color:var(--ink-4); font-size:.88rem;">
-    <code style="color:var(--ie-red);">viewCode=V_blockmap</code> is functional — it opens the seat map directly. The four <code>utm_*</code> parameters let GA4 attribute any resulting purchase to the exact email that drove the click.
-  </p>
-
-  <h3 class="h-sub">Try it yourself — build this in an afternoon</h3>
-  <p style="color:var(--ink-3); max-width:720px;">Five prompts, copied one after the other into Claude Code (see §05), take you from two API keys to a branded live-data landing page. No coding knowledge required — just copy, paste, run, and watch Claude build each piece while explaining what it's doing.</p>
+  <h3 class="h-sub">Before you start</h3>
 
   <div class="callout callout--warn" data-reveal>
     <div class="callout__icon">⚙️</div>
     <div class="callout__body">
-      <h4>Before you start</h4>
-      <p>You need three things:<br>
-      ① Your ONEBOX keys from the club (two values: <code>client_secret</code> and <code>channel_id</code>).<br>
-      ② VS Code with Claude Code installed (see §05).<br>
-      ③ A new empty folder, opened in VS Code.<br>
-      Don't worry about Node.js, setup, or anything technical — Claude Code handles all of that for you as you go. Just paste the prompts below one at a time and follow along.</p>
+      <h4>You need three things</h4>
+      <p>
+      ① Your ONEBOX keys (two values: <code>client_secret</code> and <code>channel_id</code>)<br>
+      ② VS Code with Claude Code installed (see §05)<br>
+      ③ A new empty folder, opened in VS Code<br><br>
+      Don't worry about Node.js or technical setup — Claude Code handles it all. Just paste the prompts below one at a time and follow along.</p>
     </div>
   </div>
 
@@ -2540,7 +2508,7 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
     <div class="callout__icon">✅</div>
     <div class="callout__body">
       <h4>Pre-provisioned for the AI Marketing Lab</h4>
-      <p>You don't need to request your own keys — these are pre-configured for this lab. Paste them into your <code>.env</code> file when Claude Code asks:</p>
+      <p>These keys are already configured for this lab. Paste them into your <code>.env</code> file:</p>
       <div style="background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:1rem; margin-top:1rem; font-family:var(--font-mono); font-size:.85rem; color:var(--ink); line-height:1.8;">
         ONEBOX_CLIENT_SECRET=163242167d78a369efc5272b39958803<br>
         ONEBOX_CHANNEL_ID=2287<br>
@@ -2549,22 +2517,22 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
     </div>
   </div>
 
-  <h3 class="h-sub">📖 Resources &amp; Documentation</h3>
+  <h3 class="h-sub">📖 Documentation &amp; API Reference</h3>
 
-  <h4 style="margin-top:1.5rem; margin-bottom:1rem; font-size:1rem; font-weight:600; color:var(--ink-2);">ONEBOX Official Documentation</h4>
+  <h4 style="margin-top:1.5rem; margin-bottom:1rem; font-size:1rem; font-weight:600; color:var(--ink-2);">Official Resources</h4>
   <div style="color:var(--ink-3); max-width:720px; line-height:1.8;">
     <p><strong>Developer Portal:</strong> <a href="https://developer.oneboxtds.com/" target="_blank">https://developer.oneboxtds.com/</a></p>
-    <p style="margin-top:.75rem;"><strong>Authentication:</strong> <a href="https://developer.oneboxtds.com/docs/authentication/seller-channel-clients/" target="_blank">https://developer.oneboxtds.com/docs/authentication/seller-channel-clients/</a></p>
-    <p style="margin-top:.75rem;"><strong>API Docs:</strong> <a href="https://developer.oneboxtds.com/docs/" target="_blank">https://developer.oneboxtds.com/docs/</a></p>
+    <p style="margin-top:.75rem;"><strong>Authentication Docs:</strong> <a href="https://developer.oneboxtds.com/docs/authentication/seller-channel-clients/" target="_blank">https://developer.oneboxtds.com/docs/authentication/seller-channel-clients/</a></p>
+    <p style="margin-top:.75rem;"><strong>Full API Documentation:</strong> <a href="https://developer.oneboxtds.com/docs/" target="_blank">https://developer.oneboxtds.com/docs/</a></p>
   </div>
 
-  <h4 style="margin-top:1.5rem; margin-bottom:1rem; font-size:1rem; font-weight:600; color:var(--ink-2);">Interactive Documentation</h4>
-  <p style="color:var(--ink-3); max-width:720px;">After running the local server, open this file in your browser to see the three main API calls with real examples:</p>
-  <div style="background:var(--bg-soft); border:1px solid var(--line); border-radius:6px; padding:1rem; margin-top:.75rem; font-family:var(--font-mono); font-size:.9rem; color:var(--ie-blue); text-decoration:none;">
+  <h4 style="margin-top:1.5rem; margin-bottom:1rem; font-size:1rem; font-weight:600; color:var(--ink-2);">Interactive Test Page</h4>
+  <p style="color:var(--ink-3); max-width:720px;">After running the local server, open this file to see the three API calls with real request/response examples:</p>
+  <div style="background:var(--bg-soft); border:1px solid var(--line); border-radius:6px; padding:1rem; margin-top:.75rem; font-family:var(--font-mono); font-size:.9rem; color:var(--ie-blue);">
     http://localhost:8001/onebox-api-test.html
   </div>
 
-  <h4 style="margin-top:1.5rem; margin-bottom:1rem; font-size:1rem; font-weight:600; color:var(--ink-2);">Main Endpoints</h4>
+  <h3 class="h-sub">The three API endpoints we use</h3>
 
   <div style="margin-top:1rem;">
     <div style="border-left:3px solid var(--ie-blue); padding-left:1rem; margin-bottom:1.5rem;">
@@ -2591,7 +2559,22 @@ https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
     </div>
   </div>
 
+  <h3 class="h-sub">How we use the API: The purchase deep-link</h3>
+  <p style="color:var(--ink-3); margin-bottom:1rem;">When we send the alert email, the <strong>Buy ticket</strong> button opens ONEBOX directly on the seat map with UTM parameters so GA4 can attribute the purchase back to the exact email:</p>
+  <div class="url-box" data-reveal>
+https://tickets.oneboxtds.com/rccelta/select/<em>{sessionId}</em>?
+&nbsp;&nbsp;&nbsp;<strong>viewCode=V_blockmap</strong>
+&nbsp;&nbsp;&nbsp;&amp;utm_source=avisame
+&nbsp;&nbsp;&nbsp;&amp;utm_medium=email
+&nbsp;&nbsp;&nbsp;&amp;utm_campaign=recovery-app
+&nbsp;&nbsp;&nbsp;&amp;utm_content=event-<em>{eventId}</em>-grada-<em>{gradaId}</em>
+  </div>
+  <p style="color:var(--ink-4); font-size:.88rem; margin-top:1rem;">
+    <code style="color:var(--ie-red);">viewCode=V_blockmap</code> opens the seat map directly. The four <code>utm_*</code> parameters let GA4 attribute any resulting purchase to the exact email that drove the click.
+  </p>
+
   <h3 class="h-sub">Try it yourself — build this in an afternoon</h3>
+  <p style="color:var(--ink-3); max-width:720px;">Five prompts, copied one after the other into Claude Code (see §05), take you from API keys to a branded live-data landing page. No coding knowledge required — just copy, paste, run, and watch Claude explain what it's doing.</p>
 
   <div class="prompt" data-reveal>
     <div class="prompt__badge">01</div>
