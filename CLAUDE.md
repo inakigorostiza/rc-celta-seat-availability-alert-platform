@@ -45,7 +45,16 @@ Inaki Gorostiza hosts an **education labs platform** for marketing students and 
 - **Status**: Complete and live
 - **Local Path**: `/Users/igorostiza/subagents-agent-teams-concepts-lab/`
 
-**4. N8N Workflows Marketing Lab**
+**4. Blocks, Workflows, and Agents Lab**
+- **GitHub Repo**: `https://github.com/igorostiza-ie/blocks-workflows-agents-lab`
+- **GitHub Pages**: `https://igorostiza-ie.github.io/blocks-workflows-agents-lab/`
+- **Purpose**: Comprehensive guide to building effective agentic systems. Learn simple, composable patterns for production-ready agents
+- **Duration**: 30-40 minutes
+- **Tech Stack**: HTML, CSS, Responsive design
+- **Status**: Complete and live
+- **Local Path**: `/Users/igorostiza/blocks-workflows-agents-lab/`
+
+**5. N8N Workflows Marketing Lab**
 - **GitHub Repo**: `https://github.com/inakigorostiza/n8n-workflows-marketing`
 - **GitHub Pages**: `https://inakigorostiza.github.io/n8n-workflows-marketing/`
 - **Purpose**: Automation tutorials with n8n for marketing workflows
