@@ -48,11 +48,16 @@ Inaki Gorostiza hosts an **education labs platform** for marketing students and 
 **4. Blocks, Workflows, and Agents Lab**
 - **GitHub Repo**: `https://github.com/igorostiza-ie/blocks-workflows-agents-lab`
 - **GitHub Pages**: `https://igorostiza-ie.github.io/blocks-workflows-agents-lab/`
-- **Purpose**: Comprehensive guide to building effective agentic systems. Learn simple, composable patterns for production-ready agents
+- **Purpose**: Comprehensive guide to building effective agentic systems with visual diagrams. Learn simple, composable patterns for production-ready agents
 - **Duration**: 30-40 minutes
-- **Tech Stack**: HTML, CSS, Responsive design
-- **Status**: Complete and live
+- **Tech Stack**: HTML, CSS, SVG diagrams, Responsive design
+- **Status**: Complete with visual diagrams
 - **Local Path**: `/Users/igorostiza/blocks-workflows-agents-lab/`
+- **Features**: 
+  - Building block: Augmented LLM diagram
+  - 5 workflow patterns with visual diagrams (Prompt Chaining, Routing, Parallelization, Orchestrator-Workers, Evaluator-Optimizer)
+  - Autonomous agent loop diagram
+  - Consistent design system styling
 
 **5. N8N Workflows Marketing Lab**
 - **GitHub Repo**: `https://github.com/inakigorostiza/n8n-workflows-marketing`
