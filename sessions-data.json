@@ -1,0 +1,4205 @@
+{
+  "timestamp": "2026-04-29T09:36:31.229Z",
+  "totalSessions": 21,
+  "sessions": [
+    {
+      "id": 240895,
+      "name": "NUMERADO",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2020-02-12T21:00:00+01:00",
+        "end": "2027-02-06T21:00:00+01:00",
+        "sale_start": "2019-05-10T10:00:00+02:00",
+        "sale_end": "2027-02-06T21:00:00+01:00",
+        "booking_start": "2019-11-30T23:00:00Z",
+        "booking_end": "2025-02-01T20:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 10,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 50,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 22,
+              "name": "IVA 6,5%",
+              "value": 6.5
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 22,
+              "name": "IVA 6,5%",
+              "value": 6.5,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER",
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 7,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 10,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 9.39,
+          "surcharge": {
+            "promoter": 3.76,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 6.57,
+          "surcharge": {
+            "promoter": 3.76,
+            "channel": 0
+          },
+          "original_price": 9.39,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 46.95,
+          "surcharge": {
+            "promoter": 3.76,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 10,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 50,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 7,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 10,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 249468,
+      "name": "NUMERADO",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2020-11-25T15:00:00+01:00",
+        "end": "2027-11-20T20:00:00+01:00",
+        "sale_start": "2020-02-21T08:00:00+01:00",
+        "sale_end": "2027-11-20T20:00:00+01:00",
+        "booking_start": "2020-09-12T22:00:00Z",
+        "booking_end": "2025-11-15T19:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 10,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 50,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 22,
+              "name": "IVA 6,5%",
+              "value": 6.5
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 22,
+              "name": "IVA 6,5%",
+              "value": 6.5,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER",
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 7,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 10,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 9.39,
+          "surcharge": {
+            "promoter": 3.76,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 6.57,
+          "surcharge": {
+            "promoter": 3.76,
+            "channel": 0
+          },
+          "original_price": 9.39,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 46.95,
+          "surcharge": {
+            "promoter": 3.76,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 10,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 50,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 7,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 10,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "main": {
+          "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/249468/227974_561209_1739950912334.jpg",
+          "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/249468/227976_174625_1739950940680.jpg",
+          "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/249468/177203_634020_1739950849300.jpg"
+        },
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/249468/227975_723572_1739950913020.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/249468/227977_294161_1739950941304.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/249468/227973_592200_1739950876381.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 617439,
+      "name": "NUMERADO diaria 44",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2025-07-17T12:00:00+02:00",
+        "end": "2025-07-18T12:00:00+02:00",
+        "sale_start": "2023-08-20T09:00:00+02:00",
+        "sale_end": "2026-07-17T12:00:00+02:00",
+        "booking_start": "2023-08-20T07:00:00Z",
+        "booking_end": "2026-07-17T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 5.6,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 8,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 7.27,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 5.09,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 7.27,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 7.27,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 5.6,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 8,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "main": {
+          "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/617439/235086_911226_1751532170008.jpg"
+        },
+        "landscape": [
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/617439/235087_822608_1751532170715.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 509945,
+      "name": "NUMERADO diaria 44",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-03-29T12:00:00+02:00",
+        "end": "2026-03-30T12:00:00+02:00",
+        "sale_start": "2024-05-01T09:00:00+02:00",
+        "sale_end": "2027-03-29T12:00:00+02:00",
+        "booking_start": "2024-05-01T07:00:00Z",
+        "booking_end": "2027-03-29T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 5.6,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 8,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 7.27,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 5.09,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 7.27,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 7.27,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 5.6,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 8,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "main": {
+          "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/509945/227981_860237_1739951200209.jpg"
+        },
+        "landscape": [
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/509945/227982_809211_1739951200833.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 569823,
+      "name": "NUMERADO diaria 44",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-03-31T12:00:00+02:00",
+        "end": "2026-04-01T12:00:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-03-31T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-03-31T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 5.6,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 8,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 7.27,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 5.09,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 7.27,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 7.27,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 5.6,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 8,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "main": {
+          "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/569823/227994_952677_1739952263015.jpg"
+        },
+        "landscape": [
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/569823/227995_524471_1739952263739.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 613473,
+      "name": "NUMERADO diaria 45",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-03-31T12:00:00+02:00",
+        "end": "2026-04-01T12:00:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-03-31T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-03-31T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 5.6,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 8,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 7.27,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 5.09,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 7.27,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 7.27,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 8,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 5.6,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 8,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "main": {
+          "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/613473/234112_969368_1749117111739.jpg"
+        },
+        "landscape": [
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/sesion/613473/234113_155364_1749117112376.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 616004,
+      "name": "NUMERADO diaria 46",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-04-01T12:00:00+02:00",
+        "end": "2026-04-23T23:00:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-04-19T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-04-19T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 9.55,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 13.64,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 616005,
+      "name": "NUMERADO diaria 46",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-04-06T12:00:00+02:00",
+        "end": "2026-04-06T23:00:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-04-01T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-04-01T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 9.55,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 13.64,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 617422,
+      "name": "Multisesion",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-04-07T10:00:00+02:00",
+        "end": "2026-04-07T14:00:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-04-02T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-04-02T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 9.55,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 13.64,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 617423,
+      "name": "Multisesion",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-04-07T10:06:00+02:00",
+        "end": "2026-04-07T14:06:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-04-02T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-04-02T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 9.55,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 13.64,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 617424,
+      "name": "Multisesion",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-04-07T10:12:00+02:00",
+        "end": "2026-04-07T14:12:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-04-02T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-04-02T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 9.55,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 13.64,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 617425,
+      "name": "Multisesion",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-04-07T10:18:00+02:00",
+        "end": "2026-04-07T14:18:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-04-02T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-04-02T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 9.55,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 13.64,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 617426,
+      "name": "Multisesion",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-04-07T10:24:00+02:00",
+        "end": "2026-04-07T14:24:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-04-02T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-04-02T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 9.55,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 13.64,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 617427,
+      "name": "Multisesion",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-04-07T10:30:00+02:00",
+        "end": "2026-04-07T14:30:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-04-02T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-04-02T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 9.55,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 13.64,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 617428,
+      "name": "Multisesion",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-04-07T10:36:00+02:00",
+        "end": "2026-04-07T14:36:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-04-02T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-04-02T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 9.55,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 13.64,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 617429,
+      "name": "Multisesion",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-04-07T10:42:00+02:00",
+        "end": "2026-04-07T14:42:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-04-02T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-04-02T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 9.55,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 13.64,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 617430,
+      "name": "Multisesion",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-04-07T10:48:00+02:00",
+        "end": "2026-04-07T14:48:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-04-02T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-04-02T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 9.55,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 13.64,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 617431,
+      "name": "Multisesion",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-04-07T10:54:00+02:00",
+        "end": "2026-04-07T14:54:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-04-02T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-04-02T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 9.55,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 13.64,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 617432,
+      "name": "Multisesion",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-04-07T11:00:00+02:00",
+        "end": "2026-04-07T15:00:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-04-02T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-04-02T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 9.55,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          },
+          "original_price": 13.64,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 13.64,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 15,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 10.5,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          },
+          "original_price": 15,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 617433,
+      "name": "Multisesion",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 14,
+        "name": "Estadio Saprissa",
+        "location": {
+          "address": "Passeig Olímpic, 5-7",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "postal_code": "08038",
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "image": "https://s3.amazonaws.com/onebox-repository/pre/1/60/recinto/14/logo/163359_1384427750832.jpg",
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-04-07T11:06:00+02:00",
+        "end": "2026-04-07T16:00:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-04-02T12:00:00+02:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2027-04-02T10:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 3,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 20,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 2,
+              "name": "IVA 10%",
+              "value": 10
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 2,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 3,
+            "channel": 0
+          },
+          "original_price": 0,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 2.48,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 2.48,
+            "channel": 0
+          },
+          "original_price": 0,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 18.18,
+          "surcharge": {
+            "promoter": 3.31,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 3,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 20,
+          "surcharge": {
+            "promoter": 4,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 3,
+            "channel": 0
+          },
+          "original_price": 0,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    },
+    {
+      "id": 695442,
+      "name": "Multisesion",
+      "type": "SESSION",
+      "event": {
+        "id": 4587,
+        "name": "* API NUMBERED EVENT",
+        "texts": {
+          "title": {
+            "en-US": "",
+            "es-ES": "NUMERADO"
+          },
+          "subtitle": {
+            "en-US": "2019 TOUR",
+            "es-ES": "GIRA 2019"
+          },
+          "description_short": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Descripción corta ñ.`+^'w8rqwht' Ñ' ?</p>"
+          },
+          "description_long": {
+            "en-US": "",
+            "es-ES": "<p align=\"LEFT\">Hola qué tal</p>"
+          }
+        },
+        "images": {
+          "main": {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227979_960659_1739951059076.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227980_58049_1739951083388.jpg"
+          },
+          "landscape": [
+            {
+              "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+              "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+            },
+            {
+              "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+            }
+          ]
+        },
+        "default_language": "es_ES"
+      },
+      "venue": {
+        "id": 3496,
+        "name": "Palau Sant Jordi Recinto ejemplo",
+        "location": {
+          "address": "Calle Ejemplo",
+          "city": "Barcelona",
+          "country": {
+            "code": "ES",
+            "name": "España"
+          },
+          "country_subdivision": {
+            "code": "ES-B",
+            "name": "Barcelona"
+          },
+          "time_zone": "Europe/Berlin"
+        },
+        "graphic": true,
+        "check_orphan_seats": false
+      },
+      "date": {
+        "start": "2026-07-05T11:00:00+02:00",
+        "end": "2026-07-05T13:00:00+02:00",
+        "sale_start": "2024-05-03T09:00:00+02:00",
+        "sale_end": "2027-03-11T11:00:00+01:00",
+        "booking_start": "2024-05-03T07:00:00Z",
+        "booking_end": "2026-04-11T09:00:00Z",
+        "start_unconfirmed": false
+      },
+      "price": {
+        "min": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 3,
+            "channel": 0
+          }
+        },
+        "max": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 3,
+            "channel": 0
+          }
+        },
+        "taxes": {
+          "tickets": [
+            {
+              "id": 1,
+              "name": "IVA 18%",
+              "value": 18
+            }
+          ],
+          "surcharges": [
+            {
+              "id": 1,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "PROMOTER",
+                "SECONDARY_MARKET_PROMOTER"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "IVA 21%",
+              "value": 21,
+              "applies_to": [
+                "CHANNEL",
+                "SECONDARY_MARKET_CHANNEL"
+              ]
+            }
+          ]
+        },
+        "min_promoted": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 3,
+            "channel": 0
+          },
+          "original_price": 0,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "min_net": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 2.48,
+            "channel": 0
+          }
+        },
+        "min_net_promoted": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 2.48,
+            "channel": 0
+          },
+          "original_price": 0,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        },
+        "max_net": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 2.48,
+            "channel": 0
+          }
+        },
+        "min_final": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 3,
+            "channel": 0
+          }
+        },
+        "max_final": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 3,
+            "channel": 0
+          }
+        },
+        "min_final_promoted": {
+          "value": 0,
+          "surcharge": {
+            "promoter": 3,
+            "channel": 0
+          },
+          "original_price": 0,
+          "variation": {
+            "type": "PERCENTAGE",
+            "value": 30
+          }
+        }
+      },
+      "images": {
+        "landscape": [
+          {
+            "ca-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/227978_229889_1739951049414.jpg",
+            "en-US": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175305_929464_1739951074835.jpg",
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/175304_477248_1739950985999.jpg"
+          },
+          {
+            "es-ES": "https://s3.amazonaws.com/onebox-repository/pre/1/657/evento/4587/180286_975641_1634211928728.jpg"
+          }
+        ]
+      },
+      "availability": {
+        "total": 0,
+        "available": 0,
+        "occupancy": 0,
+        "sections": []
+      }
+    }
+  ]
+}
