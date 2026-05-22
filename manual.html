@@ -3690,6 +3690,98 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
   </div>
 </section>
 
+<section class="section" id="rubric">
+  <div class="sec-header" data-reveal>
+    <div class="sec-num">14</div>
+    <div class="sec-title-wrap">
+      <span class="sec-eyebrow">Evaluation</span>
+      <h2 class="sec-title">RUBRIC · Assessment Framework.</h2>
+      <p class="sec-lead">Five dimensions evaluated on a 100-point scale.</p>
+    </div>
+  </div>
+
+  <div class="matrix" data-reveal>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:35%;">Dimension</th>
+          <th style="width:10%; text-align:center;">Points</th>
+          <th>Excellent (A: 23–25)</th>
+          <th>Good (B: 18–22)</th>
+          <th>Acceptable (C: 13–17)</th>
+          <th>Needs Work (D: 0–12)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. MVP</strong><br>Landing page, form, matches, sectors</td>
+          <td style="text-align:center;">25</td>
+          <td>Page loads; form works; 21 matches display; 82 sectors from ONEBOX</td>
+          <td>Most features work; minor styling issues</td>
+          <td>Features present but incomplete</td>
+          <td>Page or form non-functional</td>
+        </tr>
+        <tr>
+          <td><strong>2. Data Layer</strong><br>Tracking, visualization, analytics</td>
+          <td style="text-align:center;">25</td>
+          <td>Form data logged; color-coded availability; real-time display; analytics ready</td>
+          <td>Data logged; availability shown; mostly responsive</td>
+          <td>Basic tracking; availability present</td>
+          <td>No tracking or visualization</td>
+        </tr>
+        <tr>
+          <td><strong>3. Legal</strong><br>Security, privacy, compliance</td>
+          <td style="text-align:center;">20</td>
+          <td>.env secured; .gitignore configured; GDPR notice; no hardcoded secrets</td>
+          <td>Credentials protected; basic compliance</td>
+          <td>Partial protection; minor gaps</td>
+          <td>Credentials exposed or committed to Git</td>
+        </tr>
+        <tr>
+          <td><strong>4. Innovation</strong><br>Bonus features, enhancements, creativity</td>
+          <td style="text-align:center;">15</td>
+          <td>2+ bonus features (Mailchimp, n8n, SMS); animations; performance optimized</td>
+          <td>1–2 bonus features; some polish</td>
+          <td>Partial bonus feature attempted</td>
+          <td>No bonus features</td>
+        </tr>
+        <tr>
+          <td><strong>5. Presentation</strong><br>README, code quality, API docs, UI/UX</td>
+          <td style="text-align:center;">15</td>
+          <td>Clear README; clean code; comprehensive API docs; professional design</td>
+          <td>README present; mostly organized; good design</td>
+          <td>Basic docs; acceptable code; basic UI</td>
+          <td>Missing docs; messy code; poor design</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="h-sub">Grading Scale</h3>
+  <div class="matrix" data-reveal>
+    <table>
+      <thead>
+        <tr>
+          <th>Points</th>
+          <th style="text-align:center;">Grade</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>95–100</td><td style="text-align:center;"><strong>A+</strong></td><td>Exceptional; production-ready</td></tr>
+        <tr><td>90–94</td><td style="text-align:center;"><strong>A</strong></td><td>Excellent; fully functional</td></tr>
+        <tr><td>85–89</td><td style="text-align:center;"><strong>A−</strong></td><td>Very good; minor gaps</td></tr>
+        <tr><td>80–84</td><td style="text-align:center;"><strong>B+</strong></td><td>Good; some refinement needed</td></tr>
+        <tr><td>75–79</td><td style="text-align:center;"><strong>B</strong></td><td>Acceptable; noticeable gaps</td></tr>
+        <tr><td>70–74</td><td style="text-align:center;"><strong>B−</strong></td><td>Below expectation</td></tr>
+        <tr><td>&lt;70</td><td style="text-align:center;"><strong>C/F</strong></td><td>Insufficient; major gaps</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+
 </main>
 </div>
 
@@ -3808,486 +3900,6 @@ tag NOT ∋     <strong style="color:var(--ie-red);">notified:event-4587-grada-2
     });
   });
 </script>
-
-<!-- § 14: EVALUATION RUBRIC - Insert before closing </body> tag in manual.html -->
-
-<section id="rubric" class="section">
-  <h2>📊 § 14: Evaluation Rubric</h2>
-  <p class="subtitle">Project Assessment Framework</p>
-
-  <p>This section outlines how the RC Celta Seat Availability Alert Platform will be evaluated. The rubric assesses five core dimensions: MVP functionality, data integrity, legal compliance, innovation, and presentation quality.</p>
-
-  <hr class="section-divider">
-
-  <h3>Evaluation Criteria</h3>
-
-  <h4>1️⃣ MVP (Minimum Viable Product) Working Fine (25 points)</h4>
-
-  <p>Does the core product function as intended? Can users sign up, submit their information, and receive alerts?</p>
-
-  <table class="rubric-table">
-    <thead>
-      <tr>
-        <th>Criteria</th>
-        <th>Excellent (A: 23-25)</th>
-        <th>Good (B: 18-22)</th>
-        <th>Acceptable (C: 13-17)</th>
-        <th>Needs Work (D: 0-12)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Landing Page Functionality</strong></td>
-        <td>Page loads flawlessly; hero section displays correctly; logo renders; all form fields work; responsive across devices</td>
-        <td>Page loads; most elements work; minor styling issues; responsive on most devices</td>
-        <td>Page loads with some broken elements; form partially works; limited responsiveness</td>
-        <td>Page fails to load or is non-functional</td>
-      </tr>
-      <tr>
-        <td><strong>Form Submission</strong></td>
-        <td>All form fields required; validation works; data captured correctly; console logs show proper structure; no errors on submit</td>
-        <td>Form submits; validation present; data captured; minor issues</td>
-        <td>Form submits but with validation gaps; data partially captured</td>
-        <td>Form non-functional or data not captured</td>
-      </tr>
-      <tr>
-        <td><strong>Match Display & Navigation</strong></td>
-        <td>All 21+ matches display as cards; search filters correctly; pagination works smoothly; no lag or errors</td>
-        <td>Matches display; search works; basic filtering functional</td>
-        <td>Matches display but with incomplete data; search has issues</td>
-        <td>Matches not displayed or search broken</td>
-      </tr>
-      <tr>
-        <td><strong>Real Sector Integration</strong></td>
-        <td>Landing page dropdown populated with all 82 real sectors from ONEBOX; <code>generate-landing.js</code> runs successfully; sectors remain after page refresh</td>
-        <td>Dropdown populated with sectors; script runs with minor issues</td>
-        <td>Some sectors missing or script has errors</td>
-        <td>Sectors hardcoded or placeholder values remain</td>
-      </tr>
-      <tr>
-        <td><strong>End-to-End Workflow</strong></td>
-        <td>User can: view matches → search → see availability → select sector → submit form → data logs correctly</td>
-        <td>Most workflow steps functional</td>
-        <td>Workflow partially works with some gaps</td>
-        <td>Workflow incomplete or broken</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>2️⃣ Data Layer (25 points)</h4>
-
-  <p>How effectively is user data tracked and visualized? Does the system provide clear, actionable insights through data presentation?</p>
-
-  <table class="rubric-table">
-    <thead>
-      <tr>
-        <th>Criteria</th>
-        <th>Excellent (A: 23-25)</th>
-        <th>Good (B: 18-22)</th>
-        <th>Acceptable (C: 13-17)</th>
-        <th>Needs Work (D: 0-12)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>User Interaction Tracking</strong></td>
-        <td>Form submissions logged with complete data; search queries tracked; sector selections recorded; console shows structured JSON; timestamps recorded</td>
-        <td>Form data logged; most interactions captured; basic structure</td>
-        <td>Form data logged but incomplete; some interactions missing</td>
-        <td>No tracking or data not logged</td>
-      </tr>
-      <tr>
-        <td><strong>Availability Visualization</strong></td>
-        <td>Color-coded indicators (green/amber/red) clearly show seat availability; percentage bars display occupancy; visual hierarchy emphasizes availability status; accessible to colorblind users</td>
-        <td>Color coding present; availability shown; mostly clear</td>
-        <td>Basic availability display; color coding present but unclear</td>
-        <td>Availability not visualized or confusing</td>
-      </tr>
-      <tr>
-        <td><strong>Real-Time Data Display</strong></td>
-        <td>Match cards update dynamically; availability refreshes without page reload; search results render instantly; no lag or delay in data presentation</td>
-        <td>Data displays correctly; mostly responsive</td>
-        <td>Data displays but with delays; some lag</td>
-        <td>Data display broken or very slow</td>
-      </tr>
-      <tr>
-        <td><strong>Data-Driven UI Elements</strong></td>
-        <td>All UI elements (cards, dropdowns, status indicators) driven by actual data; visual feedback indicates data state (loading, error, success); price ranges displayed clearly</td>
-        <td>Most UI elements data-driven; mostly functional feedback</td>
-        <td>Some UI elements hardcoded; partial data-driven design</td>
-        <td>UI not connected to data; no dynamic feedback</td>
-      </tr>
-      <tr>
-        <td><strong>Analytics & Insights</strong></td>
-        <td>Tracks form fill rates, search patterns, sector popularity, availability trends; data could feed analytics dashboard; ready for Google Analytics integration</td>
-        <td>Basic tracking present; some analytics capability</td>
-        <td>Minimal tracking; limited analytics readiness</td>
-        <td>No tracking or analytics capability</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>3️⃣ Legal Layer (20 points)</h4>
-
-  <p>Does the project meet security, privacy, and compliance requirements?</p>
-
-  <table class="rubric-table">
-    <thead>
-      <tr>
-        <th>Criteria</th>
-        <th>Excellent (A: 19-20)</th>
-        <th>Good (B: 15-18)</th>
-        <th>Acceptable (C: 11-14)</th>
-        <th>Needs Work (D: 0-10)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Credential Security</strong></td>
-        <td>All secrets in <code>.env</code>; <code>.env</code> in <code>.gitignore</code>; no credentials in Git history; tokens masked in logs and documentation</td>
-        <td>Credentials in <code>.env</code>; <code>.gitignore</code> configured; mostly secure</td>
-        <td>Credentials mostly protected but with minor gaps; some exposure risk</td>
-        <td>Credentials hardcoded or committed to Git; serious security breach</td>
-      </tr>
-      <tr>
-        <td><strong>GDPR & Privacy Compliance</strong></td>
-        <td>Form includes privacy checkbox; privacy policy referenced; no unauthorized data collection; data handling documented</td>
-        <td>Privacy notice present; basic GDPR compliance</td>
-        <td>Partial privacy compliance; gaps in documentation</td>
-        <td>No privacy measures; GDPR non-compliant</td>
-      </tr>
-      <tr>
-        <td><strong>Data Protection</strong></td>
-        <td>Client-side validation only (no server data leaks); sensitive data not logged; API responses sanitized</td>
-        <td>Basic data protection; minimal logging of sensitive data</td>
-        <td>Some data protection but with gaps</td>
-        <td>No data protection measures</td>
-      </tr>
-      <tr>
-        <td><strong>Code Security</strong></td>
-        <td>No hardcoded secrets; no SQL injection risks; no XSS vulnerabilities; input validation present</td>
-        <td>Mostly secure code; minor vulnerabilities</td>
-        <td>Some security issues; basic validation present</td>
-        <td>Multiple security vulnerabilities; no validation</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>4️⃣ Innovation & New Proposals (15 points)</h4>
-
-  <p>Does the student go beyond requirements? Are there creative solutions, improvements, or additional features?</p>
-
-  <table class="rubric-table">
-    <thead>
-      <tr>
-        <th>Criteria</th>
-        <th>Excellent (A: 14-15)</th>
-        <th>Good (B: 11-13)</th>
-        <th>Acceptable (C: 8-10)</th>
-        <th>Needs Work (D: 0-7)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Feature Extensions</strong></td>
-        <td>2+ bonus features implemented (e.g., Mailchimp, n8n, SMS, analytics, multi-language); features are functional and well-integrated</td>
-        <td>1–2 bonus features attempted; mostly functional</td>
-        <td>Partial bonus feature; incomplete implementation</td>
-        <td>No bonus features or all non-functional</td>
-      </tr>
-      <tr>
-        <td><strong>Design Enhancements</strong></td>
-        <td>Beyond requirement: animations, hover effects, micro-interactions, accessibility features (ARIA labels, keyboard nav)</td>
-        <td>Some design enhancements; mostly polished</td>
-        <td>Basic design; minimal enhancement</td>
-        <td>No design improvements</td>
-      </tr>
-      <tr>
-        <td><strong>Optimization & Performance</strong></td>
-        <td>Page loads fast (&lt;2s); API calls optimized; debouncing on search; caching where applicable; efficient data structures</td>
-        <td>Good performance; some optimization</td>
-        <td>Acceptable speed; room for optimization</td>
-        <td>Slow or unoptimized; performance issues</td>
-      </tr>
-      <tr>
-        <td><strong>Creative Problem-Solving</strong></td>
-        <td>Demonstrates novel approach to a challenge (e.g., novel UI pattern, unexpected use of API, clever script automation)</td>
-        <td>Solves problems effectively with standard approaches</td>
-        <td>Solves problems but with limited creativity</td>
-        <td>Doesn't address or solve problems creatively</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>5️⃣ Presentation (15 points)</h4>
-
-  <p>How well is the project communicated? Is documentation clear, code readable, and UI intuitive?</p>
-
-  <table class="rubric-table">
-    <thead>
-      <tr>
-        <th>Criteria</th>
-        <th>Excellent (A: 14-15)</th>
-        <th>Good (B: 11-13)</th>
-        <th>Acceptable (C: 8-10)</th>
-        <th>Needs Work (D: 0-7)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>README & Setup Instructions</strong></td>
-        <td>Clear, step-by-step setup guide; lists all dependencies; explains how to run each script; includes troubleshooting</td>
-        <td>README present; setup instructions mostly clear</td>
-        <td>Basic README; some setup info missing</td>
-        <td>No README or incomplete instructions</td>
-      </tr>
-      <tr>
-        <td><strong>Code Quality & Organization</strong></td>
-        <td>Code follows DRY principle; consistent naming conventions; logical file structure; meaningful comments; no dead code</td>
-        <td>Clean code; mostly organized; some redundancy</td>
-        <td>Code works but disorganized; limited comments</td>
-        <td>Messy code; difficult to follow</td>
-      </tr>
-      <tr>
-        <td><strong>API Documentation</strong></td>
-        <td><code>onebox-api-test.html</code> is comprehensive; shows real requests/responses; explains all endpoints; tokens masked</td>
-        <td>API documentation present; mostly complete</td>
-        <td>Basic API docs; some endpoints missing</td>
-        <td>No API documentation or incomplete</td>
-      </tr>
-      <tr>
-        <td><strong>UI/UX Design</strong></td>
-        <td>Professional design; consistent branding (RC Celta colors); responsive across all devices; intuitive navigation; accessible (contrast, font sizes)</td>
-        <td>Good design; branded appropriately; mostly responsive; usable</td>
-        <td>Basic design; acceptable usability; some responsiveness issues</td>
-        <td>Poor design; confusing navigation; not responsive</td>
-      </tr>
-      <tr>
-        <td><strong>Visual Communication</strong></td>
-        <td>Hero section visually compelling; cards display data clearly; color-coding (green/amber/red) enhances understanding; logo integrated beautifully</td>
-        <td>Visuals are clear; mostly effective</td>
-        <td>Visuals present but could be clearer</td>
-        <td>Visuals missing or confusing</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <hr class="section-divider">
-
-  <h3>Grading Scale</h3>
-
-  <table class="grade-table">
-    <thead>
-      <tr>
-        <th>Total Points</th>
-        <th>Grade</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>95–100</td>
-        <td><strong>A+</strong></td>
-        <td>Exceptional; production-ready; exceeds all expectations</td>
-      </tr>
-      <tr>
-        <td>90–94</td>
-        <td><strong>A</strong></td>
-        <td>Excellent; fully functional MVP; all requirements met</td>
-      </tr>
-      <tr>
-        <td>85–89</td>
-        <td><strong>A−</strong></td>
-        <td>Very good; MVP works; minor gaps in polish or compliance</td>
-      </tr>
-      <tr>
-        <td>80–84</td>
-        <td><strong>B+</strong></td>
-        <td>Good; core MVP functional; some data or presentation issues</td>
-      </tr>
-      <tr>
-        <td>75–79</td>
-        <td><strong>B</strong></td>
-        <td>Acceptable; MVP partially functional; compliance gaps</td>
-      </tr>
-      <tr>
-        <td>70–74</td>
-        <td><strong>B−</strong></td>
-        <td>Below expectation; significant gaps in MVP or security</td>
-      </tr>
-      <tr>
-        <td>Below 70</td>
-        <td><strong>C or F</strong></td>
-        <td>Insufficient; MVP non-functional or major compliance issues</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <hr class="section-divider">
-
-  <h3>Submission Checklist</h3>
-
-  <p>Before submitting, verify:</p>
-
-  <ul class="checklist">
-    <li>✅ <strong>MVP:</strong> Landing page loads; form works; matches display; sectors populate from ONEBOX</li>
-    <li>✅ <strong>Data:</strong> <code>.env</code> configured; all three API endpoints working; <code>sessions-data.json</code> generated; data is accurate</li>
-    <li>✅ <strong>Legal:</strong> Credentials in <code>.env</code> and in <code>.gitignore</code>; no secrets in Git history; privacy notice on form</li>
-    <li>✅ <strong>Innovation:</strong> At least one feature beyond requirements implemented</li>
-    <li>✅ <strong>Presentation:</strong> README with clear instructions; code is clean; API docs complete; UI is polished</li>
-  </ul>
-
-  <hr class="section-divider">
-
-  <h3>Common Deductions</h3>
-
-  <table class="deductions-table">
-    <thead>
-      <tr>
-        <th>Issue</th>
-        <th>Points</th>
-        <th>Category</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Credentials committed to Git</td>
-        <td>−15</td>
-        <td>Legal</td>
-      </tr>
-      <tr>
-        <td>Landing page doesn't load or major UI broken</td>
-        <td>−10</td>
-        <td>MVP</td>
-      </tr>
-      <tr>
-        <td>API authentication fails or missing data</td>
-        <td>−10</td>
-        <td>Data</td>
-      </tr>
-      <tr>
-        <td>Form submission non-functional</td>
-        <td>−8</td>
-        <td>MVP</td>
-      </tr>
-      <tr>
-        <td>No privacy notice or compliance gaps</td>
-        <td>−5</td>
-        <td>Legal</td>
-      </tr>
-      <tr>
-        <td>Code poorly organized or undocumented</td>
-        <td>−5</td>
-        <td>Presentation</td>
-      </tr>
-      <tr>
-        <td>Missing or incomplete README</td>
-        <td>−3</td>
-        <td>Presentation</td>
-      </tr>
-      <tr>
-        <td>Search/filter broken</td>
-        <td>−5</td>
-        <td>MVP</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <hr class="section-divider">
-
-  <h3>Bonus Opportunities</h3>
-
-  <p>For students exceeding expectations:</p>
-
-  <ul class="bonus-list">
-    <li>🌟 <strong>Mailchimp Integration</strong> (+5 pts): Connect form to Mailchimp audience (Innovation)</li>
-    <li>🌟 <strong>n8n Automation</strong> (+10 pts): Build workflow that triggers alerts when seats available (Innovation)</li>
-    <li>🌟 <strong>Advanced Analytics</strong> (+5 pts): Track form conversions, click-through rates (Innovation)</li>
-    <li>🌟 <strong>Multi-Language Support</strong> (+5 pts): Spanish/Galician/English switcher (Presentation)</li>
-    <li>🌟 <strong>SMS Alerts via Twilio</strong> (+10 pts): Send SMS when availability changes (Innovation)</li>
-    <li>🌟 <strong>Database Persistence</strong> (+8 pts): Store subscriber preferences using Supabase or similar (Data)</li>
-    <li>🌟 <strong>Automated Testing</strong> (+5 pts): Jest or Vitest suite covering critical functions (MVP)</li>
-  </ul>
-
-  <hr class="section-divider">
-
-  <h3>Student Resources</h3>
-
-  <p>When stuck or unsure:</p>
-
-  <ol>
-    <li><strong>Review the relevant § section</strong> in the manual for guidance</li>
-    <li><strong>Check <code>onebox-api-test.html</code></strong> for API request/response examples</li>
-    <li><strong>Run validation scripts</strong> to debug issues (e.g., <code>node validate-onebox.js</code>)</li>
-    <li><strong>Read code comments</strong> in landing.html, generate-landing.js, and other scripts</li>
-    <li><strong>Consult README.md</strong> for setup and troubleshooting</li>
-  </ol>
-
-  <div class="callout info">
-    <strong>Assessment Framework:</strong> Competency-based rubric with five core dimensions<br>
-    <strong>Last Updated:</strong> April 2026<br>
-    <strong>Course:</strong> RC Celta Platform Development
-  </div>
-
-</section>
-
-<!-- Add these CSS styles to your manual.html <style> block if not already present -->
-<style>
-  .rubric-table, .grade-table, .deductions-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 2rem 0;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-  }
-
-  .rubric-table th, .grade-table th, .deductions-table th {
-    background-color: #333;
-    color: white;
-    padding: 1rem;
-    text-align: left;
-    font-weight: 600;
-    border: 1px solid #ddd;
-  }
-
-  .rubric-table td, .grade-table td, .deductions-table td {
-    padding: 1rem;
-    border: 1px solid #ddd;
-    vertical-align: top;
-    line-height: 1.5;
-  }
-
-  .rubric-table tr:nth-child(even),
-  .grade-table tr:nth-child(even),
-  .deductions-table tr:nth-child(even) {
-    background-color: #f5f5f5;
-  }
-
-  .checklist, .bonus-list {
-    margin: 1.5rem 0;
-    padding-left: 2rem;
-    list-style: none;
-  }
-
-  .checklist li, .bonus-list li {
-    margin-bottom: 0.75rem;
-    line-height: 1.6;
-  }
-
-  .section-divider {
-    border: none;
-    border-top: 2px solid #ddd;
-    margin: 3rem 0;
-  }
-
-  .callout.info {
-    background-color: #e8f4f8;
-    border-left: 4px solid #0066cc;
-    padding: 1rem;
-    margin: 2rem 0;
-    border-radius: 4px;
-  }
-</style>
 
 </body>
 </html>
